@@ -1,0 +1,179 @@
+\subsubsection{Analysis}
+
+\begin{exercise}
+    let $f_n: \mathbb{R} \to [0, \infty)$ meets:
+
+    \begin{enumerate}
+        \item $f_n$ is continuous and supported on $[-1,1]$
+
+        which means $\forall |x| > 1,\: f_n(x)= 0$
+        
+        \item integral of $f_n(x)$:
+
+    \[
+        \int_{\mathbb{R}} f_n(x) \mathrm{d}x = 1
+    \]
+
+    \end{enumerate}
+
+
+    and $\forall \epsilon > 0$ and $ 0 < \delta \le 1$, exists $N$, and for all $n \ge N$:
+
+$\forall \delta \le |x| \le 1,\: f_n(x) \le \epsilon$
+
+let $g: \mathbb{R} \to \mathbb{R}$ be continuous and supported on $[0,1]$, prove:
+
+\[
+    f_n \ast g \to g \quad \mathrm{uniformly}
+\]
+\end{exercise}
+
+\begin{proof}
+    since $g$ is continuous on a closed interval, and hence bounded and uniformly continuous. we pick any $\epsilon > 0$ 
+    and let $|g(x)| \le M$, since $g$ is uniformly continuous, we pick $\delta > 0$ so that 
+    for all $x,y \in [0,1],\: |x-y| \le \delta $  we have $|g(x) -g(y)| \le \epsilon$
+
+    by definition of $f_n$, we pick $N$, so that for all $n \ge N$, we have:
+
+ $\forall  \delta \le |x| \le 1,\:  f(x) \le \epsilon$, then we have
+
+    \begin{align*}
+        \left| (f_n \ast g)(x) - g(x) \right| &= \left| \int_{\mathbb{R}}f_n(y)g(x-y) \mathrm{d}y  - g(x)\right| = \left| \int_{[-1,1]}f_n(y)g(x-y) \mathrm{d}y  - g(x)\right| \\ 
+        & \le \left| \int_{[-1,-\delta]}f_n(y)g(x-y) \mathrm{d}y \right| + \left| \int_{[\delta,1]}f_n(y)g(x-y) \mathrm{d}y \right| + \left| \int_{[-\delta,\delta]}f_n(y)g(x-y) \mathrm{d}y - g(x)\right| \\
+        & \le \int_{[-1,-\delta]}f_n(y)\left| g(x-y) \right| \mathrm{d}y + \int_{[\delta,1]}f_n(y)\left| g(x-y) \right| \mathrm{d}y +  \left| \int_{[-\delta,\delta]}f_n(y)g(x-y) \mathrm{d}y - g(x)\right| \\
+        & \le  2M\epsilon(1-\delta) + \left| \int_{[-\delta,\delta]}f_n(y)g(x-y) \mathrm{d}y - g(x)\right|
+    \end{align*}
+
+    let's consider:
+
+    \[
+    \int_{[-\delta,\delta]}f_n(y)g(x-y) \mathrm{d}y
+    \]
+
+    since $f_n(y) \ge 0$ on $[-\delta,\delta]$ and $g(x-y)$ of $y$ is continuous on $[-\delta, \delta]$, because we can assume $g(0)=g(1) =0$, 
+    and it will not affect result of convolution. so there exists $\xi \in [-\delta, \delta]$ meets:
+
+    \[
+    \int_{[-\delta,\delta]}f_n(y)g(x-y) \mathrm{d}y = g(x-\xi)\int_{[-\delta,\delta]}f_n(y)\mathrm{d}y
+    \]
+
+    since $|x-\xi -x| \le \delta$, so we have $g(x-\xi) -g(x) = c_1,\: |c_1| \le \epsilon$, and
+
+
+    \[
+        1-\int_{[-\delta,\delta]}f_n(y) \mathrm{d}y = c_2  =  \int_{[-1, -\delta]}f_n(y) \mathrm{d}y + \int_{[\delta, 1]}f_n(y) \mathrm{d}y
+    \]
+
+    and $|c_2| \le 2\epsilon(1-\delta)$
+
+    so we got:
+
+    \begin{align*}
+        & \left| \int_{[-\delta,\delta]}f_n(y)g(x-y) \mathrm{d}y - g(x)\right| \\
+        &= \left| g(x-\xi)\int_{[-\delta, \delta]}f_n(y)\mathrm{d}y - g(x) \right| \\
+        &= \left| (g(x) + c_1)(1-c_2) - g(x) \right| \\
+        &= \left| c_1 - c_1c_2 - c_2g(x) \right| \\
+        & \le \epsilon + 2\epsilon^2(1-\delta) + 2M\epsilon(1-\delta)
+    \end{align*}
+
+
+    after all, we got
+
+    \[
+\left| (f_n \ast g)(x) - g(x) \right| \le 4M\epsilon(1-\delta) + \epsilon + 2\epsilon^2(1-\delta)
+    \]
+
+\end{proof}
+
+\begin{exercise}
+    prove: exists $c_n$ meets:
+
+    \begin{enumerate}
+        \item
+
+        \[
+            \int_{[-1,1]}c_n(1-x^2)^n \mathrm{d}x = 1
+        \]
+
+        \item  
+        
+        \[
+            \forall 0 < |x| \le 1, \: c_n(1-x^2)^n \to 0
+        \]
+
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    consider:
+
+    \begin{align*}
+        \int_{[-1,1]}(1-x^2)^n\mathrm{d}x &\ge \int_{[-1,1]}(1-|x|)^n\mathrm{d}x \\
+        & \ge 2 \frac{1}{n+1}
+    \end{align*}
+
+    if we assign:
+
+
+    \[
+        c_n = \left(\int_{[-1,1]}(1-x^2)^n\mathrm{d}x \right)^{-1}
+    \]
+
+    then we got $c_n \le \frac{n+1}{2}$, consider any $0 < |x| \le 1$, then we got $0 \le 1-x^2 < 1$ and
+    $c_n(1-x^2)^n \le \frac{n+1}{2}(1-x^2)^n$
+
+    let $\epsilon = 1-x^2$ and $\epsilon < 1$, then we got
+
+    \[
+        \lim_{n \to \infty}\frac{n+1}{2}\epsilon ^n = 0
+    \]
+
+    because
+
+    \[
+        \varlimsup_{n \to \infty}\frac{n+2}{n+1}\epsilon = \epsilon < 1
+    \]
+\end{proof}
+
+\subsubsection{Algebra}
+
+\begin{exercise}
+    let $G$ be a semi group, ant it contains a left identity $1_l$ and a right identity $1_r$,
+    prove $1_l = 1_r$
+\end{exercise}
+
+\begin{proof}
+    by definition of identity:
+
+    \[
+        1_l 1_r = 1_r = 1_l
+    \]
+\end{proof}
+
+
+\begin{exercise}
+    let $G$ be a monoid, and every element $a$ has a left inverse $a^{-1}l$, 
+    prove: every element also has at least one right inverse, and left inverse is right inverse
+\end{exercise}
+
+\begin{proof}
+    let $ba = 1$ and $cb = 1$, then we have:
+
+    \[
+        cba=(cb)a = a = c(ba) = c
+    \]
+
+    so we got $ab = cb= 1 $, so $b$ is also a right inverse of $a$
+\end{proof}
+
+\begin{exercise}
+   let $G$ be a monoid, and every element $a$ has a left inverse $a^{-1}l$, then left inverse is unique
+\end{exercise}
+
+\begin{proof}
+    let $ba = 1$ and $ca= 1$, since $a$ has at least a right inverse $d$, we got:
+    
+    \[
+        ba = ca,\: b(ad) = c(ad) = b  = c
+    \]
+\end{proof}

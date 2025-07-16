@@ -1,0 +1,363 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{2025-03-24}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+
+\section{三次方程化简}
+
+\subsection{多项式展开}
+
+假设 $x_1, x_2, x_3$ 是方程 $(x-x_1)(x-x_2)(x-x_3)$ 的三个根。
+
+\begin{align*}
+   (x-x_1)(x-x_2)(x-x_3) = x^3 +(x_1x_2 + x_1x_3 + x_2x_3)x^2 - (x_1 + x_2 + x_3)x - x_1x_2x_3
+\end{align*}
+
+\subsection{从已知条件生成多项式}
+
+已知 $x_1 + x_2 = a$ 并且 $x_1 x_2 = b$ 可以通过构建二次多项式的方法求 $x_1$ 和 $x_2$，因为
+
+$(x-x_1)(x-x_2) = x^2 - (x_1 + x_2)x + x_1 x_2$ 所以 $x_1$ 和 $x_2$ 是方程
+
+\[
+x^2 - ax + b = 0
+\]
+
+的根
+
+同理，已知 $x_1x_2x_3 = c$，$x_1 + x_2 + x_3 = b$ 并且 $x_1x_2 + x_1x_3 + x_2x_3 = a$ 后可以通过求
+
+\[
+x^3 + ax^2 - bx -c = 0
+\]
+
+的根来求解
+
+\subsection{重根}
+
+这里要注意的是多项式 $x^3 - 1$ 和 $(x-1)^3$ 的区别，这两个多项式都有 $x=1$ 这个根，但是 $x=1$ 是 $x^3-1$ 的一重根，
+而 $x=1$ 是 $(x-1)^3$ 的三重根。
+
+\section{实变函数习题}
+
+\subsection{集合习题}
+
+\begin{enumerate}
+    \item $A_1 \subseteq A_2 \subseteq .. \subseteq A_n ...$，而且$B_1 \subseteq B_2 \subseteq .. \subseteq B_n ...$ 
+     那么 
+     \[
+        \left( \bigcup_{n=1}^{\infty} A_n \right) \cap \left( \bigcup_{n=1}^{\infty} B_n \right) = \bigcup_{n=1}^{\infty} A_n \cap B_n
+     \]
+
+     证明：
+
+     令
+
+     \begin{align*}
+        A &= \bigcup_{n=1}^{\infty} A_n \\
+        B &= \bigcup_{n=1}^{\infty} B_n \\
+     \end{align*}
+
+     则
+
+     \begin{align*}
+        A \cap \bigcup_{j=1}^{\infty}B_n &= \bigcup_{j=1}^{\infty}A \cap B_j \\
+        &= \bigcup_{j=1}^{\infty} \bigcup_{i=1}^{\infty} A_i \cap B_j
+     \end{align*}
+
+     所以 $x \in A \cup B$ 等价于存在 $i,j $ 满足 $x \in A_i \cap B_j$，在 $A_n$ 和 $B_n$ 都是单增德前提下， 这个和
+
+     \[
+     x \in \bigcup_{n=1}^{\infty}A_n \cap B_n
+     \]
+
+     是等价的
+
+
+    \item $A_1 \supseteq A_2 \supseteq .. \supseteq A_n ...$，而且$B_1 \supseteq B_2 \supseteq .. \supseteq B_n ...$ 
+     那么 
+     \[
+        \left( \bigcap_{n=1}^{\infty} A_n \right) \cup \left( \bigcap_{n=1}^{\infty} B_n \right) = \bigcap_{n=1}^{\infty} A_n \cup B_n
+     \]
+
+     我们对 $A_1^C, \, A_2^C, .. $ 以及 $B_1^C, B_2^C, .. $ 用到上面的结论得到
+
+     \[
+        \left( \bigcup_{n=1}^{\infty} A_n^C \right) \cap \left( \bigcup_{n=1}^{\infty} B_n^C \right) = \bigcup_{n=1}^{\infty} A_n^C \cap B_n ^C
+     \]
+
+     然后两边取补集得到
+
+     \[
+        \left( \bigcap_{n=1}^{\infty} A_n \right) \cup \left( \bigcap_{n=1}^{\infty} B_n \right) = \bigcap_{n=1}^{\infty} A_n \cup B_n 
+     \]
+
+    \item 若 $A \cup B = E \cup F,\, A \cap F = \emptyset,\, B \cap E = \emptyset$ 那么 $A = E$ 且 $B = F$
+
+    \begin{align*}
+        a + b + ab &= e + f + ef \\
+        af = 0 \\
+        be = 0 \\
+    \end{align*}
+
+    两边同时乘以 $e$
+
+    \[
+    ae = e
+    \]
+
+    两边同时乘以 $a$ 得到
+
+    \[
+        a = ae 
+    \]
+
+    所以 $a = ae = e$
+
+    同理，两边同时乘以 $b,f$ 后可以得到
+
+    \[
+        b = f = bf
+    \]
+\end{enumerate}
+
+\subsection{集合极限习题}
+
+\begin{enumerate}
+    \item 设 $f_n: \mathbb{R} \to \mathbb{R}$ 有
+
+\[
+\lim_{n \to \infty} f_n(x) = f(x),\, x \in \mathbb{R}
+\]
+
+那么
+
+\[
+\{ x \,\vert\, f(x) \le t \} = \bigcap_{k=1}^{\infty} \bigcup_{m=1}^{\infty} \bigcap_{n=m}^{\infty}\{ x \,\vert\, f_n(x) < t + \frac{1}{k} \}
+\]
+
+证明，如果 $f(x) \le t$ 说明
+
+\[
+\lim_{n \to \infty}f_n(x) \le t
+\]
+
+那么对所有的 $\epsilon > 0$ 一定存在  $m \in \mathbb{N}$ 满足 $\forall n \ge m,\, f_n(x) < t + \epsilon$
+
+然后我们把 $\epsilon$ 换成 $1/k$ 得到
+
+\[
+\{ x \,\vert\, f(x) \le t \} \subseteq \bigcap_{k=1}^{\infty} \bigcup_{m=1}^{\infty} \bigcap_{n=m}^{\infty}\{ x \,\vert\, f_n(x) < t + \frac{1}{k} \}
+\]
+
+另一方面，若 
+
+\[
+x \in \bigcap_{k=1}^{\infty} \bigcup_{m=1}^{\infty} \bigcap_{n=m}^{\infty}\{ x \,\vert\, f_n(x) < t + \frac{1}{k} \}
+\]
+
+
+那么对所有的 $k \in \mathbb{N}^+$ 一定存在  $m \in \mathbb{N}$ 满足 $\forall n \ge m,\, f_n(x) < t + \frac{1}{k}$
+
+然后我们对 $n$ 取极限得到
+
+\[
+\lim_{n \to \infty}f_n(x) = f(x) \le t + \frac{1}{k}
+\]
+
+再对 $k$ 取极限得到
+
+\[
+f(x) \le t
+\]
+
+所以有
+
+\[
+\bigcap_{k=1}^{\infty} \bigcup_{m=1}^{\infty} \bigcap_{n=m}^{\infty}\{ x \,\vert\, f_n(x) < t + \frac{1}{k} \} \subseteq \{ x \,\vert \, f(x) \le t \}
+\]
+
+\item 若 $\lim_{n \to \infty} a_n = a$ 有如下命题
+
+\[
+    \bigcap_{k=1}^{\infty}\bigcup_{N=1}^{\infty}\bigcap_{n=N}^{\infty}(a_n - \frac{1}{k}, a_n + \frac{1}{k}) = \{ a \}
+\]
+
+首先我们令
+
+\[
+A = \bigcap_{k=1}^{\infty}\bigcup_{N=1}^{\infty}\bigcap_{n=N}^{\infty}(a_n - \frac{1}{k}, a_n + \frac{1}{k}) 
+\]
+
+我们先证明 $a \in A$ ，因为 $\lim_{n \to \infty} a_n = a$ ，所以任取 $\epsilon > 0$，都有 $N$ 满足 $\forall n \ge N,\, \lvert a_n - a \rvert \le \epsilon$，
+那么我们取 $\epsilon = \frac{1}{2k}$，可以得到
+
+\[
+a \in \bigcup_{N=1}^{\infty}\bigcap_{n=N}^{\infty}(a_n - \frac{1}{k}, a_n + \frac{1}{k})
+\]
+
+因为 $k$ 可以任意取，所以有 $a \in A$
+
+我们继续证明只有 $a \in A$，用反证法，假设存在 $a + \epsilon \in A,\, \lvert \epsilon \rvert > 0$。然后我们取 $k$ 满足$\frac{1}{k} < \lvert \epsilon \rvert$。
+带入 $a + \epsilon \in A$ 的条件，可以得到 $a_n$ 收敛到 $a + \epsilon$，这个显然和 $a_n$ 收敛到 $a$ 矛盾了。
+
+
+\end{enumerate}
+
+\section{高等代数习题}
+
+\subsection{Vandermonde 行列式}
+
+\begin{align*}
+    \begin{vmatrix}
+       1 & x_1 & x_1^2 & ... & x_1^{n-1} \\
+       1 & x_2 & x_2^2 & ... & x_2^{n-1} \\
+       ... & ... & ... & ... & ...\\
+       1 & x_n & x_n^2 & ... & x_n^{n-1} \\
+    \end{vmatrix} &= 
+    \begin{vmatrix}
+       1 & 0 & 0 & ... & 0 \\
+       1 & x_2-x_1 & x_2^2-x_1x_2 & ... & x_2^{n-1}-x_1(x_2^{n-2}) \\
+       ... & ... & ... & ... & ...\\
+       1 & x_n-x_1 & x_n^2-x_1x_n & ... & x_n^{n-1}-x_1(x_n^{n-2}) \\
+    \end{vmatrix}  \\
+    &= (x_2-x_1)(x_3-x_2)..(x_n-x_1) 
+    \begin{vmatrix}
+       1 & 0 & 0 & ... & 0 \\
+       1 & 1 & x_2 & ... & x_2^{n-2} \\
+       ... & ... & ... & ... & ...\\
+       1 & 1 & x_n & ... & x_n^{n-2} \\
+    \end{vmatrix}  \\
+    &= \begin{vmatrix}
+         1 & x_2 & ... & x_2^{n-2} \\
+         ... & ... & ... & ...\\
+         1 & x_n & ... & x_n^{n-2} \\
+    \end{vmatrix}\prod_{i=2}^{n}(x_i-x_1) \\
+    &= \prod_{i=1}^{n-1}\prod_{j=i+1}^{n}(x_j-x_i)
+\end{align*}
+
+
+\subsection{线性空间}
+
+\subsubsection{八大公理}
+
+\begin{enumerate}
+    \item $\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}$
+    \item $\mathbf{x} + \mathbf{y} + \mathbf{z} = \mathbf{x} + (\mathbf{y} + \mathbf{z})$
+    \item $\mathbf{x} + (-\mathbf{x}) = \mathbf{0}$
+    \item $\mathbf{x} + \mathbf{0} = \mathbf{x}$
+    \item $a(\mathbf{x}+\mathbf{y}) = a\mathbf{x} + a\mathbf{y}$
+    \item $(a+b)\mathbf{x} = a\mathbf{x} + b\mathbf{x}$
+    \item $(ab)\mathbf{x} = a(b\mathbf{x})$
+    \item $1\mathbf{x} = \mathbf{x}$
+\end{enumerate}
+
+\subsection{结论}
+
+\begin{enumerate}
+    \item $-\mathbf{x}$ 唯一
+
+    假设有两个 $-\mathbf{x}$ 分别是  $-\mathbf{x}_1$ 和$-\mathbf{x}_2$
+    那么有
+
+    \[
+        \mathbf{x} + (-\mathbf{x}_1) = \mathbf{0}
+    \]
+
+    两边加上 $-\mathbf{x}_2$ 得到
+
+    \[
+        -\mathbf{x}_2 + \mathbf{x} + (-\mathbf{x}_1) = -\mathbf{x}_1 = -\mathbf{x}_2
+    \]
+
+
+    \item $0 \mathbf{x} = \mathbf{0}$
+
+    证明: $0\mathbf{x} = (0+0)\mathbf{x} = 0\mathbf{x} + 0\mathbf{x}$ 
+    两边同时加上 $0\mathbf{x}$ 的逆元得到 
+
+    \[
+        \mathbf{0} = 0 \mathbf{x}
+    \]
+
+
+    \item $(-1) \mathbf{x} = -\mathbf{x}$
+
+    \[
+        (-1)\mathbf{x} + 1 \mathbf{x} = 0\mathbf{x} = \mathbf{0}
+    \]
+
+\end{enumerate}
+
+\section{Laplace 定理}
+
+\subsection{Laplace 定理}
+
+行列式任取 $k$ 行 $i_1, i_2, .. i_k \in K$，然后按照 $\binom{n}{k}$ 中方式选择列，计算选中行列交叉的行列式，再乘以交叉部分的代数余子式，相加
+
+\[
+\text{det}(A) = \sum_{J \in \binom{n}{k}} \text{det}(A_{i \in I,\, j \in J})(-1)^{\sum I + \sum J} \text{det}(A_{i \notin I,\, j \notin J})
+\]
+
+\subsection{分块矩阵行列式}
+
+利用 Laplace 定理可以计算分块矩阵的行列式
+
+下面按照左边 $n$ 列展开得到。
+
+\[
+\begin{vmatrix}
+    A_n & M \\
+    O & B_m \\
+\end{vmatrix} = \text{det}(A_n) \text{det}(B_m) (-1)^{2\binom{n+1}{2}} = \text{det}(A_n)\text{det}(B_m)
+\]
+
+同理有
+
+
+\[
+\begin{vmatrix}
+    A_n & O \\
+    M & B_m \\
+\end{vmatrix} = \text{det}(A_n) \text{det}(B_m)
+\]
+
+此外要注意
+
+
+\[
+\begin{vmatrix}
+    O & A_n \\
+    B_m & M \\
+\end{vmatrix} = \text{det}(A_n) \text{det}(B_m)(-1)^{n\binom{n+1}{2} + \frac{n^2(2m + n+1)}{2}}
+\]
+
+注意到有
+
+\[
+n\binom{n+1}{2} + \frac{n^2(2m + n+1)}{2} = \frac{n^2}{2}(2(n+1) + 2m ) = n^2(n+1 + m)
+\]
+
+因为我们只需要考虑奇偶性，所以可以对 $2$ 取模
+
+\[
+n^2(n+1+m) \equiv n + n + nm \equiv nm \quad \text{mod} 2
+\]
+
+所以
+
+\[
+\begin{vmatrix}
+    O & A_n \\
+    B_m & M \\
+\end{vmatrix} = \text{det}(A_n) \text{det}(B_m)(-1)^{nm}
+\]
+
+\end{document}

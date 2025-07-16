@@ -1,0 +1,184 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\subsection{Baire Class One Function}
+
+\begin{lem}
+\label{lem:lem-1}
+   If $f$ is a bounded baire one function with bound $M$, then there exists a sequence $f_n$ of continuous functions such that
+   each $f_n$ has the same bound $M$ and such that $\{ f_n \}$ converges pointwise to $f$ on $[a,b]$
+\end{lem}
+
+\begin{proof}
+    since $f$ is baire one function, there should exists $g_n$ converges pointwise to $f$. we compose a new sequence $f_n$:
+
+    \[
+        f_n = \min(\max(g_n, -M), M)
+    \]
+
+    it is easy to show $ |f_n| \le M$. then we fix $x$ and take $n \to \infty$, by laws of limit
+
+    \begin{align*}
+        \lim_{n \to \infty}f_n(x) &= \lim_{n \to \infty}\min(\max(g_n(x), -M), M) \\
+        &= \min (\max(\lim_{n \to \infty}g_n(x), -M), M) \\
+        &= \min (\max (f(x), -M), M) = f(x)
+    \end{align*}
+
+    also $\min,\, \max$ preserve continuity, so sequece of continuous function $f_n \to f$ pointwisely.
+\end{proof}
+
+\begin{lem}
+    \label{lem:lem-2}
+    let $f_n$ be a sequence of Baire one functions defined on $[a,b]$ such that $\sum_{k=1}^{\infty}M_n$ be 
+    a convergent series of non-negative real numbers. If $|f_n(x)| \le M_n$ for all $n$ and for all $x \in [a,b]$ 
+    then the function $f = \sum_{n=1}^{\infty}f_n$ is a Baire one function.
+\end{lem}
+
+\begin{proof}
+    by Weierstrass m-test, $f$ is well-defined.
+    by \autoref{lem:lem-1}, since $f_n$ is bounded $M_n$, so for every $f_n$, there exists a sequence of continuous and bounded functions $g_{nk},\, k=1,2,..$ 
+    converges to $f_n$. we construct a new sequence $h_n$ below:
+
+    \begin{align*}
+        h_1 &= g_{11} \\
+        h_2 &= g_{12} + g_{22} \\
+        .. \\
+        h_n &= g_{1n} + g_{2n} + .. + g_{nn} \\
+    \end{align*}
+
+    then we will prove $h_n \to f$ pointwise. let's fix $x$, then later we will write function call $f(x)$ as $f$
+    let's anlysis $h_n - f$, we have
+
+    \begin{align*}
+        \lvert h_n - f \rvert &= \left| \sum_{k=1}^{n}g_{kn} - \sum_{k=1}^{\infty}f_k \right| \\
+        &= \left| \sum_{k=1}^{n}\left( g_{kn} - f_k\right) + \sum_{k=n+1}^{\infty}f_k \right|
+    \end{align*}
+
+    we can select any $K \le n$, so that
+
+    \begin{align*}
+        \lvert h_n - f \rvert &= \left| \sum_{k=1}^{K}\left( g_{kn} - f_k\right) + \sum_{k=K+1}^{\infty}f_k + \sum_{k=K+1}^{n}g_{kn} \right| \\
+         & \le \left| \sum_{k=1}^{K}\left( g_{kn} - f_k\right) \right| + \left|\sum_{k=K+1}^{\infty}f_k\right| + \left|\sum_{k=K+1}^{n}g_{kn} \right|
+    \end{align*}
+
+    let's fix $K$ at first, since $g_{kn}$ converges to $f_k$ pointwise, and $K$ is finite, we can take $n$ large enough, so that $|g_{kn} - f_k| \le \epsilon/K, \forall \epsilon > 0, 1 \le k \le K$
+    so that 
+
+    \begin{align*}
+        \left| \sum_{k=1}^{K}\left( g_{kn} - f_k\right) \right| \le \epsilon 
+    \end{align*}
+
+    and 
+
+    \[
+        \lim_{n \to \infty}\left| \sum_{k=1}^{K}\left( g_{kn} - f_k\right) \right| = 0
+    \]
+
+    which means $\forall K \ge 1$, as we take $n \to \infty$
+
+    \begin{align*}
+        \lim_{n \to \infty}\lvert h_n - f \rvert &  \le \lim_{n \to \infty}\left( \left| \sum_{k=1}^{K}\left( g_{kn} - f_k\right)\right| + \left|\sum_{k=K+1}^{\infty}f_k\right| + \left|\sum_{k=K+1}^{n}g_{kn} \right| \right)\\
+        & \le \sum_{k=K+1}^{\infty}\left|f_k\right| + \lim_{n \to \infty}\sum_{k=K+1}^{n}\left| g_{kn} \right|  \\
+        & \le \sum_{k=K+1}^{\infty}\left|f_k\right| + \lim_{n \to \infty}\sum_{k=K+1}^{n}\left| f_{k} \right|  \\
+        & \le  2\sum_{k=K+1}^{\infty}\left|f_k\right| \\
+        & \le  2\sum_{k=K+1}^{\infty}\left|M_k\right| \\
+    \end{align*}
+
+    then we can take $K \to \infty$, since $\sum_{k=K}^{\infty} M_k$ converges absolutely, we have
+
+    \[
+        \lim_{K \to \infty}\sum_{k=K}^{\infty}\left|M_k\right| = 0
+    \]
+
+    then we have
+
+    \[
+        \lim_{n \to \infty}\lvert h_n - f \rvert = 0
+    \]
+
+
+
+   
+\end{proof}
+
+\begin{thm}
+    let $f_n$ be a sequence of Baire one functions defined on $[a,b]$. If $\{ f_n \}$
+    converges uniformly to $f$ on $[a,b]$, then $f$ is a Baire one function.
+
+\end{thm}
+
+\begin{proof}
+    since $f_n \to f$ uniformly, $\forall k > 0$ exists arbitrary large $n_k$ so that $\| f_{n_k} - f\|_{\infty} \le 2^{-k}$, let's analysis the function sequence
+$h_k = f_{n_{k+1}} - f_{n_k}$. since $n_k$ can be arbitrary large, we can assume $n_{k}$ is monotone increase. $h_k$ is Baire one function, obviously. and we have
+
+\begin{align*}
+    \| h_{k}  \|_{\infty} &= \| f_{n_{k+1}} -  f_{n_k} \|_{\infty} \le \| f_{n_{k+1}} -  f \|_{\infty} +  \|f - f_{n_k} \|_{\infty} \\
+    & \le \frac{3}{2}2^{-k}
+\end{align*}
+
+by \autoref{lem:lem-2}, $\sum_{k=1}^{\infty} h_k$ should coverges to a Baire function. Actually, we have
+
+\[
+    \sum_{k=1}^{\infty}h_k = f - f_{n_1}
+\]
+
+then we conclude that $f - f_{n_1}$ is Baire one function. so $f = f -f_{n_1} + f_{n_1}$ also.
+\end{proof}
+
+\begin{thm}
+    let $F_n \subseteq \mathbb{R}^n$ be a sequece of closed set, and $\forall n, F_n$ has no interior point. let 
+
+    \[
+        E = \bigcup_{n=1}^{\infty}F_n
+    \]
+
+    then $E$ also has no interior point
+\end{thm}
+
+\begin{proof}
+    For sake of contradiction, let's assume $E$ has at least one interior point $x_0 \in E$. then there exists 
+    $\delta_0 > 0$ so that $B(x_0, \delta_0) \subseteq E$. Since $\delta_0$ can be arbitrary small, we can half $\delta_0$ so that we have.
+
+    \[
+        B_0 = \overline{B}(x_0, \delta_0) \subseteq E
+    \]
+    
+    Since $F_1$ has no interior point, there should exists at lease one point $x_1$ 
+    so that $x_1 \in B(x_0, \delta_0),\, x_1 \notin F_1$. $x_1$ is a interior point of $E$ also. and we have $B(x_1, \delta_1) \subseteq E$. 
+    As $F_1$ is closed and $B_0$ is open. we can adjust $\delta_1$ be small enough so that 
+    
+    \begin{align*}
+      \delta_1 & < \delta_0 / 2  \\
+    B(x_1, \delta_1) & \subseteq B(x_0, \delta_0) \\
+    \overline{B}(x_1, \delta_1) & \cap F_1 = \emptyset
+    \end{align*}
+    Take
+    $n$ steps, we can construct a sequence of point $x_n$. Then $x_n$ is a cauchy sequece obviously. So we have
+
+    \[
+        \lim_{n \to \infty}x_n = x
+    \]
+
+    As $\forall n, x_n \in \overline{B_0}$, so $x \in \overline{B}(x_0, \delta_0) \subseteq E$. let's consider $x$ and $F_n$. We fix $n$ at first,
+    then we have $\forall k \ge n, x_k \in \overline{B_n}$. Since $\overline{B_n}$ is closed, so
+    $x \in \overline{B_n}$, as $\overline{B_n} \cap F_n = \emptyset$, we have $x \notin F_n$. 
+    Since we can take $n$ as arbitrary number. So $\forall n, x \notin F_n$, which is contradict to $x \in E$.
+
+\end{proof}
+\end{document}
+
+
+
+
+
+

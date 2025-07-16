@@ -1,0 +1,84 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\begin{exercise}
+    let $A$ be a measurable set and we have $m^*(A \triangle B) = 0$, prove that $B$ is also measurable, and $m(B) = m(A)$
+\end{exercise}
+
+\begin{proof}
+    since we have $A \triangle B = \left( A \setminus B \right) \cup \left( B \setminus A \right)$, so 
+    $m^*(A \setminus B) = m^*(B \setminus A) = 0$, and both $A \setminus B$, $B \setminus A$ are measurable.
+
+    then we have
+
+    \[
+        B = (A \setminus (A \setminus B)) \cup (B \setminus A)
+    \]
+
+    so $B$ is measurable
+\end{proof}
+
+\begin{exercise}
+    let $B$ meets that, for any $\epsilon > 0$, exists a measurable set $A$, so that $m^*(A \triangle B) \le \epsilon$, prove that
+    $B$ is measurable.
+\end{exercise}
+
+
+\begin{proof}
+    since $A$ is measurable, and $m^*(A \triangle B) \le \epsilon$, and we have
+    consider that:
+
+    \begin{align*}
+        B &\subseteq A \cup B \subseteq A \cup (B \setminus A) \\
+        B^C & \subseteq A^C \cup B^C \subseteq A^C \cup (B^C \setminus A^C) \subseteq A^C \cup (A \setminus B) 
+    \end{align*}
+
+    \begin{align*}
+        m^*(T \cap B) &\le m^*(T \cap (A \cup (B \setminus A))) \le m^*(T \cap A) + m^*(T \cap (B \setminus A)) \\
+        & \le m^*(T \cap A) + \epsilon \\
+        m^*(T \cap B^C) & \le m^*(T \cap A^C) + m^*(T \cap (A \setminus B) \\
+        & \le m^*(T \cap A^C) + \epsilon \\
+m^*(T \cap B) + m^*(T \cap B^C) & \le  m^*(T \cap A) +  m^*(T \cap A^C) + 2\epsilon \\
+& \le m^*(T) + 2\epsilon
+    \end{align*}
+
+
+take $\epsilon \to 0$, then we have
+
+\[
+m^*(T \cap B) + m^*(T \cap B^C) = m^*(T)
+\]
+
+\end{proof}
+
+\begin{exercise}
+    let $E \subseteq \mathbb{R}$ and $0 < \alpha < m(E)$, then exists $A \subseteq E$ 
+    such that $A$ is bounded and closed. and $m(A) = \alpha$
+\end{exercise}
+
+\begin{proof}
+    let's assume $E$ is bounded, otherwise we can take bounded subset $E'$ of $E$, so that  $m(E') > \alpha$
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+

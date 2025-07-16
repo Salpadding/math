@@ -1,0 +1,404 @@
+\subsubsection{Mathematical Analysis}
+
+\begin{exercise}
+    prove: if $A \subseteq X$ meets: every sequence $x_n \in A$ has at least one convergent sub sequence, where $(X,d)$ is a complete metric space, then $A$ has finite sub cover 
+    if $A$ has a open cover.
+\end{exercise}
+
+\begin{proof}
+    let $A$ have a group of open cover
+    \[
+        A \subseteq \bigcup_{\alpha \in I}V_{\alpha}
+    \]
+
+    and define $r(x): A \to \mathbb{R}^*$
+
+    \[
+        r(x) = \sup_{r \ge 0} \{ r: B(x,r) \subseteq V_{\alpha},\: \alpha \in I \}
+    \]
+
+    and define $r_0$ as
+
+    \[
+        r_0 = \inf_{x \in A} r(x)
+    \]
+
+    then we discuss on $r_0$:
+
+    \begin{enumerate}
+        \item we prove a lemma at first: for any convergent $x_n \in A$, we have
+
+        \[
+            \lim_{n \to \infty}r(x_n) \ge r(\lim_{n \to \infty}x_n)
+        \]
+
+        consider $x \in A$ and
+
+        \[
+            \lim_{n \to \infty}x_n = x
+        \]
+
+        we prove that for any $n$
+
+        \[
+            r(x_n) \ge r(x) - d(x_n, x)
+        \]
+
+        because for any $y \in A$, we have
+
+        \begin{align*}
+             d(y, x) &\le d(y,x_n) + d(x_n, x) \\
+        \end{align*}
+
+        so if $d(y, x_n) < r(x) - d(x_n, x)$
+
+        we have
+
+        \[
+            d(y,x) < r(x)
+        \]
+
+        thus we have
+
+        \[
+            B(x_n, r(x)- d(x_n, x)) \subseteq B(x, r(x))
+        \]
+
+        by definition of $r(x_n)$ we have
+
+        \[
+            r(x_n) \ge r(x) - d(x_n, x)
+        \]
+
+        take $n \to \infty$ we have
+
+        \[
+            \lim_{n \to \infty}r(x_n) \ge r(x)
+        \]
+
+
+        \item consider if $r_0 = 0$
+
+        by definition of $\inf$, there exists a sequence $x_n \in A$, such that
+
+        \[
+            \lim_{n \to \infty}r(x_n) = 0
+        \]
+
+        since $x_n \in A$, by condition there exists a sub sequence $x_{n_k}$ such that
+
+        \[
+            \lim_{k \to \infty}x_{n_{k}} = x_0 
+        \]
+
+        by our previous lemma we have
+
+        \[
+            r(x_0) \le \lim_{k \to \infty}r(x_{n_{k}}) \le 0
+        \]
+
+        however since $x_0$ belongs to at lease one open set $V_{\alpha}$, so $r(x_0) > 0$, 
+        so $r_0 \ne 0 $
+
+        \item consider $0 < r_0 \le \infty$
+
+        we  take $0 < r_1 < \infty$ and $r_1 < r_0$, then for every $x \in A$, there exists
+        a ball $B(x, r_x),\, r_x \ge r_1$ and $B(x, r_x) \subseteq V_{\alpha}$ for some $\alpha \in I$
+
+        then we can construct a sequence $x_n$:
+
+        \begin{align*}
+            & x_1 \in A\: & B(x_1, r_1) \subseteq V_{1} \\
+            & x_2 \in A \setminus (V_1)\: & B(x_2, r_2) \subseteq V_2 \\
+            & x_3 \in A \setminus (V_1 \cup V_2) & \: B(x_3, r_3) \subseteq V_3 \\
+            & ...
+        \end{align*}
+
+        since $A$ cannot covered by finite open sets $V_1, V_2, .. V_n$, so we can construct infinite $x_n$.
+        it is obviously that for any $j > i$ we have $d(x_i, x_j) \ge r_1$
+
+        so $x_n$ cannot contains any convergent sub sequence which is contradict.
+
+
+
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    let $I \subseteq \mathbb{R}^n$ and $a_1 \le b_1, a_2 \le b_2, .., a_n \le b_n$
+
+    \[
+        I = \{ (x_1,x_2, .. ,x_n) : a_i \le x_i \le b_i \}
+    \]
+
+    prove that $I$ is compact
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Lemma 1: let $J_1 = [a_1, b_1], J_2 = [a_2, b_2], ..$ and $J_1 \supseteq J_2 \supseteq J_3 .. $ then:
+
+        \[
+            \bigcap_{n=1}^{\infty}J_n \ne \emptyset
+        \]
+
+        since we have $a_1 \ge a_2 \ge a_3$ and for $a_n$ has upper bound $b_1,b_2, .. $, so we take
+
+        \[
+            x = \sup_{n \ge 1}a_n
+        \]
+
+        then we have for any $n$, $a_n \le x$. since for any $n,\: b_n$ is also an upper bound so we have
+
+        \[
+            a_n \le x \le b_n
+        \]
+        so we have
+
+        \[
+            x \in \bigcap_{n=1}^{\infty}J_n
+        \]
+
+        \item Lemma 2: let 
+
+        \[
+            J_m = \{ (x_1,x_2, .. ,x_n) : a_i^{(m)} \le x_i \le b_i^{(m)} \}
+        \]
+
+        and $J_1 \supseteq J_2 \supseteq J_3 .. $ then we have
+
+        \[
+            \bigcap_{n=1}^{\infty}J_n \ne \emptyset
+        \]
+
+        we define a function $f: \mathbb{R}^n \to \mathbb{R}$:
+
+        \[
+            f((x_1, x_2, .. ,x_n)) = x_1
+        \]
+
+        then we have
+
+        \[
+            f(J_m) = [a_1^{(m)}, b_1^{(m)}] 
+        \]
+
+        and
+
+        \[
+            f^{-1}([a_1^{(m)}, b_1^{(m)}]) = J_m
+        \]
+
+        by $J_1 \supseteq J_2$, we have
+
+        \[
+            f(J_1) \supseteq f(J_2):\: [a_1^{(1)}, b_1^{(1)}] \supseteq [a_1^{(2)}, b_1^{(2)}]
+        \]
+
+        so there exists $c_1$ such that
+
+        \[
+            c_1 \in \bigcap_{m=1}^{\infty}f(J_m) = \bigcap_{m=1}^{\infty}[a_1^{(m)}, b_1^{(m)}]
+        \]
+
+        replace $f$ with
+
+        \[
+            g((x_1, x_2, .. ,x_n)) = x_2
+        \]
+
+        we can obtain $c_2$ such that
+
+        \[
+            c_2 \in \bigcap_{m=1}^{\infty}[a_2^{(m)}, b_2^{(m)}]
+        \]
+
+        so we construct $c_1, c_2, .. c_n$ and we have
+
+        \[
+            (c_1, c_2, .., c_n) \in \bigcap_{m=1}^{\infty}J_m
+        \]
+
+        \item $J$ has finite sub cover
+
+        assume $J$ has a open cover, and this open cover contains none finite sub cover.
+        let $J$ as
+
+        \[
+            J = \{ (x_1,x_2, .., x_n): a_i \le x_i \le b_i\} \quad a_i \le b_i
+        \]
+
+        and
+
+        \[
+            J \subseteq \bigcup_{\alpha \in I}V_{\alpha}
+        \]
+
+        and define
+
+        \[
+            \| J \|_{\infty} = \max_{1 \le i \le n}b_i - a_i
+        \]
+
+        we will divide $J$ by $n$ times, and get $2^n$ sub sets
+
+        \[
+            J = \bigcup_{k=0}^{2^n-1} \{ (x_1, x_2, .., x_n): l_i^{(k)} \le x_i \le r_i^{(k)} \}
+        \]
+
+        and
+
+        \begin{align*}
+            l_i^{(k)} = \begin{cases}
+                a_i & k < 2^{i-1} \\
+                \frac{a_i + b_i}{2} & k \ge 2^{i-1} \\
+            \end{cases} \\
+            r_i^{(k)} = \begin{cases}
+                \frac{a_i + b_i}{2} & k < 2^{i-1} \\
+                b_i & k \ge 2^{i-1} \\
+            \end{cases}
+        \end{align*}
+
+        since $J$ has none finite sub cover, there should exists $0 \le k \le 2^{n}-1$ such that
+
+        \[
+            \{ (x_1, x_2, .., x_n): l_i^{(k)} \le x_i \le r_i^{(k)} \}
+        \]
+
+        also has none finite sub cover, we pick this parts $J_1$ and we have
+
+        \[
+            \| J_1 \|_{\infty} = \frac{1}{2^n} \| J \|_{\infty}
+        \]
+
+        and we can divide $J_1$ then got $J_2$, consider we pick $m$ times and we have
+
+        \[
+            \| J_m \|_{\infty} = \frac{1}{2^{m}} \| J \|_{\infty}
+        \]
+
+        since  $J \supseteq J_1 \supseteq J_2 .. $ so we have
+
+        \[
+            \bigcap_{m=1}^{\infty}J_m \ne \emptyset
+        \]
+
+        pick $x$
+
+        \[
+            x \in \bigcap_{m=1}^{\infty}J_m 
+        \]
+
+        since $x \in V_{\alpha}$ for some $\alpha \in I$, and $V_{\alpha}$ is open, there should exists $r$ such that
+
+        \[
+            B(x, r) \subseteq V_{\alpha}
+        \]
+
+        we take $m$ be large enough such that
+
+        \[
+ \| J_m \|_{\infty}  = \frac{1}{2^{m}} \| J \|_{\infty} < \frac{r}{n}
+        \]
+
+        for any $y \in J_m$ we have
+
+        \begin{align*}
+            d_{l_2}(y,x) & \le d_{l_1}(y,x) \\
+            & \le n d_{l_\infty}(y,x) \le n  \| J_m \|_{\infty} \\
+            & < r
+        \end{align*}
+
+        so we have
+
+        \[
+            J_m \subseteq B(x, r) \subseteq V_{\alpha}
+        \]
+
+        so $J_m$ has a finite sub cover, which is contradict.
+
+    \end{enumerate} 
+\end{proof}
+
+\begin{exercise}
+    On topological space $(X, \mathcal{F})$, if every singe point set is closed, then every derive set is closed 
+\end{exercise}
+
+\begin{proof}
+   let $E \subseteq X$ and 
+   
+   \[
+    E' = \{ x: \forall V \in \mathcal{F},\, x \in V,\, V \cap (E \setminus \{ x\}) \ne \emptyset \}
+   \]
+
+   then we have
+
+   \[
+    (E')^C = \{ x: \exists V \in \mathcal{F},\, x \in V,\, V \cap (E \setminus \{ x\}) = \emptyset \}
+   \]
+
+   consider that any $y \in V,\, y \ne x$: we have a open set $V \setminus (\{ x\})$:
+
+   \begin{align*}
+    (V \setminus \{x\} ) \cap (E \setminus \{y \}) &= V \cap E \cap (\{ x, y\})^C \\
+    & \subseteq \{ x \} \cap (\{x, y\})^C = \emptyset
+   \end{align*}
+
+
+   so for any $x \in (E')^C$ we have a open set $V_x$ which contains $x$ and
+
+   \begin{align*}
+        V_x \subseteq (E')^C
+   \end{align*}
+
+   
+   so $(E')^C$ can be written as union of open sets:
+
+   \[
+    (E')^C = \bigcup_{x \in (E')^C} V_x
+   \]
+
+   and $E'$ is closed
+
+\end{proof}
+
+\begin{exercise}
+    let $I_1, I_2, .., I_n$ be disjoint and non-empty closed interval. and $J$ is a bounded and nonempty open interval and
+
+    \[
+        J \subseteq \bigcup_{k=1}^{n}I_k
+    \]
+
+    prove: exists $1\le p \le n$, $J \subseteq I_p$
+\end{exercise}
+
+\begin{proof}
+    pick $x_0 \in J$, assume $x_0 \in I_{q_0}$ for some $1\le q_0 \le n$, we prove that $J \subseteq I_{q_0}$.
+
+    assume $\exists x_1 \in J, x_1 \ne x_0, x_1 \in I_{q_1}, q_1 \ne q_0$
+    assume $x_0 < x_1$ there should exists $x_2, x_0 < x_2 < x_1$, and
+    $x_2 \notin I_{q_0}, x_2 \notin I_{q_1}$. otherwise we have $(x_0, x_1) \subseteq I_{q_0} \cup I_{q_1}$,
+    which is contradict with they are disjoint bounded and closed interval.
+
+    since $x_2 \in J$, there should exists $I_{q_2}$ such that $x_2 \in I_{q_2}$, and $q_2, q_1, p$ is distinct.
+    because $I_{q_0}$ and $I_{q_2}$ is disjoint, there should exists $x_3, x_0 < x_3 < x_2$
+    and $x_3 \notin I_{q_0}, x_3 \notin I_{q_2}$
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

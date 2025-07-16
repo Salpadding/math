@@ -1,0 +1,142 @@
+\subsection{L'h\^{o}pital's Rule}
+
+\begin{thm}
+    \label{thm:lhopital}
+    suppose $f,g$ are real and differentiable in $(a,b)$, and $g'(x) \ne 0$ for all $x \in (a,b)$
+    ,where $-\infty \le a < b \le \infty$, and $L \in \R^*$. Suppose
+
+    \[
+        \frac{f'(x)}{g'(x)} \to L \quad \mathrm{as} \: x \to a
+    \]
+
+    If one of:
+
+    \begin{enumerate}
+        \item $f(x) \to 0$ and $g(x) \to 0$ as $x \to a$
+
+        \item $g(x) \to \infty$ as $x \to a$
+    \end{enumerate}
+
+    Then:
+
+    \[
+        \frac{f(x)}{g(x)} \to L \quad \mathrm{as}\: x \to a
+    \]
+\end{thm}
+
+\begin{proof}
+    At first, we need to prove $g(x)$ is injective, it is easy to prove by mean value theorem since $g'(x) \ne 0$.
+
+    Now assume $-\infty \le A < \infty$, we pick $A < r$, and we will prove that:
+
+    \[
+        \varlimsup_{x \to a}\frac{f(x)}{g(x)} \le r
+    \]
+
+
+    since $f'(x)/g'(x) \to A < r$, there exists $c_1$ so that for all $x \in (a,c_1),\: f'(x)/g'(x) \le r$.
+    Now let's pick any $x,y \in (a,c_1),\: x < y$, by mean value theorem: \: (We can do so because $g(x) \ne g(y)$)
+
+    \[
+        \frac{f(x) - f(y)}{g(x) - g(y)} = \frac{f'(t)}{g'(t)} \le r \quad \text{for some} \: t \in (x,y)
+    \]
+
+    let's fix $y$
+
+    If (1) holds:
+
+    take $x \to a$, then we got:
+
+    \[
+        \frac{f(y)}{g(y)} \le r
+    \]
+
+
+    since $y \in (a,c_1)$ is arbitrary, take $y \to a$, then we got:
+
+    \[
+        \varlimsup_{y \to a}\frac{f(y)}{g(y)} \le r
+    \]
+
+    Or if (2) holds:
+
+    since $g(x) \to \infty$ as $x \to a$, we can pick $x$ close enough to $a$, so that
+
+    \begin{align*}
+        g(x) &> g(y) \\
+        g(x) &> 0 
+    \end{align*}
+
+    and we got:
+
+    \begin{align*}
+        \frac{f(x) - f(y)}{g(x) - g(y)} & \le r \\
+       \frac{f(x) - f(y)}{g(x)} & \le r \frac{g(x) -g(y)}{g(x)} \\
+       \frac{f(x)}{g(x)}& \le r + \frac{f(y) - r g(y)}{g(x)}
+    \end{align*}
+
+    take $x \to a$, we got
+
+    \[
+        \varlimsup_{x \to a} \frac{f(x)}{g(x)} \le  r
+    \]
+
+    because $r$ can be arbitrary close to $A$, thus we got:
+
+    \[
+        \varlimsup_{x \to a}\frac{f(x)}{g(x)} \le L
+    \]
+
+    Similarly, if $-\infty < A \le \infty$, we can pick $-\infty < p < A$, and prove that:
+
+    \[
+        \varliminf_{x \to a} \frac{f(x)}{g(x)} \ge  p
+    \]
+
+    since $p$ can be arbitrary close to $L$, and thus
+
+
+    \[
+        \varliminf_{x \to a} \frac{f(x)}{g(x)} \ge L
+    \]
+
+    after all,
+    
+    if $L \in \R$, then
+
+    \[
+        L \le \varliminf_{x \to a}\frac{f(x)}{g(x)} \le \varlimsup_{x \to a}\frac{f(x)}{g(x)} \le L
+    \]
+
+
+    which indicates:
+
+    \[
+        \lim_{x \to a}\frac{f(x)}{g(x)} = A
+    \]
+
+
+    Similarly conclusion holds if $L = \infty$ or $L = -\infty$
+\end{proof}
+
+\begin{corollary}
+   \autoref{thm:lhopital} also apply to case when:
+   
+   \begin{enumerate}
+    \item $x \to b$
+
+    Or
+
+    \item $g(x) \to -\infty$ as $x \to a$ or $x \to b$
+   \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    just replace $x \to a$ with $x \to b$, for $g(x) \to -\infty$, prove
+
+    \[
+        \lim_{x \to a}\frac{f(x)}{-g(x)} = -A
+    \]
+
+    and apply law of limit
+\end{proof}

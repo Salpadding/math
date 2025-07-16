@@ -1,0 +1,34 @@
+% math 
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+% cross reference, use \autoref instead of \ref
+\usepackage{aliascnt}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+
+\geometry{left=1.5cm, right=1.5cm, top=2cm, bottom=2cm}
+
+\newtheorem{thm}{Theorem}[section]
+
+\newaliascnt{lem}{thm}
+\newaliascnt{prop}{thm}
+\newaliascnt{definition}{thm}
+\newaliascnt{exercise}{thm}
+\newaliascnt{corollary}{thm}
+
+\theoremstyle{definition}
+\newtheorem{lem}[lem]{Lemma}
+\newtheorem{prop}[prop]{Proposition}
+\newtheorem{definition}[definition]{Definition}
+\newtheorem{exercise}[exercise]{Exercise}
+\newtheorem{corollary}[corollary]{Corollary}
+
+\def\lemautorefname{Lemma}
+\def\thmautorefname{Theorm}
+\aliascntresetthe{lem}
+\aliascntresetthe{prop}
+\aliascntresetthe{definition}
+\aliascntresetthe{exercise}
+\aliascntresetthe{corollary}
+

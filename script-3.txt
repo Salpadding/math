@@ -1,0 +1,38 @@
+In this video, i will show you how to debug temporal workflow.
+
+Let's open a k9s, a kubernetes command line interface. We can search kubernetes
+resource by this tool.
+
+I will connect to kubernetes man03 cluster. So i need to modify environment variable
+KUBECONFIG as ~/.kube/int.yaml. It was download from wiki page.
+
+I will use idp-service as a example. The idp-service is under tps namespace. Let's
+
+go to tps namespace. The temporal configuration is a config map. Let's open it.
+
+From the configuration file, the default grpc server is no longer localhost, but 
+a remote url.
+
+The webserver is temporal ui. Let's take a look at temporal UI.
+
+It you need to login, click 'continue with microsoft'.
+
+This temporal ui is good for debug. I can observe the execution history of workflow.
+
+Make sure namespace is correct. Then we can search our workflow by task queue name
+
+
+The payload of workflow is here.
+And i can see users to synchronize. From SyncUserWorkflow payload. 
+
+Let's take a look at activity. The input of FetchUserDataActivity is a tenant with some user id.
+
+And the output shows this user has many planner codes.
+
+Now let's check the UpdateUserDataActivity. The input should be user id ,tenant, and planner codes.
+
+And the output is null.
+
+
+
+

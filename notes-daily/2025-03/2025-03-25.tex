@@ -1,0 +1,459 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{2025-03-25}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{多元函数微积分}
+
+\subsection{偏导连续可以推出函数可微}
+
+\subsubsection{$f$ 为实值函数}
+
+若 $f: \mathbb{R}^n \to \mathbb{R}$ 满足 $\frac{\partial f}{\partial x_i}$ 连续，那么 $f$ 连续并且可微。
+
+证明如下，令 $\mathbf{x'} = \mathbf{x} + \Delta = \mathbf{x} + [\delta_1, \delta_2, .., \delta_n]^T$
+
+\begin{align*}
+    & f(\mathbf{x}')  - f(\mathbf{x}) - \sum_{i=1}^{n}f_i(\mathbf{x})\delta_i = \int_{x_1}^{x_1 + \delta_1}f_1(t, x_2, .., x_n) \text{d}t  + \\ 
+    & \int_{x_2}^{x_2 + \delta_1}f_2(x_1 + \delta_1, t, .., x_n) \text{d}t + .. + \int_{x_2}^{x_n + \delta_n}f_n(x_1 + \delta_1, x_2 + \delta_2, .., t) \text{d}t - \sum_{i=1}^{n}f_i(\mathbf{x}) \delta_i
+\end{align*}
+
+因为 $f_1, f_2, .. f_n$ 都是连续的，所以我们可以让 $\delta_1, \delta_2, .. \delta_n$ 都充分小，然后代入 $f_1, f_2, .., f_n$ 连续的性质，得到
+
+\begin{align*}
+\lvert f_1(t,x_2,..,x_n) - f_1(x_1, x_2, .. ,x_n)\rvert & \le \epsilon \\
+\lvert f_2(x_1 + \delta_1,t,..,x_n) - f_2(x_1, x_2, .. ,x_n)\rvert & \le \epsilon \\
+.. \\
+\lvert f_n(x_1 + \delta_1,x_2+\delta_2,..,x_n+\delta_n) - f_n(x_1, x_2, .. ,x_n)\rvert & \le \epsilon \\
+\end{align*}
+
+再代入上面得到
+
+\begin{align*}
+    \lvert f(\mathbf{x}')  - f(\mathbf{x}) - \sum_{i=1}^{n}f_i(\mathbf{x})\delta_i \rvert \le \lvert \sum_{i=1}^{n} \delta_i \epsilon \rvert \le \epsilon \sum_{i=1}^{n} \lvert \delta_i \rvert
+\end{align*}
+
+两边同时除以 $\Delta$ 的二范数得到 
+
+
+\begin{align*}
+    \frac{\lvert f(\mathbf{x} + [\delta_i]^T)  - f(\mathbf{x}) - \sum_{i=1}^{n}f_i(\mathbf{x})\delta_i \rvert}{\sqrt{\sum_{i=1}^{n}\delta_i^2}}   \le \epsilon \frac{\sum_{i=1}^{n} \lvert \delta_i \rvert}{\sqrt{\sum_{i=1}^{n}\delta_i^2}}
+\end{align*}
+
+根据柯西不等式有
+
+\[
+\sum_{i=1}^{n} \lvert \delta_i \rvert \le \sqrt{n} \sqrt{\sum_{i=1}^{n}\delta_i^2}
+\]
+
+所以有
+
+\[
+\frac{\lvert f(\mathbf{x} + [\delta_i]^T)  - f(\mathbf{x}) - \sum_{i=1}^{n}f_i(\mathbf{x})\delta_i \rvert}{\sqrt{\sum_{i=1}^{n}\delta_i^2}} \le \epsilon \sqrt{n}
+\]
+
+根据定义得到了 $f$ 在 $\mathbf{x}$ 处可微，而且有
+
+$\nabla f = [f_1, f_2, .. , f_n]$
+
+\subsubsection{$f \in \mathbb{R}^n \to \mathbb{R}^m$ }
+
+我们可以令 $g_i(\mathbf{x}) = \mathbf{e}_i^T f(\mathbf{x})$，也就是第 $i$ 个分量，然后我们可以得到 $g_i$ 都是可微的。
+
+令 $\mathbf{x'} = \mathbf{x} + \Delta = \mathbf{x} + [\delta_1, \delta_2, .., \delta_n]^T$
+
+当 $\| \Delta \|_2$ 充分小的时候，我们有
+
+\begin{align*}
+f(\mathbf{x} + \Delta) - f(\mathbf{x}) - \mathbf{J}_f(\mathbf{x}) \Delta &= \\
+f(\mathbf{x} + \Delta) - f(\mathbf{x}) - \begin{bmatrix}
+    (\nabla g_1)^T \\
+    (\nabla g_2)^T \\
+    .. \\
+    (\nabla g_m)^T \\
+\end{bmatrix}  \Delta
+\end{align*}
+
+因为 $g_i$ 都是可微的，所以有
+
+\[
+\alpha_i = \| g_i(\mathbf{x} + \Delta) - g_i(\mathbf{x}) - (\nabla g_i)^T\Delta \|_2 \le \epsilon \| \Delta \|_2
+\]
+
+因为
+
+\begin{align*}
+\| f(\mathbf{x} + \Delta) - f(\mathbf{x}) - \mathbf{J}_f(\mathbf{x}) \Delta \|_2 &= \sqrt{\sum_{i=1}^{m}\alpha_i^2} \le \sqrt{m \cdot \max_{i \le m} \alpha_i^2} \\
+& \le \sqrt{m}(\sqrt{\max_{i \le m} \alpha_i^2}) \le \sqrt{m}\sum_{i=1}^{m} \alpha_i \\
+&\le m \sqrt{m} \epsilon \| \Delta \|_2
+\end{align*}
+
+所以 $f$ 可微
+
+\subsubsection{其他结论}
+
+通过这个定理，可以验证得到下面这些函数都是可微的。
+
+\begin{enumerate}
+    \item $f(x,y) = x + y$
+    \item $f(x,y) = xy$
+    \item $f(x,y) = x^2 + y^2$
+\end{enumerate}
+
+\subsection{Clairaut's Theorem}
+
+若 $f: \mathbb{R}^n \to \mathbb{R}$ 二阶连续可微，n阶连续可微是指满足n阶偏导连续，那么有
+
+\[
+\frac{\partial^2 f}{\partial x_j \partial x_i} = 
+\frac{\partial^2 f}{\partial x_i \partial x_j}
+\]
+
+下面给出证明，我们只要证明在 $\mathbf{x} = \mathbf{0}$ 处即可，其他情况可以转化成 $f(\mathbf{x} + \mathbf{x}_0)$。令 
+
+\[
+X(\delta) = f(\delta \mathbf{e}_i + \delta \mathbf{e}_j) - f(\delta \mathbf{e}_i) - f(\delta \mathbf{e}_j) + f(\mathbf{0})
+\]
+
+我们对 $x_j$ 展开成积分
+
+\begin{align*}
+X(\delta)  &= \int_{0}^{\delta}\frac{\partial f}{\partial x_j}(\delta \mathbf{e}_i + x_j \mathbf{e}_j) \text{d}x_j - \int_{0}^{\delta}\frac{\partial f}{\partial x_j}(x_j \mathbf{e}_j) \text{d}x_j \\
+& = \int_{0}^{\delta}\frac{\partial f}{\partial x_j}(\delta \mathbf{e}_i + x_j \mathbf{e}_j) - \frac{\partial f}{\partial x_j}(x_j \mathbf{e}_j) \text{d}x_j \\
+&= \int_{0}^{\delta}\int_{0}^{\delta} \frac{\partial^2 f}{\partial x_i \partial x_j}(x_i \mathbf{e}_i + x_j \mathbf{e}_j) \text{d}x_j \text{d}x_i
+\end{align*}
+
+我们可以让 $\delta$ 充分小，足以满足二阶偏导数连续的性质，所以有
+
+\[
+\lvert \frac{\partial^2 f}{\partial x_i \partial x_j}(x_i \mathbf{e}_i + x_j \mathbf{e}_j) - \frac{\partial^2 f}{\partial x_i \partial x_j}(\mathbf{0}) \rvert \le \epsilon
+\]
+
+令
+
+\[
+\frac{\partial^2 f}{\partial x_i \partial x_j}(\mathbf{0}) = a
+\]
+
+得到
+
+\begin{align*}
+\lvert X(\delta) - \delta^2 a \rvert &= \lvert X - \int_{0}^{\delta}\int_{0}^{\delta}a \text{d}x_i \text{d}x_j \rvert \\
+& \le  \int_{0}^{\delta}\int_{0}^{\delta} \lvert \frac{\partial^2 f}{\partial x_i \partial x_j}(x_i \mathbf{e}_i + x_j \mathbf{e}_j) - a\rvert \text{d}x_i \text{d}x_j \\
+& \le \epsilon \delta^2
+\end{align*}
+
+同理我们可以把 $X(\delta)$ 对 $x_i$ 展开成积分
+
+
+\begin{align*}
+X(\delta)  &= \int_{0}^{\delta}\frac{\partial f}{\partial x_i}(x_i \mathbf{e}_i + \delta \mathbf{e}_j) \text{d}x_i - \int_{0}^{\delta}\frac{\partial f}{\partial x_i}(x_i \mathbf{e}_i) \text{d}x_i \\
+& = \int_{0}^{\delta}\frac{\partial f}{\partial x_i}(\delta x_i\mathbf{e}_i + \delta \mathbf{e}_j) - \frac{\partial f}{\partial x_i}(x_i \mathbf{e}_i) \text{d}x_i \\
+&= \int_{0}^{\delta}\int_{0}^{\delta} \frac{\partial^2 f}{\partial x_j \partial x_i}(x_i \mathbf{e}_i + x_j \mathbf{e}_j) \text{d}x_i \text{d}x_j
+\end{align*}
+
+令
+
+\[
+a' = \frac{\partial^2 f}{\partial x_j \partial x_i}(\mathbf{0})
+\]
+
+我们得到
+
+\[
+\lvert X(\delta) - \delta^2 a' \rvert \le \epsilon \delta^2
+\]
+
+运用三角不等式得到
+
+\[
+\lvert \delta^2 a - \delta^2 a' \rvert \le2\epsilon \delta^2
+\]
+
+因为 $\delta > 0$ 而 $\epsilon$ 可以任意小，所以
+
+\[
+a= a'
+\]
+
+\section{行列式计算}
+
+\subsection{降阶法}
+
+\subsubsection{组合数}
+
+\begin{align*}
+    X_n &= \begin{vmatrix}
+        1 & 1 & 1 & .. & 1 \\
+        1 & \binom{2}{1} & \binom{3}{1} & .. & \binom{n}{1} \\
+        1 & \binom{3}{2} & \binom{4}{2} & .. & \binom{n+1}{2} \\
+        .. & .. & .. & .. & .. \\
+        1 & \binom{n}{n-1} & \binom{n+1}{n-1} & .. & \binom{2n-2}{n-1}
+    \end{vmatrix} =     \begin{vmatrix}
+        1 & 1 & .. & 1 & 1\\
+        0 & \binom{1}{1} &  \binom{2}{1} & .. & \binom{n-1}{1} \\
+        0 & \binom{2}{2} & \binom{3}{2} & .. & \binom{n}{2}  \\
+        .. & .. & .. & .. & ..\\
+        0 & \binom{n-1}{n-1} & \binom{n}{n-1} & .. & \binom{2n-3}{n-1}
+    \end{vmatrix} \\
+    &=\begin{vmatrix}
+          1 &  \binom{2}{1} & .. & \binom{n-1}{1} \\
+          1 & \binom{3}{2} & .. & \binom{n}{2}  \\
+          .. & .. & .. & ..\\
+          1 & \binom{n}{n-1} & .. & \binom{2n-3}{n-1}
+    \end{vmatrix} = \begin{vmatrix}
+          1 &  \binom{1}{0} & .. & \binom{n-2}{0} \\
+          1 & \binom{2}{1} & .. & \binom{n-1}{1}  \\
+          .. & .. & .. & ..\\
+          1 & \binom{n-1}{n-2} & .. & \binom{2n-4}{n-2}
+    \end{vmatrix} \\
+    & = \begin{vmatrix}
+          1 &  1 & .. & 1 \\
+          1 & \binom{2}{1} & .. & \binom{n-1}{1}  \\
+          .. & .. & .. & ..\\
+          1 & \binom{n-1}{n-2} & .. & \binom{2n-4}{n-2}
+    \end{vmatrix} = X_{n-1}
+\end{align*}
+
+所以有 $X_n= X_1 = 1$
+
+\subsubsection{$a_i b_j$}
+
+\begin{align*}
+    \begin{vmatrix}
+        a_1b_1 & a_1b_2 & a_1b_3 & .. & a_1b_n \\
+        a_1b_2 & a_2b_2 & a_2b_3 & .. & a_2b_n \\
+        a_1b_3 & a_2b_3 & a_3b_3 & .. & a_3b_n \\
+        .. & .. & .. & .. & .. \\
+        a_1b_n & a_2b_n & a_3b_n & .. & a_nb_n \\
+    \end{vmatrix} &= 
+    a_1 \begin{vmatrix}
+        b_1 & b_2 & b_3 & .. & b_n \\
+        a_1b_2 & a_2b_2 & a_2b_3 & .. & a_2b_n \\
+        a_1b_3 & a_2b_3 & a_3b_3 & .. & a_3b_n \\
+        .. & .. & .. & .. & .. \\
+        a_1b_n & a_2b_n & a_3b_n & .. & a_nb_n \\
+    \end{vmatrix} 
+    \\
+   &= a_1\begin{vmatrix}
+        b_1 & b_2 & b_3 & .. & b_n \\
+        a_1b_2 - a_2b_1 & 0 & 0 & .. & 0 \\
+        a_1b_3 - a_3b_1 & a_2b_3 - a_3b_2 & 0 & .. & 0 \\
+        .. & .. & .. & .. & .. \\
+        a_1b_n - b_1a_n & a_2b_n - b_2a_n & a_3b_n -a_nb_3 & .. & 0 \\
+   \end{vmatrix} \\
+   &= a_1b_n \prod_{i=1}^{n-1}(a_ib_{i+1} - a_{i+1}b_i)
+\end{align*}
+
+\subsubsection{爪型行列式}
+
+
+\begin{enumerate}
+    \item 第一种情况 $a_2a_3..a_n \ne 0$
+
+\begin{align*}
+    \begin{vmatrix}
+        a_1 & b_2 & b_3 & .. & b_n \\
+        c_2 & a_2 & 0 & .. & 0 \\
+        c_3 & 0 & a_3 & .. & 0 \\
+        .. & .. & .. & .. & ..  \\
+        c_n & 0 & 0 & .. & a_n 
+    \end{vmatrix} &=   {a_2a_3..a_n}  \begin{vmatrix}
+        a_1 & \frac{b_2}{a_2} & \frac{b_3}{a_3} & .. & \frac{b_n}{a_n} \\
+        c_2 & 1 & 0 & .. & 0 \\
+        c_3 & 0 & 1 & .. & 0 \\
+        .. & .. & .. & .. & ..  \\
+        c_n & 0 & 0 & .. & 1 
+    \end{vmatrix} \\
+    &= a_2a_3..a_n \begin{vmatrix}
+        a_1 - \sum_{i=2}^{n}\frac{b_ic_i}{a_i} & \frac{b_2}{a_2} & \frac{b_3}{a_3} & .. & \frac{b_n}{a_n} \\
+        0 & 1 & 0 & .. & 0 \\
+        0 & 0 & 1 & .. & 0 \\
+        .. & .. & .. & .. & ..  \\
+        0 & 0 & 0 & .. & 1 
+    \end{vmatrix} \\
+    &= a_2a_3..a_n(a_1 - \sum_{i=1}^{n}\frac{b_ic_i}{a_i})
+\end{align*}
+
+    \item 如果存在 $a_i = 0$ 我们可以用 Laplace 定理对 $a_i = 0$ 的行进行展开。
+
+    下面不妨设 $a_2 = 0$，那么有
+
+    \begin{align*}
+     \begin{vmatrix}
+        a_1 & b_2 & b_3 & .. & b_n \\
+        c_2 & 0 & 0 & .. & 0 \\
+        c_3 & 0 & a_3 & .. & 0 \\
+        .. & .. & .. & .. & ..  \\
+        c_n & 0 & 0 & .. & a_n 
+    \end{vmatrix}  =     -c_2     \begin{vmatrix}
+        b_2 & b_3 & .. & b_n \\
+        0 & a_3 & .. & 0 \\
+        .. & .. & .. & ..  \\
+        0 & 0 & .. & a_n 
+    \end{vmatrix} = -c_2b_2 \prod_{i=3}^{n}a_i
+    \end{align*}
+
+    同理，对于更一般的 $a_k = 0,\, k \ge 2$ 有
+
+    \begin{align*}
+     \begin{vmatrix}
+        a_1 & b_2 & b_3 & .. & b_n \\
+        c_2 & a_2 & 0 & .. & 0 \\
+        c_3 & 0 & a_3 & .. & 0 \\
+        .. & .. & .. & .. & ..  \\
+        c_k & .. & a_k & .. & 0 \\
+        .. & .. & .. & .. & ..  \\
+        c_n & 0 & 0 & .. & a_n 
+    \end{vmatrix}  =     (-1)^{k+1}c_k     \begin{vmatrix}
+          b_2 & b_3 & .. & b_n \\
+          a_2 & 0 & .. & 0 \\
+          0 & a_3 & .. & 0 \\
+         .. & .. & .. & ..  \\
+          0 & 0 & .. & a_n 
+    \end{vmatrix} 
+    \end{align*}
+
+    注意对于 $i < k$ 的行，余子式的对角线元素变成了 $i,j-1$ 对于 $i > k$  的行，余子式的对角线元素依然是 $i,j$
+    注意到余子式的第 $k-1$ 列可以按照 $b_k$ 展开得到
+
+    \[
+        b_k(-1)^{k}a_2a_3..a_{k-1}a_{k+1}..a_n
+    \]
+
+    最终得到
+
+    \[
+        -c_kb_k a_2a_3..a_{k-1}a_{k+1}..a_n
+    \]
+
+    注意到我们第一次展开的时候有
+
+    \begin{align*}
+        i' &= \begin{cases}
+            i & i < k \\
+            i - 1 & i > k \\
+        \end{cases} \\
+        j' &= j-1 \\
+    \end{align*}
+
+    第二次展开的时候有
+
+
+    \begin{align*}
+        i' &= i-1 \\
+        j' &= \begin{cases}
+            j & j < k-1 \\
+            j - 1 & j > k-1 \\
+        \end{cases}
+    \end{align*}
+
+    把这两个变换作复合得到
+
+    \begin{align*}
+        i' &= \begin{cases}
+            i-1 & i < k \\
+            i - 2 & i > k \\
+        \end{cases} \\
+        j' &= \begin{cases}
+            j - 1& j < k \\
+            j - 2 & j > k \\
+        \end{cases}
+    \end{align*}
+
+    可以看到两次变换后 $i = j$ 可以推断出 $i'=j'$ 也就是对角线元素保持不变。
+
+    \item 转化成爪型行列式
+
+    \begin{align*}
+        \begin{vmatrix}
+            x_1 - a_1 & x_2 & x_3 & .. & x_n \\
+            x_1 & x_2 -a_2 & x_3 & .. & x_n \\
+            x_1 & x_2 & x_3 - a_3& .. & x_n \\
+            ..& ..&..&..&.. \\
+            x_1 & x_2 & .. & .. & x_n -a_n 
+        \end{vmatrix} &=         \begin{vmatrix}
+            x_1 - a_1 & x_2 & x_3 & .. & x_n \\
+            a_1 & -a_2 & 0 & .. & 0 \\
+            a_1 & 0 &  - a_3& .. & 0 \\
+            ..& ..&..&..&.. \\
+            a_1 & 0 & .. & .. &  -a_n 
+        \end{vmatrix} \\
+        &= (-1)^{n-1}a_2a_3..a_n(x_1 - a_1 + a_1\sum_{i=2}^{n}\frac{x_i}{a_i})
+    \end{align*}
+
+\end{enumerate}
+
+\subsubsection{直接展开}
+
+如下，按照第一行展开
+
+\begin{align*}
+    \begin{vmatrix}
+        a & 0 & .. & 0 & 1 \\
+        0 & a & .. & 0 & 0 \\
+        .. & .. & .. & .. & .. \\
+        0 & 0 & .. & a & 0 \\
+        1 & 0 & .. & 0 & a \\
+    \end{vmatrix} = a^n + (-1)^{n+1}(-1)^{n}a^{n-2} = a^n - a^{n-2}
+\end{align*}
+
+另一个例子
+
+假设 $\lvert A \rvert = \lvert a_{ij}\rvert$ 是一个 $n$ 阶行列式，$A_{ij}$ 是它的第 $i,j$ 元素的代数余子式，那么有
+
+\[
+\begin{vmatrix}
+    a_{11} & a_{12} & .. & a_{1n} & x_1 \\ 
+    a_{21} & a_{22} & .. & a_{2n} & x_2 \\ 
+    .. & .. &.. &.. &.. \\
+    a_{n1} & a_{n2} & .. & a_{nn} & x_n \\ 
+    y_1 & y_2 & .. & y_n & z \\ 
+\end{vmatrix} = z \cdot \text{det} (A) - \sum_{i=1}^{n} \sum_{j=1}^{n}A_{ij}x_i y_j
+\]
+
+先按最后一列展开，然后再按最后一行展开得到
+
+\begin{align*}
+& = z \text{det}(A) + \sum_{i=1}^{n}(-1)^{n+i+1}x_i\sum_{j=1}^{n}(-1)^{n+j}y_jM_{ij} \\
+& = z \text{det}(A) + \sum_{i=1}^{n}(-1)^{i+j+1}\sum_{j=1}^{n}x_iy_iM_{ij} \\
+& = z \text{det}(A) - \sum_{i=1}^{n}\sum_{j=1}^{n}x_iy_iA_{ij} \\
+\end{align*}
+
+\section{实变函数习题}
+
+\subsection{映射与基数}
+
+\subsubsection{一一映射(1)}
+
+$f: \mathbb{R} \to \mathbb{R}$ 记 $f_1 = f$，$f_{n}(x) = f(f_{n-1}(x))$，若存在 $n_0$ 满足 $f_{n_0}(x) = x$ ，
+那么$f$ 是 $\mathbb{R}$ 到 $f(\mathbf{R})$ 上的一一映射。
+
+先证明 $f$ 是满射，那么存在 $c \in \mathbb{R}$ 满足 $c \notin f(\mathbb{R})$，以此类推可以得到 $f_{n+1}(\mathbb{R}) = f(f_{n}(\mathbb{R})) \subseteq f(\mathbb{R})$，
+但这个显然和 $f_{n_0}(c) = c$ 矛盾。
+
+继续证明 $f$ 是单射，假设存在 $x_1 \ne x_2$ 满足 $x_1 = x_2$，用数学归纳可以证明 $f_{n_0}(x_1)  = f_{n_0}(x_2)$，这个显然和 $f_{n_0}(x) = x$ 矛盾。
+
+
+\subsubsection{一一映射(2)}
+
+不存在 $\mathbb{R}$ 上的连续函数，它在无理数 $\mathbb{R} \setminus \mathbb{Q}$ 上是一一映射，而在 $\mathbb{Q}$ 上不是一一映射。
+假设存在 $q_1 < q_2,\, q_1,\, q_2 \in \mathbb{Q}$ 满足 $f(q_1) = f(q_2)$
+
+因为 $f$ 在 $[q_1, q_2]$ 上连续，我们可以用最值原理，至少能找到一个不等于 $f(q_1)$ 的最值。因为如果最大和最小值都等于 $f(q_1)$ 就和 $f$ 在无理数集上单射矛盾。
+
+不妨设 $f$ 在 $[q_1, q_2]$ 上取到最大值 $f(c) = M > f(q_1)$，我们分析 $(f(q_1), M)$ 之间的数，根据介值定理，对任意 $d \in (f(q_1), M)$ 都存在
+$x_1 \in [q_1, c]$ 和 $x_2 \in [c, q_2]$ 满足 $f(x_1) = f(x_2) = d$
+
+根据我们的条件 $x_1$ 和 $x_2$ 都是有理数，这样 $f$ 就能够把一个有理数集的子集$A$映射到一个区间上 $(f(q_1), M) \subseteq f(A)$，
+这显然和 $f(A)$ 是可数集矛盾了
+
+\end{document}

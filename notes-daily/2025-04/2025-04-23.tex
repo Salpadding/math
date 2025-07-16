@@ -1,0 +1,86 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\begin{exercise}
+    let $E \subseteq [0,1]$ be a measurable set. And $m(E) = 1$, prove: $\overline{E} = [0,1]$
+\end{exercise}
+
+\begin{proof}
+    assuming exists $x \in [0,1]$ and $x \notin \overline{E}$. since $\left(\overline{E}\right)^C$ is open, there 
+    should exists a open ball $B(x,r) \subseteq \left(\overline{E}\right)^C$. and we have
+
+    \begin{align*}
+        \overline{E} & \subseteq B(x,r)^C \\
+        [0,1] \cap \overline{E} & \subseteq [0,1] \cap B(x,r)^C \\
+        \overline{E} & \subseteq [0,1] \cap B(x,r)^C \\
+        m(\overline{E}) & \le m([0,1] \cap B(x,r)^C) < 1
+    \end{align*}
+
+    which is contradict with $m(\overline{E}) \ge m(E) \ge 1$
+\end{proof}
+
+\begin{exercise}
+    let $A_n$ be disjoint measurable sets. And $B_n \subseteq A_n$. prove that
+
+    \[
+        m^*(\bigcup_{n=1}^{\infty}B_n) = \sum_{n=1}^{\infty}m^*(B_n)
+    \]
+
+\end{exercise}
+
+\begin{proof}
+    we will proof at first that, for any $N \ge 1$, we have
+
+    \[
+        m^*(\bigcup_{n=1}^{N}B_n) = \sum_{n=1}^{N}m^*(B_n)
+    \]
+
+    since $A_1$ is measurable, we take the definition of measurable sets as below
+
+    \begin{align*}
+        m(\bigcup_{n=1}^{N}B_n) &= m(\bigcup_{n=1}^{N}B_n \cap A_1)  + m(\bigcup_{n=1}^{N}B_n \cap A_1^C) \\
+        &= m(\bigcup_{n=1}^{N}\left(B_n \cap A_1 \right)) + m(\bigcup_{n=1}^{N}\left( B_n \setminus A_1 \right))\\
+        &= m(B_1) + m(\bigcup_{n=2}^{N}B_n)
+    \end{align*}
+
+    if you are doubt about deduction above consider that:
+
+    \begin{align*}
+        B_1 & \cap A_1 = A_1 \\
+        B_2 & \cap A_1 \subseteq A_2 \cap A_1 \subseteq \emptyset \\
+        B_1 & \setminus A_1 \subseteq A_1 \setminus A_1 \subseteq \emptyset \\
+        B_2 & \setminus A_1 = A_2 \cap B_2 \cap A_1^C = B_2 \cap A_2  \cap A_1^C = B_2 \cap A_2 = B_2
+    \end{align*}
+
+    then we can take measurable definition of $A_2$ on $B_2 \cup B_3 ... \cup B_N$, and so on, finally we got
+
+    \[
+        m^*(\bigcup_{n=1}^{N}B_n) = \sum_{n=1}^{N}m^*(B_n)
+    \]
+
+    then we take $N \to \infty$, where the equation holds on because both side is monotone and convergence
+    under extended real number set.
+    
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,456 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+
+\section{Theory of Real Variable Function}
+\begin{exercise}
+    let $f_n: \Omega \to \mathbb{R}^*$ be a sequence of non-negative measurable functions. Then we have
+
+    \[
+        \sum_{n=1}^{\infty}\int_{\Omega}f_n \mathrm{d}x =\int_{\Omega}\sum_{n=1}^{\infty}f_n \mathrm{d}x
+    \]
+\end{exercise}
+
+\begin{proof}
+    let 
+
+    \[
+        F_n = \sum_{i=1}^{n}f_i
+    \]
+
+    and
+
+    \[
+        F = \lim_{n \to \infty} F_n
+    \]
+
+    Then $F_n$ is increasing and 
+
+    \[
+        \sum_{n=1}^{\infty}f_n = F
+    \]
+
+    by Beppo Levi's theorem, we have
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega}F_n \mathrm{d}x = \int_{\Omega}F \mathrm{d}x
+    \]
+
+    where
+
+    \[
+\int_{\Omega}F \mathrm{d}x = \int_{\Omega}\left( \sum_{n=1}^{\infty}f_n \right) \mathrm{d}x
+    \]
+
+    and
+
+    \begin{align*}
+\lim_{n \to \infty}\int_{\Omega}F_n \mathrm{d}x &= \lim_{n \to \infty}\int_{\Omega}\left( \sum_{i=1}^{n}f_i \right) \mathrm{d}x \\
+&= \lim_{n \to \infty}\sum_{i=1}^{n}\left( \int_{\Omega}f_i \mathrm{d}x \right) \\
+&= \sum_{n=1}^{\infty}\left( \int_{\Omega}f_n \mathrm{d}x \right)
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f: \Omega \to \mathbb{R}^*$ be non-negative measurable function. and $E_n \subseteq \Omega$ be a sequence of measurable sets.
+    and $\forall i \ne j,\, E_i \cap E_j = \emptyset$. also
+
+    \[
+        \bigcup_{n=1}^{\infty}E_n = \Omega
+    \]
+
+    Then we have
+
+    \[
+        \sum_{n=1}^{\infty} \int_{E_n} f \mathrm{d}x =  \int_{\Omega} f \mathrm{d}x
+    \]
+\end{exercise}
+
+\begin{proof}
+    \begin{align*}
+        \sum_{n=1}^{\infty} \int_{E_n} f \mathrm{d}x &= \sum_{n=1}^{\infty} \int_{\Omega} f \chi_{E_n}  \mathrm{d}x \\
+        &= \int_{\Omega} \left( \sum_{n=1}^{\infty} f \chi_{E_n}  \right) \mathrm{d}x \\
+        &= \int_{\Omega} f \mathrm{d}x
+    \end{align*} 
+
+\end{proof}
+
+\begin{exercise}
+    let $E_1, E_2, .. , E_n \subseteq [0,1]$ and measurable. And we have
+
+    \[
+        \sum_{j=1}^{n} \chi_{E_j}(x) \ge k,\, \forall x \in [0,1]
+    \]
+
+    then we have at least $1 \le l \le n$ such that  $m(E_l) \ge k/n$
+\end{exercise}
+
+\begin{proof}
+    assume $\forall 1 \le l \le n, m(E_l) < k/n$. then we have 
+
+    \[
+        \sum_{j=1}^{n} \int_{E_j} 1 \mathrm{d}x \le \sum_{j=1}^{n} k/n \le k
+    \]
+
+    however we have
+
+    \begin{align*}
+        \sum_{j=1}^{n} \int_{E_j} 1 \mathrm{d}x &= \sum_{j=1}^{n} \int_{[0,1]} \chi_{E_j} \mathrm{d}x \\
+        &= \int_{[0,1]} \left( \sum_{j=1}^{n}\chi_{E_j} \right) \mathrm{d}x \\
+        & \ge \int_{[0,1]} k \mathrm{d}x \ge k 
+    \end{align*}
+\end{proof}
+
+
+\begin{exercise}
+    let $f: \Omega \to \mathbb{R}^*$ and $f < \infty \quad \text{a.e.},\, m(\Omega) < \infty$. divide $[0, \infty)$ as
+
+    $0 = y_0 < y_1 < y_2 ...$ and $\exists \delta > 0$ such that $y_{n+1} - y_n > \delta$
+
+    let 
+
+    \[
+        E_k = \{ x: y_k \le f(x) < y_{k+1}\}
+    \]
+
+    then $f$ is integrable iff:
+
+    \[
+        \sum_{k=0}^{\infty}y_k m(E_k) < \infty
+    \]
+    if $f$ is integrable we have
+
+    \[
+        \int_{\Omega} f \mathrm{d}x= \lim_{\delta \to 0} \sum_{k=0}^{\infty}y_k m(E_k) 
+    \]
+\end{exercise}
+
+\begin{proof}
+    let 
+
+    \[
+        h = \sum_{k=0}^{\infty} y_k \chi_{E_k}
+    \]
+
+    and
+
+    \[
+        g = \sum_{k=0}^{\infty} y_{k+1} \chi_{E_k}
+    \]
+
+    then we have
+
+    \[
+        h \le f \le g
+    \]
+
+    so we have
+
+    \[
+     \int_{\Omega}h \mathrm{d}x  \le  \int_{\Omega}f \mathrm{d}x \le \int_{\Omega}g \mathrm{d}x
+    \]
+
+    which is
+
+    \begin{align*}
+        \sum_{k=0}^{\infty}y_k m(E_k) &\le \int_{\Omega}f \mathrm{d}x \le \sum_{k=0}^{\infty}y_{k+1} m(E_k) \\
+            & \le \sum_{k=0}^{\infty}y_{k} + (y_{k+1} - y_k) m(E_k) \\
+            & \le \sum_{k=0}^{\infty}y_{k}m(E_k) + \sum_{k=0}^{\infty}\delta m(E_k) \\
+            & \le \sum_{k=0}^{\infty}y_{k}m(E_k) + \delta m(\Omega)
+    \end{align*}
+
+    so $f: \Omega \to \mathbb{R}^*$ is integrable iff 
+
+    \[
+        \sum_{k=0}^{\infty}y_k m(E_k) < \infty
+    \]
+
+\end{proof}
+
+
+\begin{exercise}
+    let $f: \Omega \to \mathbb{R}^*$ and $f < \infty \quad \text{a.e.},\, m(\Omega) < \infty$. 
+    then $f$ is integrable iff
+
+    \[
+        \sum_{n=0}^{\infty}m(\{ x: f(x) \ge n \}) < \infty
+    \]
+
+\end{exercise}
+
+\begin{proof}
+    let
+    \[
+        E_n  = \{x : f(x) \ge n \}
+    \]
+    and
+
+    \[
+        F_n = \{x: n \le f(x) < n + 1\}
+    \]
+
+    then we have
+
+    \[
+        E_n = \bigcup_{k=n}^{\infty}F_k
+    \]
+
+    so
+
+    \begin{align*}
+        \sum_{n=0}^{\infty} m(E_n) &=  \sum_{n=0}^{\infty} \sum_{k=n}^{\infty}m(F_k) \\
+        &= \sum_{k=0}^{\infty}(k+1)m(F_k)
+    \end{align*}
+
+    since 
+
+    \[
+        \Omega = \bigcup_{k=0}^{\infty}
+    \]
+
+    so $f: \Omega \to \mathbb{R}^*$ is integrable iff
+
+    \[
+        \sum_{k=0}^{\infty}k m(F_k) < \infty
+    \]
+
+    and we have
+
+    \[
+\sum_{k=0}^{\infty}k m(F_k) \le \sum_{k=0}^{\infty}(k+1) m(F_k) \le \sum_{k=0}^{\infty}k m(F_k) + m(\Omega)
+    \]
+\end{proof}
+
+\begin{thm}[ lebesgue dominated convergence theorem ]
+    let $f_n : \Omega \to \mathbb{R}^*$ be a sequence of measurable functions.
+    and 
+
+    \[
+        \lim_{n \to \infty}f_n(x) = f(x) \: \text{a.e.}  \: x \in \Omega
+    \]
+
+    and exists integrable function $F: \Omega \to \mathbb{R}^*$ such that
+
+    \[
+        \left| f_n(x) \right| \le F(x) \: \text{a.e.} \: x \in \Omega
+    \]
+
+    then we have
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x = \int_{\Omega} f(x) \mathrm{d}x
+    \]
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $f_n$ is measurable obviously at first:
+
+            let 
+
+            \[
+                E_n = \{x \in \Omega: \lvert f_n(x)\rvert \le F(x) \}
+            \]
+
+            then we have
+
+
+            \begin{align*}
+                \int_{\Omega} \left| f_n(x) \right| \mathrm{d}x &= \int_{\Omega} \left| f_n(x) \right| \chi_{E_n}(x) \mathrm{d}x \\
+                & \le \int_{\Omega} \left| F(x) \right| \chi_{E_n}(x) \mathrm{d}x  \\
+                & \le \int_{\Omega} \left| F(x) \right| \mathrm{d}x < \infty
+            \end{align*}
+
+        \item $f$ is measurable:
+
+        let 
+        \[
+            E = \bigcap_{n=1}^{\infty}E_n
+        \]
+
+        then we have
+
+        \[
+            m(\Omega \setminus E) = m(\bigcup_{n=1}^{\infty} \left(\Omega \setminus E_n \right)) \le \sum_{n=1}^{\infty}m(\left(\Omega \setminus E_n \right)) = 0
+        \]
+
+        and
+
+        \begin{align*}
+            \int_{\Omega}f(x) \mathrm{d}x &= \int_{\Omega}f(x) \chi_{E}\mathrm{d}x \\
+            & \le \int_{\Omega}F(x) \chi_{E}\mathrm{d}x \\
+            & \le \int_{\Omega}F(x) \mathrm{d}x < \infty
+        \end{align*}
+
+        \item define $g_n$        
+
+        let 
+
+        \[
+            g_n = \left| f_n(x) - f(x) \right|
+        \]
+
+        \item $g_n$ is integrable
+
+        \[
+            \lvert g_n(x) \rvert \le \lvert f_n(x) \rvert + \lvert f(x) \rvert \le 2F(x) \: \text{a.e.} \: x \in \Omega
+        \]
+
+        \item apply Fatou lemma on $2F(x) - g_n(x)$:
+
+        \[
+            \int_{\Omega} \left(\lim_{n \to \infty} 2F(x) - g_n(x)\right) \mathrm{d}x \le \varliminf_{n \to \infty} \int_{\Omega} 2F(x) - g_n(x) \mathrm{d}x
+        \]
+
+        since
+
+        \[
+            2F(x) - g_n(x) \to 2F(x) \: \text{a.e.} \: x \in \Omega
+        \]
+
+        so we have
+
+        \begin{align*}
+            \int_{\Omega} 2F(x) \mathrm{d}x &\le \varliminf_{n \to \infty}\left( \int_{\Omega} 2F(x) \mathrm{d}x - \int_{\Omega} g_n(x) \mathrm{d}x\right) \\
+            & \le \int_{\Omega} 2F(x) \mathrm{d}x + \varliminf_{n \to \infty} \int_{\Omega} -g_n(x) \mathrm{d}x
+        \end{align*}
+
+        so we have
+
+        \[
+            \varlimsup_{n \to \infty}\int_{\Omega} g_n(x) \mathrm{d}x \le 0
+        \]
+
+        since
+
+        \[
+            g_n(x) \ge 0
+        \]
+
+        we must have
+
+        \[
+            \lim_{n \to \infty}\int_{\Omega} g_n(x) \mathrm{d}x = 0
+        \]
+
+        also we have
+
+        \begin{align*}
+            & \left| \lim_{n \to \infty} \left(\int_{\Omega} f_n \mathrm{d}x\right) -  \int_{\Omega} f \mathrm{d}x  \right| \\
+            & = \left| \lim_{n \to \infty} \left(\int_{\Omega} f_n \mathrm{d}x -  \int_{\Omega} f \mathrm{d}x \right) \right| \\ 
+            & = \left| \lim_{n \to \infty} \left(\int_{\Omega} f_n(x) - f(x) \mathrm{d}x \right) \right| \\
+            & \le \lim_{n \to \infty} \left(\int_{\Omega} \left| f_n(x) - f(x) \right| \mathrm{d}x \right)  \\
+            & \le \varlimsup_{n \to \infty} \int_{\Omega} g_n(x) \mathrm{d}x \le 0
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+
+\begin{exercise}
+    prove that: $L_1$ convergence imply convergence in measure.
+\end{exercise}
+
+\begin{proof}
+    let $f_n: \Omega \to \mathbb{R}^*$ and $f: \Omega \to \mathbb{R}^*$ be integrable and we have
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega}\left| f_n(x) - f(x)\right| \mathrm{d}x = 0
+    \]
+
+    pick any $\epsilon > 0$, let
+
+    \[
+        E_{\epsilon} = \{ x \in \Omega : \left| f_n(x) - f(x)\right| > \epsilon \}
+    \]
+
+    then we have
+
+    \[
+\epsilon m(E_{\epsilon})  = \int_{E_{\epsilon}} \epsilon \mathrm{d}x \le \int_{\Omega}\left| f_n(x) - f(x)\right| \mathrm{d}x
+    \]
+
+    so we have
+
+    \[
+        \lim_{n \to \infty}m(E_{\epsilon}) = 0
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $f_n: \Omega \to \mathbb{R}^*$ be integrable and we have
+
+    \[
+        \sum_{n=1}^{\infty} \int_{\Omega} \lvert f_n(x) \rvert \mathrm{d}x < \infty
+    \]
+
+    prove that
+
+    \[
+        \sum_{n=1}^{\infty} \int_{\Omega}  f_n(x)  \mathrm{d}x  =  \int_{\Omega}\left( \sum_{n=1}^{\infty} f_n(x) \right) \mathrm{d}x
+    \]
+\end{exercise}
+
+\begin{proof}
+    let 
+
+    \[
+        F(x) = \sum_{n=1}^{\infty} \lvert f_n(x) \rvert
+    \]
+
+    by Beppo's theorem we have
+
+    \[
+        \int_{\Omega}F(x)\mathrm{d}x = \sum_{n=1}^{\infty} \int_{\Omega} \lvert f_n(x)\rvert  \mathrm{d}x < \infty
+    \]
+
+    so $F$ is absolutely integrable.
+
+    then we define
+
+    \[
+        f(x) = \sum_{n=1}^{\infty}f_n(x)
+    \]
+
+    since $f(x) \le F(x)$, so $f$ is also absolutely integrable.
+
+    then we define
+
+    \[
+        S_N(x) = \sum_{n=1}^{N}f_n(x)
+    \]
+
+    then $S_N$ is absolutely and dominated by absolutely integrable function $F$, by Lebesgue dominated convergence theorem, we have
+
+    \[
+        \lim_{N \to \infty} \int_{\Omega}S_N \mathrm{d}x = \int_{\Omega}\left( \lim_{N \to \infty}S_N(x) \right) \mathrm{d}x
+    \]
+
+    so we have
+
+    \[
+        \sum_{n=1}^{\infty} \int_{\Omega} f_n(x) \mathrm{d}x =  \int_{\Omega} \sum_{n=1}^{\infty} f_n(x) \mathrm{d}x
+    \]
+
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

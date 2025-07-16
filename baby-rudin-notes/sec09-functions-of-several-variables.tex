@@ -1,0 +1,1504 @@
+\section{Functions of Several Variables}
+
+\subsection{Linear Transformations}
+
+\begin{thm}
+    \label{daca0235-3fc5-4b2f-ade5-e47efb134cfc}
+define linear space $E$ as span of $x_1,x_2,x_3,...,x_n$:
+    \[
+        E = \mathrm{span} \{ x_1,x_2,x_3,...,x_n\}
+    \]
+
+    and $y \ne 0, y \in E$, then there exists $k \le n$ such that
+
+    \[
+        E = \mathrm{span} \{ x_1,x_2,..,x_{k-1},y,x_{k+1},...,x_n\}
+    \]
+\end{thm}
+
+\begin{proof}
+    since $y \in E$, assume $y$ has form:
+
+    \[
+        y=c_1x_1 + c_2x_2+...+c_nx_n
+    \]
+
+    since $y \ne 0$, there should exists $k$ such that $c_k \ne 0$ and $x_k \ne 0$, thus we have
+
+    \[
+        -c_kx_k = c_1x_1 + c_2x_2+ ... + c_{k-1}x_{k-1} -y + c_{k+1}x_{k+1}+...+c_nx_n
+    \]
+
+    which indicates $x_k$ is linear combination of $x_1,x_2,...,x_{k-1},y,x_{k+1},...,x_n$,
+
+    by $x_1,x_2,x_3,...,x_n \in \mathrm{span} \{ x_1,x_2,..,x_{k-1},y,x_{k+1},...,x_n\}$, we have
+
+    \[
+ \mathrm{span} \{ x_1,x_2,x_3,...,x_n\}       \subseteq \mathrm{span} \{ x_1,x_2,..,x_{k-1},y,x_{k+1},...,x_n\}
+    \]
+
+    similarly, we have
+
+    \[
+ \mathrm{span} \{ x_1,x_2,..,x_{k-1},y,x_{k+1},...,x_n\} \subseteq \mathrm{span} \{ x_1,x_2,x_3,...,x_n\}
+    \]
+
+    thus
+
+    \[
+        E = \mathrm{span} \{ x_1,x_2,..,x_{k-1},y,x_{k+1},...,x_n\}
+    \]
+\end{proof}
+
+\begin{thm}
+define linear space $E$ as span of $x_1,x_2,x_3,...,x_n$:
+    \[
+        E = \mathrm{span} \{ x_1,x_2,x_3,...,x_n\}
+    \]
+
+    and $y_1,y_2,...,y_{n},y_{n+1} \in E$, then $y_1,y_2,...,y_{n+1}$ is dependent
+
+\end{thm}
+
+\begin{proof}
+   assume $y_1,y_2,...,y_{n+1}$  is independent, we can replace $x_1,x_2,x_3,...,x_n$ by $y_1,y_2,...,y_n$ for $n$ times.
+
+   Assume $E$ has been replaced as:
+
+   \[
+        E = \mathrm{span}\{ y_1,y_2,...,y_k, x_{k+1},x_{k+2},...,x_n\}
+   \]
+
+   since $y_{k+1} \in E$, and $y_{k+1} \ne 0$, we could express $y_{k+1}$ as linear combination:
+
+   \[
+    y_{k+1} = c_1y_1 + ... + c_ky_k + c_{k+1}x_{k+1} + ... + c_nx_n
+   \]
+
+   because $y_1,y_2,...,y_k,y_{k+1}$ is independent, there should exists $i$ such that $c_i \ne 0$ and $x_i \ne 0$.
+
+   without loss of generality, assume $i=k+1$. we have:
+
+   \[
+    -c_{k+1}x_{k+1} = c_1y_1 + ... + c_ky_k -y_{k+1} + ... + c_nx_n
+   \]
+
+   by \autoref{daca0235-3fc5-4b2f-ade5-e47efb134cfc} thus we have
+
+   \[
+    E = \mathrm{span}\{ y_1,y_2,...,y_k, y_{k+1},x_{k+2},...,x_n\}
+   \]
+
+   after $n$ steps, we got
+
+   \[
+        y_{n+1} \in \mathrm{span}\{ y_1,y_2,...,y_n\}
+   \]
+
+   which is contradict with $y_1,y_2,...,y_n$ is independent.
+\end{proof}
+
+\begin{thm}
+    let $A: X \to Y$ is a linear mapping, where $X$ is finite dimensional vector space. 
+    And $X$ has basis $(x_1,x_2,...,x_n)$
+    Then image of $A$ is
+
+    \[
+        A(X) = \mathrm{span} \{ A(x_1), A(x_2), ..., A(x_n)\}
+    \]
+\end{thm}
+
+\begin{proof}
+    easily to prove by definition of linear mapping
+\end{proof}
+
+
+\begin{thm}
+    let $A: X \to X$ is a linear mapping, where $X$ is finite dimensional vector space. 
+    let $X$ has basis $(x_1,x_2,...,x_n)$
+
+    Then:
+
+    \begin{enumerate}
+        \item $A$ is injective iff $A(x_1), A(x_2), ..., A(x_n)$ is independent
+        \item $A$ is surjective iff $A(x_1), A(x_2), ..., A(x_n)$ is independent
+        \item $A$ is injective iff $A$ is surjective
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item if $A$ is injective, then
+
+        \[
+            A(X) = \mathrm{span} \{ A(x_1), A(x_2), ..., A(x_n)\}
+        \]
+
+        we will prove $A(x_1),A(x_2),...,A(x_n)$ is independent. 
+
+        If $A(x_1),A(x_2),...,A(x_n)$ is dependent, by definition linear combination,
+        we got 
+        
+        \[
+        A(c_1x_1+c_2x_2+...+c_nx_n) = A(0) = 0
+        \]
+
+        where $c_1x_1+c_2x_2+...+c_nx_n \ne 0$, thus contradict with $A$ is injective.
+
+        if $A(x_1), A(x_2), ..., A(x_n)$ is independent, let $y_1 = c_1x_1 + c_2x_2 + ... + c_nx_n$, and
+        $y_2 = d_1x_1 + d_2x_2 + ... + d_nx_n$, by $A(y_1) = A(y_2)$, we got 
+        
+        \[
+            A(y_1-y_2) = (c_1-d_1)A(x_1) + (c_2-d_2)A(x_2) + ... + (c_n-d_n)A(x_n) = 0
+        \]
+
+        by $A(x_1), A(x_2), ...,A(x_n)$ is independent, we got $c_1 = d_1,c_2=d_2,...,c_n = d_n$
+        
+
+        \item if $A$ is surjective
+        
+        we got
+
+        \begin{align*}
+            A(X) &= \mathrm{span} \{ A(x_1), A(x_2), ..., A(x_n)\} = X \\
+            &= \mathrm{span} \{ x_1,x_2,...,x_n \}
+        \end{align*}
+
+        which means $A(x_1), A(x_2), ..., A(x_n)$ is independent
+
+        if $A(x_1), A(x_2), ..., A(x_n)$ is independent, we got $n$ independent vector in a $n$ dimensional vector space.
+        which forms a basis of $X$, so that $A(X) = X$
+
+        \item $A$ is injective iff $A$ is surjective
+
+        by combine (1) and (2)
+    \end{enumerate}
+\end{proof}
+
+
+\begin{definition}[Norm of Linear Mapping]
+    let $A: \mathbb{R}^n \to \mathbb{R}^m$ be a linear mapping, define norm of linear mapping as:
+    
+    \[
+        \| A\| = \sup_{|x| \le 1} \left| Ax \right|
+    \]
+
+    notes that:
+
+    \[
+\left| Ax \right| \le \| A \| |x|
+    \]
+\end{definition}
+
+\begin{proof}
+    trivial case for $|x| = 0$, when $|x| \ne 0$, consider
+
+    \begin{align*}
+        \left| A x \right| &= \left| A |x| \frac{x}{|x|} \right| = |x| \left| A \frac{x}{|x|} \right| \\
+        & \le |x| \| A \|
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    \begin{enumerate}
+        \item if $A, B: \mathbb{R}^n \to \mathbb{R}^m$ is a linear mapping
+    \end{enumerate}
+
+    Then
+
+    \begin{enumerate}
+        \item $\| A\| < \infty$ and $A$ is uniformly continuous.
+
+        \item $\| A + B\| \le \| A \| + \| B \|$ and $\| c A\| = c \| A \|$
+
+        \item linear mapping from $\mathbb{R}^n$ to $\mathbb{R}^m$ forms a metric space
+        with metric defined as $d(A,B) = \| A - B\|$
+
+        \item $\| BA\| \le \|B\| \| A\|$
+    \end{enumerate}
+\end{thm}
+
+
+\begin{proof}
+    Steps:
+
+   \begin{enumerate}
+    \item $\| A\| < \infty$ and $A$ is uniformly continuous.
+
+    let $\mathbb{R}^n$ has standard basis $\mathbf{e}_1,\mathbf{e}_2,...,\mathbf{e}_n$, consider that,
+    for any $x \in \mathbb{R}^n, |x| \le 1$, we have
+
+    \begin{align*}
+        x &= c_1\mathbf{e}_1 + c_2\mathbf{e}_2 + ... + c_n\mathbf{e}_n \\
+        |x|^2 &= c_1^2 + c_2^2 + .... + c_n^2 \le 1
+    \end{align*}
+
+    by triangle inequality under $\mathbb{R}^m$ and cauchy inequality thus
+
+    \begin{align*}
+        | Ax| &= \left| c_1 A\mathbf{e}_1 + c_2 A\mathbf{e}_2 + ... + c_n A\mathbf{e}_n\right| \\
+        & \le |c_1| \left|  A\mathbf{e}_1 \right| + |c_2| \left|  A\mathbf{e}_2 \right| + ... + |c_n| \left|  A\mathbf{e}_n \right| \\
+        & \le \sqrt{c_1^2 + c_2^2 + ... + c_n^2} \sqrt{|A\mathbf{e}_1|^2 + |A\mathbf{e}_2|^2 + ... + |A\mathbf{e}_n|^2} \\
+        & \le \sqrt{|A\mathbf{e}_1|^2 + |A\mathbf{e}_2|^2 + ... + |A\mathbf{e}_n|^2}
+    \end{align*}
+
+    which means $|Ax| $ is bounded.
+
+    And $A$ is uniformly continuous by:
+
+    $\left| Ax - Ay \right| \le \| A \| \left| x -y \right|$
+
+    \item $\| A + B\| \le \| A \| + \| B \|$and $\| c A\| = c \| A \|$
+
+    pick any $x \in \mathbb{R}^n$ and $|x| \le 1$, consider
+
+    \[
+        \left| (A+B) x\right| \le |Ax| + |Bx| \le  \| A \| + \| B \|
+    \]
+
+    since $x$ is arbitrary, we got
+
+
+    \[
+        \| A+B\| \le  \| A \| + \| B \|
+    \]
+
+    Similarly, we have
+
+    \begin{align*}
+        \left| (cA) x \right| & = |c| \left| A x \right| \le |c| \cdot \| A \| \\
+        \| cA \|&  \le |c| \cdot \| A \|
+    \end{align*}
+
+    and
+
+    \begin{align*}
+        |c| \cdot |Ax| &= |(cA)x| \le \| c A\| \\
+        |c|\cdot  \| A \| &\le\| c A\| \\
+    \end{align*}
+
+    \item $d(A,B) = \| A - B \|$ forms a metric space.
+    
+    \begin{enumerate}
+        \item $d(A,B) \ge 0$, and $d(A,B) = 0$ iff $A = B$
+
+        $d(A,A) = 0$ is easily to prove. if $d(A,B) = 0$, then $\left|A(x) - B(x)\right| = 0$ by
+        normalize $x$.
+
+        \item $d(A,C) \le d(A,B) + d(B,C)$
+
+        \begin{align*}
+            \| A - C\| = \| A - B + B - C \| \le \| A -B\| + \| B-C\|
+        \end{align*}
+
+        \item $d(A,B) = d(B,A)$
+
+        by $|(B-A)x| = |(A-B)x|$
+
+        \item $\| BA \| \le \| B \| \| A \|$
+
+        consider arbitrary $x \in \mathbb{R}^n$ and $|x| = 1$
+
+        \begin{align*}
+            | (BA)x | &= | B(Ax) | \le \| B \| |Ax| \le \| B \| \|A \|  \\
+            \| BA \| & \le \|B\| \cdot \|A\|
+        \end{align*}
+    \end{enumerate}
+
+   \end{enumerate} 
+\end{proof}
+
+\begin{thm}
+    let $\Omega$ be the set of all invertible linear operators on $\mathbb{R}^n$
+
+    \begin{enumerate}
+        \item If $A \in \Omega$, $B \in L(\mathbb{R}^n)$. and
+
+        \[
+            \| B - A\| \cdot \| A^{-1}\| < 1
+        \]
+
+        then $B \in \Omega$
+
+    \item $\Omega$ is a open subset of $L(\mathbb{R}^n)$, and the mapping $A \to A^{-1}$ is continuous
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+   \begin{enumerate}
+    \item $B \in \Omega$
+
+    let $\| A^{-1} \| = 1/\alpha$ and $\| B - A \| = \beta$
+    \begin{align*}
+        \alpha |x| &= \alpha |A^{-1}Ax | \le \alpha \| A^{-1}\| \cdot |Ax| \\
+        & \le |A| x \le |(A-B)x| + |Bx| \\
+        & \le \beta |x| + |Bx|
+    \end{align*}
+
+    which indicates:
+
+    \[
+        |Bx| \ge (\alpha - \beta)|x|
+    \]
+
+    by $\beta / \alpha < 1$, we got $\beta < \alpha$, so that $Bx = 0$ iff $x = 0$, and hence $B \in \Omega$
+
+    \item $\Omega$ is a open subset of $L(\mathbb{R}^n)$
+
+    when $A \in \Omega$, by (1), we have
+
+    \[
+        \{ B \in L(\mathbb{R}^n): \| B - A\| < \frac{1}{\| A^{-1}\|} \} \subseteq \Omega
+    \]
+    
+    so $A$ is interior point of $\Omega$, since $A$ is arbitrary, $\Omega$ is open.
+
+
+    \item the mapping $A \to A^{-1}$ is continuous
+
+    consider:
+
+    \[
+        B^{-1} - A^{-1} = B^{-1}(A-B)A^{-1}
+    \]
+
+    since $B^{-1}$ exists,  by define $x = B^{-1}y$ and $|y| = 1$ then we got
+
+    \[
+        |Bx| = |BB^{-1}y|= |y| \ge (\alpha - \beta) | B^{-1} y|
+    \]
+
+    which indicates
+
+    \[
+        \| B^{-1}\| \le \frac{1}{\alpha - \beta}
+    \]
+    
+    \begin{align*}
+       \| B^{-1} - A^{-1} \|  &= \| B^{-1}(A - B) A^{-1}\| \\
+       & \le  \| B^{-1} \| \| A - B \| \| A^{-1} \| \\
+       & \le \frac{\beta}{\alpha(\alpha - \beta)} 
+    \end{align*}
+
+    which shows $A \to A^{-1}$ is continuous.
+   \end{enumerate}
+\end{proof}
+
+\begin{thm}
+    let $A \in L(\mathbb{R}^n, \mathbb{R}^m)$, and $\{ a_{i,j}\}$ be matrix form of $A$ 
+    under standard basis.
+
+    Then
+
+    \[
+        \| A \| \le \sqrt{\sum_{i,j} \left|a_{i,j} \right|^2}
+    \]
+\end{thm}
+
+\begin{proof}
+    let $x = (c_1,c_2,...,c_n)$ and $|x|^2 = 1$, then
+
+    \begin{align*}
+        \left| A x \right|^2 &= \sum_{i=1}^{n} \left( \sum_{j=1}^{m} a_{i,j}c_i \right)^2 \\
+        & \le \sum_{i=1}^{n} \left( \sum_{j=1}^{m} a_{i,j}c_i \right)^2 \\
+        & \le \sum_{i=1}^{n} \left( \left(\sum_{j=1}^{m} \left|a_{i,j} \right|^2\right) \left(\sum_{j=1}^{m} \left|c_j \right|^2\right) \right) \\
+        & \le \sum_{i=1}^{n} \left(\sum_{j=1}^{m} \left|a_{i,j} \right|^2\right)   \\
+    \end{align*}
+
+    since $x$ is arbitrary
+
+    \[
+\| A \| \le \left(\sum_{i=1}^{n} \sum_{j=1}^{m} \left|a_{i,j} \right|^2 \right)^{1/2}
+    \]
+\end{proof}
+
+\subsection{Differentiation}
+
+\begin{definition}
+    \label{thm:2415c4f9-4014-4d47-b080-94e8ef38d71e}
+    suppose $E$ is an open set in $\mathbb{R}^n$, $\mathbf{f}$ maps $E$ to $\mathbb{R}^m$, and $\mathbb{x} \in E$.
+    If there exists a linear transformation $A \in L(\mathbb{R}^n, \mathbb{R}^m)$ such that
+
+    \[
+        \lim_{h \to 0} \frac{\left| \mathbf{f}(x + h) - \mathbf{f}(x) - Ah \right|}{\left| h \right|} = 0
+    \]
+
+    then we say $\mathbf{f}$ is differentiable at $x$, and we write
+
+    \[
+        f'(x) = A
+    \]
+\end{definition}
+
+\begin{thm}
+    Differentiation at \autoref{thm:2415c4f9-4014-4d47-b080-94e8ef38d71e} is well defined
+\end{thm}
+
+\begin{proof}
+    To simplify, define
+
+    \[
+        g(h_n) = \mathbf{f}(x + h_n) - \mathbf{f}(x)
+    \]
+
+    let $h_n \to 0, |h_n| \ne 0$, by definition of differentiation, we got:
+
+    \begin{align*}
+        \lim_{n \to \infty}\frac{\left| g(h_n) - A_1h_n \right|}{\left| h_n \right|} = 0
+    \end{align*}
+
+    and
+
+
+    \begin{align*}
+        \lim_{n \to \infty}\frac{\left| g(h_n) - A_2h_n \right|}{\left| h_n \right|} = 0
+    \end{align*}
+
+    combine them we got:
+
+
+    \begin{align*}
+        &\frac{\left| g(h_n) - A_1h_n \right|}{\left| h_n \right|} + \frac{\left|A_2h_n - g(h_n) \right|}{\left| h_n \right|} =  \frac{\left| g(h_n) - A_1h_n \right| + \left| A_2h_n - g(h_n) \right|}{\left| h_n \right|} \\
+        \ge & \frac{\left| g(h_n) - A_1h_n  +  A_2h_n - g(h_n) \right|}{\left| h_n \right|}  \\
+        \ge & \frac{\left| A_2h_n - A_1h_n  \right|}{\left| h_n \right|}  \ge \left| (A_1- A_2) \frac{h_n}{|h_n|} \right| \to 0
+    \end{align*}
+
+    since $h_n$ is arbitrary as long as $|h_n| \to 0$, we can choose $x_n$ so that $|(A_1 - A_2) x_n| \to \| A_1 - A_2 \|$ with $|x_n| \le 1$, and define $h_n = x_n/ n$
+
+    thus we got 
+
+    \[
+\left| (A_1- A_2) \frac{h_n}{|h_n|} \right| = \left| (A_1- A_2) x_n \right| \to \| A_1 - A_2 \|
+    \]
+
+    by law of limitation, we got $\| A_1 - A_2 \| = 0$, thus $A_1 = A_2$
+\end{proof}
+
+\begin{thm}
+    suppose $E$ is an open set in $\mathbb{R}^n$, $\mathbf{f}$ maps $E$ to $\mathbb{R}^m$, 
+    $\mathbf{f}$ is differentiable at $x_0 \in E$, $\mathbf{g}$ maps an open set 
+    containing $\mathbf{f}(E)$ into $\mathbb{R}^k$, and $\mathbf{g}$ is differentiable 
+    at $\mathbf{f}(x_0)$. Then the mapping $\mathbf{F}$ of $E$ into $\mathbf{R}^k$
+    defined by
+
+    \[
+        \mathbf{F}(\mathbf{x}) = \mathbf{g}(\mathbf{f}(x))
+    \]
+
+    is differentiable at $x_0$, and
+
+    \[
+        \mathbf{F}'(x_0) = \mathbf{g}'(\mathbf{f}(x_0)) \cdot \mathbf{f}'(x_0)
+    \]
+\end{thm}
+
+\begin{proof}
+    define:
+    
+    \begin{align*}
+        A &= \mathbf{f}'(x_0) \\
+        B &= \mathbf{g}'(\mathbf{f}(x_0)) \\
+        y_0 &= \mathbf{f}(x_0)
+    \end{align*}
+
+    by:
+
+    \begin{align*}
+        \lim_{h \to 0} \frac{\left| \mathbf{f}(x_0 + h) - y_0 - Ah \right|}{|h|} &= 0 \\
+        \lim_{h \to 0} \frac{\left| \mathbf{g}(y_0 + h) - \mathbf{g}(y_0) - Bh \right|}{|h|} &= 0 \\
+    \end{align*}
+
+    Then:
+
+    define $\Delta_y = \mathbf{f}(x_0 + h) - \mathbf{f}(x_0)$
+
+    \begin{align*}
+        &\frac{\left|\mathbf{F}(x_0 + h) - \mathbf{F}(x_0) - BA h\right|}{|h|}\\
+        =& \frac{\left| \mathbf{g}(\mathbf{f}(x_0 + h)) - \mathbf{g}(\mathbf{f}(x_0))- B(Ah)\right|}{|h|}  \\
+        =& \frac{\left| \mathbf{g}(y_0 + \Delta_y) - \mathbf{g}(y_0)- B \Delta_y + B(\Delta_y-Ah)\right|}{\left| h \right|}  \\
+        \le &  \frac{\left| \mathbf{g}(y_0 + \Delta_y) - \mathbf{g}(y_0)- B \Delta_y \right|}{\left| h \right|} + \frac{\left|  B \left(\Delta_y -Ah \right) \right|}{\left| h \right|}
+    \end{align*}
+
+    since $\mathbf{f}'(x_0) = A $ we can pick $h$ be small enough, so that 
+
+    \[
+\frac{\left| \Delta_y -Ah  \right|}{\left| h \right|} \le \epsilon
+    \]
+
+    and because $\mathbf{g'}(y_0) = B$, $\mathbf{f}$ is continuous at $x_0$, we have $\Delta_y \to 0$ as $h \to 0$
+
+    \[
+\left| \mathbf{g}(y_0 + \Delta_y) - \mathbf{g}(y_0)- B \Delta_y \right| \le \epsilon \Delta_y 
+    \]
+
+    thus we got
+
+    \begin{align*}
+        &\frac{\left| \mathbf{g}(y_0 + \Delta_y) - \mathbf{g}(y_0)- B \Delta_y \right|}{\left| h \right|} + \frac{\left|  B \left(\Delta_y -Ah \right) \right|}{\left| h \right|} \\
+        \le & \epsilon \frac{|\Delta_y|}{|h|} + \| B\| \epsilon \\
+        \le &\epsilon \frac{|\Delta_y - Ah + Ah|}{|h|} + \| B\| \epsilon \\
+        \le &\epsilon \frac{|\Delta_y - Ah|}{|h|} +\epsilon \frac{|Ah|}{|h|} + \| B\| \epsilon \\
+        \le & \epsilon^2 + \| A\| \epsilon + \| B\| \epsilon
+    \end{align*}
+
+    since $\epsilon $ can be arbitrary small, so
+
+    \[
+        \mathbf{F}'(x_0) = BA = \mathbf{g}'(\mathbf{f}(x_0)) \cdot \mathbf{f}'(x_0)
+    \]
+
+\end{proof}
+
+\begin{thm}
+   suppose $\mathbf{f}: E \to \mathbb{R}^m$, where $E \subseteq \mathbb{R}^n$, and $\mathbf{f}$
+   is differentiable at a point $x \in E$.Then the partial derivatives exists, and
+
+   \[
+        \mathbf{f}'(x) \mathbf{e}_j = \sum_{i=1}^{m}\left( D_jf_i \right)(x) \mathbf{u}_i
+   \]
+
+   Here $\mathbf{e}_1,\mathbf{e}_2, ..., \mathbf{e}_n$ and $\mathbf{u}_1,\mathbf{u}_2, ..., \mathbf{u}_m$
+   are standard basis of $\mathbb{R}^n$ and $\mathbb{R}^m$.
+\end{thm}
+
+\begin{proof}
+    we prove, for any $i \le m$, the below holds:
+
+    \[
+        \mathbf{f}'(x) \mathbf{e}_j \cdot \mathbf{u}_i =  D_jf_i (x) 
+    \]
+
+    define $\mathbf{f}'(x) = A$
+    since 
+
+    \[
+        \lim_{h \to 0} \frac{\left| \mathbf{f}(x + h) - \mathbf{f}(x) - Ah \right|}{\left| h \right|} = 0
+    \]
+
+    then define $h = t \mathbf{e}_j$, and take the $i$-th component of the vector by projecting onto $\mathbf{u}_i$
+
+
+    \[
+        \lim_{t \to 0} \frac{\left| \mathbf{f}(x + t \mathbf{e}_j) - \mathbf{f}(x) - At \mathbf{e}_j \right|}{\left| t \right|} = 0
+    \]
+
+    and by $|y \cdot \mathbf{u}_i| \le |y| |\mathbf{u}_i| \le |y|$, we got
+
+    \begin{align*}
+ \frac{\left| \mathbf{f}(x + t \mathbf{e}_j) - \mathbf{f}(x) - At \mathbf{e}_j \right|}{\left| t \right|} & \ge        \frac{\left| \left(\mathbf{f}(x + t \mathbf{e}_j) - \mathbf{f}(x) - At \mathbf{e}_j \right) \cdot \mathbf{u}_i \right|}{\left| t \right|} \\
+ &= \frac{\left| f_i(x + t \mathbf{e}_j) - f_i(x) - tA \mathbf{e}_j \cdot \mathbf{u}_i \right|}{\left| t \right|} \\ 
+         &= \left| \frac{ f_i(x + t \mathbf{e}_j) - f_i(x)   }{t }- A\mathbf{e}_j  \cdot \mathbf{u}_i \right|
+    \end{align*}
+
+    thus 
+
+    \[
+        \lim_{t \to 0}\left| \frac{ f_i(x + t \mathbf{e}_j) - f_i(x)   }{t }- A\mathbf{e}_j \cdot \mathbf{u}_i \right| = 0
+    \]
+
+    which indicates $D_jf_i(x) = \mathbf{f}'(x) \mathbf{e_j} \cdot \mathbf{u}_i$
+\end{proof}
+
+\begin{thm}
+    \label{thm:e718cb8c-0fc2-4cba-89f3-3db78500fbc2}
+    suppose $\mathbf{f}$ maps a convex open set $E \subseteq \mathbb{R}^n$ into $\mathbb{R}^m$.
+    , $\mathbb{f}$ is differentiable in $E$, and there is a real number $M$ such that
+
+    \[
+        \| \mathbf{f}'(x)\| \le M
+    \]
+
+    for every $x \in E$. Then
+
+    \[
+        \left| \mathbf{f}(b) - \mathbf{f}(a) \right| \le M |b-a|
+    \]
+
+    for all $a,b \in E$.
+\end{thm}
+
+\begin{proof}
+    fix $a,b \in E$, and define $\gamma: [0,1] \to E$ as:
+
+    \[
+        \gamma(t) = (1-t)a + tb
+    \]
+
+    and
+
+    \[
+        \mathbf{g}(t) = \mathbf{f}(\gamma(t))
+    \]
+
+    Then
+
+    \[
+        \mathbf{g}'(t) = \mathbf{f}'(\gamma(t))\gamma'(t) = \mathbf{f}'(\gamma(t))(b-a)
+    \]
+
+    by
+
+    \[
+        \left|\mathbf{g}(1) -\mathbf{g}(0) \right| \le (1-0) \left| \mathbf{g}'(t_0)\right| \le M \left| b-a \right|
+    \]
+
+    thus
+
+
+    \[
+        \left|\mathbf{f}(b) - \mathbf{f}(a) \right| \le (1-0) \left| \mathbf{g}'(t_0)\right| \le M \left| b-a \right|
+    \]
+\end{proof}
+
+\begin{corollary}
+    if $\mathbf{f}'(x) = 0$ for all $x \in E$, then $\mathbf{f}$ is constant.
+\end{corollary}
+
+\begin{definition}
+    A differentiable mapping f of an open set $E \subseteq \mathbb{R}^n$ into $\mathbb{R}^m$ is
+said to be continuously differentiable in $E$ if $\mathbf{f}'$ is a continuous mapping of $E$
+into $L(\mathbb{R}^n, \mathbb{R}^m)$
+
+If this is so, we also say that $\mathbf{f}$ is a $\mathscr{C}'$ -mapping, or that $\mathbf{f} \in \mathscr{C}'(E)$
+\end{definition}
+
+\begin{thm}
+    suppose $\mathbf{f}$ maps an open set $E \subseteq \mathbb{R}^n$ to $\mathbb{R}^m$.
+    Then $\mathbf{f} \in \mathscr{C}'(E)$ if and only if the partial derivatives $D_jf_i$ exists and are continuous
+    on $E$ for $1 \le i \le m$, $1 \le j \le n$
+\end{thm}
+
+\begin{proof}
+    Steps:
+
+    define $D(x) \in \mathbb{R}^{m \times n}$ as:
+
+    \[
+D(x)_{[i,j]} = D(x) \mathbf{e}_j \cdot \mathbf{u}_i  = D_jf_i(x) =  \lim_{t \to 0} \frac{f_i(x + t \mathbf{e}_j)- f_i(x)}{t}
+    \]
+
+    \begin{enumerate}
+        \item Sufficiency
+
+        
+
+        we will prove $\mathbf{f}$ is differentiable at first.
+
+        since partial derivatives are all continuous, we can pick $\delta > 0$, so that $\forall y \in B(x, \delta), i \le m, j \le n$,
+        $\left| D_jf_i(y) - D_jf_i(x) \right| \le \epsilon $
+
+        and consider that when $|h| < \delta$, define 
+
+        \begin{align*}
+            h_j &= \left(h \cdot \mathbf{e}_j \right) \mathbf{e}_j \\
+            s_0 &= 0 \\
+            s_j &= \sum_{k=1}^{j} h_k \\
+        \end{align*}
+
+        then, by mean value theorem, and $|s_{j-1} + \xi_i \mathbf{e_j}| \le |h| \le \delta$
+
+        \begin{align*}
+            &\left|\left(\mathbf{f}(x + h) - \mathbf{f}(x) - D(x)h \right) \cdot \mathbf{u}_i \right| = \left|\left(\sum_{j=1}^{n} f_i(x + s_j)-f_i(x + s_{j-1})\right) - D(x)h \cdot \mathbf{u}_i\right| \\
+&= \left|\sum_{j=1}^{n} D_jf_i(x + s_{j-1} + \xi_j \mathbf{e}_j)(h \cdot \mathbf{e}_j) - \sum_{j=1}^{n}D(x)h_j \mathbf{u}_i\right| \\
+& \le \sum_{j=1}^{n} \left| D_jf_i(x + s_{j-1} + \xi_j \mathbf{e}_j)(h \cdot \mathbf{e}_j) - (h \cdot \mathbf{e}_j)D(x)\mathbf{e}_j \cdot \mathbf{u}_i\right|  \\ 
+& \le \sum_{j=1}^{n} \left| h \cdot \mathbf{e}_j\right| \epsilon \le \sqrt{n} |h | \epsilon
+        \end{align*}
+
+        and thus, by by $l_2$ norm less thant $l_1$ norm:
+
+        \[
+\left|\mathbf{f}(x + h) - \mathbf{f}(x) - D(x)h  \right| \le m \sqrt{n} |h| \epsilon
+        \]
+
+        and hence
+
+        \[
+        \lim_{h \to 0}\frac{1}{|h|}\left|\mathbf{f}(x + h) - \mathbf{f}(x) - D(x)h  \right| = 0
+        \]
+
+        then we will prove $\mathbf{f}'(x)$ is continuous, since every component of $\mathbf{f}'(x)$
+        is continuous, thus $\mathbf{f}'(x)$ is continuous.
+
+
+    \item Necessarily
+
+    if $\mathbf{f}'(x)$ is continuous, then its every component is continuous. Since partial derivative exists if differentiable, and
+    partial derivative is component of differentiation. So partial derivative should continuous.
+    \end{enumerate}
+\end{proof}
+
+\subsection{The Contraction Principle}
+
+\begin{thm}
+    \label{thm:c838d972-8aa6-4a9f-a016-bb59e7e82f45}
+    If $X$ is a complete metric space, and if $\phi$ is contraction of $X$
+    into $X$, then there exists one and only one $x \in X$ such that $\phi(x) = x$
+\end{thm}
+
+\begin{proof}
+    Steps:
+
+
+    \begin{enumerate}
+        \item $\phi$ is continuous
+
+        by $\left| \phi(x) - \phi(y)\right| \le \left| x- y\right|$, $\phi$ is uniformly continuous
+        
+        \item     We will prove $x$ exists at first
+
+        We pick any $x \in X$, and construct sequence  $\phi^{n}(x)$ as
+
+        \begin{align*}
+            \phi^{0}(x) &= x \\
+            \phi^{n}(x) &= \phi(\phi^{n-1}(x)) 
+        \end{align*}
+
+
+        it is easily to prove by induction that
+
+        \[
+            \left| \phi^{n+1}(x) - \phi^{n}(x) \right| \le c^n \left| \phi(x) - x \right|
+        \]
+
+        we will prove $\phi^n(x)$ is bounded at first. By triangle inequality
+
+        \begin{align*}
+            \left| \phi^{n+1}(x) - x\right| &= \left|\sum_{k=0}^{n} \left(\phi^{k+1}(x) - \phi^{k}(x) \right) \right| \\
+            & \le \sum_{k=0}^{n} \left|\phi^{k+1}(x) - \phi^{k}(x) \right| \le \sum_{k=0}^{n} c^k \left|\phi(x) - x \right| \\
+            & \le \frac{1}{1-c} \left|\phi(x) - x \right|
+        \end{align*}
+
+        since $\phi^{n}(x)$ is bounded, let
+
+        \[
+            \left| \phi^{n}(x) - x\right| \le M \quad \forall n  \in \mathbb{N}
+        \]
+
+        fix $N$, let $k, p \ge 0$, then
+
+        \begin{align*}
+            \left| \phi^{N+k}(x) - \phi^{N+p}(x) \right| &\le \left| \phi^{N+k}(x) - \phi^{N}(x) + \phi^{N}(x) - \phi^{N+p}(x) \right| \\
+            & \le  \left| \phi^{N+k}(x) - \phi^{N}(x) \right| + \left| \phi^{N+p}(x) - \phi^{N}(x) \right| \\
+            & \le c^N\left|  \phi^{k}(x) - x\right| + c^N\left|  \phi^{p}(x) - x\right| \\
+            & \le 2M c^N
+        \end{align*}
+
+        which shows $\phi^n$ is a cauchy sequence, since $X$ is complete, $\phi^{n}(x)$ converges to some point $x^* \in X$.
+        since $\phi$ is continuous:
+
+        \[
+            \phi(\lim_{n \to \infty}\phi^n(x)) = \lim_{n \to \infty} \phi^{n+1}(x) = x^*
+        \]
+
+        \item we will prove $x^*$ is unique
+        
+        assume $\phi(x^*_1) = x^*_1$ and $\phi(x^*_2) = x^*_2$, by
+
+        \[
+            \left| \phi^{n}(x) - \phi^{n}(y) \right| \le c^n \left| x - y \right|
+        \]
+
+        we got
+
+        \[
+            \left| \phi^{n}(x^*_1) - \phi^{n}(x^*_2) \right| \le c^n \left| x^*_1 - x^*_2 \right|
+        \]
+
+        by $\phi(x^*_1) = x^*_1$ and  $\phi(x^*_2) = x^*_2$thus
+
+        \[
+            \left| x^*_1 - x^*_2 \right| \le c^n \left| x^*_1 - x^*_2 \right|
+        \]
+
+        take $n \to \infty$, we got $\left| x^*_1 - x^*_2 \right| \le 0$
+    \end{enumerate}
+
+
+\end{proof}
+
+\subsection{The Inverse Function Theorem}
+
+\begin{thm}
+    \label{47ef7de4-f145-4883-970b-73c8157de091}
+    suppose $\mathbf{f}$ is a $\mathscr{C}'$-mapping of an open set $E \subseteq \mathbb{R}^n$ into $\mathbb{R}^n$.
+    $\mathbf{f}'(a)$ is invertible for some $a \in E$, and $b = \mathbf{f}(a)$. Then
+
+    \begin{enumerate}
+        \item there exists open sets $U$ and $V$  in $\mathbb{R}^n$ such that
+        $a \in U, b \in V$. $\mathbf{f}$ is injective on $U$ and $\mathbf{f}(U)= V$
+
+        \item if $\mathbf{g}$ is the inverse of $\mathbf{f}$, defined in $V$ by
+
+        \[
+            \mathbf{g}(\mathbf{f}(x)) = x
+        \]
+
+        then $\mathbf{g} \in \mathscr{C}'$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    Put $A = \mathbf{f}'(a)$, and choose $\lambda $ so that 
+
+    \[
+        \lambda \| A^{-1}\| = \frac{1}{2}
+    \]
+
+   let $y \in \mathbb{R}^n$ is arbitrary, define $\phi$ as:
+
+   \[
+    \phi(x) = x + A^{-1}(y - \mathbf{f}(x))
+   \]
+
+   since 
+
+   \[
+    \phi'(x) = I - A^{-1} \mathbf{f}'(x) = A^{-1}\left( A - \mathbf{f}'(x)\right)
+   \]
+
+   since $\mathbf{f}'(x)$ is continuous, now we can pick an open ball $U$ with center $a$, so that
+
+   \[
+        \| \mathbf{f}'(x) - \mathbf{f}'(a)\| \le \lambda
+   \]
+
+   thus, $\forall x \in U$, we have
+
+   \[
+        \phi'(x) \le \| A^{-1} \| \| A - \mathbf{f}'(x) \| \le \frac{1}{2}
+   \]
+
+   by \autoref{thm:e718cb8c-0fc2-4cba-89f3-3db78500fbc2}, $\forall x_1,x_2 \in U$, we got
+
+   \[
+        \left| \phi(x_1) - \phi(x_2) \right| \le \frac{1}{2} \left| x_1 - x_2 \right|
+   \]
+
+   and by \autoref{thm:c838d972-8aa6-4a9f-a016-bb59e7e82f45}, $\phi$ has at most one fixed point in $U$.
+
+   so that $\mathbf{f}(x) = y$ for at most one $x \in U$. Thus $\mathbf{f}$ is injective in $U$.
+
+   We also need to prove $f(U)$ is open.
+
+   Next, put $V = \mathbf{f}(U)$ and pick $y_0 \in V$. Then $y_0 = x_0$  for some $x_0 \in U$
+   Let $B$ be an open ball with center at $x_0$ and radius $r > 0$, so small that
+   its closure $\overline{B}$ lies in $U$. We will show that $y \in V$ whenever $|y-y_0| < \lambda r$
+
+   fix $y$ and $|y-y_0 | < \lambda r$. thus
+
+   \[
+    \left|\phi(x_0) - x_0 \right| = \left| A^{-1}(y-y_0) \right| < \| A^{-1} \| \lambda r = \frac{r}{2}
+   \]
+
+   if $x \in \overline{B}$, it therefore follows that
+
+   \begin{align*}
+    \left| \phi(x) - x_0 \right|& \le \left| \phi(x) - \phi(x_0) \right| + \left| \phi(x_0) - x_0 \right| \\
+    & \le \frac{1}{2} \left| x -x_0\right| + \frac{r}{2} \le r
+   \end{align*}
+
+   hence $\phi(x) \in B, \forall x \in \overline{B}$. thus $\phi: \overline{B} \to \overline{B}$ becomes a contraction on
+   complete metric space. Thus there exists unique $x$ such that $\phi(x) = x$, so that $\mathbf{f}(x) = y$, which means
+
+   \[
+    y \in f(\overline{B}) \subseteq f(U)
+   \]
+
+   pick $y \in f(U)$, $y + k \in f(U)$, Then there exists $x \in U, x +h \in U$, so that
+   $y = f(x), y+k = f(x+h)$. Thus we got
+
+   \[
+    \phi(x +h) - \phi(x) = h + A^{-1}\left[ \mathbf{f}(x) - \mathbf{f}(x+h)\right] = h - A^{-1}k
+   \]
+
+   thus
+
+   \[
+    \left| h - A^{-1}k \right| \le \frac{1}{2} |h |
+   \]
+
+   and hence
+
+   \begin{align*}
+    \left| A^{-1}k \right| &\ge \frac{1}{2} |h| \\
+    |h| & \le 2 \| A^{-1}\| |k| \le \frac{1}{\lambda} |k|
+   \end{align*}
+
+   by 
+   
+   \[
+   |\mathbf{f}'(x) - A | \le \frac{1}{2} \| A^{-1}\|
+   \]
+
+   and hence $\mathbf{f}'(x)$ is invertible, say $T$, since
+
+   \[
+    \mathbf{g}(y+k) - \mathbf{g}(y) - Tk = h - Tk = -T\left[ \mathbf{f}(x+h) - \mathbf{f}(x) - \mathbf{f}'(x)h \right]
+   \]
+
+   implies
+
+   \[
+    \frac{\left| \mathbf{g}(y+k) - \mathbf{g}(y) - Tk \right|}{|k|} \le \frac{\| T \| \left|\mathbf{f}(x+h) - \mathbf{f}(x) - \mathbf{f}'(x)h \right|}{\lambda |h|}
+   \]
+\end{proof}
+
+\begin{corollary}
+    Another proof
+\end{corollary}
+
+\begin{proof}
+    let's define $A = \mathbf{f}'(a)$ and $\mathbf{h} = A^{-1}\left[\mathbf{f}(x + a) - b\right]$, then we got $\mathbf{h}(0) = 0$
+    and $\mathbf{h}'(0) = I$, if we can prove that $\mathbf{h}$ is invertible within
+    a open set from $U$ onto $V$. Then $\mathbf{f}$ is invertible within $U + a$ onto $A(V) + b$
+
+    now let's define $\tilde{\mathbf{h}} = \mathbf{h}(x) - x$, thus $\tilde{\mathbf{h}}'(0) = 0$, since $\tilde{\mathbf{h}}'$
+    is continuous. there is a open ball $B(0,r)$ such that 
+
+    \[
+        \| \tilde{\mathbf{h}}'(x) \| \le \frac{1}{2} \quad \forall x \in B(0,r)
+    \]
+
+    let's consider $x,y \in B(0,r)$, by
+
+    \begin{align*}
+        \left|\tilde{\mathbf{h}}(y) - \tilde{\mathbf{h}}(x) \right| &= \left|\int_0^1 \frac{\mathrm{d}}{\mathrm{d}t} \tilde{\mathbf{h}}\left(\left[y-x\right]t + x\right)  \mathrm{d}t\right| \\
+        &= \left|\int_0^1  \tilde{\mathbf{h}}'\left(\left[y-x\right]t + x\right) \cdot (y-x)  \mathrm{d}t\right| \\
+        & \le \int_0^1  \|\tilde{\mathbf{h}}'\left(\left[y-x\right]t + x\right) \| \cdot \left| y-x \right|  \mathrm{d}t \\
+        & \le \frac{1}{2} \left| y -x\right|
+    \end{align*}
+
+    so $\tilde{h}$ is a contraction on $B(0,r)$
+
+    and thus $\mathbf{h}(x) = \tilde{\mathbf{h}}(x) + x$ is injective on $B(0,r)$, consider:
+
+    \begin{align*}
+        \tilde{\mathbf{h}}(x_1) + x_1 &= \tilde{\mathbf{h}}(x_2) + x_2 \\
+\left|\tilde{\mathbf{h}}(x_1) - \tilde{\mathbf{h}}(x_2) \right| &= \left| x_1 - x_2\right| \le \frac{1}{2}\left| x_1 - x_2\right|
+    \end{align*}
+
+    which indicates $\left| x_1 -x_2\right| = 0$
+
+    now, let's prove $B(0, r/2) \subseteq \mathbf{h}(B(0,r))$, consider $y \in B(0, r/2)$, and $|y| = r/2 - \epsilon$. we define
+    function $\mathbf{h}_y: \overline{B}(0, r - \epsilon) \to \mathbb{R}^n$ as $\mathbf{h}_y(x) = y - \tilde{\mathbf{h}}(x) $. It is easily
+    to verify that $\mathbf{h}_y$ is a contraction and
+    
+    \begin{align*}
+        \left| y - \tilde{\mathbf{h}}(x) \right| &\le |y| + \left| \tilde{\mathbf{h}}(x) \right| \\
+        & \le \frac{r}{2} - \epsilon + \frac{r-\epsilon}{2} \le  r - \frac{3}{2}\epsilon \\
+        & \le r - \epsilon
+    \end{align*}
+
+    so $\mathbf{h}_y: \overline{B}(0, r - \epsilon) \to \overline{B}(0, r - \epsilon)$ is a contraction maps from a complete 
+    metric space to complete metric space. And thus it has unique fix point $x \in \overline{B}(0, r-\epsilon)$, and
+
+    \begin{align*}
+        y - \tilde{\mathbf{h}}(x) &= x \\
+        y  &= x + \tilde{\mathbf{h}}(x) = \mathbf{h}(x)\\
+    \end{align*}
+
+    and hence $\mathbf{h}:U \to B(0, r/2)$ is bijective, where $U = \mathbf{h}^{-1}(B(0,r/2))$, by $\mathbf{h}$ is continuous,
+    $U$ is open.
+\end{proof}
+
+\subsection{Implicit Function Theorem}
+
+\begin{thm}
+    if $x=(x_1,x_2,...,x_n) \in \mathbb{R}^n$ and $y=(y_1,y_2,...,y_m) \in \mathbb{R}^m$, let us
+    write $(x,y)$ as
+
+    \[
+        (x,y) = (x_1,x_2,...,x_n,y_1,y_2,...,y_m) \in \mathbb{R}^{n + m}
+    \]
+
+    Every $A \in L(\mathbb{R}^{n+m}, \mathbb{R}^n)$ can be split into two linear transformations.
+
+    $A_x: L(\mathbb{R}^n, \mathbb{R}^n)$ and $A_y \in L(\mathbb{R}^m, \mathbb{R}^n)$, defined by
+
+    \begin{align*}
+        A_xh = A(h,0) \\
+        A_yk = A(0,k) \\
+    \end{align*}
+
+    Then:
+
+    \begin{enumerate}
+        \item for any $h \in \mathbb{R}^n, k \in \mathbb{R}^m$
+
+        \[
+            A(h,k) = A_xh + A_yk
+        \]
+
+        \item if $A_x$ is invertible, then there corresponds to every $k \in \mathbb{R}^m$ a unique $h \in \mathbb{R}^n$ such that
+        $A(h,k) = 0$
+    \end{enumerate}
+
+\end{thm}
+
+\begin{proof}
+    proofs:
+
+    \begin{enumerate}
+        \item $A(h,k) = A_xh + A_yk$ 
+
+        obviously
+
+        \item consider:
+        
+        \begin{align*}
+            A(h,k) &= A_xh + A_yk = 0 \\
+                -h &= A_x^{-1}A_y k 
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}
+    let $\mathbf{f}$ be a $\mathscr{C}'$-mapping of an open set $E \subseteq \mathbb{R}^{n+m}$,
+    such that $\mathbf{f}(a,b) = 0$ for some $(a,b) \in E$.
+
+    Put $A = \mathbf{f}'(a,b)$ and assume that $A_x$ is invertible.
+
+    Then there exists open sets $U \subseteq \mathbb{R}^{n+m}$ and $W \subseteq \mathbb{R}^{m}$,
+    with $(a,b) \in U$ and $b \in W$, having the following property:
+
+    \begin{enumerate}
+        \item To every $y \in W$ corresponds a unique $x$ such that $(x,y) \in U$ and $\mathbf{f}(x,y) = 0$
+
+        \item if this $x$ is defined to be $\mathbf{g}(y)$, then $\mathbf{g}$ is a $\mathscr{C}'$-mapping of 
+        $W$ into $\mathbb{R}^n$, $\mathbf{g}(b) = a$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    define $\mathbf{F}(x,y) = \left( \mathbf{f}(x,y), y \right)$
+
+     
+    We will show $\mathbf{F}'(a,b)$ is a invertible element of $L(\mathbb{R}^{n+m},\mathbb{R}^{n+m})$ 
+
+    let $z = (x,y)$ ,we have
+
+   \begin{align*}
+        \mathbf{F}(z) &= \begin{bmatrix}
+           I_n \\ 
+           O_{m \times n}
+        \end{bmatrix} \mathbf{f}(z) + \begin{bmatrix}
+           O_n & O_{n \times m} \\
+           O_{m \times n} & I_m
+       \end{bmatrix} z \\
+        \mathbf{F}'(z) &= \begin{bmatrix}
+           I_n \\ 
+           O_{m \times n}
+        \end{bmatrix} \mathbf{f}'(z) + \begin{bmatrix}
+           O_n & O_{n \times m} \\
+           O_{m \times n} & I_m
+        \end{bmatrix}  \\
+   \end{align*}
+
+Then $\mathbf{F}$ is a $\mathscr{C}'$-mapping of $E$ into $\mathbb{R}^{n+m}$.
+
+    and thus
+
+    \begin{align*}
+        \mathbf{F}'([a,b]) &= \begin{bmatrix}
+           I_n \\ 
+           O_{m \times n}
+        \end{bmatrix} A + \begin{bmatrix}
+           O_n & O_{n \times m} \\
+           O_{m \times n} & I_m
+        \end{bmatrix}  \\
+        &= \begin{bmatrix}
+           I_n \\ 
+           O_{m \times n}
+        \end{bmatrix} \begin{bmatrix}
+            A_x & A_y
+        \end{bmatrix} + \begin{bmatrix}
+           O_n & O_{n \times m} \\
+           O_{m \times n} & I_m
+        \end{bmatrix} \\
+        & =  \begin{bmatrix}
+            A_x & A_y \\
+            O_{m \times n} & O_{m \times m} \\
+        \end{bmatrix} + \begin{bmatrix}
+           O_n & O_{n \times m} \\
+           O_{m \times n} & I_m
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            A_x & A_y \\
+            O_{m \times n} & I_m \\
+        \end{bmatrix}
+    \end{align*}
+
+    which indicates $\mathbf{F}'([a,b])$ is invertible.
+
+    Thus we can apply inverse function theorem: \autoref{47ef7de4-f145-4883-970b-73c8157de091}.
+
+    It shows that there exist open sets $U$ and $V$ in $\mathbb{R}^{n+m}$, with $(a,b) \in U$ and $(0,b) \in V$,
+    such that $\mathbf{F}$ is bijective of $U$ onto $V$.
+
+    let $W$ be the set of all $y \in \mathbb{R}^m$ so that $(0,y) \in V$. Note that $b \in W$, because
+    $\mathbf{F}(a,b) = (0,b)$. Thus $W$ is not empty. 
+    
+    $W$ is open due to it is pre-image of open set, consider $\varphi(y) = (0,y)$ and $W = \varphi^{-1}(V)$
+
+    Thus $\mathbf{f}$ has implicit function when $y \in W$.
+
+    If $y \in W$, we have $(0,y) \in V$, and thus there exists $(x,y) \in U$ such that
+    $\mathbf{F}(x,y) = (0,y)$, and hence $f(x,y) = 0$
+    
+    assume there exists $x, x' \in \mathbf{R}^{n}$ 
+    such that $(x,y) \in U,\: (x',y) \in U$
+    and $\mathbf{f}(x,y) = \mathbf{f}(x',y) = 0$.
+    thus we got $\mathbf{F}(x,y) = \mathbf{F}(x',y) = (0,y)$. Since $\mathbf{F}$ 
+    is invertible on $U$, so $x = x'$
+
+    Now let's define $\mathbf{g}: W \to \mathbb{R}^n$, by $\mathbf{g}(y) = x, \: \mathbf{f}(x,y) = 0$.
+
+    consider that:
+
+    \begin{align*}
+        \mathbf{F}(\mathbf{g}(y), y) &= (0, y)  \\
+(\mathbf{g}(y), y) &= \mathbf{F}^{-1}(0, y) \\
+        \mathbf{g}(y) &= \begin{bmatrix}
+            I_n & O_{m \times n}
+        \end{bmatrix} \mathbf{F}^{-1}(\begin{bmatrix}
+            O_{n \times m} \\
+            I_m
+        \end{bmatrix} y)
+    \end{align*}
+
+    since $\mathbf{F}^{-1} \in \mathscr{C}'$ this show $\mathbf{g} \in \mathscr{C}'$. 
+
+    and
+
+    \begin{align*}
+        \mathbf{g}'(b) &= \begin{bmatrix}
+            I_n & O_{m \times n}
+        \end{bmatrix} \left(\mathbf{F}^{-1}\right)'\left(\begin{bmatrix}
+            O_{n \times m} \\
+            I_m
+        \end{bmatrix} b \right) \begin{bmatrix}
+            O_{n \times m} \\
+            I_m
+        \end{bmatrix}\\
+        &= \begin{bmatrix}
+            I_n & O_{m \times n}
+        \end{bmatrix}\left(\begin{bmatrix}
+            A_x & A_y \\
+            O_{m \times n} & I_m \\
+        \end{bmatrix}\right)^{-1} \begin{bmatrix}
+            O_{n \times m} \\
+            I_m
+        \end{bmatrix}
+    \end{align*}
+
+    consider that: 
+
+    \begin{align*}
+        \begin{bmatrix}
+            A_x^{-1} & -A_x^{-1}A_y \\
+            O_{m \times n} & I_m
+        \end{bmatrix}
+        \begin{bmatrix}
+            A_x & A_y \\
+            O_{m \times n} & I_m \\
+        \end{bmatrix} = I_{n+m}
+    \end{align*}  
+
+    thus we have
+
+    \[
+\left(\begin{bmatrix}
+            A_x & A_y \\
+            O_{m \times n} & I_m \\
+        \end{bmatrix}\right)^{-1} =         \begin{bmatrix}
+            A_x^{-1} & -A_x^{-1}A_y \\
+            O_{m \times n} & I_m
+        \end{bmatrix}
+    \]
+
+    thus
+
+
+    \begin{align*}
+        \mathbf{g}'(b) &= \begin{bmatrix}
+            I_n & O_{m \times n}
+        \end{bmatrix}\left(\begin{bmatrix}
+            A_x & A_y \\
+            O_{m \times n} & I_m \\
+        \end{bmatrix}\right)^{-1} \begin{bmatrix}
+            O_{n \times m} \\
+            I_m
+        \end{bmatrix} \\
+        &=\begin{bmatrix}
+            I_n & O_{m \times n}
+        \end{bmatrix}
+        \begin{bmatrix}
+            A_x^{-1} & -A_x^{-1}A_y \\
+            O_{m \times n} & I_m
+        \end{bmatrix}
+        \begin{bmatrix}
+            O_{n \times m} \\
+            I_m
+        \end{bmatrix} \\
+        &=  - A_x^{-1}A_y
+    \end{align*}
+\end{proof}
+
+\subsection{The Rank Theorem}
+
+\begin{definition}
+    suppose $X$ and $Y$ are vector spaces, and $A \in L(X,Y)$.
+    The null space of $A, \mathrm{null}(A)$, is the set of all $x \in X$ at which $Ax = 0$.
+    It is clear that $\mathrm{null}(A)$ is a vector space. 
+
+    Likewise, the range of $A, A(X)$ is a vector space in $Y$.
+
+    The rank of $A, r(A)$ is defined to be the dimension of $A(X)$ 
+\end{definition}
+
+\begin{thm}
+    let $X$ be a vector space. An operator $P \in L(X)$ is said to be a projection in $X$
+    if $P^2 = P$.
+
+    Then
+
+    \begin{enumerate}
+        \item every $x \in X$ has a unique representation of the form
+
+        \[
+            x = x_1 + x_2
+        \]
+
+        where $x \in P(X)$ and $x_2 \in \mathrm{null}(P)$
+
+        \item if $X$ is a finite dimensional vector space and if $X_1$ is a vector space in
+        $X$, then there is a projection $P$ in $X$ with $P(X) = X_1$
+
+        \item $\dim P(X) + \dim \mathrm{null}(P) = \dim X$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    proofs:
+
+    \begin{enumerate}
+        \item proof
+
+    consider that  $x =Px +  x - Px$ where  $Px \in P(X)$ and $x - Px \in \mathrm{null}(P)$ 
+
+    now assume we have $x = x_1 + x_2$ and $x = x_1' + x_2'$ where $x_1,x_1' \in P(X)$ and $x_2, x_2' \in \mathrm{null}(P)$
+
+    thus we got $Px_1 + Px_2 = Px_1' + Px_2'$ and thus $P(x_1 -x_1') = 0$, since $x_1 - x_1' \in P(X)$, we have $P(x_1 - y_1) = x_1 -y_1$, 
+    thus $x_1 = x_1'$ and $x_2 = x_2'$
+
+        \item proof
+
+    Assume $X$ as basis $\mathbf{e}_1,\mathbf{e}_2,...,\mathbf{e}_n$ and $X_1$ 
+    has basis $\mathbf{u}_1,\mathbf{u}_2,...,\mathbf{u}_k$. since $\mathbf{u}_1,\mathbf{u}_2,..., \mathbf{u}_k$
+    is independent. we can construct a new basis of $X$ contains $\mathbf{u}_1,\mathbf{u}_2,...\mathbf{u}_k$, let new 
+    basis as $\mathbf{u}_1,\mathbf{u}_2,...\mathbf{u}_k, \mathbf{e}'_{k+1}, ... ,\mathbf{e}'_{n}$, and define $P$
+    as
+
+    \begin{align*}
+        &P(c_1 \mathbf{u}_1 + c_2 \mathbf{u}_2 + ... + c_k \mathbf{u}_k + c_{k+1}\mathbf{e}'_{k+1} + ... + c_n\mathbf{e}'_{n} ) \\
+        =& c_1 \mathbf{u}_1 + c_2 \mathbf{u}_2 + ... + c_k \mathbf{u}_k
+    \end{align*}
+
+    note that $\{\mathbf{e}'_{k+1}, \mathbf{e}'_{k+2}, ... ,\mathbf{e}'_{n}\}$ is null space of $P$
+
+        \item proof
+
+        assume projection $P^2 = P$ and $P(X)$ has rank $r$, has basis $\mathbf{u}_1,\mathbf{u}_2,...,\mathbf{u}_r$:
+
+        \[
+            P(X) = \mathrm{span}\{ \mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_r \}
+        \]
+
+        now consider $\mathrm{null}(P)$, and assume it has basis $\{ \mathbf{e}_1, \mathbf{e}_2, ..., \mathbf{e}_k \}$
+
+        we will show that
+
+        \[
+            X = \mathrm{span} \{\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_r, \mathbf{e}_1, \mathbf{e}_2, ..., \mathbf{e}_k \}
+        \]
+
+        by (1), it shows $X = \mathrm{span} \{\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_r, \mathbf{e}_1, \mathbf{e}_2, ..., \mathbf{e}_k \}$, 
+
+        now, we will prove $\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_r, \mathbf{e}_1, \mathbf{e}_2, ..., \mathbf{e}_k$ is independent, consider
+
+        \[
+            c_1\mathbf{u}_1 +  c_2\mathbf{u}_2 + ... + c_r \mathbf{u}_r + c_1'\mathbf{e}_1 + c_2'\mathbf{e}_2 + ...+ c_k' \mathbf{e}_k = 0
+        \]
+
+        apply $P$ at both side, we got
+        \[
+c_1\mathbf{u}_1 +  c_2\mathbf{u}_2 + ... + c_r \mathbf{u}_r = 0
+        \]
+
+        and hence $c_1 = c_2 = ... = c_r = 0$, thus $c_1' = c_2' = ... = c_k' = 0$
+
+        so $\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_r, \mathbf{e}_1, \mathbf{e}_2, ..., \mathbf{e}_k$ becomes a
+        basis of $X$, it is obviously that $\dim P(X) + \dim \mathrm{null}(P) = \dim X$
+
+    \end{enumerate}
+
+\end{proof}
+
+\begin{thm}
+    let $A \in L(X, Y)$, and range of $A$ is $A(X)$, assume $A(X), Y, X$ has basis, where $\dim X = n$
+
+    \begin{align*}
+        A(X) &= \mathrm{span}\{ y_1,y_2,...,y_r \} \\
+        Y &= \mathrm{span}\{ y_1,y_2,...,y_r,...,y_m \} \\
+        X &= \mathrm{span}\{ x_1,x_2,...,x_r,...,x_n \} \\
+    \end{align*}
+
+    and $Ax_1 = y_1, Ax_2 = y_2, ..., Ax_r = y_r$
+
+    define $S \in L(Y, X)$:
+
+    \[
+        S(c_1y_1 + c_2y_2 + ... + c_ry_r + ... + c_m y_m ) = c_1x_1 + c_2x_2 + ... + c_rx_r
+    \]
+
+    Then:
+
+    \begin{enumerate}
+        \item $\forall y \in A(X), ASy = y$
+
+        \item $SASAx = SAx$
+
+        \item $\mathrm{null}(SA) = \mathrm{null}(A)$
+
+        \item $\dim (SA)(X) = \dim A(X)$
+
+        \item $\dim \mathrm{null}(A) + \dim A(X) = n$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item assume $y = c_1y_1 + c_2y_2 + ... + cy_r$, then
+
+        \begin{align*}
+            AS(c_1y_1 + c_2y_2 + ... + c_ry_r) & = A(c_1x_1 + c_2x_2 + ... + c_rx_r) \\
+            &= c_1y_1 + c_2y_2 + ... + c_r y_r = y
+        \end{align*}
+
+        \item $SASAx = SAx$
+
+        by (1):
+
+        \begin{align*}
+            SASAx = S(AS) (Ax) = S(Ax) 
+        \end{align*}
+
+        \item $\mathrm{null}(SA) = \mathrm{null}(A)$
+
+        consider if $Ax = 0$, then $SAx = S0 = 0$, otherwise , if $SAx = 0$, then $ASAx = (AS)(Ax) = Ax = 0$
+
+        \item $\dim (SA)(X) = \dim A(X)$
+
+        obviously, by definition of $S$, we got
+
+        \[
+\dim (SA)(X) = \dim A(X) = r
+        \]
+
+        \item $\dim \mathrm{null}(A) + \dim A(X) = n$
+
+        since $(SA)^2 = SA$, we have 
+
+        \[
+            \dim \mathrm{null} (SA) + \dim SA(X) = n
+        \]
+
+        by (3) and (4), we got
+
+        \[
+            \dim \mathrm{null} (A) + \dim A(X) = n
+        \]
+
+    \end{enumerate}
+\end{proof}
+
+
+\subsection{High Order Differentiation}
+
+\begin{thm}
+    let $f: \mathbb{R}^n \to \mathbb{R}$, be twice continuously differentiable at $x$.
+
+    define:
+
+
+    \begin{align*}
+        f_{i,j}(x) &= \frac{\partial^2 f}{\partial x_j \partial x_i}(x) \\
+        &= \lim_{t \to 0}\frac{1}{t}\left(\lim_{s \to 0}\frac{f(x + s\mathbf{e}_i+ t \mathbf{e}_j)- f(x + t \mathbf{e}_j)}{s}- \lim_{s \to 0}\frac{f(x + s\mathbf{e}_i)-f(x)}{s}\right)
+    \end{align*}
+
+    Then $f_{i,j} = f_{j,i}$
+\end{thm}
+
+\begin{proof}
+    without loss of generality, assume $x = 0$ and $f(0) = 0$, otherwise we can discuss on $g$  
+    
+    \[
+    g(y) = f(y+x) - f(0)
+    \]
+
+    since both $f_{i,j}$ and $f_{j,i}$ are continuous at $0$, there should be a close ball $B(0,n\delta)$, 
+    such that $\forall y \in B(0, n\delta)$
+    
+    \begin{align*}
+    \left| f_{i,j}(y) - f_{i,j}(0) \right| &\le \epsilon \\
+    \left| f_{j,i}(y) - f_{j,i}(0) \right| &\le \epsilon \\
+    \end{align*}
+
+    let's consider
+
+    \[
+        c = f(\delta \mathbf{e}_i + \delta \mathbf{e}_j) - f(\delta \mathbf{e}_i) - f(\delta \mathbf{e}_j) + f(0)
+    \]
+
+    by mean value theorem, we have
+
+    \begin{align*}
+        c &= \int_{0}^{\delta} f_{j}(\delta \mathbf{e}_i + t \mathbf{e}_j) \mathrm{d}t - \int_{0}^{\delta} f_{j}( t \mathbf{e}_j) \mathrm{d}t  \\
+        &= \int_{0}^{\delta} f_{j}(\delta \mathbf{e}_i + t \mathbf{e}_j) -  f_{j}( t \mathbf{e}_j) \mathrm{d}t \\
+        &= \int_{0}^{\delta} f_{j,i}(\xi_t\mathbf{e}_i + t \mathbf{e}_j) \mathrm{d}t \quad \exists \xi_t \in (0, \delta)\\ 
+    \end{align*}
+
+    similarly, we have
+
+
+    \begin{align*}
+        c = \int_{0}^{\delta} f_{i,j}(t\mathbf{e}_i + \zeta_t \mathbf{e}_j) \mathrm{d}t \quad \exists \xi_t \in (0, \delta)\\ 
+    \end{align*}
+
+    and thus:
+
+    \begin{align*}
+       \left| c - \delta f_{j,i}(0) \right| &= \left| \int_{0}^{\delta} f_{j,i}(\xi_t\mathbf{e}_i + t \mathbf{e}_j) \mathrm{d}t  - \int_0^{\delta} f_{j,i}(0) \mathrm{d}t \right| \\
+       & \le  \epsilon \delta
+    \end{align*}
+
+    and similarly, we have
+
+    \[
+       \left| c - \delta f_{i,j}(0) \right| \le \epsilon \delta
+    \]
+
+    which shows
+
+    \begin{align*}
+        \delta\left| f_{i,j}(0) - f_{j,i}(0)\right| &\le 2\epsilon \delta \\
+        \left| f_{i,j}(0) - f_{j,i}(0)\right| & \le 2\epsilon 
+    \end{align*}
+
+    since $\epsilon$ can be arbitrary small, which shows $f_{i,j}(0) = f_{j,i}(0)$
+
+\end{proof}

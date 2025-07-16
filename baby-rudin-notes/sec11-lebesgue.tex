@@ -1,0 +1,1817 @@
+\section{The Lebesgue Theory}
+
+\subsection{Outer Measure}
+
+\begin{definition}[Open box]
+    An open box $B$ in $\mathbb{R}^n$ is any set of the form:
+    
+    \[
+        B = \prod_{i=1}^{n}(a_i, b_i) = \{(x_1,x_2,...,x_n): x_i \in (a_i, b_i) \}
+    \]
+
+    where $a_i \le b_i$ is real number.
+
+    And we define volume of $B$ as:
+
+    \[
+        \mathrm{vol}(B) = \prod_{i=1}^{n}(b_i - a_i)
+    \]
+
+    for empty set we define $\mathrm{vol}(\emptyset) = 0$, and if interior of $A$ is an open box,
+
+    we define $\mathrm{vol}(A) = \mathrm{vol}(\mathrm{int}(A))$
+\end{definition}
+
+
+\begin{definition}[Outer measure]
+    If $\Omega \subseteq \mathbb{R}^n$ is a set, we define the outer measure $m^*(\Omega)$ 
+    as:
+
+    \[
+        m^*(\Omega) = \inf \{ \sum_{j \in J} \mathrm{vol}(B_j): \Omega \subseteq \bigcup_{j \in J}B_j\}
+    \]
+
+    where $J$ is at most countable
+\end{definition}
+
+\begin{thm}
+    properties of outer measure
+
+    \begin{enumerate}
+        \item outer measure of empty set is $0$.
+
+        \item positivity $0 \le m^*(\Omega) \le \infty$
+
+        \item If $A \subseteq B$, then $m^*(A) \le m^*(B)$
+
+        \item finite sub-additivity
+
+        \[
+            m^*(\bigcup_{j \in J}A_j) \le \sum_{j \in J}m^*(A_j)
+        \]
+
+        where $J$ is a finite set
+
+        \item countable sub-additivity
+
+        \[
+            m^*(\bigcup_{j \in J}A_j) \le \sum_{j \in J}m^*(A_j)
+        \]
+
+        where $J$ is at most countable
+
+        \item translation invariance
+
+        \[
+            m^*(x + \Omega) = m^*(\Omega)
+        \]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    proofs:
+
+    \begin{enumerate}
+        \item $m^*(\emptyset) = 0$
+        
+        by
+
+        \[
+            \emptyset \subseteq \prod_{i=1}^{n}(0,\epsilon)
+        \]
+
+        thus
+
+        \[
+            m^*(\emptyset) \le \epsilon^n
+        \]
+
+        take $\epsilon \to 0$
+
+        \item $0 \le m^*(\Omega) \le \infty$
+
+        since summation of volume is non-negative, thus its limit point should be non-negative.
+
+        \item monotonicity
+
+        assume any set of open box covers $B$, it also covers $A$, define the summation as $S(J)$,
+        where $J$ contains open box covers $B$
+
+        \[
+            m^*(A) \le S(J)
+        \]
+
+        then take $S(J) \to m^*(B)$
+
+        \item we will prove $m^*(A \cup B) \le m^*(A) + m^*(B)$
+
+        assume $J_A$ and $J_B$ contains open box covers $A$ and $B$, it is easily to verify that
+        $J_A \cup J_B$ covers $A \cup B$
+
+        thus we have:
+
+        \[
+            m^*(A\cup B)\le S(J_A \cup J_B) \le S(J_A) + S(J_B)
+        \]
+
+        and take $S(J_A) \to m^*(A)$ and $S(J_B) \to m^*(B)$
+
+        then we can prove finite case by induction
+
+        \item countable sub-additivity
+
+        let $J_1, J_2, ...$ contains open box which covers $A_1, A_2, ...$ respectively.
+
+        And we have
+        
+        \[
+        S(J_i) \le m^*(A_i) + \frac{1}{2^i} \epsilon
+        \]
+
+        
+        now $J_1 \cup J_2 \cup ... $ covers $A_1 \cup A_2 ...$, thus
+
+        \begin{align*}
+            m^*\left(\bigcup_{i=1}^{\infty}A_i \right) \le S\left(\bigcup_{i=1}^{\infty} J_i \right)
+        \end{align*}
+
+        since 
+
+        \[
+            J = \bigcup_{i=1}^{\infty} J_i
+        \]
+
+        is countable and non negative, consider its finite sum:
+
+        \[
+            \mathrm{vol}(B_1) +\mathrm{vol}(B_2) + ... + \mathrm{vol}(B_n) \le \sum_{i=1}^{\infty}S(J_i)
+        \]
+
+        take side left to $S(J)$, thus we got
+
+        \[
+            S(J) \le \sum_{i=1}^{\infty}S(J_i)
+        \]
+
+        and
+
+
+        \begin{align*}
+            m^*\left(\bigcup_{i=1}^{\infty}A_i \right) & \le S(J) \le \sum_{i=1}^{\infty}S(J_i) \\
+            & \le \sum_{i=1}^{\infty}m^*(A_i) + \epsilon
+        \end{align*}
+
+        since $\epsilon$ is arbitrary, we have
+
+        \[
+m^*\left(\bigcup_{i=1}^{\infty}A_i \right) \le \sum_{i=1}^{\infty}m^*(A_i)
+        \]
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}
+    The outer measure of closed box is 
+
+    let
+    \[
+        \overline{B} = \prod_{i=1}^{n}[a_i,b_i]
+    \]
+
+    Then
+
+    \[
+        m^*(\overline{B}) = \prod_{i=1}^{n}(b_i - a_i)
+    \]
+\end{thm}
+
+\begin{proof}
+
+    we will prove a lemma at first, that is, if $\overline{B}$ is covered by
+    finite open box $B_1, B_2, ..., B_N$.
+
+    Then
+
+    \[
+    \mathrm{vol}(\overline{B}) \le \sum_{i=1}^{N} \mathrm{vol}(B_i) 
+    \]
+
+    we prove this by use induction on dimension $n$.
+
+    when $n=1$, $\overline{B}$ becomes an interval, let define it as $[a,b]$.
+
+    And $B_1,B_2,...,B_N$ becomes open interval, we can express those open
+    box as function $\chi_{B_1},\chi_{B_2},...$, and thus
+
+    by $[a,b]$ covered by $B_1 \cup B_2 \cup ... \cup B_N$, we have
+
+    \[
+        \chi_{[a,b]} \le \sum_{i=1}^{N} \chi_{B_i}
+    \]
+
+    and then, we take integration on both side, since they are simple functions.
+
+    \begin{align*}
+        \mathrm{vol}(\overline{B}) &= \int_{\mathbb{R}} \chi_{[a,b]} \\
+        & \le \int_{\mathbb{R}} \sum_{i=1}^{N} \chi_{B_i} \le  \sum_{i=1}^{N} \int_{\mathbb{R}} \chi_{B_i} \\
+        & \le \sum_{i=1}^{N} \mathrm{vol}(B_i)
+    \end{align*}
+
+
+    when $n=k+1$, we will define a set function $P_t$ as:
+
+    \[
+        P_t(U) = U \cap \{ (x_1,x_2,...,x_{k+1}) \in \mathbb{R}^{k+1}: x_{k+1} = t\}
+    \]
+
+    it is easily to verify $P$ is monotone, and maps from an open or closed box in $\mathbb{R}^{k+1}$ to an open or closed box or empty set in $\mathbb{R}^k$, and we have $P_t(U \cup V) = P_t(U) \cup P_t(V)$
+
+    Thus, if a closed box be covered by finite open box in $\mathbb{R}^{k+1}$:
+
+    \[
+        \overline{B} \subseteq \bigcup_{i=1}^{N} B_i
+    \]
+
+    then we apply $P_t$ on both side:
+
+
+    \[
+        P_t(\overline{B}) \subseteq P_t\left(\bigcup_{i=1}^{N} B_i\right) \subseteq \bigcup_{i=1}^{N}P_t(B_i)
+    \]
+
+    by hypothesis of induction we have:
+
+    \begin{align*}
+        \mathrm{vol}(P_t(\overline{B})) &\le \sum_{i=1}^{N} \mathrm{vol}(P_t(B_i))
+    \end{align*}
+
+    The above inequality holds when $t$ is arbitrary.
+
+    thus $\mathrm{vol}(P_t(B_i))$ and $\mathrm{vol}(P_t(\overline{B}))$ becomes piecewise constant function of $t$, so we can take integration at both side:
+
+    \begin{align*}
+        \int_{\mathbb{R}}\mathrm{vol}(P_t(\overline{B})) \mathrm{d}t  &\le \int_{\mathbb{R}}\sum_{i=1}^{N} \mathrm{vol}(P_t(B_i)) \mathrm{d}t \\
+        & \le \sum_{i=1}^{N} \int_{\mathbb{R}}\mathrm{vol}(P_t(B_i)) \mathrm{d}t \\
+        & \le \sum_{i=1}^{N}\mathrm{vol}(B_i)
+    \end{align*}
+
+    by
+
+    \[
+\int_{\mathbb{R}}\mathrm{vol}(P_t(\overline{B})) \mathrm{d}t = \mathrm{vol}(\overline{B})
+    \]
+
+    we proved our lemma.
+
+
+    Since closed box is compact, which means every open cover contains a finite sub cover.
+    
+    Let $J$ be any open cover of $\overline{B}$ which contains open box, and $S(J)$ be summation of volume.
+
+    And $J'$ be finite sub cover of $J$, thus we have
+
+    \[
+        \mathrm{vol}(\overline{B}) \le S(J') \le S(J)
+    \]
+
+    take $S(J) \to m^*(\overline{B})$, then we have
+
+    \[
+        \mathrm{vol}(\overline{B}) \le m^*(\overline{B})
+    \]
+
+    on the other hand, we can cover $\overline{B}$ by any open box which extend 
+    its interval on each dimension for $\epsilon$ longer.
+
+    thus we have
+
+    \[
+        m^*(\overline{B}) \le \mathrm{vol}(\overline{B}) + M\epsilon
+    \]
+
+    where $M$ is an upper bound which is only related with $n$ and $\mathrm{vol}(\overline{B})$
+
+    take $\epsilon \to 0$, we got
+
+
+    \[
+        m^*(\overline{B}) \le \mathrm{vol}(\overline{B})
+    \]
+
+    after all, we proved that
+
+    \[
+        m^*(\overline{B}) = \mathrm{vol}(\overline{B})
+    \]
+\end{proof}
+
+\begin{corollary}
+    The outer measure of open box $B$ is its volume.
+\end{corollary}
+
+\begin{proof}
+    by $m^*(B) \le m^*(\overline{B})$ and use $\overline{B} \subseteq B$, and 
+    let $\overline{B}$ approximate $B$.
+\end{proof}
+
+
+\subsection{Measurable Sets}
+
+\begin{thm}
+    Some operation which preserve measurable.
+
+    if $E,E_1, E_2\subseteq \mathbb{R}^n$ are measurable then:
+
+    \begin{enumerate}
+        \item $E + x$ is measurable.
+
+        \item $E^C$ is measurable.
+
+        \item $E_1 \cap E_2$ is measurable.
+
+        \item $E_1 \cup E_2$ is measurable.
+
+        \item if $m(E_1 \cap E_2) = 0$, then
+
+        \[
+            m(E_1 \cup E_2) = m(E_1) + m(E_2)
+        \]
+
+        \item if $E_n$ is countable measurable set, Then
+
+        \[
+            \bigcup_{n=1}^{\infty}E_n
+        \]
+
+        and
+
+
+        \[
+            \bigcap_{n=1}^{\infty}E_n
+        \]
+
+        is measurable.
+
+        also, if $E_n$ is disjoint. we have
+
+        \[
+            m(\bigcup_{n=1}^{\infty}E_n) = \sum_{n=1}^{\infty}m(E_n)
+        \]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $E+x$ is measurable
+
+        for any $A$, consider
+
+        \begin{align}
+            m^*(A \cap (E+x)) + m^*(A^C \cap (E+x)) &= m^*(\left(A -x\right)\cap E) + x) + m^*(((A^C-x) \cap E) + x) \\
+            &= m^*(\left(A -x\right)\cap E) + m^*((A^C-x) \cap E) \\
+            &= m^*(A-x)
+        \end{align}
+
+        since $A$ is arbitrary, we can prove by replace $A$ with $A +x$.
+
+        \item $E^C$ is measurable
+
+        by symmetric
+
+        \item $E_1 \cap E_2$ is measurable
+
+        \begin{align*}
+            m^*(A \cap E_1) & = m^*(A \cap E_1\cap E_2) + m^*(A \cap E_1 \cap E_2^{C}) \\ 
+            m^*(A \cap E_1^C) & = m^*(A \cap E_1^C \cap E_2) + m^*(A \cap E_1^{C} \cap E_2^C) \\ 
+        \end{align*}
+
+by $E_1$ is measurable, consider
+
+\[
+    (E_1 \cap E_2)^C = E_1 \setminus E_2 \cup E_2 \setminus E_1 \cup E_1^C \cap E_2^C
+\]
+
+\begin{align*}
+m^*(A) &= m^*(A \cap E_1 \cap E_2) + m^*(A \cap E_1 \cap E_2^{C}) + m^*(A \cap E_1^{C} \cap E_2) + m^*(A \cap E_1^{C} \cap E_2^C) \\
+& \ge m^*(A \cap E_1 \cap E_2) + m^*(A \cap (E_1 \cap E_2)^C) 
+\end{align*}
+
+so $E_1 \cap E_2$ is measurable.
+
+    \item $E_1 \cup E_2$ is measurable
+    
+    since $\cup$ is combination of complement and intersection.
+
+
+    \item if $m(E_1 \cap E_2) = \emptyset$, then
+
+    let $A$ be arbitrary set, we will prove
+
+    \[
+        m^*\left( A \cap \left( E_1 \cup E_2\right) \right) = m^*(A \cap E_1) + m^*(A \cap E_2)
+    \]
+
+    define $X = E_1 \cup E_2$, by $E_2$ is measurable:
+
+    \begin{align}
+        m^*(A \cap X) &= m^*( A \cap X \cap E_2) + m^*( (A \cap X) \cap E_2^C) \\
+        &= m^*(A \cap E_2)  + m^*(A \cap E_1)
+    \end{align}
+
+    also we can define 
+
+    \[
+        X = \left(\bigcup_{k=1}^{n-1}E_k \right) \cup E_n
+    \]
+
+    prove
+
+    \[
+        m^*\left(A \cap \bigcup_{k=1}^{n}E_k\right) = \sum_{k=1}^{n}m^*(A \cap E_k)
+    \]
+
+    by induction.
+
+    by define $A = \mathbb{R}^n$, we can prove that
+
+    \[
+        m\left(\bigcup_{k=1}^{n}E_k\right) = \sum_{k=1}^{n} m(E_k)
+    \]
+
+    \item we will prove, for any $A \subseteq \mathbb{R}^n$,
+
+    let 
+
+    \[
+        E = \bigcup_{n=1}^{\infty}E_n
+    \]
+    
+    \[
+        m^*(A) = m^*(A \cap E) + m^*(A \cap E^C)
+    \]
+
+    let's define 
+
+    \[
+        F_N = \bigcup_{n=1}^{N}E_n
+    \]
+
+    consider
+
+    \[
+        A \cap E = A \cap \bigcup_{n=1}^{\infty}E_n  = \bigcup_{n=1}^{\infty} A \cap E_n
+    \]
+
+    and
+
+    \[
+        m^*\left(A \cap F_N \right) = m^*\left(\bigcup_{n=1}^{N} A \cap E_n \right) = \sum_{n=1}^{N}m^*(A \cap E_n)
+    \]
+
+    which means
+
+    \[
+        \lim_{N \to \infty}m^*(A \cap F_N) = \sum_{n=1}^{\infty}m^*(A \cap E_n) \ge m^*(A \cap E)
+    \]
+
+    and
+
+    \[
+        m^*(A \setminus F_N) \ge m^*(A \setminus E)
+    \]
+
+    also we have
+
+    \[
+        m^*(A) = m^*(A \cap F_N) + m^*(A \setminus F_N)
+    \]
+
+    take $N \to \infty$, we got
+
+    \[
+        m^*(A) \ge m^*(A \cap E) + m^*(A \setminus E)
+    \]
+
+    so $E$ is measurable.
+
+    and by
+
+    \begin{align*}
+        \sum_{n=1}^{N}E_n = m^*(F_N) \le m^*(E)
+    \end{align*}
+
+    take $N \to \infty$, we got
+
+    \begin{align*}
+        \sum_{n=1}^{\infty}E_n  \le m^*(E)
+    \end{align*}
+
+    after all, we got
+
+    \[
+        m^*(E) = \sum_{n=1}^{\infty}E_n
+    \]
+
+    \end{enumerate}  
+\end{proof}
+
+\begin{thm}
+    let $E_{n+1} \supseteq E_{n}$ and $E_n$ be measurable, Then 
+
+    \[
+        m\left(\bigcup_{n=1}^{\infty}E_n \right) = \lim_{n \to \infty}m(E_n)
+    \]
+\end{thm}
+
+\begin{proof}
+    define 
+
+    \begin{align*}
+        F_1 &= E_1 \\
+        F_{n+1} &= E_{n+1} \setminus E_{n}
+    \end{align*}
+
+    Then $F_n$ be disjoint. Thus we can apply countable additivity:
+
+    \begin{align*}
+       m\left(\bigcup_{n=1}^{\infty}E_n\right) &= m\left(\bigcup_{n=1}^{\infty}F_n\right) = \sum_{n=1}^{\infty}m(F_n) \\
+       &= m(E_1) + \sum_{n=2}^{\infty}m(E_{n} \setminus E_{n-1}) \\
+       &= m(E_1) + \sum_{n=2}^{\infty}\left(m(E_{n}) - m(E_{n-1}) \right)\\
+       &= \lim_{n \to \infty}m(E_n)
+    \end{align*}
+
+    We use $m(E_{n}) - m(E_{n-1})$ here because  $\forall n, \:m(E_n) < \infty$, otherwise the conclusion is obviously.
+\end{proof}
+
+\begin{corollary}
+    let $E_{n+1} \subseteq E_{n}$ and $E_n$ be measurable, where $m(E_1) < \infty$,
+    Then
+
+    \[
+        m\left(\bigcap_{n=1}^{\infty}E_n \right) = \lim_{n \to \infty}m(E_n)
+    \]
+\end{corollary}
+
+\begin{proof}
+    we define $F_n$ as:
+
+    \begin{align*}
+        F_1 &= \emptyset \\
+        F_n &= E_1 \setminus E_n \\
+    \end{align*}
+
+    thus $F_n$ becomes increasing, so we can apply previous theorem
+
+    \[
+        m\left(\bigcup_{n=1}^{\infty}F_n\right) = \lim_{n\to \infty}m(F_n)
+    \]
+
+    and
+
+    \begin{align*}
+        m\left(\bigcup_{n=1}^{\infty}F_n\right) &= m\left(\bigcup_{n=1}^{\infty}E_1 \setminus E_n \right) \\
+        &= m\left(E_1 \cap \bigcup_{n=1}^{\infty} E_n^C \right) = m\left(E_1 \setminus \bigcap_{n=1}^{\infty} E_n \right) \\
+        &= m(E_1) - m\left(\bigcap_{n=1}^{\infty} E_n \right) \\
+        \lim_{n \to \infty}m(F_n) &= \lim_{n \to \infty}m(E_1 \setminus E_n) = \lim_{n \to \infty}m(E_1)- m(E_n) \\
+        &= m(E_1) - \lim_{n \to \infty}m(E_n)
+    \end{align*}
+\end{proof}
+
+\subsection{Measurable Function}
+
+\subsection{simple functions}
+
+\begin{definition}
+    let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and $f: \Omega \to \mathbb{R}$
+    be a measurable function. We say $f$ is a simple function if its image $f(\Omega)$ is finite.
+\end{definition}
+
+\begin{thm}
+    A measurable function is simple iff it could be represents as finite linear combination of characteristic
+    function of measurable set.
+\end{thm}
+
+\begin{proof}
+    Sufficiency is obviously, since addition of finite measurable function is measurable. And image is also finite.
+
+    If a measurable function is simple, assume $f(\Omega) = \{ c_1,c_2,...,c_n\}$, and 
+
+    $f^{-1}(\{ c_1\}) = E_1, f^{-1}(\{ c_2\}) = E_2, ... , f^{-1}(\{ c_n\}) = E_n$, Then
+
+    \[
+        f = \sum_{k=1}^{n} c_k \chi_{E_k}
+    \]
+\end{proof}
+
+\begin{thm}
+    addition of two simple function is also simple, also for multiplication.
+\end{thm}
+
+\begin{proof}
+    let 
+
+    \begin{align*}
+        f &= \sum_{k=1}^{n}c_k \chi_{E_k} \\
+        g &= \sum_{j=1}^{m}d_j \chi_{F_j} \\
+    \end{align*}
+
+    Then
+
+    \begin{align*}
+        f g &= \sum_{k=1}^{n}\sum_{j=1}^{m} c_kd_j \chi_{E_k \cap F_j} \\
+        f + g &= \sum_{k=1}^{n} c_k \chi_{E_k} + \sum_{j=1}^{m}d_j \chi_{F_j}
+    \end{align*}
+\end{proof}
+
+\begin{definition}[Lebesgue integral of simple function]
+    Let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let $f: \Omega \to \mathbb{R}$ be a simple measurable function which is non-negative.
+    Thus the image $f(\Omega)$ is finite and contained in $[0, \infty)$. We then define
+the Lebesgue integral $\int_{\Omega}$ of $f$on $\Omega$ by
+
+\[
+    \int_{\Omega}f = \sum_{\lambda \in f(\Omega); \lambda > 0} \lambda m(\{ x \in \Omega: f(x) = \lambda \})
+\]
+\end{definition}
+
+\begin{thm}
+    \label{thm:7e089ab3-04aa-44e3-9ead-32b28d6b95db}
+    if $f: \Omega \to \mathbb{R}$ is a simple non-negative, measurable function. And it could be expressed as linear combination of characteristic function of measurable set group $\{ F_k\}$,
+    and $\{ F_k\}$ is disjoint
+
+    \[
+        f = \sum_{k=1}^{m} d_k \chi_{F_k}
+    \]
+
+    Then
+
+    \[
+        \int_{\Omega} f = \sum_{k=1}^{m}d_k m(F_k)
+    \]
+
+    Note $d_k$ may not be distinct
+\end{thm}
+
+\begin{proof}
+    assume $f(\Omega) = \{ c_1,c_2,...,c_n\}$, and 
+
+    $f^{-1}(\{ c_1\}) = E_1, f^{-1}(\{ c_2\}) = E_2, ... , f^{-1}(\{ c_n\}) = E_n$, Then
+
+    we can group $d_k$ by $c_1,c_2,...,c_n$, because the set $\{ d: d = d_1,d_2,...,d_m\} $ is $\{c_1,c_2,...,c_n\}$ actually.
+
+    \begin{align*}
+        \sum_{k=1}^{m}d_k m(F_k) &= \sum_{j=1}^{n}\sum_{k: d_k = c_j}d_k m(F_k) \\
+        &= \sum_{j=1}^{n}c_j \sum_{k: d_k = c_j}m(F_k) \\
+        &= \sum_{j=1}^{n}c_j m\left(\bigcup_{k: d_k = c_j} F_k \right) \\
+    \end{align*}
+
+    consider 
+
+    \[
+        \bigcup_{k: d_k = c_j} F_k
+    \]
+
+    by $d_k = c_j$ we have $F_k \subseteq E_j$, by $c_j = d_k$, and $F_k$ is disjoint, there exists at least one 
+    $d_k = c_j$, consider if $x$ in
+
+    \[
+        E_j \setminus \left(\bigcup_{k: d_k = c_j} F_k \right)
+    \]
+
+    then $f(x) = c_j$ and $f(x) \ne c_j$ both holds.
+
+    thus
+
+    \begin{align*}
+        \sum_{k=1}^{m}d_k m(F_k) &= \sum_{j=1}^{n}c_j m\left(\bigcup_{k: d_k = c_j} F_k \right) \\
+        &= \sum_{j=1}^{n}c_j m\left(E_j \right) = \int_{\Omega} f
+    \end{align*}
+
+\end{proof}
+
+\begin{thm}
+    Let $\Omega$ be a measurable set, and let $f: \Omega \to \mathbb{R}$
+    and $g: \Omega \to \mathbb{R}$ be non-negative simple measurable functions.
+
+    Then:
+
+    \begin{enumerate}
+        \item $0 \le \int_{\Omega}f \le \infty$, and $\int_{\Omega}f = 0$ iff $m(\{ x: f(x) \ne 0\}) = 0$
+
+        \item $\int_{\Omega}(f+g) = \int_{\Omega}f  + \int_{\Omega}g $
+
+        \item $\int_{\Omega}cf = c\int_{\Omega}f$
+
+        \item if $ f \le g$, then $\int_{\Omega}f \le \int_{\Omega}g$
+
+        \item if $\Omega_1 \cup \Omega_2$ is disjoint, and $\Omega_1 \cup \Omega_2 = \Omega$,then
+
+        \[
+            \int_{\Omega_1} f  + \int_{\Omega_2} f = \int_{\Omega} f
+        \]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    proofs:
+
+    \begin{enumerate}
+        \item $0 \le \int_{\Omega}f \le \infty$, and $\int_{\Omega}f = 0$ iff $m(\{ x: f(x) \ne 0\}) = 0$
+
+        obviously by definition
+
+        \item $\int_{\Omega}(f+g) = \int_{\Omega}f  + \int_{\Omega}g $
+
+        \begin{align*}
+            \int_{\Omega}f  + \int_{\Omega}g  &= \sum_{j=1}^{n}c_j m(E_j) + \sum_{k=1}^{s}d_k m(F_k) \\
+            &= \sum_{j=1}^{n}\sum_{k=1}^{s}c_j m(E_j \cap F_k) + \sum_{k=1}^{s}\sum_{j=1}^{n}d_k m(F_k \cap E_j) \\
+            &= \sum_{j=1}^{n}\sum_{k=1}^{s}\left(c_j + d_k \right) m(E_j \cap F_k)
+        \end{align*}
+
+        since 
+
+        \[
+            h = \sum_{j=1}^{n}\sum_{k=1}^{s}\left(c_j + d_k \right)\chi_{E_j \cap F_k}
+        \]
+
+        by \autoref{thm:7e089ab3-04aa-44e3-9ead-32b28d6b95db}, we proved
+
+        \item $\int_{\Omega}cf = c\int_{\Omega}f$
+
+        easily to prove like (2)
+
+        \item if $ f \le g$, then $\int_{\Omega}f \le \int_{\Omega}g$
+
+        by $h = g -f$ is non-negative
+
+        \[
+            h = \sum_{j=1}^{n}\sum_{k=1}^{s}\left(d_k -f_j\right)\chi_{E_j \cap F_k}
+        \]
+
+        thus
+
+        \[
+            \sum_{j=1}^{n}\sum_{k=1}^{s}\left(d_k - c_j \right) m(E_j \cap F_k) \ge 0
+        \]
+
+        simplify, we got
+
+        \[
+            \int_{\Omega}f \le \int_{\Omega}g
+        \]
+
+        \item if $\Omega_1 \cup \Omega_2$ is disjoint, and $\Omega_1 \cup \Omega_2 = \Omega$ Then
+
+        assume when $x \in \Omega$
+
+        \[
+            f(x) = \sum_{j=1}^{n} c_j \chi_{E_j}(x)
+        \]
+
+        for $x \in \Omega_1$, we got
+
+
+        \[
+            f(x) = \sum_{j=1}^{n} c_j \chi_{E_j \cap \Omega_1}(x)
+        \]
+
+        thus
+
+        \[
+            \int_{\Omega_1} f = \sum_{j=1}^{n}c_j m(E_j \cap \Omega_1)
+        \]
+
+        similarly for $\Omega_2$, thus we got
+
+        \begin{align*}
+            \int_{\Omega_1} f + \int_{\Omega_2} f&= \sum_{j=1}^{n}c_j m(E_j \cap \Omega_1) +  \sum_{j=1}^{n}c_j m(E_j \cap \Omega_2) \\
+            &= \sum_{j=1}^{n}c_j \left(m(E_j \cap \Omega_2) + m(E_j \cap \Omega_2) \right)\\
+            &= \sum_{j=1}^{n}c_j m(E_j)  = \int_{\Omega} f
+        \end{align*}
+
+    \end{enumerate}
+
+\end{proof}
+
+\subsection{Integration of Non-negative Measurable Functions}
+
+\begin{definition}
+    Let $f: \Omega \to \mathbb{R}$ and $g: \Omega \to \mathbb{R}$ be functions. We
+say that $f$ majorizes $g$, or$g$ minorizes$f$ , if we have $f (x) \ge g(x)$ for all $x \in \Omega$.
+\end{definition}
+
+\begin{definition}[Lebesgue integral for non-negative functions]
+   Let be a measurable subset of $\mathbb{R}^n$, and let $f: \Omega \to [0,\infty]$ be measurable and non-negative. Then 
+
+   \[
+    \int_{\Omega} f = \sup \{ \int_{\Omega} s,\: s \text{ is simple and non-negative, and minorizes } f \}
+   \]
+\end{definition}
+
+\begin{thm}
+    Let $\Omega$ be a measurable set, and let $f,g: \Omega \to [0,\infty]$ be non-negative measurable functions.
+    Then:
+
+    \begin{enumerate}
+        \item We have $0 \le \int_{\Omega}f \le \infty$. Furthermore, we have $\int_{\Omega} f = 0$ if and only if $f(x) = 0$
+for almost every $x \in \Omega$
+
+        \item For any non-negative number $c$, we have $c \int_{\Omega}f  = \int_{\Omega}cf$
+
+        \item  If $f (x) \le g(x)$ for all $x \in \Omega$ , then we have $\int_{\Omega} f \le \int_{\Omega} g$.
+
+        \item If $f (x)= g(x)$ for almost every $\in \Omega$, then $\int_{\Omega}f = \int_{\Omega} g$.
+
+        \item If $\Omega' \subseteq \Omega$ is measurable, then
+
+        \[
+            \int_{\Omega} f \chi_{\Omega'} \le \int_{\Omega} f
+        \]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    proofs:
+
+    \begin{enumerate}
+        \item $0 \le \int_{\Omega}f \le \infty$ and $\int_{\Omega} f$ if and only if $f(x) = 0$
+for almost every $x \in \Omega$
+
+        obviously by definition. If $m(\{ x: f(x) > 0\}) = 0$, for any $s$ minorizes $f$, we have $\int_{\Omega}s = 0$.
+
+        also, If $m(\{ x: f(x) > 0\}) > 0$, there should exists $n$, such that $m(\{ x: f(x) > 1/n\}) > 0$, define $E = \{ x: f(x) > 1/n\}$ 
+
+        and thus exists some simple function $s, \: s(x) = \chi_{E} 1/n$ minorizes $f$, and $\int_{\Omega}s > 0$.
+
+        \item $c \int_{\Omega}f  = \int_{\Omega}cf$
+
+        when $c = 0$, it is trivial
+
+        let $s_n$ minorizes $f$ by $cs_n \le cf$
+        
+        \[
+            c\int_{\Omega}s_n = \int_{\Omega}cs_n
+        \]
+
+        take $\int_{\Omega}s_n \to \int_{\Omega}f$, we got
+
+        \begin{align*}
+            \varlimsup_{n \to \infty}c\int_{\Omega}s_n &= c\int_{\Omega}f = \varlimsup_{n \to \infty}\int_{\Omega}cs_n \\
+            & \le \int_{\Omega}cf
+        \end{align*}
+
+        similarly, take $s_n$ minorizes $ cf$, we got $s_n/c$ minorizes $f$
+
+        \[
+            \frac{1}{c}\int_{\Omega}s_n = \int_{\Omega}\frac{1}{c}s_n
+        \]
+
+        take $\int_{\Omega}s_n \to \int_{\Omega}cf$, we got
+
+        \[
+            \frac{1}{c} \int_{\Omega}cf \le \int_{\Omega}f
+        \]
+
+        after all, we  got
+
+        \[
+        \int_{\Omega}cf = c\int_{\Omega}f
+        \]
+
+        \item If $f (x) \le g(x)$ for all $x \in \Omega$ , then we have $\int_{\Omega} f \le \int_{\Omega} g$
+
+        take $s_n$ minorizes $f$, which also minorizes $g$ by $f \le g$.
+
+        \[
+            \int_{\Omega}s_n \le \int_{\Omega} g
+        \]
+
+        take $\int_{\Omega}s_n \to \int_{\Omega}f$, Then
+
+        \[
+            \int_{\Omega}f \le \int_{\Omega} g
+        \]
+
+        \item If $f (x)= g(x)$ for almost every $\in \Omega$, then $\int_{\Omega}f = \int_{\Omega} g$.
+
+        consider if $s_n$ minorizes $f$, by redefine $s_n(x) = 0, \forall x \in \{x: f(x) \ne g(x)\}$,
+        we got $s_n^*$ which minorizes $g$. Thus
+
+        \[
+            \int_{\Omega}s_n  = \int_{\Omega}s_n^* \le \int_{\Omega}g
+        \]
+
+        take $\int_{\Omega}s_n \to \int_{\Omega}f$, we got
+
+        \[
+          \int_{\Omega}f  \le \int_{\Omega}g
+        \]
+
+        similarly, we can prove
+
+
+        \[
+          \int_{\Omega}g  \le \int_{\Omega}f
+        \]
+
+        thus
+
+        \[
+          \int_{\Omega}f = \int_{\Omega}g
+        \]
+
+
+        \item If $\Omega' \subseteq \Omega$ is measurable, by 
+        
+        \[
+        f\chi_{\Omega'} \le f\chi_{\Omega} \le f
+        \]
+
+        and (3)
+
+        we have
+
+        \[
+            \int_{\Omega} f \chi_{\Omega'} \le \int_{\Omega} f
+        \]
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}[Lebesgue monotone convergence theorem]
+    \label{thm:lebesgue-MCT-17b9b7af-2c23-4932-abc4-509e9a8e199f}
+    let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let $\{ f_n \}$
+    be a sequence of non-negative measurable functions from $\Omega $ to $[0,\infty]$
+    which are increasing in the sense that
+
+    \[
+        0 \le f_1(x) \le f_2(x) \le f_3(x) \le ... \quad \text{for all } x \in \Omega
+    \]
+
+    Thus
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega}f_n = \int_{\Omega} \left(\lim_{n \to \infty}f_n \right) 
+    \]
+\end{thm}
+
+\begin{proof}
+    define 
+
+    \[
+        f = \lim_{n \to \infty}f_n
+    \]
+
+    by 
+
+    \[
+        \int_{\Omega} f_n \le \int_{\Omega} f
+    \]
+
+    then
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega} f_n \le \int_{\Omega} f
+    \]
+
+    fix $0 < \epsilon < 1$, we will prove, for any simple measurable function $s$ minorizes $f$, we have
+
+    \[
+        \epsilon\int_{\Omega} s \le \lim_{n \to \infty}\int_{\Omega} f_n
+    \]
+
+    let's define $E_n$ as:
+
+    \[
+        E_n = \{ x \in \Omega: f_n(x) \ge \epsilon s(x) \}
+    \]
+
+    by $f_n \to f,\: s(x) \le f(x), \: 0 < \epsilon < 1$  we have
+
+    \[
+        \bigcup_{n=1}^{\infty}E_n = \Omega
+    \]
+
+    expand $s$ as 
+
+    \[
+        s = \sum_{j=1}^{m}c_j \chi_{F_j}
+    \]
+
+    where $c_j \ge 0$ and $F_j$ be disjoint.
+
+    now, let's consider:
+
+    \begin{align*}
+        \int_{\Omega} f_n  &\ge \int_{\Omega} f_n \chi_{E_n} \ge \epsilon \int_{\Omega} s \chi_{E_n} \\
+        & \ge \epsilon \int_{\Omega}\sum_{j=1}^{m}c_j \chi_{F_j \cap E_n} \\
+        & \ge \epsilon \sum_{j=1}^{m}c_j m(F_j \cap E_n)
+    \end{align*}
+
+    and by $E_{n+1} \supseteq E_n$, and $E_1 \cup E_2 \cup ... = \Omega$
+
+    \begin{align*}
+        \lim_{n \to \infty}  \sum_{j=1}^{m}c_j m(F_j \cap E_n) &= \sum_{j=1}^{m} \lim_{n \to \infty} c_j m(F_j \cap E_n) \\
+        & = \sum_{j=1}^{m} c_j m(F_j) \\
+        &= \int_{\Omega} s
+    \end{align*}
+
+    thus we got
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega} f_n  \ge \epsilon \int_{\Omega} s
+    \]
+
+    take $\epsilon \to 1$, we got
+
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega} f_n  \ge \int_{\Omega} s
+    \]
+
+    since $s$ is arbitrary simple measurable function minorizes $f$, we got
+
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega} f_n  \ge \int_{\Omega} f
+    \]
+
+    after all,
+
+    we got
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega} f_n  = \int_{\Omega} f
+    \]
+\end{proof}
+
+\begin{thm}
+    \label{fbb1399e-f592-4e23-be54-aa7b9783005b}
+    let $f: \Omega \to [0, \infty]$ be non-negative measurable function.
+
+    Then there exists sequence of non-negative, simple, measurable functions from $\Omega $ to $[0,\infty)$
+    which are increasing in the sense that
+
+    \[
+        0 \le f_1(x) \le f_2(x) \le f_3(x) \le ... \quad \text{for all } x \in \Omega
+    \]
+
+    and
+
+    \[
+        \lim_{n \to \infty}f_n(x) = f(x) \quad \text{for all } x \in \Omega
+    \]
+
+\end{thm}
+
+\begin{proof}
+   we define $f_n$ as:
+
+   \begin{align*}
+    f_n(x) & = n  \quad \text{ when } f(x) > n \\
+    f_n(x) & = \lfloor f(x) \rfloor + \frac{\lfloor2^n \{ f(x) \} \rfloor}{2^n}  \quad \text{ when } f(x) \le n \\
+   \end{align*}
+   
+   where $[x]$ is integer part of $x$, and $\{x\} = x - \lfloor x \rfloor$
+
+   first, $f_n \to f$, is obviously, assume $f(x) = c$, if $c = \infty$, then $f_n(x) = n$, where $n \to \infty$.
+
+   if $c < \infty$, when $n \ge \lfloor c \rfloor + 1$, we have 
+   
+   \[
+ \lfloor c \rfloor + \{ c \} - \frac{1}{2^n} < \lfloor c \rfloor + \frac{\lfloor 2^n \{ c \} \rfloor}{2^n} \le \lfloor c \rfloor + \{ c \}
+   \]
+
+   thus $f_n(x) \to c$ obviously.
+
+   now, let's prove $f_{n+1}(x) \ge f_n(x)$:
+   
+   if $x > n$, we have $f_{n}(x) = n$ and:
+   
+   \begin{enumerate}
+    \item if $f(x) > n+1$
+
+    $f_{n+1}(x) = n+1 \ge n$
+
+    \item if $n < f(x) \le n+1$
+
+    $f_{n+1}(x) \ge \lfloor n \rfloor \ge n$ 
+   \end{enumerate}
+
+   so $f_n(x) \le f_{n+1}(x)$ when $f(x) > n$
+
+   if $f(x) \le n$, let's check $f_{n+1}(x) - f_n(x)$, and define $c = f(x)$
+
+   by $\lfloor x+y \rfloor \ge \lfloor x \rfloor + \lfloor y \rfloor$
+
+   \begin{align*}
+    f_{n+1}(x) &=  \frac{\lfloor 2^{n+1} \{ c \}\rfloor}{2^{n+1}} = \frac{\lfloor 2^{n} \{ c \} + 2^{n} \{ c \}\rfloor}{2^{n+1}} \\
+    & \ge\frac{\lfloor 2^{n} \{ c \}] + \lfloor 2^{n} \{ c \}]}{2^{n+1}} \ge \frac{\lfloor 2^{n} \{ c \}\rfloor}{2^{n}}
+   \end{align*}
+
+   which means 
+   
+   \[
+   f_{n+1}(x) -  f_n(x) = \frac{\lfloor 2^{n+1} \{ c \}  ]}{2^{n+1}}- \frac{\lfloor 2^{n} \{ c \}\rfloor}{2^{n}} \ge 0
+   \]
+\end{proof}
+
+
+\begin{thm}[Interchange of addition and integration]
+    \label{a1203caa-2e3d-4549-b385-8acd12b2d13f}
+    Let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let $f,g: \Omega \to [0, \infty]$  be measurable functions.  
+    
+    Then
+
+    \[
+        \int_{\Omega} \left( f + g \right) = \int_{\Omega}  f + \int_{\Omega}  g
+    \]
+\end{thm}
+
+\begin{proof}
+    let $f_n, g_n$ be simple, non-negative, measurable functions, where $f_n \to f, \: g_n \to g$. By 
+    \autoref{fbb1399e-f592-4e23-be54-aa7b9783005b}, we got
+
+    \begin{align*}
+        \lim_{n \to \infty}\int_{\Omega} f_n &= \int_{\Omega} f \\
+        \lim_{n \to \infty}\int_{\Omega} g_n &= \int_{\Omega} g \\
+    \end{align*}
+
+    and thus
+
+
+    \begin{align*}
+        \lim_{n \to \infty}\left(\int_{\Omega} (f_n + g_n) \right) &= \int_{\Omega} f + \int_{\Omega} g\\
+    \end{align*}
+
+    consider $f_n + g_n \to f + g$ and $f_n + g_n$ is also increasing, thus
+
+    \[
+        \lim_{n \to \infty}\left(\int_{\Omega} (s_n + g_n) \right) = \int_{\Omega} \left(\lim_{n \to \infty}(s_n + g_n) \right) = \int_{\Omega}(f+g)
+    \]
+
+    combine them, we got
+
+    \[
+        \int_{\Omega} \left( f + g \right) = \int_{\Omega}  f + \int_{\Omega}  g
+    \]
+\end{proof}
+
+\begin{thm}
+    Let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let $f: \Omega \to [0, \infty]$  be measurable functions. 
+    And disjoint set $\Omega_1 \cup \Omega_2 = \Omega$, Then
+
+    \[
+        \int_{\Omega_1} f + \int_{\Omega_2}f = \int_{\Omega}f
+    \]
+
+\end{thm}
+
+\begin{proof}
+    we just need to prove:
+
+    \[
+        \int_{\Omega_1} f = \int_{\Omega} f \chi_{\Omega_1}
+    \]
+
+    and then use \autoref{a1203caa-2e3d-4549-b385-8acd12b2d13f},
+
+    assume arbitrary simple measurable, non-negative $s_n$ minorizes $f$ on $\Omega_1$, we can extend it to $t_n: \Omega \to \mathbb{R}$ as
+    $t_n = s_n \chi_{\Omega_1}$
+
+    Thus we have
+
+    \[
+        \int_{\Omega_1}s_n = \int_{\Omega}t_n \le \int_{\Omega} f \chi_{\Omega_1}
+    \]
+
+    take $\int_{\Omega_1}s_n \to \int_{\Omega_1} f$, we got
+
+    \[
+\int_{\Omega_1} f \le \int_{\Omega} f \chi_{\Omega_1}
+    \]
+
+    similarly, for any $t_n$ minorizes $f \chi_{\Omega}$, it also minorizes $f$ on $\Omega_1$, 
+    use same step, define $s_n = t_n \chi_{\Omega_1}$ we got
+
+    \begin{align*}
+        \int_{\Omega_1}t_n &= \int_{\Omega}t_n - \int_{\Omega \setminus \Omega_1}t_n \\
+        &=\int_{\Omega}t_n \le \int_{\Omega_1}f 
+    \end{align*}
+
+    and take $\int_{\Omega}t_n \to \int_{\Omega}f \chi_{\Omega_1}$
+
+    \[
+        \int_{\Omega}f\chi_{\Omega_1} \le \int_{\Omega_1}f 
+    \]
+\end{proof}
+
+\begin{thm}[Fatou’s lemma]
+    \label{thm:fatous-lemma}
+     Let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let
+     $f_1,f_2,...$ be a sequence of non-negative functions from $\Omega$ to $[0, \infty]$.
+     Then
+
+     \[
+        \int_{\Omega} \varliminf_{n \to \infty} f_n \le \varliminf_{n \to \infty} \int_{\Omega}  f_n
+     \]
+\end{thm}
+
+\begin{proof}
+    consider that 
+
+    \[
+        \varliminf_{n \to \infty}f_n(x) = \lim_{n \to \infty} \inf_{k \ge n}f_k(x)
+    \]
+
+    and we define
+
+    \[
+        h_n(x) =\inf_{k \ge n}f_k(x)
+    \]
+
+    thus $h_n$ is increasing, by \autoref{thm:lebesgue-MCT-17b9b7af-2c23-4932-abc4-509e9a8e199f}, we got
+
+    \[
+        \int_{\Omega} \lim_{n \to \infty}h_n = \lim_{n \to \infty} \int_{\Omega} h_n
+    \]
+
+    by $h_n \le f_n$, we have
+
+    \[
+        \int_{\Omega} h_n \le \int_{\Omega} f_n
+    \]
+
+    and thus
+
+    \[
+        \varliminf_{n \to \infty}\int_{\Omega} h_n \le \varliminf_{n \to \infty}\int_{\Omega} f_n
+    \]
+
+    since
+
+    \[
+\int_{\Omega} h_{n+1} \ge \int_{\Omega} h_{n}
+    \]
+
+    we got
+
+    \[
+\varliminf_{n \to \infty}\int_{\Omega} h_n = \lim_{n \to \infty}\int_{\Omega} h_n
+    \]
+
+    thus we got
+
+    \[
+ \int_{\Omega} \varliminf_{n \to \infty} f_n  =       \int_{\Omega} \lim_{n \to \infty}h_n = \lim_{n \to \infty} \int_{\Omega} h_n \le \varliminf_{n \to \infty} \int_{\Omega} f_n
+    \]
+\end{proof}
+
+\begin{thm}
+    Let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let $f: \Omega \to [0, \infty]$ be a  non-negative measurable function such that $\int_{\Omega}f$ is finite. Then $f$ is finite almost everywhere (i.e., the set $\{x \in \Omega : f(x) = \infty\}$ has measure zero).
+\end{thm}
+
+\begin{proof}
+    assume 
+    
+    \begin{align*}
+        E &= \{x \in \Omega : f(x) = \infty\} \\
+        m(E) & > 0 \\
+    \end{align*}
+
+    and we define $s_n$ as:
+
+    \begin{align*}
+        s_n(x) = 0 & \quad x \notin E \\
+        s_n(x) = n & \quad x \in E \\
+    \end{align*}
+
+    thus $s_n$ minorizes $f$, and 
+    
+    \[
+     n \cdot m(E) \le \int_{\Omega}s_n \le \int_{\Omega}f 
+    \]
+
+    take $n \to \infty$, we got $\int_{\Omega}f = \infty$
+\end{proof}
+
+\begin{thm}[Borel–Cantelli lemma]
+    let $\Omega_1,\Omega_2, ...$ be measurable subsets of $\mathbb{R}^n$ such that 
+
+    \[
+        \sum_{n=1}^{\infty}m(\Omega_n) < \infty
+    \]
+
+    Then the set
+
+    \[
+        E = \{ x \in \mathbb{R}^n: x \in \Omega_n \text{ for infinitely many } n \}
+    \]
+
+    is a set of measure zero.
+\end{thm}
+
+\begin{proof}
+    define 
+
+    \[
+        \Omega = \bigcup_{n=1}^{\infty}\Omega_n
+    \]
+
+    and define $f: \Omega \to [0, \infty]$ as
+
+    \[
+        f(x) = \sum_{n=1}^{\infty}\chi_{\Omega_n}
+    \]
+
+    thus 
+
+    \[
+        E = \{x \in \Omega: f(x) = \infty \}
+    \]
+
+    by \autoref{thm:lebesgue-MCT-17b9b7af-2c23-4932-abc4-509e9a8e199f}
+
+    \[
+        \int_{\Omega}\sum_{n=1}^{\infty}\chi_{\Omega_n} = \sum_{n=1}^{\infty}\int_{\Omega}\chi_{\Omega_n} = \sum_{n=1}^{\infty} m(\Omega_n) < \infty
+    \]
+
+    Thus $E$ has measure of zero, otherwise $\int_{\Omega} f = \infty$
+\end{proof}
+
+\subsection{Integration of Absolutely Integrable Functions}
+
+\begin{definition}[Absolutely integrable functions]
+    Let $\Omega$ be a measurable subset of $\mathbb{R}^n$. 
+    A measurable function $f: \Omega \to \mathbb{R}^*$ is said  
+    to be absolutely integrable if the  integral
+
+    \[
+        \int_{\Omega} |f| 
+    \]
+
+    is finite
+\end{definition}
+
+\begin{definition}[Lebesgue integral]
+    let $f: \Omega \to \mathbb{R}^*$ be an absolutely integrable  function. We define the Lebesgue integral
+    $\int_{\Omega}f $ as
+
+    \[
+        \int_{\Omega}f = \int_{\Omega}f^+ - \int_{\Omega}f^-
+    \]
+
+    where
+
+    \begin{align*}
+        f^+ &= \frac{|f| + f}{2} \\
+        f^- &= \frac{|f| - f}{2} \\
+    \end{align*}
+
+    Note that
+
+    \[
+\int_{\Omega}f^+ \le \int_{\Omega}|f| < \infty
+    \]
+
+    thus we are never encountering the indeterminate form $\infty - \infty$
+\end{definition}
+
+\begin{thm}
+    let $\Omega$ be a measurable set, and let $f \Omega \to \mathbb{R}^*$ and $g: \Omega \to \mathbb{R}^*$ be absolutely integrable functions.
+
+    Then
+
+    \begin{enumerate}
+        \item For any real number $c$ (positive, zero, or negative), we have that $cf$ is absolutely  integrable and
+
+        \[
+            \int_{\Omega} cf = c\int_{\Omega} f
+        \]
+
+        \item If $\Omega_1 \cup \Omega_2 = \Omega$ and $\Omega_1 \cap \Omega_2 = \emptyset$.
+        
+        Then $f$ is absolutely integrable on $\Omega$ iff $f$ is absolutely on $\Omega_1$ and $\Omega_2$ and
+
+        \[
+            \int_{\Omega_1}f +\int_{\Omega_2}f = \int_{\Omega}f
+        \]
+
+        \item $f+g$ is absolutely integrable and
+
+        \[
+            \int_{\Omega}(f+g) = \int_{\Omega}f +  \int_{\Omega}g
+        \]
+
+        \item If $f \le g$ for all $x \in \Omega$, then $\int_{\Omega}f \le \int_{\Omega} g$
+
+
+        \item If $f = g$ a.e. $x \in \Omega$, then $\int_{\Omega}f = \int_{\Omega} g$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    proofs:
+    
+    \begin{enumerate}
+        \item consider:
+        
+        \[
+            \int_{\Omega}|cf| = \int_{\Omega}|c||f| = |c|\int_{\Omega}|f| < \infty
+        \]
+
+        so $cf$ is absolutely integrable.
+
+        let's assume $c$ is non-negative
+
+        \begin{align*}
+            \int_{\Omega}(cf)^+ &= \int_{\Omega}cf^+ = c\int_{\Omega}f^+ \\
+            \int_{\Omega}(cf)^- &= \int_{\Omega}cf^- = c\int_{\Omega}f^- \\
+\int_{\Omega}(cf)^+ - \int_{\Omega}(cf)^- &= c\int_{\Omega}f^+ - c\int_{\Omega}f^- \\
+&= c\left(\int_{\Omega}f^+ - \int_{\Omega}f^- \right) = c\int_{\Omega} f
+        \end{align*}
+
+        when $c$ is negative, we just need some modification like $(cf)^+ = |c|f^-$ and $(cf)^- = |c| f^+$
+
+        \item if $f$ is absolutely integrable on $\Omega$. Then 
+
+        \[
+           \int_{\Omega_1}|f| + \int_{\Omega_2}|f|  = \int_{\Omega}|f| 
+        \]
+
+        which show $f$ is absolutely integrable on $\Omega$ iff it is absolutely integrable on both $\Omega_1, \Omega_2$
+
+        and
+
+        \begin{align*}
+            \int_{\Omega}f  &= \int_{\Omega}f^+ - \int_{\Omega}f^- \\
+            &= \int_{\Omega_1}f^+ + \int_{\Omega_2}f^+ - (\int_{\Omega_1}f^- + \int_{\Omega_2}f^-) \\
+            &= \int_{\Omega_1} f + \int_{\Omega_2} f
+        \end{align*}
+
+        \item for $f+g$ 
+
+        it is easily to prove $f+g$ is absolutely integrable by triangle inequality.
+
+        let's define 
+
+        \begin{align*}
+            E_1 &= \{ x: |f(x)| < \infty\} \\
+            E_2 &= \{ x: |g(x)| < \infty\} \\
+        \end{align*}
+
+        because $m(\Omega \setminus E_1) = 0$ and $m(\Omega \setminus E_2) = 0$, we have
+
+        $m(\Omega \setminus(E_1 \cap E_2)) = 0$, thus we can discuss on integration over $E = E_1 \cap E_2$, 
+        so as avoid indeterminate $\infty - \infty$
+
+
+        define
+
+        \begin{align*}
+            h &= f+ g\\
+        \end{align*}
+
+        then
+
+        \begin{align*}
+            h &= h^+ - h^- = f^+ + g^+ - (f^- + g^-) \\
+            h^+ + f^- + g^- &= f^+ + g^+ + h^- 
+        \end{align*}
+
+        and integration at both side
+
+        \[
+            \int_{E}h^+ + \int_{E}f^- + \int_{E}g^- = \int_{E}f^+ + \int_{E}g^+ +\int_{E}h^-
+        \]
+
+        thus
+
+        \begin{align*}
+\int_{E}h^+ - \int_{E}h^- &= \int_{E}f^+ + \int_{E}g^+- \int_{E}f^- - \int_{E}g^- \\
+&= \int_{E}f^+ - \int_{E}f^- + \int_{E}g^+ - \int_{E}g^- \\
+&= \int_{E}f + \int_{E}g
+        \end{align*}
+
+        now, we can replace $E$ with $\Omega$ by(2).
+        
+        \item If $f \le g$ for all $x \in \Omega$, then $\int_{\Omega}f \le \int_{\Omega} g$
+
+        \[
+            \int_{\Omega}f  - \int_{\Omega}g = \int_{\Omega}(f -g) \ge 0
+        \]
+
+
+        \item If $f = g$ a.e. $x \in \Omega$, then $\int_{\Omega}f = \int_{\Omega} g$
+
+        define 
+
+        \[
+            \Omega_1 = \{ x \in \Omega: f(x) \ne g(x)\}
+        \]
+
+        Then
+
+        \begin{align*}
+            \int_{\Omega}f &= \int_{\Omega_1}f + \int_{\Omega \setminus \Omega_1}f = \int_{\Omega \setminus \Omega_1}g \\
+            \int_{\Omega}g &= \int_{\Omega_1}g + \int_{\Omega \setminus \Omega_1}g = \int_{\Omega \setminus \Omega_1}g
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}
+    \label{thm:lebesgue-DCT-744c7182-13fa-4e6c-910a-a68f67181b29}
+    let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let $f_1,f_2,...$ be a sequence of
+    measurable functions from $\Omega$ to $\mathbb{R}^*$ which converge pointwise. Suppose 
+    also that there is an absolutely integrable function $F: \Omega \to [0, \infty]$ such that
+    $|f_n(x)| \le F(x),\: \forall x \in \Omega$ and all $n=1,2,3,...$. Then
+
+    \[
+        \int_{\Omega}\lim_{n \to \infty} f_n = \lim_{n \to \infty} \int_{\Omega} f_n
+    \]
+
+\end{thm}
+
+\begin{proof}
+    since $F$ is absolutely measurable, the set
+
+    \[
+        E = \{ x \in \Omega: |F(x)| = \infty \}
+    \]
+
+    has measure of zero, so we can discuss on $\Omega' = \Omega \setminus E$, without loss of generality, 
+    we will use $\Omega$ as $\Omega'$, since $\Omega$ and $\Omega'$ are interchangeable when used for integration.
+
+    let's define $f: \Omega \to \mathbb{R}^*$
+
+    \[
+        f(x) = \lim_{n \to \infty}f_n(x)
+    \]
+
+    by $f_n$ is measurable and $f_n \to f$, so $f$ is also measurable. consider
+
+    \[
+        \{x: f(x) < a \} = \bigcup_{m=1}^{\infty} \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{\infty} \{x: f_k(x) \le a - \frac{1}{m}\}
+    \]
+
+    consider $F + f_n$ are non-negative and converge pointwise to $F+f$, will not increasing, we can apply 
+
+    \autoref{thm:fatous-lemma}, by $F$ and $f$ are both absolutely integrable, so that
+
+    \begin{align*}
+        \int_{\Omega} f + F &\le \varliminf_{n \to \infty} \int_{\Omega} f_n + F \\
+        & \le \int_{\Omega}F + \varliminf_{n \to \infty} \int_{\Omega} f_n
+    \end{align*}
+
+    after apply cancellation law, we got
+
+    \[
+        \int_{\Omega}f \le \varliminf_{n \to \infty} \int_{\Omega} f_n
+    \]
+
+    and $F - f_n$ is also non negative, thus we got
+
+    \[
+        \int_{\Omega} F - f \le \varliminf_{n \to \infty}\int_{\Omega} F - f_n
+    \]
+
+    after apply cancellation law, we got
+
+    \[
+        \varlimsup_{n \to \infty} \int_{\Omega} f_n \le \int_{\Omega}f
+    \]
+
+    after all, we got
+
+    \[
+ \int_{\Omega}f \le \varliminf_{n \to \infty} \int_{\Omega} f_n \le       \varlimsup_{n \to \infty} \int_{\Omega} f_n \le \int_{\Omega}f 
+    \]
+
+    so $\int_{\Omega} f_n$ converges and
+
+    \[
+\lim_{n \to \infty} \int_{\Omega} f_n = \int_{\Omega} f
+    \]
+
+\end{proof}
+
+\begin{definition}[Upper and lower Lebesgue integral]
+    Let $\Omega$ be a measurable subset of $\mathbb{R}^n$, and let $f: \Omega \to \mathbb{R}$ 
+    be a function(not necessarily measurable). We define the  upper Lebesgue integral as
+
+    \[
+        \overline{\int_{\Omega}} f = \inf \{ \int_{\Omega}g : g \text{ is absolutely integrable function, g majorizes f}\}
+    \]
+
+    and
+
+
+    \[
+        \underline{\int_{\Omega}} f = \sup \{ \int_{\Omega}g : g \text{ is absolutely integrable function, g minorizes f}\}
+    \]
+\end{definition}
+
+\begin{thm}
+    let $g,h : \Omega \to \mathbb{R}^*$ be absolutely integrable, and $g \le f \le h$,
+
+    Then $f$ is also absolutely integrable
+\end{thm}
+
+\begin{proof}
+    consider that 
+
+    \begin{align*}
+        |f| &= |f - g + g| \\
+        & \le f-g + |g| \le h-g + |g| \\
+        & \le h + |g| \le |h| + |g|
+    \end{align*}
+
+    thus we have
+
+    \[
+        |f| \le |g| + |h|
+    \]
+
+    and
+
+    \[
+        \int_{\Omega}|f| \le \int_{\Omega}|g| + |h| = \int_{\Omega}|g| + \int_{\Omega}|h| < \infty
+    \]
+\end{proof}
+
+\begin{thm}
+    let $f,g,h: \Omega \to \mathbb{R}^*$, if $g \le f \le h$ and $g = h$ a.e. Then $f = g = h$ a.e.
+\end{thm}
+
+\begin{proof}
+
+    when $g(x) < f(x)$, by $g(x) < f(x) \le h(x)$, thus $g(x) < h(x)$, so
+
+    \begin{align*}
+        m(\{x: g(x) \ne f(x)\}) & \le m(\{x: g(x) \ne f(x)\}) = 0
+    \end{align*}
+
+    similarly for $f(x) < h(x)$
+\end{proof}
+
+\begin{thm}
+    Let be a measurable subset of $\mathbb{R}^n$, and let $f: \Omega \to \mathbb{R}$ 
+    be a function  (not necessarily measurable). Let $A$ be a real number, and suppose
+
+    \[
+        \overline{\int_{\Omega}}f =\underline{\int_{\Omega}}f = A
+    \]
+    
+    Then f is absolutely integrable, and 
+
+    \[
+        \int_{\Omega}f  = A
+    \]
+\end{thm}
+
+\begin{proof}
+    let $f^+_n, f^-_n$ be absolutely integrable, while $f_n^+$ majorizes $f$, $f^-_n$ minorizes $f$, so as
+
+    \begin{align*}
+        \lim_{n \to \infty}\int_{\Omega} f^+_n &= A  \\
+        \lim_{n \to \infty}\int_{\Omega} f^-_n &= A  \\
+    \end{align*}
+
+    and define
+
+    \begin{align*}
+        F^+(x) = \inf_{n} f^+_n(x) \\
+        F^-(x) = \sup_{n} f^-_n(x) \\
+    \end{align*}
+
+    thus $F^+$ is absolutely integrable by $f^-_1 \le F^+ \le f^+_1$, similarly for $F^-$. They are
+    also measurable, since $\inf$ and $\sup$ operator on function sequence preserve measurable.
+
+    since they are both absolutely integrable, we can discuss on their integration. By $f^-_n \le F^- \le F^+ \le f_n$. We have
+
+    \[
+  \int_{\Omega}f^-_n \le \int_{\Omega} F^- \le \int_{\Omega}F^+ \le \int_{\Omega}f^+_n
+    \]
+
+    take $n \to \infty$, we have
+
+    \[
+\int_{\Omega} F^- = \int_{\Omega}F^+
+    \]
+
+    thus 
+
+    \[
+        \int_{\Omega}F^+ - F^- = 0
+    \]
+
+    since $F^+ - F^- \ge 0$, we must have $F^+ = F^-$ a.e. By $F^- \le f \le F^+$, we have $f = F^- = F^+$ a.e.
+
+    Thus $f$ is absolutely integrable and
+
+    \[
+        \int_{\Omega}f = A
+    \]
+\end{proof}
+
+
+
+\subsection{Comparison with the Riemann Integral}
+
+\begin{thm}
+    let $[a,b] \subseteq \mathbb{R}$ be a bounded interval, and $f: [a,b] \to \mathbb{R}$
+    be a riemann integrable function. Then $f$ is also absolutely integrable,
+    and
+
+    \[
+        \int_a^b f \mathrm{d}m = \int_a^b f \mathrm{d}x
+    \]
+
+    we use $\mathrm{d}m$ to denote lebesgue integral, and $\mathrm{d}x$ denote riemann integral here,
+\end{thm}
+
+\begin{proof}
+    let's define
+
+    \[
+        \int_a^b f \mathrm{d}x = A
+    \]
+
+    since $f$ is riemann integrable. There exists a partition sequence $P_n$, such that
+
+    \begin{align*}
+        \lim_{n \to \infty}U(P_n, f)  &= A \\
+        \lim_{n \to \infty} L(P_n, f) & =  A \\
+    \end{align*}
+
+    where $U(P_n, f)$ and $L(P_n, f)$ represents riemann upper sum and riemann lower sum here.
+
+    Since $f$ is riemann integrable, and thus bounded, assume $|f| \le M$
+
+    Now, we can construction simple function $s_n$ majorizes $f$ by $P_n$:
+
+    \[
+        s_n = \sum_{[x_{i-1},x_i] \in P_n} \left(\sup_{[x_{i-1}, x_{i}]} f \right) \chi_{[x_{i-1}, x_i)}
+    \]
+
+    we don't need to define when $x = b$, since it will not affect integration of $s_n$
+
+    by $|f| \le M$, we have $|s_n| \le M$, so $s_n$ is 
+    absolutely measurable.  And
+
+    \[
+        \int_{a}^b s_n \mathrm{d}m = U(P_n, f)
+    \]
+
+    Similarly, we can define $t_n$ as
+
+
+    \[
+        t_n = \sum_{[x_{i-1},x_i] \in P_n} \left(\inf_{[x_{i-1}, x_{i}]} f \right) \chi_{[x_{i-1}, x_i)} 
+    \]
+
+    Thus
+
+
+    \[
+        \int_{a}^b t_n \mathrm{d}m = L(P_n, f)
+    \]
+
+    Now we have two absolutely integrable function sequence, which majorizes and minorizes $f$ separately.
+    And both of their integration converges to same real number $A$. So $f$ should also 
+    be absolutely integrable, and its integration is $A$.
+
+\end{proof}
+
+\subsection{Fubini's Theorem}
+
+\begin{thm}
+    Let $f: \mathbb{R}^2 \to \mathbb{R}$ be an absolutely integrable function.
+    Then there exists absolutely integrable functions $F: \mathbb{R} \to \mathbb{R}$
+    and $G: \mathbb{R} \to \mathbb{R}$ such that for a.e. $x$, $f(x,y)$ is absolutely
+    integrable in $y$ with
+
+    \[
+        F(x) = \int_{\mathbb{R}} f(x,y) \mathrm{d}y
+    \]
+
+    and for a.e. $y$, $f(x,y)$ is absolutely integrable in $x$ with
+
+
+    \[
+        G(x) = \int_{\mathbb{R}} f(x,y) \mathrm{d}x
+    \]
+
+    Finally, we have
+
+    \[
+        \int_{\mathbb{R}} F(x) \mathrm{d}x =\int_{\mathbb{R}} G(y) \mathrm{d}y = \int_{\mathbb{R}^2} f
+    \]
+\end{thm}
+
+\begin{proof}
+    Steps:
+
+    \begin{enumerate}
+        \item when $f(x,y)$ is indicator function on $[-N, N] \times [-N, N]$
+
+
+    \end{enumerate}
+\end{proof}

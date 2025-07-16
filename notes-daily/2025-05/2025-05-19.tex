@@ -1,0 +1,302 @@
+\subsubsection{linear mapping}
+
+\begin{exercise}
+    let $V$ be a linear space on field $F$, and $\phi, \psi: V \to V$ be linear mapping. 
+
+    prove:
+
+    \begin{enumerate}
+        \item $\phi \circ \psi$ is also a linear mapping
+
+        \item $\phi_1 \circ \phi_2 \circ \phi_3 = \phi_1 \circ (\phi_2 \circ \phi_3)$
+
+        \item $\exists e \in L(V),\: \forall \phi \in L(V),\: e \circ \phi = \phi \circ e = \phi$
+
+        \item $\phi_1 \circ( \phi_2 + \phi_3) = \phi_1 \circ \phi_2 + \phi_1 \circ \phi_3$
+        \item $( \phi_2 + \phi_3) \circ \phi_1 = \phi_2 \circ \phi_1 + \phi_3 \circ \phi_1$
+
+        \item $(k \phi) \circ \psi = k(\phi \circ \psi) = \phi \circ(k \psi)$
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    obviously
+\end{proof}
+
+\begin{exercise}
+    let $V, U$ is a linear space on field $F$, and $V$ has a basis $e_1,e_2,..,e_n$, and $\phi, \psi: V \to U$
+    is linear mapping, prove $\phi = \psi $ iff for every $1 \le k \le n$,
+    $\phi(e_k) = \psi(e_k)$
+\end{exercise}
+
+\begin{proof}
+    consider any $\alpha \in V$, we have $\alpha = x_1e_1 + .. + x_ne_n$, then we got
+
+    \begin{align*}
+        \phi(\alpha) &= \phi(x_1e_1 + .. + x_ne_n) = x_1\phi(e_1) + .. + x_n \phi(e_n) \\
+        \psi(\alpha) &= \psi(x_1e_1 + .. + x_ne_n) = x_1\psi(e_1) + .. + x_n \psi(e_n) \\
+    \end{align*}
+
+    then we got $\phi = \psi$
+\end{proof}
+
+\begin{exercise}
+    let $V, U$ is a linear space on field $F$, and $V$ has a basis $e_1,e_2,..,e_n$, pick
+    $n$ vectors in $U$: $\beta_1, \beta_2, .., \beta_n$
+
+    then there exists a unique linear mapping $\phi$ meets, $\phi(e_i) = \beta_i,\: \forall i \le n$
+\end{exercise}
+
+\begin{proof}
+    define: 
+
+    \[
+        \phi(x_1e_1 + .. + x_n e_n) = x_1\beta_1 + .. + x_n\beta_n
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $\phi: V\to U$ is a linear mapping and $U, V$ is linear space on field $F$, where $V$ has  basis $e_1,e_2,..,e_n$ 
+    and $U$ has basis $f_1,f_2,..,f_m$, please represents $\phi(\alpha)$ as linear combination of $f_1,f_2,..,f_m$
+\end{exercise}
+
+\begin{proof}
+    assume we have:
+
+    \begin{align*}
+        \phi(e_1) &= x_{11}f_1 + .. + x_{1m}f_m \\
+        \phi(e_2) &= x_{21}f_1 + .. + x_{2m}f_m \\
+        .. & .. \\
+        \phi(e_n) &= x_{n1}f_1 + .. + x_{nm}f_m \\
+    \end{align*}
+
+    let $\alpha = y_1e_1 + .. + y_ne_n$, then we got:
+
+    \begin{align*}
+        \phi(\alpha) &= y_1\phi(e_1) + .. + y_n \phi(e_n) \\
+        &= \begin{bmatrix}
+            f_1 & f_2 & .. & f_m
+        \end{bmatrix} \begin{bmatrix}
+            x_{11} & .. & x_{n1} \\
+            x_{12} & .. & x_{n2}\\
+            .. & .. &  .. \\
+            x_{1m} & .. & x_{nm}\\
+        \end{bmatrix} \begin{bmatrix}
+            y_1 \\
+            y_2 \\
+            .. \\
+            y_n
+        \end{bmatrix}
+    \end{align*}
+
+
+    after all, if we have basis of $U,V$, we got an bijective mapping from $\phi: V \to U$ and $F_{m \times n}$
+\end{proof}
+
+\begin{exercise}
+    let $e_1,e_2,..,e_n$ and $f_1,f_2,..,f_n$ be basis of $V$, try find transition matrix from $e_1,e_2,..,e_n \to f_1,f_2,..,f_n$
+\end{exercise}
+
+\begin{proof}
+    let 
+
+    \begin{align*}
+        f_1 &= x_{11}e_1 + x_{12}e_2 + .. + x_{1n}e_n \\
+        f_2 &= x_{21}e_1 + x_{22}e_2 + .. + x_{2n}e_n \\
+        .. & .. \\
+        f_n &= x_{n1}e_1 + x_{n2}e_2 + .. + x_{nn}e_n \\
+    \end{align*}
+
+    which is 
+
+    \[
+        [f_1, f_2, .., f_n]^T = X[e_1,e_2,..,e_n]^T
+    \]
+
+    let 
+
+    \begin{align*}
+        \eta_e(x_1e_1 + x_2e_2 + .. + x_ne_n) &= [x_1,x_2,..,x_n]^T \\
+        \eta_f(x_1f_1 + x_2f_2 + .. + x_nf_n) &= [x_1,x_2,..,x_n]^T \\
+    \end{align*}
+
+    then we got:
+
+    \begin{align*}
+        \eta_e(f_1) &= (X_{[1,:]})^T \\
+        \eta_e(f_2) &= (X_{[2,:]})^T \\
+            .. & .. \\
+        \eta_e(f_n) &= (X_{[n,:]})^T \\
+    \end{align*}
+
+    if 
+
+    \[
+        \eta_f(\alpha) = [y_1,y_2,..,y_n]^T
+    \]
+
+    then
+
+    \begin{align*}
+        \eta_e(\alpha) &= \eta_e(y_1f_1+..+y_nf_n) \\
+        &= y_1(X_{[1,:]})^T + .. + y_n(X_{[n,:]})^T \\
+        &= X^T \eta_f(\alpha)
+    \end{align*}
+
+    so we got
+
+    \[
+        \eta_e = X^T \eta_f
+    \]
+
+    and
+
+    \[
+        \eta_f = (X^T)^{-1}\eta_e
+    \]
+
+    so $X^T$ is transition matrix
+\end{proof}
+
+\begin{exercise}
+    let $T: L(V, U) \to F_{m \times n}, \eta_1: V \to F^{n}, \eta_2: U \to F^m$,
+    prove $T$ is a linear mapping, and for any $\phi \in L(V,U)$, define $\phi_A: F^n \to F^m$
+
+    \[
+        \phi_A(x) = Ax,\: A = T(\phi)
+    \]
+
+    then we have:
+
+    \[
+        \eta_2 \circ \phi = \phi_A \circ \eta_1
+    \]
+\end{exercise}
+
+\begin{proof}
+    consider that:
+
+    \[
+        \phi(ke_1) = k\phi(e_1) = kx_{11}f_1 + .. + kx_{1m}f_m
+    \]
+
+    so we have $T(k\phi) = kT(\phi)$
+
+    and
+
+    \begin{align*}
+        \phi(e_1) &= x_{11}f_1 + .. + x_{1m}f_m \\
+        \psi(e_1) &= y_{11}f_1 + .. + y_{1m}f_m \\
+        (\phi+\psi)(e_1) &= (x_{11} + y_{11})f_1 + .. + (x_{1m} + y_{1m})f_m 
+    \end{align*}
+
+    so we have $T(\phi + \psi) = T(\phi) + T(\psi)$
+
+    the last one we had proved
+\end{proof}
+
+\begin{exercise}
+    let $W$ also be a linear space on $F$, and has basis $w_1,w_2,..,w_k$, and $\psi: U \to W$
+    is a linear mapping, prove that:
+    $T(\psi \circ \phi) = T(\psi) T(\phi)$
+\end{exercise}
+
+\begin{proof}
+    assume that:
+    
+    \begin{align*}
+        \phi(e_1) &= x_{11}f_1 + .. + x_{1m}f_m \\
+        \phi(e_2) &= x_{21}f_1 + .. + x_{2m}f_m \\
+        .. & .. \\
+        \phi(e_n) &= x_{n1}f_1 + .. + x_{nm}f_m \\
+        X &= \begin{bmatrix}
+            x_{11} & .. & x_{n1} \\
+            x_{12} & .. & x_{n2} \\
+            .. & .. & ..  \\
+            x_{1m} & .. & x_{nm} \\
+        \end{bmatrix} \\
+        \phi(\alpha) &= \begin{bmatrix}
+            f_1 & f_2 & .. & f_m
+        \end{bmatrix} X \alpha
+    \end{align*}
+
+    and
+
+
+    \begin{align*}
+        \psi(f_1) &= y_{11}g_1 + .. + y_{1k}g_k \\
+        \psi(f_2) &= y_{21}g_1 + .. + y_{2k}g_k \\
+        .. & .. \\
+        \psi(f_m) &= y_{m1}g_1 + .. + y_{mk}g_k \\
+        Y &= \begin{bmatrix}
+            y_{11} & .. & y_{m1} \\
+            y_{12} & .. & y_{m2} \\
+            .. & .. & ..  \\
+            y_{1k} & .. & y_{mk} \\
+        \end{bmatrix} \\
+        \psi(\beta) &= \begin{bmatrix}
+            g_1 & g_2 & .. & g_k
+        \end{bmatrix} Y \beta
+    \end{align*}
+
+    then we got:
+
+    \begin{align*}
+        \psi \circ \phi(\alpha) = \begin{bmatrix}
+            g_1 & g_2 & .. & g_k
+        \end{bmatrix} Y X \alpha
+    \end{align*}
+
+    thus we have
+
+    \[
+        T(\psi \circ \phi) = YX = T(\psi) T(\phi)
+    \]
+
+\end{proof}
+
+\begin{exercise}
+    let $\phi \in L(V)$ is a linear mapping and $V$ has two basis $e_1, e_2, .., e_n$ and $f_1,f_2,..,f_n$
+    if $e_1,e_2,..,e_n \to f_1,f_2,..,f_n$ has transition matrix $P$, and $\phi$ mapped to matrix $A$ with basis $e_1,e_2,..,e_n$
+    and $\phi$ mapped to matrix $B$ at $f_1,f_2,..,f_n$, prove:
+    \[
+        B = P^{-1}AP
+    \]
+\end{exercise}
+
+\begin{proof}
+   let $\eta_1: V \to F^n, \eta_2: V \to F^n$
+
+   \begin{align*}
+    \eta_1(x_1e_1 + x_2e_2 + .. + x_ne_n) &= (x_1,x_2,..,x_n) \\
+    \eta_2(x_1f_1 + x_2f_2 + .. + x_nf_n) &= (x_1,x_2,..,x_n) \\
+   \end{align*}
+
+   and
+
+   \begin{align*}
+    \phi &=  \eta_1^{-1} \circ A \circ \eta_1 \\
+    \phi &= \eta_2^{-1} \circ B \circ \eta_2 \\
+    \eta_2 & = P^{-1} \circ \eta_1 
+   \end{align*}
+
+   then we got:
+
+   \begin{align*}
+    \phi &= \eta_2^{-1} \circ B \circ \eta_2 =(P^{-1} \eta_1)^{-1} B \circ (P^{-1} \eta_ 1) \\
+    &= \eta_1^{-1} \circ P \circ B \circ P^{-1} \circ \eta_1 \\
+    &= \eta_1^{-1} \circ (P B  P^{-1}) \circ \eta_1
+   \end{align*}
+
+   so we got
+
+   \[
+    PBP^{-1} = A
+   \]
+
+   and
+
+   \[
+    P^{-1}AP = B
+   \]
+\end{proof}

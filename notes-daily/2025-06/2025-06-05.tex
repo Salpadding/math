@@ -1,0 +1,152 @@
+\subsubsection{Algebra}
+
+\begin{exercise}
+    let polynomial $f(x_1,x_2,..,x_n) \ne 0$ and $g(x_1,x_2,..,x_n) \ne 0$, prove: 
+    
+
+    \[
+    f(x_1,x_2,..,x_n)g(x_1,x_2,..,x_n) \ne 0
+    \]
+\end{exercise}
+
+\begin{proof}
+    we define order $\le$ between $x_1^{s_1}x_2^{s_2}..x_n^{s_n}$ and $x_1^{t_1}x_2^{t_2}..x_n^{t_n}$ as
+    dict order of $(s_1,s_2,..,s_n)$ and $(t_1,t_2,..,t_n)$
+
+
+
+
+    let $cx_1^{s_1}x_2^{s_2}..x_n^{s_n}$ be max item of $f(x_1,x_2,..,x_n)$
+    and $dx_1^{t_1}x_2^{t_2}..x_n^{t_n}$ be max item of $g(x_1,x_2,..,x_n)$
+
+    then $cdx_1^{s_1+t_1}x_2^{s_2+t_2}..x_n^{s_n+t_n}$ become max item of $f g$, since $cd \ne 0$, we must have $fg \ne 0$
+\end{proof}
+
+\begin{exercise}
+    let $f(x_1,x_2,..,x_n) \ne 0$, then exists $c_1,c_2,..,c_n$ so that $f(c_1,c_2,..,c_n) \ne 0$
+\end{exercise}
+
+\begin{proof}
+    we use induction on $n$, when $n=1$, it is trivial. when $n=k+1$, 
+
+    $f(x_1,x_2,..,x_k,x_{k+1})$ could be expressed as polynomial of $x_{k+1}$
+
+    \[
+        f(x_1,x_2,..,x_k,x_{k+1}) = b_0 + b_1x_{k+1} + .. + b_mx_{k+1}^m
+    \]
+
+    and $b_0, b_1,..,b_m$ is polynomial of $(x_1,x_2,..,x_k)$, we can pick $(c_1,c_2,..,c_k)$
+    so that $b_m \ne 0$, and select $x_{k+1} = c_{k+1}$ so that polynomial of $x_{k+1}$ not be $0$
+\end{proof}
+
+\begin{exercise}
+    let $f(x_1,x_2,..,x_n)$ and $g(x_1,x_2,..,x_n)$ be polynomial, if for every $(x_1,x_2,..,x_n)$ we have
+
+    \[
+        f(x_1,x_2,..,x_n) = g(x_1,x_2,..,x_n)
+    \]
+
+    then $f(x_1,x_2,..,x_n) = g(x_1,x_2,..,x_n)$
+\end{exercise}
+
+\begin{proof}
+    let $h(x_1,x_2,..,x_n) = f(x_1,x_2,..,x_n) - g(x_1,x_2,..,x_n)$ and assume $h(x_1,x_2,..,x_n) \ne 0$, then there exists $(c_1,c_2,..,c_n)$ so that $h(c_1,c_2,..,c_n) = f(c_1,c_2,..,c_n)- g(c_1,c_2,..,c_n) \ne 0$
+
+    which is contradict.
+\end{proof}
+
+\begin{exercise}
+    let $f(x_1,x_2,..,x_n)$ be a symmetric polynomial, then $f(x_1,x_2,..,x_n)$ could be expressed as $g(\sigma_1, \sigma_2,..,\sigma_n)$
+\end{exercise}
+
+\begin{proof}
+    let max item of $f(x_1,x_2,..,x_n)$ be $x_1^{l_1}x_2^{l_2}..x_n^{l_n}$, consider that
+
+    \begin{align*}
+        \sigma_1^{l_1-l_2} &= (x_1 + x_2 + .. +x_n)^{l_1-l_2} \\
+        \sigma_2^{l_2-l_3} &= (x_1x_2 + x_1x_3 + .. + x_1x_n + x_2x_3 + .. + x_2x_n + .. + x_{n-1}x_n)^{l_2-l_3} \\
+        \sigma_3^{l_3-l_4} &= (x_1x_2x_3 + x_1x_2x_4 +..+ x_1x_{n-1}x_n  + .. + x_2x_3x_4 + .. + x_2x_{n-1}x_n + .. + x_{n-2}x_{n-1}x_n)^{l_3 - l_4} \\
+        .. & .. \\
+        \sigma_n^{l_n} &= x_1^{l_n}x_2^{l_n} .. x_n^{l_n}
+    \end{align*}
+
+    and the first item of 
+
+    \[
+        \sigma_1^{l_1-l_2}\sigma_2^{l_2-l_3}\sigma_3^{l_3-l_4} .. \sigma_n^{l_n}
+    \]
+
+    is
+
+    \[
+        x_1^{l_1-l_2}(x_1x_2)^{l_2-l_3}(x_1x_2x_3)^{l_3-l_4}..(x_1x_2..x_n)^{l_n} = x_1^{l_1}x_2^{l_2}..x_n^{l_n}
+    \]
+
+    let 
+
+    \[
+        \phi_1 =\sigma_1^{l_1-l_2}\sigma_2^{l_2-l_3}\sigma_3^{l_3-l_4} .. \sigma_n^{l_n}
+    \]
+
+    and $f_1 = f - \phi_1$
+
+
+    unique:
+
+    we will prove if
+
+    $f(x_1,x_2,..,x_n) = g(\sigma_1, \sigma_2,..,\sigma_n)$ and $f(x_1,x_2,..,x_n) = 0$ then $g(y_1,y_2,..,y_n) = 0$
+
+    assume $g(y_1,y_2,..,y_n) \ne 0$, then there exists $c_1,c_2,..,c_n$ so that $g(c_1,c_2,..,c_n) \ne 0$, then we construct a polynomial $h(x)$
+
+    \[
+        h(x) = x^n + (-1)c_1x^{n-1} + .. + (-1)^{n-1}c_{n-1}x + (-1)^n c_n
+    \]
+
+    and $h(x)$ has root $\alpha_1,\alpha_2,..,\alpha_n$, by vieta's theorem we have
+
+    \begin{align*}
+        c_n &=  \alpha_1\alpha_2..\alpha_n = \sigma_n(\alpha_1,\alpha_2,..,\alpha_n) \\
+        c_{n-1} &=  \sigma_{n-1}(\alpha_1,\alpha_2,..,\alpha_n) \\
+        .. & .. \\
+        c_{1} &= \sigma_{1}(\alpha_1,\alpha_2,..,\alpha_n)
+    \end{align*}
+
+    so we got
+
+    \[
+        f(\alpha_1,\alpha_2,..,\alpha_n) = g(\sigma_1,\sigma_2,..,\sigma_n) = g(c_1, c_2,..,c_n) = 0
+    \]
+
+    which is contradict with $g(c_1,c_2,..,c_n) \ne 0$, so we must have $g(y_1,y_2,..,y_n) = 0$
+
+\end{proof}
+
+\begin{exercise}
+    we define
+
+    \[
+        s_k = x_1^k + x_2^k + .. +x_n^k
+    \]
+
+    let $f(x) = (x-x_1)(x-x_2)..(x-x_n) = x^n + (-1)\sigma_1x^{n-1} + (-1)^2\sigma_2x^{n-2} + .. +(-1)^n \sigma_n$
+
+    then $x^{k+1}f'(x) = (s_0x^k + s_1x^{k-1} + .. + s_k)f(x) + g(x)$
+\end{exercise}
+
+\begin{proof}
+    we prove $f'(x)$ at first:
+
+    \[
+        f'(x) = \sum_{i=1}^{n}\frac{f(x)}{x-x_i}
+    \]
+
+    we use induction on $n$
+
+    \begin{align*}
+        f'(x) &= \left((x-x_1)(x-x_2)..(x-x_k)(x-x_{k+1}) \right)' \\
+        &= (x-x_1)(x-x_2)..(x-x_k) + (x-x_{k+1})\left((x-x_1)(x-x_2)..(x-x_k) \right)' \\
+        &= (x-x_1)(x-x_2)..(x-x_k) + (x-x_{k+1})\sum_{i=1}^{k}\frac{(x-x_1)(x-x_2)..(x-x_k)}{x-x_i} \\
+        &= \sum_{i=1}^{k}\frac{(x-x_1)(x-x_2)..(x-x_k)(x-x_{k+1})}{x-x_i}
+    \end{align*}
+\end{proof}

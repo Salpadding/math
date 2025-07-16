@@ -1,0 +1,187 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\begin{exercise}
+    if $f_n: E \to \mathbb{R}$ is measurable, and $\forall \delta > 0, \exists E_{\delta} \subseteq E$ such that
+    $m(E_{\delta}) < \delta$ and $f_n: E \setminus E_{\delta} \to \mathbb{R}$ converges to $f$ uniformly.
+
+    Then $f_n \to f$ converges in measure.
+\end{exercise}
+
+\begin{proof}
+    we fix $\epsilon > 0$ at first, by definition of uniformly convergence. There exists $N$ and $\forall n \ge N$, we have
+
+    \[
+        E \setminus E_{\delta} \subseteq \{ x : \lvert f_n(x) - f(x) \rvert < \epsilon \}
+    \]
+
+    so we have
+
+
+    \begin{align*}
+        \{ x : \lvert f_n(x) - f(x) \rvert \ge \epsilon \} & \subseteq E_{\delta} \\
+        m(\{ x : \lvert f_n(x) - f(x) \rvert \ge \epsilon \}) & \le \delta
+    \end{align*}
+
+    let 
+    \[
+        a_n = m(\{ x : \lvert f_n(x) - f(x) \rvert \ge \epsilon \})
+    \]
+
+    then take limsup and liminf we have
+
+    \[
+       0 \le \varliminf_{n \to \infty}a_n \le \varlimsup_{n \to \infty}a_n \le \delta
+    \]
+
+    take $\delta \to 0$, then we have
+
+    \[
+        \lim_{n \to \infty a_n} = 0
+    \]
+
+    so we got
+
+    \[
+        \lim_{n \to \infty} m(\{ x : \lvert f_n(x) - f(x) \rvert \ge \epsilon \}) = 0
+    \]
+\end{proof}
+
+\begin{exercise}
+    $f_n$ is Cauchy in measure, prove: $f_n$ converges to measurable function $f$ in measure
+\end{exercise}
+
+\begin{proof}
+    since $f_n$ is Cauchy in measure,take $i=1,2,3,..$ we have
+
+    \[
+        \lim_{n,m \to \infty} m(\{ \lvert f_n(x) - f_m(x)\rvert \ge \frac{1}{2^i} \}) = 0
+    \]
+
+    for any $i$ exists $N_i$,for all $n,m \ge N_i$ have
+
+    \[
+        m(\{ \lvert f_n(x) - f_m(x)\rvert \ge \frac{1}{2^i} \}) < 2^{-i}
+    \]
+
+    take $k_1 = N_1, k_2 = \max(k_1 + 1, N_2), ..$ we got $f_{k_i}$
+
+    define $E_i$ as:
+
+    \[
+        E_i = \{ \lvert f_{k_i}(x) - f_{k_{i+1}}(x)\rvert \ge \frac{1}{2^i} \}
+    \]
+
+    Since
+
+    \[
+        \sum_{i=1}^{\infty}m(E_i) < \infty
+    \]
+
+    we have
+
+    \[
+        m(S) = m(\bigcap_{j=1}^{\infty}\bigcup_{i=j}^{\infty}E_i) = 0
+    \]
+
+    we will prove: $f_{k_i}$ converges point wise on $E \setminus S$ 
+    
+    for any $x \notin S$ we got $i_0$ so that $\forall i \ge i_0$
+
+    \[
+        \lvert f_{k_{i}}(x) - f_{k_{i+1}}(x) \rvert < 2^{-i}
+    \]
+
+    so
+    \[
+    f_{k_{i_0 + t}}(x) = f_{k_{i_0}}(x) + \sum_{j=1}^{t}\left( f_{k_{i_0+j}}(x) - f_{k_{i_0+j-1}}(x) \right)
+    \]
+
+    converges absolutely, take $t \to \infty$ we got
+
+    \[
+        \lim_{i \to \infty}f_{k_i}(x) = f(x)
+    \]
+
+    let
+
+    \[
+        S_j = \bigcup_{i=j}^{\infty}E_i
+    \]
+
+    next we will show $f_{k_i}$ converges on $E \setminus S_j$ uniformly.
+    
+    take $x \in E \setminus S_j$ we got
+
+    $\forall i \ge j$
+
+    \[
+        \lvert f_{k_i}(x) - f_{k_{i+1}}(x) \rvert < 2^{-i}
+    \]
+
+    so $j$ is not related with $x$ , because $S \subseteq S_j$ so $ E \setminus S_j \subseteq E \setminus S $ 
+
+    so $f_{k_i}$ converges to $f$ on $E \setminus S_j$ uniformly
+
+    we got that
+
+    \[
+        \lim_{j \to \infty}m(S_j) = 0
+    \]
+
+    by our previous proved lemma, $f_{k_i}$ converges to $f$ on $E$ in measure
+
+    by inequality
+
+    \[
+        \lvert f_k(x) - f(x)\rvert \le \lvert f_k(x) - f_{k_i}(x) + f_{k_i}(x) - f(x)\rvert
+    \]
+
+    we got
+
+    \begin{align*}
+        \{x: \lvert f_k(x) - f(x)\rvert \ge \epsilon \} & \subseteq  \bigcap_{i=1}^{\infty} \{x: \lvert f_k(x) - f_{k_{i}}(x)\rvert + \lvert f_{k_{i}}(x) - f(x)\rvert \ge \epsilon \} \\
+        & \subseteq \bigcap_{i=1}^{\infty} \{x: \lvert f_k(x) - f_{k_{i}}(x) \rvert \ge \frac{\epsilon}{2}  \} \cup \{x: \lvert f_{k_i}(x) - f(x) \rvert \ge \frac{\epsilon}{2}  \}
+    \end{align*}
+
+    so $\forall i$
+
+    \[
+        m\left( \{x: \lvert f_k(x) - f(x)\rvert \ge \epsilon \} \right) \le m\left(\{x: \lvert f_{k}(x) - f_{k_i}(x) \rvert \ge \frac{\epsilon}{2} \} \right) + m\left(\{x: \lvert f_{k_i}(x) - f(x) \rvert \ge \frac{\epsilon}{2} \right)
+    \]
+
+    because $f_n$ is Cauchy in measure, and $f_{k_i}$ converges to $f$ in measure. 
+    
+    let $k \ge N,\, i \ge N$  we take $N \to \infty$ and got
+
+    \[
+        \lim_{k \to \infty} m\left( \{x: \lvert f_k(x) - f(x)\rvert \ge \epsilon \} \right) \le  0
+    \]
+
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

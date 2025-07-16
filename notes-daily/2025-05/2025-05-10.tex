@@ -1,0 +1,166 @@
+\subsubsection{Exercise}
+
+\begin{exercise}
+    let $V$ and $W$ be disjoint open set under topological space $(X, \mathcal{F})$, prove that:
+
+    \[
+        V \cap \overline{W} = \emptyset
+    \]
+\end{exercise}
+
+\begin{proof}
+    \begin{align*}
+        V \cap \overline{W} &= V \cap (W \cup W') \\
+        & = V \cap W'
+    \end{align*}
+
+    since $V$ is open, for any $x \in V$, exists an open set $V$ and $V \cap W = \emptyset$, so $V$
+    cannot contains any limit point of $W$, so 
+
+    \[
+        V \cap W' = \emptyset
+    \]
+\end{proof}
+
+\begin{definition}
+    let $C$ under topological space $(X, \mathcal{F})$ is not connected iff exists two nonempty open set $V, W \in \mathcal{F},\: V \cap W \cap C = \emptyset$, and
+
+    \begin{align*}
+        C \subseteq V \cup W \\
+        C \cap V \ne \emptyset \\ 
+        C \cap W \ne \emptyset \\ 
+        C \cap V \cap W = \emptyset
+    \end{align*}
+\end{definition}
+
+\begin{exercise}
+    let $C$ under topological space $(X, \mathcal{F})$, then $C$ is not connected iff exists nonempty set $A, B$  such that
+
+    \begin{align*}
+        A \cap \overline{B} = \emptyset \\
+        B \cap \overline{A} = \emptyset \\
+        C = A \cup B
+    \end{align*}
+\end{exercise}
+
+\begin{proof}
+   \begin{enumerate}
+    \item when $V \cap W \cap C = \emptyset$
+
+    let $A = V \cap C,\: B = W \cap C$, then we have
+
+    \begin{align*}
+        A \cap \overline{B} &= V \cap C \cap \overline{W \cap C} \\
+        & = V \cap C \cap ((W \cap C) \cup (W \cap C)') \\
+        &= V \cap C \cap (W \cap C)'
+    \end{align*}
+
+
+    since $(V \cap C) \cap (W \cap C) = \emptyset$, for any $x \in V \cap C$, there exists an open set $V$ such that
+
+    \[
+        V \cap (W \cap C) = \emptyset
+    \]
+
+    so $x$ cannot be limit point of $W \cap C$, so
+
+    \[
+        A \cap \overline{B} = \emptyset
+    \]
+
+    so we find $A, B$ that:
+
+    \begin{align*}
+        A \cap \overline{B} = \emptyset \\
+        B \cap \overline{A} = \emptyset \\
+        A \cup B = C
+    \end{align*}
+
+
+    \item when $C = A \cup B$
+
+    since we have 
+    \begin{align*}
+       A \cap \overline{B} = \emptyset \\ 
+        B \cap \overline{A} = \emptyset \\
+    \end{align*}
+
+    so we have
+
+
+    \begin{align*}
+       A \subseteq (\overline{B})^C \\
+       B \subseteq (\overline{A})^C \\
+    \end{align*}
+
+    let's define: $V = (\overline{A})^C$, $W = (\overline{B})^C$, then we have:
+
+    \begin{align*}
+        C \cap V &= (A \cup B) \cap (\overline{A})^C \supseteq B \ne \emptyset \\
+        C \cap W &= (A \cup B) \cap (\overline{B})^C \supseteq A \ne \emptyset \\
+        C &= A \cup B \subseteq V \cup W \\
+        C \cap V \cap W & = (A \cup B) \cap (\overline{A} \cup \overline{B})^C \\
+        & = (A \cup B) \cap (\overline{A \cup B})^C \\
+        & \subseteq (A \cup B) \cap (A \cup B)^C \subseteq \emptyset
+    \end{align*}
+    
+
+   \end{enumerate} 
+\end{proof}
+
+\begin{exercise}
+    prove that $I \in \mathbb{R}$, then $I$ is connected iff: $\forall x,y \in I, x <y$, $\forall x < z < y,\: z \in I$     
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \item assume $\exists x < z < y, z \notin I$ we define
+
+        \begin{align*}
+            A &= I \cap (-\infty, z) \\ 
+            B &= I \cap (z, \infty)
+        \end{align*}
+
+        then we have
+
+        \begin{align*}
+            A \cap \overline{B} & \subseteq A \cap \overline{I} \cap [z, \infty] = \emptyset \\
+            B \cap \overline{A} & \subseteq B \cap \overline{I} \cap (-\infty,z] = \emptyset \\
+            A \cup B &= I \setminus \{ z \} = I
+        \end{align*}
+
+        \item assume $I = A \cup B$
+        let's pick $x \in A$ and $y \in B$, assume $x < y$, and we define
+
+        \[
+            z = \sup A \cap [x,y]
+        \]
+
+        by property of $\sup$ then we have $z \in \overline{A}$, so $z \notin B$
+
+        and $x \le z < y$
+
+        if $z \notin A$, then $z$ is what we want. if $z \in A$, then $z \notin \overline{B}$, since $(\overline{B})^C$ is open, 
+        we pick a neighbor $B(z, \epsilon),\, \epsilon < (y -z) / 2$ and $B(z, \epsilon) \subseteq (\overline{B})^C$
+        then $z' = z + \epsilon / 2$ is what we want, because if $z' \in A$ by $x < z < z_1 < y$ we have $z' \in A \cap [x,y]$ which 
+        is contradict with definition of $\sup$
+
+
+    \end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

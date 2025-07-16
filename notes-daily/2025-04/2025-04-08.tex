@@ -1,0 +1,314 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{real variable function}
+
+\subsection{point wise topology}
+
+\subsubsection{heine-borel theorm}
+
+let $E \subseteq \mathbb{R}^n$ be bounded and closed. $I_{\alpha},\, \alpha \in A$ be a open cover of $E$
+
+\[
+    E \subseteq \bigcup_{\alpha \in A}I_{\alpha},\quad I_{\alpha} \quad \text{is open}
+\]
+
+then there exists a finite set $B \subseteq A$ so that
+
+\[
+E \subseteq \bigcup_{\alpha \in B}I_{\alpha}
+\]
+
+proof:
+
+define function $r: E \to [0, \infty]$ that
+
+\[
+r(x) = \sup \{ r \vert B(x,r) \subseteq I_{\alpha},\, \alpha \in I \}
+\]
+
+define $r_0 = \inf \{ r(x) \vert x \in E  \},\, r_0 \in [0,\infty]$
+
+we then discuss on $r_0$
+
+\begin{enumerate}
+    \item $r_0 = 0$
+
+    if $r_0 = 0$, then we can build a sequence $x_n$ so that $r(x_n) < 1/n$. then
+
+    \[
+        \lim_{n \to \infty}r(x_n) = 0
+    \]
+
+    since $E$ is bounded and closed, there exists a subsequence $x_{f(n)}$ that
+
+    \[
+        \lim_{n \to \infty}x_{f(n)} = x_0,\: x_0 \in E
+    \]
+
+    since $x_0 \in E$, then $r(x_0) > 0$, let $\epsilon < r(x_0)$, then 
+    $B(x_0, \epsilon) \subseteq V_{\alpha}$ for some $\alpha \in A$. As $x_{f(n)} \to x_0$,
+    there should exists $N,\, \forall n \ge N,\, x_{f(n)} \subseteq B(x_0, \epsilon)$. then we have 
+    $x_{f(n)} \ge \epsilon$, which is contradict to $r(x_n) \to 0$
+
+
+    \item $r_0 > 0$
+
+    if $r_0 > 0$, then let $\epsilon < r_0$, we have $\forall x \in E, r(x) > \epsilon$. assume any finite subset of $I_{\alpha},\, \alpha \in A$ cannot cover $E$.
+    we constrcut a sequence. select $x_0 \in E$, then there should exists $I_{\alpha_1}$ so that
+
+    \[
+        B(x_0, \epsilon) \subseteq I_{\alpha_1}
+    \]
+
+    since $I_{\alpha_1}$ cannot cover $E$, we can select an element of $E \setminus I_{\alpha_1}$, we mark this element as $x_1$
+
+    similarly, there should exists $I_{\alpha_2}$ so that
+
+    \[
+        B(x_1, \epsilon) \subseteq I_{\alpha_2}
+    \]
+
+    then we can find a new element $x_2 \in E \setminus (V_{\alpha_1} \cup V_{\alpha_2})$
+
+    then we can construct a sequecne $x_n$ recursively. and for any $i \ne j$ we have
+
+    \[
+        \lvert x_i - x_j \rvert \ge \epsilon
+    \]
+
+    then $x_n$ cannot have any convergent subsequence, which is contradict to Bolzano-Weierstrass theorm.
+
+\end{enumerate}
+
+\subsubsection{Bounded Set}
+
+let $F$ be bounded and closed set, $G \subseteq \mathbb{R}^n$ is open set and $F \subseteq G$, then
+$\exists \delta >0$ so that when $\lvert x \rvert < \delta$
+
+\[
+F + \{ x \} \subseteq G
+\]
+
+for every $y \in F$, since $y \in G$, there exists ball $B_{G}(y, r_y) \subseteq G$, so we have
+
+\[
+F \subseteq \bigcup_{y \in F}B_{G}(y, r_y)
+\]
+
+then we created a open cover of $F$, $B_{G}(y, r_y/2)$ is also a open cover.
+
+since $F$ is compact, there exists finite sub cover such that:
+
+\[
+F \subseteq \bigcup_{n=1}^{N}B_G(y_n, r_n/2)
+\]
+
+consider any two point $y \in F, z \notin G$, there exists $1 \le k \le N$ such that
+
+\[
+y \in B_G(y_k, r_k/2),\: z \notin B_G(y_k, r_k)
+\]
+
+so 
+
+\[
+\lvert y - z \rvert \ge  \lvert z - y_k\rvert - \lvert y_k - y \rvert \ge r_k / 2
+\]
+
+if we take minimum 
+
+\[
+r_{\min} = \min \{ r_k \vert 1 \le k \le N \}
+\]
+
+then for any two point $y \in F,\, z \notin G$, we have
+
+\[
+\lvert y - z \rvert \ge r_{\min} / 2
+\]
+
+now consider $F + \{ x \},\, \lvert x \rvert < r_{\min} / 4$. then for any 
+$z \in F + \{ x \}$ , there exists $y \in F,\, y = z - x$ and $\lvert z - y\rvert < r_{\min} / 4$.
+
+so $z \in G$
+
+\subsubsection{compact set is bounded and closed}
+
+let $E \subseteq \mathbb{R}^n$ is compact, which means every open cover contains a finite sub cover.
+then $E$ is a bounded and closed set.
+
+proof:
+
+let's consider $E$ and $E^C$. if  $E^C$ is empty set, then  $E$ becomes $\mathbb{R}^n$.
+as we all know, $\mathbb{R}$ cannot be covered by finite bounded open intervals, which violates the $E$ is compact.
+
+we pick a point $y \in E^C$, and for any point $x \in E,\, x \ne y$. let $\delta = |y-x| /4 $. then 
+
+\[
+B(x, \delta) \cap B(y, \delta)= \emptyset
+\]
+
+consider triangle inequality, if $c \in B(x, \delta) \cap B(y, \delta)$, then $|x-y| \le |x-c| + |c-y| \le |y-x|/2$
+
+so we find a open cover of $E$
+
+\[
+E \subseteq \bigcup_{x \in E} B(x, \delta)
+\]
+
+so there exists a finite sub cover $B(x_n, \delta_n)$ so that
+
+\[
+E \subseteq \bigcup_{n=1}^{N} B(x_n, \delta_n)
+\]
+
+since $B(x_n, \delta_n)$ is bounded, and $E$ is covered by finite bounded sets. so $E$ is also bounded.
+
+we also need to prove $E$ is closed. to do so, we could prove that $E^C$ is open. since our $y$ is picked arbitrary, 
+and then we find a finite cover $B(x_n, \delta_n)$ of $E$ by $y$. let take minimum on $\delta_n$
+
+\[
+\delta_{\min} =  \min \{ \delta_n \vert 1 \le n \le N \}
+\]
+
+then we have for all $1 \le n \le N$
+
+\[
+B(x_n, \delta_n) \cap B(y, \delta_{\min}) \subseteq B(x_n, \delta_n) \cap B(y, \delta_{n}) = \emptyset
+\]
+
+then $B(y, \delta_{\min}) \subseteq E^C$, so $y$ is a interior point of $E^C$, since we pick $y$ arbitrary, so $E^C$ is open, and $E$ is closed.
+
+\subsubsection{dini's theorm}
+
+let $f_n(x): X \to \mathbb{R}$ be a non-negative monotone decrease function sequence, where $X$ is compact. which means
+
+\[
+\forall x \in X, f_{n+1}(x) \le f_n(x)
+\]
+
+and $f_n$ is continuous for all $n$, and $f_n$ converges to $h(x) = 0$ pointwisely. 
+then $f_n$ should converges to $h(x)= 0$ uniformly.
+
+proof:
+
+we assume $f_n$ not converges to $h$ uniformly at first. so that there should exists $\epsilon >0,\, \forall N \ge 0, \exists n, x_n \in X,\, f_n(x_n) \ge \epsilon$.
+since $X$ is a compact set, so there exists a subsequence  $x_{g(n)}$ such $x_{g(n)} \to x,\, x \in X$. without loss of generality, we will use $x_n$ as $x_{g(n)}$ later.
+since $f_n$ is monotone decrease, when $n$ is fixed, we have
+
+\begin{align*}
+f_n(x_{n+1}) &\ge f_{n+1}(x_{n+1}) \ge \epsilon \\
+f_n(x_{n+2}) &\ge f_{n+1}(x_{n+2}) \ge  f_{n+2}(x_{n+2}) \ge \epsilon \\
+...
+\end{align*}
+
+so $\forall k \ge 0$, we have $f_n(x_{n+k}) \ge f_{n+k}(x_{n+k}) \ge \epsilon$, since $f_n$ is continuous, we take $k \to \infty$, then have
+
+\[
+\lim_{k \to \infty}f_n(x_{n + k}) = f_n(x) \ge \epsilon
+\]
+
+since $f_n$ is converges to $h$ pointwisely, take $n \to \infty$, then
+
+\[
+\lim_{n \to \infty}f_n(x) = h(x) \ge \epsilon
+\]
+
+which is contradict with $h(x) = 0, \forall x \in X$
+
+\subsubsection{example}
+
+let $E$ has a open cover $V_{\alpha},\, \alpha \in I$. the closure $\overline{E}$ of $E$ may not be covered by $\overline{V_{\alpha}},\, \alpha \in I$
+
+let $E=(0,1)$, then $E$ has a open cover:
+
+\[
+E = \bigcup_{n=0}^{\infty}(\frac{1}{2n+3}, \frac{1}{2n+1}) \cup (\frac{1}{2n+4}, \frac{1}{2n+2})
+\]
+
+then $\overline{E} = [0,1]$, while 
+
+\[
+\bigcup_{n=0}^{\infty}[\frac{1}{2n+3}, \frac{1}{2n+1}] \cup [\frac{1}{2n+4}, \frac{1}{2n+2}] = (0,1]
+\]
+
+\subsubsection{example}
+
+let $f_n: \mathbb{R}^n \to \mathbb{R}$ be continuous function, and $f_n$ converge to $f$ pointwisely. 
+
+prove that if
+
+\[
+    E = \bigcap_{m=1}^{\infty}\bigcup_{k=1}^{\infty} \mathring{E_k}(\frac{1}{m})
+\]
+
+
+    where 
+
+    \[
+    E_k(\epsilon) = \{ x \in \mathbb{R}^n : |f_k(x) - f(x)| \le \epsilon \}
+    \]
+
+
+then $E$ is set of continuous point of $f$, the operator $\mathring{X}$ here denotes all interior point of $X$.
+
+
+\begin{proof}
+    let $E'$ is set of all continuous point of $f$, we first prove $E' \subseteq E$.
+
+    Take arbitrary continuous point $x_0$ of $f$, and arbitrary $\epsilon > 0$. since $f$ is continuous at $x_0$, there exists $\delta_1 > 0$ so that
+    $\forall |x-x_0| \le \delta_1,\, |f(x) - f(x_0) | \le \epsilon$. as $f_n$ converges to $f$ pointwisely at $x_0$, there should exists $k$, so that 
+    $|f_k(x_0) - f(x_0) | \le \epsilon$. by fix $k$, since $f_k$ is continuous at $x_0$, there exists $\delta_2 > 0$, so that
+    $\forall |x-x_0| \le \delta_2,\, |f_k(x) - f_k(x_0)| \le \epsilon$. by triangle inequality, $\forall |x-x_0| \le \min(\delta_1, \delta_2)$ we have
+
+    \begin{align*}
+        |f_k(x) - f(x)| &\le |f_k(x) - f_k(x_0) + f_k(x_0) - f(x_0) + f(x_0) - f(x)| \\
+        & \le 3\epsilon
+    \end{align*}
+
+    which means $\forall \epsilon > 0, \exists k,\,\delta$ so that $ B(x_0, \delta) \subseteq E_k(\epsilon)$. so for any $\epsilon > 0$ $x_0$ become interior point for some $E_k(\epsilon)$
+    then we have
+
+    \[
+        x_0 \in \bigcap_{\epsilon > 0}\bigcup_{k=1}^{\infty} \mathring{E_k}(\epsilon) \subseteq \bigcap_{m=1}^{\infty}\bigcup_{k=1}^{\infty} \mathring{E_k}(\frac{1}{m})
+    \]
+
+    then we prove $E \subseteq E'$
+
+    Take arbitrary $x_0 \in E$, then $\forall \epsilon > 0, \exists m,\, 1/m < \epsilon$. by $x_0 \in E$, we can find
+    $E_k(1/m)$ such that $x_0$ become interior point of $E_k(1/m)$. since $x_0$ is interior point of $E_k(1/m)$, there should exists a ball 
+    $B(x_0, r) \subseteq E_k(1/m)$. we can let $r$ be small enough so that it will fit condition that $f_k$ is continuous at $x_0$. let $x \in B(x_0, r)$ we
+
+    \begin{align*}
+        | f_k(x) - f(x) | &\le 1/m \quad \text{by definition}\\
+        | f_k(x_0) - f(x_0) | &\le 1/m \quad \text{since} \quad x_0 \in B(x_0, r)\\
+        | f_k(x) - f_k(x_0) | & \le 1/m \quad f_k \quad \text{is continuous}\\
+    \end{align*}
+
+    by triangle inequality we have
+
+    \begin{align*}
+        |f(x) - f(x_0) | &\le |f(x) -f_k(x) + f_k(x) - f_k(x_0) + f_k(x_0) - f(x_0) | \\
+        & \le \frac{3}{m}
+    \end{align*}
+
+    since $m$ is arbitrary, so $f$ is continuous
+
+\end{proof}
+
+
+\end{document}
+
+
+
+
+

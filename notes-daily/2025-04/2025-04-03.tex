@@ -1,0 +1,259 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{\today}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{实变函数论}
+
+\subsection{点集拓扑}
+
+\subsubsection{等势}
+
+若 $A$ 是无限集，$B$ 是至多可数集，那么 $A$ 和 $A \cup B$ 等势。
+
+证明: 令 $B = (b_0, b_1, ..)$ 且 $A_1 = (a_0, a_1, .. ),\, A_1 \subseteq A,\, A_1 \cup A_2 = A,\, A_1 \cap A_2 = \emptyset$。
+不妨令  $A \cap B = \emptyset$，
+
+这里可以不妨令，是因为如果不满足不妨令的条件，我们可以令 $B' = B \setminus A$，这样我们可以对 $B'$ 进行分解 $B' = (b_0,b_1,..)$ 而且 $B'$ 也是至多可数集。
+而且有 $B \cup A = B' \cup A$
+
+然后我们构造函数  $f: A \cup B \to A$
+
+\begin{align*}
+    f(a_i) &= f(a_{2i}),\, a_i \in A_1 \\
+    f(b_i) &= f(a_{2i+1}),\, b_i \in B \\
+    f(x) &= x,\, x \in A_2 \\
+\end{align*}
+
+显然 $f$ 是双射。
+
+如果 $B$ 是一个有限集，不妨令 $B=(b_0,b_1,..,b_{n-1})$ 且 $A \cap B = \emptyset$，
+
+\begin{align*}
+    f(a_i) &= f(a_{i+n}),\, a_i \in A_1 \\
+    f(b_i) &= f(a_{i}),\, b_i \in B \\
+    f(x) &= x,\, x \in A_2 \\
+\end{align*}
+
+
+显然 $f$ 是双射。
+
+\subsubsection{无限集和它的真子集等势}
+
+无限集的充分必要条件就是它和它的某个真子集等势。
+
+证明：
+
+\begin{enumerate}
+    \item 充分性
+
+    用反证法证明，假如它是有限集，那么它一定不可以和它的真子集构造双射
+
+    \item 必要性
+
+    如果某个集合$A$是无限集，然后我取它其中任意一个元素 $a$，令 $B = A \setminus \{ a \}$，利用上面的条件可以得到，$B$ 和 $B \cup A = A$ 等势。
+\end{enumerate}
+
+\subsubsection{凸函数几乎处处可微}
+
+凸函数不可微的点是一个至多可数的集合。
+
+证明：
+
+\begin{enumerate}
+    \item 构造一个二元函数
+
+    定义 
+
+    \[
+        L(x,y)= \frac{f(y) - f(x)}{y-x}
+    \]
+
+    我们将证明对任意 $x_1 < x_2 < x_3$  有
+
+    \[
+        L(x_1, x_2) \le L(x_1,x_3) \le L(x_2, x_3)
+    \]
+
+    我们把 $x_1, x_3$ 代入凸函数的定义
+
+    \[
+    f((1-t)x_1 + tx_3) \le (1-t)f(x_1) + tf(x_3)
+    \]
+
+    然后令 $x_2 = (1-t)x_1 + tx_3$ 得到
+
+    \begin{align*}
+        f(x_2) - f(x_1) & \le \frac{x_2 - x_1}{x_3 - x_1}\left(f(x_3) - f(x_1)\right) \\
+        \frac{f(x_2) - f(x_1)}{x_2 - x_1} & \le \frac{f(x_3) - f(x_1)}{x_3 - x_1} \\
+        L(x_1, x_2) &\le L(x_1, x_3) \\
+    \end{align*}
+
+    同理，变形后可以得到
+
+    \begin{align*}
+        f(x_2) - f(x_3) &\le (1-t)(f(x_1) - f(x_3)) \\   
+        \frac{f(x_2 - f(x_3))}{x_2 - x_3} & \ge - \frac{f(x_1) -f(x_3)}{x_3 - x_1} \\
+        L(x_2, x_3) & \ge L(x_1, x_3) 
+    \end{align*}
+
+    最终得到
+
+    \[
+        L(x_1, x_2) \le L(x_1, x_3) \le L(x_2, x_3)
+    \]
+
+\item 构造单调函数
+
+固定点 $x_0$ 后，我们令 
+
+\[
+\alpha(t) = L(x_0 + t, x_0)
+\]
+
+当 $t_1 < t_2$ 时，根据上面的不等式有
+
+\[
+L(x_0, x_0 + t_1) \le L(x_0,x_0 + t_2) \le L(x_0 + t_1, x_0 + t_2)
+\]
+
+也就是
+
+\[
+\alpha(t_1) \le \alpha(t_2)
+\]
+
+所以 $\alpha(t)$ 是单调增函数
+
+\item 证明刚才构造的单调增函数有下界
+
+任取一点 $x_0 - \epsilon < x_0$，对任意 $t > 0$ 根据刚才证明的不等式有
+
+\[
+L(x_0 - \epsilon, x_0) \le L(x_0 - \epsilon, x_0 + t) \le L(x_0, x_0 + t) \le \alpha(t)
+\]
+
+所以 $\alpha(t)$ 有下界
+
+\item 证明凸函数右导数存在
+
+我们只要证明 $\alpha(t)$ 有右极限即可，令
+
+\[
+c = \inf \{ \alpha(t) \,\vert\, t > 0 \}
+\]
+
+我们将证明
+
+\[
+\lim_{t \to 0, t > 0} \alpha(t) = c
+\]
+
+根据下确界的性质，配合选择公理，一定存在 $t_n $ 满足 $t_n > 0$ 且 $\alpha(t_n) - c \le 1/n$。
+这样我们构造了一个收敛到 $c$ 的序列。
+
+于是，对于任意 $\epsilon > 0$，一定有 $N$ 满足 $\alpha(t_N) - c \le \epsilon$，根据 $\alpha$ 的单调性， 只要 $0 < t < t_n$，则必然有 
+$0 \le \alpha(t) - L \le \alpha(t_N) \le \epsilon$。所以凸函数存在右导数。
+
+用相同的方法可以证明左导数也存在。
+
+\item 证明左导数小于等于右导数
+
+先固定 $x_0$，令左导数为 $f'(x_0 - 0)$，右导数为 $f'(x_0 + 0)$，得到
+
+\begin{align*}
+f'(x_0 - 0) &= \lim_{t \to 0,\, t > 0}L(x_0 - t, x_0) \\
+f'(x_0 + 0) &= \lim_{s \to 0,\, s > 0}L(x_0, x_0 + s) \\
+\end{align*}
+
+根据之前证明的不等式，我们有
+
+\[
+L(x_0 - t, x_0) \le L(x_0-t, x_0 + s) \le L(x_0, x_0+s)
+\]
+
+我们先对 $t \to 0$ 取极限得到
+
+\[
+f'(x_0-0) \le L(x_0, x_0+s)
+\]
+
+再对 $s \to 0$ 取极限得到
+
+
+\[
+f'(x_0-0) \le f'(x_0 + 0)
+\]
+
+\item 证明对 $x_1 < x_2$ 有 $f'(x_1 +0) \le f'(x_2-0)$
+
+\begin{align*}
+f'(x_1 + 0) &= \lim_{t \to 0,\, t > 0}L(x_1, x_1+t) \\
+f'(x_2 - 0) &= \lim_{s \to 0,\, s > 0}L(x_2-s, x_2) \\
+\end{align*}
+
+
+我们可以让 $t$ 和 $s$ 都足够小，满足 $x_1 +t < x_2,\, x_1 < x_2 -s$ 根据之前证明的不等式，我们有
+
+\begin{align*}
+    L(x_1, x_1 + t) &\le L(x_1, x_2) \le L(x_1+t, x_2) \\
+    L(x_1, x_2-s) &\le L(x_1,x_2) \le L(x_2 -s, x_2)
+\end{align*}
+
+取极限得到
+
+\[
+\lim_{t \to 0,\,t>0}L(x_1, x_1 + t)\le L(x_1,x_2) \le \lim_{s \to 0, s>0}L(x_2 -s,x_2)
+\]
+
+所以有 $f'(x_1+0) \le f'(x_2 - 0)$
+
+\item 证明不可微的点可以映射到不相交的开区间，而且是单射。
+
+对于凸函数的不可微的点，因为它的左右导数都存在，而且左导数小于等于右导数，加上它是不可微的，所以它的左导数一定小于右导数。
+
+任取凸函数上不可微的两个点 $x_1 < x_2$ ，因为 $x_1$ 的右导数小于等于 $x_2$ 的左导数，所以它们各自左导数和右导数构成的开区间一定不相交。
+
+\item  证明不可微的点至多可数
+
+因为不相交的开区间一定是至多可数的，所以不可微的点至多可数。
+
+\end{enumerate}
+
+
+\section{高等代数}
+
+\subsection{Laplace 定理}
+
+Laplace 定理允许行列式按多行 或者按多列展开，例如我们想按第 $i_1,i_2,..,i_m,\, i_1 < i_2 < .. < i_m$ 行展开有
+
+用数学归纳法证明
+
+\begin{align*}
+    |A| &= \sum_{j=1}^{n}a_{i_r j}(-1)^{i_r + j} D \begin{bmatrix}
+       1 & 2 & .. & i_r - 1 & i_r + 1 & .. & n \\  
+       1 & 2 & .. & j - 1 & j + 1 & .. & n \\  
+    \end{bmatrix} \\
+    &= \sum_{j=1}^{n}a_{i_r j}(-1)^{i_r + j} 
+    \sum_{1 \le k_1 < .. < k_{r-1} \le n,\, k_{*} \ne j}
+    (-1)^{I_{r-1} + k_1 + k_2+ .. + k_{r-1}  - (n-j)} 
+    D \begin{bmatrix}
+        i_1 & i_2 & .. & i_{r-1} \\
+        k_1 & k_2 & .. & k_{r-1} \\
+    \end{bmatrix} \overline{D} \begin{bmatrix}
+        i_1 & i_2 & .. & i_{r-1} & i_r \\
+        j & k_1 & k_2 & .. & k_{r-1} \\
+    \end{bmatrix}
+\end{align*}
+
+\end{document}
+
+

@@ -1,0 +1,337 @@
+\subsubsection{Continuity}
+
+\begin{definition}[Limitation]
+    let $X,Y$ be metric space, and $E \subseteq X, f: E \to Y$ and $p \in E$, we say
+    $f$ has limitation $q$ at $p$ iff for every set $V_q$ contains $q$, we have some open set $V_p$ contains $p$ so that
+
+    \[
+        f(V_p \cap E) \subseteq V_q
+    \]
+
+    and denote as:
+
+    \[
+        \lim_{x \to p}f(x) = q
+    \]
+\end{definition}
+
+
+\begin{exercise}
+    the below statements are identical:
+
+    \begin{enumerate}
+        \item $\lim_{x \to p}f(x) = q$
+
+        \item for every $\delta > 0$, exists $\epsilon > 0$ so that
+
+        \[
+            f(B(p, \epsilon) \cap E) \subseteq B(q, \delta)
+        \]
+
+        \item for every $p_n \to p,\: p_n \in E$, we have $f(p_n) \to q$
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item $1 \to 2$
+
+        by definition of open set under metric space
+
+        \item $2 \to 3$
+
+        fix $\epsilon > 0$, we got $\delta > 0$, and let $N$ be large enough so that $\forall n \ge  N$, we have
+
+        \begin{align*}
+            d(p_n, p) &< \delta \\
+            d(f(p_n), q) & < \epsilon
+        \end{align*}
+
+        \item $3 \to 1$
+
+        assume there exists open set $V_q, \: q \in V_q$ and for all open set $V_p$ contains $p$ we have
+
+        \[
+            f(V_p \cap E) \cap V_q^C \ne \emptyset
+        \]
+
+        since $V_p$ is arbitrary, we take $V_p = B(p, 1/n)$, since $V_q$ is open, there exists a open ball 
+        $B(q, \epsilon) \subseteq V_q$, so we got for all $n \ge 1$
+
+        \[
+            f(B(p, \frac{1}{n}) \cap E) \cap B(q, \epsilon)^C \ne \emptyset
+        \]
+
+        then we pick $p_n \in B(p, 1/n) \cap E$ and $d(f(p_n), q) \ge \epsilon$
+
+        so we got $p_n \to p,\: p_n \in E$ while $\varlimsup_{n \to \infty}d(f(p_n), q) \ge \epsilon$
+    \end{enumerate}
+\end{proof}
+
+
+\begin{definition}[Continuity]
+    let $X,Y$ be metric space, and $E \subseteq X, f: E \to Y$ and $p \in E$, we say
+    $f$ is continuous at $p$ iff for every open set $V_q$ contains $f(p)$ there exists a open set $V_p$ contains $p$ such that
+
+    \[
+        f(V_p \cap E) \subseteq V_q
+    \]
+
+    if $p \in E'$ we can denote this continuity as:
+
+    \[
+        \lim_{x \to p}f(x) = f(p)
+    \]
+\end{definition}
+
+\begin{definition}[Continuous Function]
+    let $X,Y$ be metric space, and $E \subseteq X, f: E \to Y$ and $p \in E$, we say $f$ is continuous iff $f$
+    is continuous at every point $p \in E$
+\end{definition}
+
+
+\begin{corollary}
+    let $X,Y$ be metric space, and $f: X \to Y$ then $f$ is continuous iff for every open set $V$ in
+    metric space $Y$, its pre image $f^{-1}(V)$ is open in metric space $X$
+\end{corollary}
+
+\begin{proof}
+    steps
+
+    \begin{enumerate}
+        \item Metric space $\to$ Topological 
+
+        assume $f: X \to Y$ is continuous, consider open set $V$ under metric space $Y$, if $V$ or $f^{-1}(V)$ is emptyset, then
+        $f^{-1}(V)$ is open. if $f^{-1}(V)$ is not empty, consider $x \in f^{-1}(V)$, since $f(x) \in V$ and $V$ is open, we must have a $V_x$ contains $x$
+
+        \[
+            f(V_x \cap X) = f(V_x) \subseteq V
+        \]
+
+        consider $x' \in V_x$, we have $f(x') \in V$ and $x' \in f^{-1}(V)$
+        so $x$ is a interior point of $f^{-1}(V)$
+
+        \item Topological $\to$ Metric space
+
+        consider $x \in X$ and $y = f(x) \in Y$ and $V_y$ is an open set contains $y$, so $f^{-1}(V_y)$ is not empty and be open.
+        so we got open set $f^{-1}(V_y)$ contains $x$ 
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}
+    let $X, Y, Z$ be metric space, and $E\subseteq X, \: f: E \to Y,\: g: f(E) \to Z$ and $h: E \to Z,\: h(x) = g(f(x))$
+
+    if $f$ is continuous at $x,\: f(x) = y$ and $g$ is continuous at $y$, then $h$ is continuous at $x$
+\end{thm}
+
+\begin{proof}
+    let $h(x) = g (f(x)) = g(y)$
+
+    consider $V$ is an open set contains $h(x)$ under $Z$
+
+    since $g$ is continuous at $y$ and $h(x) = g(y)$, there should exists open set $V_y$ contains $y$ and
+
+    \[
+        g(V_y \cap f(E)) \subseteq V
+    \]
+
+    since $f$ is continuous at $x,\: f(x) = y$ so there exists $V_x$ contains $x$:
+
+    \begin{align*}
+        f(V_x \cap E) &\subseteq V_y \\
+        f(V_x \cap E) \cap f(E) &\subseteq V_y \cap f(E) \\
+        f(V_x \cap E) &\subseteq V_y \cap f(E) \\
+    \end{align*}
+
+    so we got:
+
+    \begin{align*}
+        h(V_x \cap E) &= g(f(V_x \cap E)) \subseteq g(V_y \cap f(E)) \\
+        & \subseteq V
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    let $E \subseteq X$ and $f:E \to Y$, then $f$ is continuous at $p$ iff for every $p_n \in E,\: p_n \to p$
+    then $f(p_n) \to f(p)$
+\end{thm}
+
+\begin{proof}
+steps:
+
+    if $p \notin E'$, there exists open set $V_p$ such that $V_p \cap E = \{ p \}$, so $p_n$ contains finitely $n$
+    such that $p_n \ne p$. And for every open set $V$ contains $f(p)$ we have
+
+    \[
+        f(V_p \cap E) \subseteq V
+    \]
+
+    if $p \in E'$, then we can prove it by definition of function limitation 
+
+\end{proof}
+
+\begin{exercise}
+    let $f: X \to Y$ where $X$ is a compact metric space, and $f$ is continuous, prove:
+
+    $f(X)$ is also compact
+\end{exercise}
+
+\begin{proof}
+    let $f(X)$ has an open cover under $Y$:
+
+    \[
+        f(X) \subseteq \bigcup_{\alpha \in I}V_{\alpha}
+    \]
+
+    then we have:
+
+    \[
+        X = f^{-1}(f(X)) \subseteq \bigcup_{\alpha \in I}f^{-1}(V_{\alpha})
+    \]
+
+    since $f^{-1}(V_{\alpha})$ is open, there exists a finite sub cover such that
+
+    \[
+        X \subseteq \bigcup_{n=1}^{N}f^{-1}(V_n)
+    \]
+
+    so we have
+
+    \begin{align*}
+        f(X) & \subseteq f(\bigcup_{n=1}^{N}f^{-1}(V_n)) \subseteq \bigcup_{n=1}^{N}f(f^{-1}(V_n)) \\
+        & \subseteq \bigcup_{n=1}^{N}V_n
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f: X \to Y$ is a continuous, and 1-1 mapping, where $X$ and $Y$ be compact metric space
+
+    prove: $f^{-1}$ is also continuous
+\end{exercise}
+
+\begin{proof}
+    let $V$ be an open set under metric space $X$. then $V^C$ is closed and compact, since closed subset of compact set 
+    is closed. then $f(V^C)$ is also compact and therefore closed. since $f$ is 1-1 mapping, we have 
+
+    \begin{align*}
+        f(V^C) &= f(V)^C \\
+        f(V) &= f(V^C)^C
+    \end{align*}
+
+    so $f(V)$ is open, and therefore $f^{-1}$  is continuous
+\end{proof}
+
+\begin{definition}[Uniformly Continuous]
+    let $f: X \to Y$ where $X, Y$ is metric space. we say $f$ is uniformly continuous iff for every $\epsilon > 0$,
+    exists $\delta > 0$, for all $d(x,y) < \delta$ we have $d(f(x), f(y)) < \epsilon$
+\end{definition}
+
+\begin{exercise}
+    let $f: X \to Y$ where $X, Y$ is metric space where $X$ is a compact metric space, if $f$ is continuous, prove:
+
+    $f$ is uniformly continuous
+\end{exercise}
+
+
+\begin{proof}
+    we pick $\epsilon > 0$, and let: 
+
+    \[
+        X \subseteq \bigcup_{x \in X} f^{-1}(B(f(x), \epsilon))
+    \]
+
+
+    since $x \in f^{-1}(B(f(x_n), \epsilon))$, there exists $B(x,\delta_x) \subseteq f^{-1}(B(f(x), \epsilon))$
+
+    and we have
+
+    \[
+        X \subseteq \bigcup_{x \in X}B(x, \delta_x / 2)
+    \]
+    
+    since $X$ is compact, we have a finite sub cover:
+
+    \[
+        X \subseteq \bigcup_{n=1}^{N} B(x_n, \delta_n/2)
+    \]
+
+    let 
+
+    \[
+        \delta = \min_{n} \delta_n/2
+    \]
+
+    for any $d(x', y') < \delta$, and suppose $x' \in B(x_m, \delta_m/ 2)$, we have
+
+    $d(x_m , y') \le d(x_m, x') + d(x',y') < \delta_m$
+
+    so we have
+
+    \[
+        d(f(x'), f(y')) \le d(f(x'), f(x_m)) + d(f(x_m), f(y')) < 2\epsilon
+    \]
+
+\end{proof}
+
+\begin{exercise}
+    let $f: X \to Y$ where $X, Y$ is metric space and $f$ be continuous, let $E$ be a connected sub sef of $X$, prove:
+
+    $f(E)$ is connected
+\end{exercise}
+
+\begin{proof}
+    assume $f(E)$ is not connected, and let $f(E) = A \cup B$ where $A, B$ is separated and both not empty
+
+    and we define
+
+    \begin{align*}
+        G &= E \cap f^{-1}(A) \\
+        H &= E \cap f^{-1}(B) \\
+    \end{align*}
+
+    then we have
+
+    \begin{align*}
+        G \cup H &= E \cap (f^{-1}(A) \cup f^{-1}(B))  \\
+        &= E \cap f^{-1}(A \cup B) = E \cap f^{-1}(f(E)) \\
+        & = E
+    \end{align*}
+
+    so $G \cup H = E$
+
+    and both $G, H$ is not empty:
+
+    for $G$ we have, since $A$ is not empty, there exists $y \in A$:
+
+    \begin{align*}
+        \{y \} & \subseteq A \subseteq f(E) \\
+        f^{-1}(\{ y \}) & \cap E \subseteq f^{-1}(A) \cap E
+    \end{align*}
+
+    since $y \in f(E)$ there should exists $x \in E$ such that $f(x) = y$,so
+
+    \[
+        \{ x \} \subseteq f^{-1}(A) \cap E
+    \]
+
+
+    and we have:
+
+    \begin{align*}
+        G &\subseteq f^{-1}(A) \subseteq f^{-1}(\overline{A}) \\
+        \overline{G} & \subseteq f^{-1}(\overline{A}) \\
+        f(\overline{G}) & \subseteq f(f^{-1}(\overline{A})) \subseteq \overline{A} \\
+        f(H) & \subseteq f(f^{-1}(B)) \subseteq B \\
+        f(\overline{G} \cap H) & \subseteq f(\overline{G}) \cap f(H) = \emptyset
+    \end{align*}
+
+    then we have $\overline{G} \cap H = \emptyset$, otherwise we have at least one point $x \in E$ and
+
+    \[
+        f(\{ x \}) = \{ f(x)\} \subseteq f(\overline{G} \cap H)
+    \]
+
+    similarly we can prove $G \cap \overline{H} = \emptyset$, 
+\end{proof}

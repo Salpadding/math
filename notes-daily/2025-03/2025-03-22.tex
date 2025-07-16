@@ -1,0 +1,79 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input{../macros.tex}
+\title{泰勒级数分析}
+\author{朱英杰}
+\date{2025-03-22}
+
+
+\begin{document}
+\zihao{-4}
+
+\maketitle
+
+\section{Definitions}
+
+\subsection{$n$ 阶可微}
+
+数学上通常用 $C^n$ 表示 $n$ 阶连续可微，例如 $C^0$ 表示连续，$C^1$ 表示可微并且导函数连续，$C^2$ 表示二阶可微并且二阶导函数连续。
+
+\subsection{拉格朗日余项}
+
+若函数 $f: [a,b] \to \mathbb{R}$ 满足 $n+1$ 阶连续可微，那么取 $x_0 \in [a,b]$，$f(x)$ 可以近似表示为
+
+\[
+f(x) = \sum_{k=0}^{n}\frac{1}{k!}f^{(k)}(x_0)(x-x_0)^k + \frac{1}{(n+1)!}f^{(n+1)}(\xi)(x-x_0)^{k},\, \lvert \xi - x_0 \rvert \le \lvert x - x_0 \rvert
+\]
+
+其中
+
+\[
+\frac{1}{k!}f^{(k)}(\xi)(x-x_0)^{k}
+\]
+
+被称作拉格朗日余项，这个定理可以把 $n$ 阶连续可微的函数表示成多项式加上一个关于 $\xi$ 的函数，
+而 $\xi$ 的取值和 $x$ 有关。
+
+\section{证明}
+
+记 
+\[
+R(t) = f(t) - \sum_{k=0}^{n}\frac{1}{k!}f^{(k)}(x_0)(t-x_0)^k
+\]
+
+对 $R(t)$ 和 $(t-x_0)^{n+1}$ 在 $x_0$ 和 $x$ 用中值定理，注意这里有
+
+\[
+\lvert(t-x_0)^n \rvert > 0,\, \forall t \ne x_0
+\]
+
+这保证了我们可以安全地用中值定理。
+
+\[
+\frac{R(x)-R(x_0)}{(x-x_0)^{n+1}} = \frac{R'(\xi_1)}{(n+1)(\xi_1-x_0)^n}
+\]
+
+注意到 $R'(x_0) = 0$
+继续对 $R'(t)$ 和 $(t-x_0)^{n}$ 在 $x_0$ 和 $\xi_1$ 用中值定理得到
+
+\[
+\frac{R'(\xi_1)}{(n+1)(\xi_1-x_0)^n} = \frac{R^{(2)}(\xi_2)}{(n+1)n(\xi_2-x_0)^{n-1}}
+\]
+
+以此类推得到
+
+\[
+\frac{R(x)}{(x-x_0)^{n+1}} = \frac{R^{(n)}(\xi_n)}{(n+1)!(\xi_n - x_0)} =\frac{f^{(n)}(\xi_n)- f^{(n)}(x_0)}{(n+1)!(\xi_n - x_0)}
+\]
+
+再用一次
+得到
+
+
+\[
+\frac{R(x)}{(x-x_0)^{n+1}}  =\frac{f^{(n+1)}(\xi_{n+1})}{(n+1)!}
+\]
+
+
+\end{document}

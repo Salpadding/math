@@ -1,0 +1,1403 @@
+\section{The Real and Complex Number Systems}
+
+\subsection{Basic Concepts}
+
+\begin{thm}
+Cauchy's inequality
+
+$x,y \in \mathbb{C}^n,\: \lvert \langle x,y\rangle \rvert \le \lvert x \rvert \lvert y \rvert$
+\end{thm}
+
+\begin{proof}
+    define $f: \mathbb{C} \to \mathbb{C},\: f(\lambda) = \langle \lambda x + y, \lambda x + y \rangle$:
+
+    \begin{align*}
+        f(\lambda) =\lvert\lambda \rvert^2 \langle x, x \rangle +  \langle y, y \rangle + \lambda  \langle x,y \rangle +  \overline{\lambda}  \langle y,x \rangle
+    \end{align*}
+
+    if $x=0$ then we proved, otherwise take 
+
+    \[
+        \lambda = -\frac{\langle y,x \rangle}{\langle x, x \rangle}
+    \]
+
+    then
+
+    \[
+        f(\lambda) = \frac{\lvert \langle x, y \rangle \rvert^2}{\langle x, x \rangle} + \langle y, y \rangle - 2 \frac{\lvert \langle x,y \rangle \rvert^2}{\langle x, x\rangle} \ge 0
+    \]
+
+    which is
+
+    \[
+        \langle y, y \rangle \ge \frac{\lvert \langle x, y \rangle \rvert^2}{\langle x, x \rangle}
+    \]
+
+    consider $\langle x, x \rangle > 0$, we have
+
+    \[
+ \lvert \langle x, y \rangle \rvert^2      \le \langle x, x \rangle \langle y, y \rangle
+    \]
+
+    take square root:
+
+    \[
+\lvert \langle x, y \rangle \rvert \le \lvert x \rvert \lvert y \rvert
+    \]
+\end{proof}
+
+\subsection{Exercise}
+
+\begin{exercise}
+    let $f,g: [a,b] \to \mathbb{C}$ and $f,g$ are both integrable
+
+    and inner product is defined as:
+
+    \[
+        \langle f, g \rangle = \int_a^{b} f(x) \overline{g(x)} \mathrm{d}x
+    \]
+
+    by cauchy inequality:
+
+    \[
+        \left| \langle f, g \rangle \right| \le \left| f \right| \left| g \right|
+    \]
+    
+    prove triangle inequality:
+
+    \[
+        |f + g| \le |f| + |g|
+    \]
+
+    where $|f|$ is defined as $|f|^2 = \langle f, f \rangle $
+\end{exercise}
+
+\begin{proof}
+    consider that
+
+    \begin{align*}
+        |f+g|^2 &= \langle f + g, f+g\rangle \\
+        &= \langle f,f \rangle + \langle g,g \rangle + \langle f,g \rangle + \langle g,f  \rangle \\
+        & \le  \langle f,f \rangle + \langle g,g \rangle +  \left| \langle f,g \rangle + \langle g,f  \rangle \right| \\
+        & \le \langle f,f \rangle + \langle g,g \rangle +  \left| \langle f,g \rangle \right| + \left|\langle g,f  \rangle \right| \\
+        & \le \langle f,f \rangle + \langle g,g \rangle +  \left| f \right| \left| g \right| + \left| g \right| \left| f \right|\\
+        & \le \left( \left| f \right| + \left| g \right| \right)^2
+    \end{align*}
+
+    note that
+
+    \[
+        \langle f,g \rangle + \langle g,f  \rangle
+    \]
+
+    is a real number, so we can use fact that real number less than or equal to its absolute value.
+
+    and the below inequality
+
+    \[
+\left| \langle f,g \rangle + \langle g,f  \rangle \right| \le \left|\langle f,g \rangle \right|  + \left| \langle g,f \rangle \right| 
+    \]
+
+    is theorem of complex number, we can use it without recursion.
+
+
+    thus we got:
+
+    \[
+        |f+g| \le\left| f \right| + \left| g \right|
+    \]
+\end{proof}
+
+\section{Basic Topology}
+
+\subsection{General Topology}
+
+\begin{definition}
+    $f: A \to B$ is onto or surjective iff $f(A) = B$, $f: A \to B$ is 1-1 iff $\forall x \ne y,\: f(x) \ne f(y)$
+\end{definition}
+
+\begin{lem}
+    $A \subseteq B$ iff $A \cap B = A$ iff $A \cap B^C = \emptyset$
+\end{lem}
+
+
+\begin{proof}
+    since $x \in A \subseteq A \cap B$, so $x \in B$
+
+    \begin{align*}
+        A \cap B^C &= \emptyset \\
+        A \setminus \left(A \cap B^C\right) &= A \\
+        A \cap (A^C \cup B) &= A \\
+        A \cap B = A 
+    \end{align*}
+
+    on the other hand, if $A \subseteq B$, then
+
+    \begin{align*}
+        A \cap B  &= A \\
+        A \setminus \left(A \cap B \right) &= \emptyset \\
+        A \cap B^C &= \emptyset
+    \end{align*}
+\end{proof}
+
+\begin{lem}
+lemmas:
+    \begin{enumerate}
+        \item $A \subsetneq B$ iff $A \cap B^C \ne \emptyset$
+        \item $A \subseteq B$ iff $A \cap B = A$
+        \item $f(A \cup B) = f(A) \cup f(B)$
+        \item $f(A \cap B) \subseteq f(A) \cap f(B)$
+        \item $f(f^{-1}(A)) \subseteq A$, the equal always holds on when $f$ is surjective.
+        \item $A \subseteq f^{-1}(f(A))$, the equal holds on when $f$ is injective.
+    \end{enumerate}
+    
+\end{lem}
+
+\begin{definition}[Interior point and Interior]
+    $x$ is an interior point of $A$ iff exists open set $V_x \subseteq A,\; x \in V_x$ 
+
+
+    \[
+        \mathrm{int}(A) = \{ x \;\mathrm{ is \:interior \:point \: of}\; A \}
+    \]
+\end{definition}
+
+
+\begin{corollary}
+    $\mathrm{int}(A) \subseteq A$
+\end{corollary}
+
+
+\begin{lem}
+    $\mathrm{int}(A)$ is always open 
+\end{lem}
+
+\begin{proof}
+    We can write $\mathrm{int}(A)$ as
+
+    \[
+        \mathrm{int}(A) = \bigcup_{x \in \mathrm{int}(A)}V_x
+    \]
+
+    since arbitrary union of open sets $V_x$ is also open, so $A$ is open.
+\end{proof}
+
+\begin{corollary}
+    $A$ is open iff $\mathrm{int}(A) = A$
+\end{corollary}
+
+\begin{corollary}
+   $\mathrm{int}(A)$ is largest open set which is sub set of $A$
+\end{corollary}
+
+\begin{proof}
+    \begin{align*}
+        V &\subseteq A \\
+        \mathrm{int}(V) &\subseteq \mathrm{int}(A) \\
+        V &\subseteq \mathrm{int}(A) \\
+    \end{align*}
+
+    so we can denote $\mathrm{int}(A)$ as
+
+    \[
+        \mathrm{int}(A) = \bigcup_{V \subseteq A,\; V\;\mathrm{is open}}V
+    \]
+\end{proof}
+
+
+\begin{thm}
+$\mathrm{int}(A \cap B) = \mathrm{int}(A) \cap \mathrm{int}(B)$
+\end{thm}
+
+\begin{proof}
+    let $x \in \mathrm{int}(A \cap B)$, so we have open set $V \subseteq A \cap B,\; x \in V$. so 
+    $V \subseteq A,\; V \subseteq B$, so $x \in \mathrm{int}(A)$ and $x \in \mathrm{int}(B)$. 
+
+    on the other hand, if $x$ in both $\mathrm{int}(A)$ and $\mathrm{int}(B)$, there exists open set $V_A \subseteq V$
+    and open set $V_B \in B$, since finite intersection of open set is open, so we have open set $V_A \cap V_B \subseteq A \cap B$,
+    and $x \in V_A,\; x \in V_B$, so $x \in \mathrm{int}(A \cap B)$
+\end{proof}
+
+
+\begin{lem}
+$\mathrm{int}(A) \cup \mathrm{int}(B)  \subseteq \mathrm{int}(A \cup B)$
+\end{lem}
+
+\begin{proof}
+\begin{align*}
+    \mathrm{int}(A) &\subseteq \mathrm{int}(A \cup B) \\
+    \mathrm{int}(B) &\subseteq \mathrm{int}(A \cup B) \\
+\mathrm{int}(A) \cup \mathrm{int}(B) & \subseteq \mathrm{int}(A \cup B)
+\end{align*}
+\end{proof}
+
+\begin{corollary}
+    \label{col:bigcup-int-subseteq-int-bigcup}
+    \[
+        \bigcup_{\alpha \in I}\mathrm{int}(A_{\alpha}) \subseteq  \mathrm{int}(\bigcup_{\alpha \in I}A_{\alpha})
+    \]
+\end{corollary}
+
+\begin{remark}
+    define $A_n = (-1/n, 1/n)$, then:
+    
+    \begin{align*}
+        \bigcap_{n=1}^{\infty} A_n &= \{ 0 \} \\
+        \mathrm{int}(\bigcap_{n=1}^{\infty} A_n) &= \emptyset \\
+    \end{align*}
+
+    while
+
+    \begin{align*}
+        \{ 0\} \subseteq & \bigcap_{n=1}^{\infty} \mathrm{int}(A_n) \\
+    \end{align*}
+
+    which shows:
+
+    \[
+        \bigcap_{\alpha \in I}\mathrm{int}(A_{\alpha}) \ne  \mathrm{int}(\bigcap_{\alpha \in I}A_{\alpha})
+    \]
+\end{remark}
+
+\begin{definition}[Limit point]
+   A limit point of $A$ is that, for every open set $V$ contains $x$, $A \cap \left( V \setminus \{x\} \right) \ne \emptyset$.
+   Pay attention that a limit point $x$ of $A$ may not in $A$. 
+\end{definition}
+
+\begin{definition}[Derived set]
+    Derived set $A'$ of $A$ is all its limit point.
+\end{definition}
+
+\begin{definition}[Closure]
+    Closure $\overline{A}$ of $A$ is defined as $A \cup A'$
+\end{definition}
+
+
+
+\begin{lem}
+    $\mathrm{int}(A) \cap (A^C)' = \emptyset$
+\end{lem}
+
+\begin{proof}
+    assume $x \in \mathrm{int}(A)$ and $x \in (A^C)'$, then we have $x \in V_x \subseteq A$, and 
+    $(V_x \setminus \{ x\}) \cap A^C = V_x \cap A^C \ne \emptyset$
+
+    however we have
+
+    \[
+        V_x \cap A^C \subseteq A \cap A^C = \emptyset
+    \]
+\end{proof}
+
+\begin{lem}\label{lem:A-int-comp-subseteq-A-closure}
+    $\left( \mathrm{int}(A) \right)^C \subseteq A^C \cup (A^C)'$
+\end{lem}
+
+\begin{proof}
+    since $x \notin \mathrm{int}(A)$, if $x \in A^C$, then the theorem holds.
+    now let's assume $x \in A$,
+    then for every $V_x$ contains $x$, $V_x \cap A^C \ne \emptyset$ and we have
+
+    \begin{align*}
+        \left( V_x \setminus \{ x \} \right) \cap A^C &= V_x \cap \left( A^C \setminus \{ x \} \right)  \\
+        &= V_x \cap A^C  \ne \emptyset
+    \end{align*}
+
+    which indicates $x \in (A^C)'$
+\end{proof}
+
+\begin{lem}
+    $\overline{A^C} = \left( \mathrm{int}(A) \right)^C $
+\end{lem}
+
+\begin{proof}
+    we first prove $\overline{A^C} \subseteq \left( \mathrm{int}(A) \right)^C$. since $\overline{A^C} = A^C \cup \left(A^C\right)'$. 
+    
+    as $\mathrm{int}(A) \subseteq A$, so $A^C \subseteq \left(\mathrm{int}(A) \right)^C$
+    
+    on the other hand, since $\mathrm{int}(A) \cap (A^C)' = \emptyset$, then we have $(A^C)' \subseteq (\mathrm{int}(A))^C$, combine them 
+    we have 
+
+    \begin{align*}
+        A^C &\subseteq \left(\mathrm{int}(A) \right)^C \\
+        (A^C)' & \subseteq \left(\mathrm{int}(A) \right)^C \\
+        \overline{A^C} &\subseteq A^C \cup (A^C)' \subseteq \left(\mathrm{int}(A) \right)^C
+    \end{align*}
+
+    then we prove $(\mathrm{int}(A))^C \subseteq \overline{A^C}$, from \autoref{lem:A-int-comp-subseteq-A-closure}, we have
+
+    \[
+        \left( \mathrm{int}(A) \right)^C \subseteq A^C \cup (A^C)'
+    \]
+
+    which indicates 
+
+
+    \[
+        \left( \mathrm{int}(A) \right)^C \subseteq \overline{A^C}
+    \]
+\end{proof}
+
+
+\begin{lem}
+   $\overline{A}$ is closed 
+\end{lem}
+
+\begin{proof}
+    $(\overline{A})^C = \mathrm{int}(A^C)$
+\end{proof}
+
+\begin{lem}
+    $A$ is closed iff $A = \overline{A}$
+\end{lem}
+
+\begin{proof}
+    if $A$ is closed, then $A^C$ is open
+
+    \begin{align*}
+        \overline{A} = \overline{(A^C)^C} = (\mathrm{int}(A^C))^C = (A^C)^C = A
+    \end{align*}
+\end{proof}
+
+\begin{lem}
+    $\overline{A}$ is minimal closed set which is super set of $A$
+\end{lem}
+
+\begin{proof}
+    let $A \subseteq Y$ and $Y$ is closed. then we have
+
+    \begin{align*}
+        A &\subseteq Y \\
+        \overline{A} &\subseteq \overline{Y} \subseteq Y
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    We can denote closure of $A$ as below
+
+    \[
+        \overline{A} = \bigcap_{B \supseteq A,\, B = \overline{B}}B
+    \]
+\end{corollary}
+
+\begin{lem}
+    $\overline{A} \cup \overline{B} = \overline{A \cup B}$
+\end{lem}
+
+\begin{proof}
+    take complement on both side
+
+    \begin{align*}
+        \mathrm{int}(A^C) \cap \mathrm{int}(B^C) &= \mathrm{int}(A^C \cap B^C) \\
+        \overline{A} \cup \overline{B} &= \overline{A \cup B}
+    \end{align*}
+\end{proof}
+
+
+\begin{lem}
+    $\overline{A} \cap \overline{B} \subseteq \overline{A \cap B}$
+\end{lem}
+
+
+\begin{proof}
+    take complement on both side:
+    \begin{align*}
+        \mathrm{int}(A^C) \cup \mathrm{int}(B^C) &\subseteq \mathrm{int}(A^C \cup B^C) \\
+        \overline{A \cap B} & \subseteq \overline{A} \cap \overline{B} 
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    \[
+        \bigcap_{\alpha \in I} \overline{A_{\alpha}} \subseteq \overline{\bigcap_{\alpha \in I} A_{\alpha} }
+    \]
+\end{corollary}
+
+\begin{proof}
+    by \autoref{col:bigcup-int-subseteq-int-bigcup}:
+
+    \[
+        \bigcup_{\alpha \in I}\mathrm{int}(A_{\alpha}^C) \subseteq \mathrm{int}(\bigcup_{\alpha \in I}A_{\alpha}^C)
+    \]
+
+    take complement on both side:
+
+    \begin{align*}
+      (\mathrm{int}(\bigcup_{\alpha \in I}A_{\alpha}^C))^C & \subseteq  (\bigcup_{\alpha \in I}\mathrm{int}(A_{\alpha}^C))^C \\
+      \overline{(\bigcup_{\alpha \in I}A_{\alpha}^C)^C} & \subseteq  \bigcap_{\alpha \in I}(\mathrm{int}(A_{\alpha}^C))^C \\
+      \overline{\bigcap_{\alpha \in I}A_{\alpha}} & \subseteq  \bigcap_{\alpha \in I}\overline{A_{\alpha}} \\
+    \end{align*}
+\end{proof}
+
+\begin{definition}[Boundary Point]
+    Boundary point of $A$ is defined as 
+    
+    \[
+    \partial A = \left(\mathrm{int}(A) \right)^C \cap \left(\mathrm{int}(A^C) \right)^C
+    \]
+
+    which means boundary is not interior or complement's interior 
+\end{definition}
+
+\begin{lem}
+    $\partial A = \overline{A} \setminus \mathrm{int}(A)$
+\end{lem}
+
+\begin{proof}
+   \begin{align*}
+    \partial A &= \left(\mathrm{int}(A) \right)^C \cap \left(\mathrm{int}(A^C) \right)^C \\
+    &= \left(\mathrm{int}(A) \right)^C \cap \overline{A} \\
+    &= \overline{A} \setminus \mathrm{int}(A)
+   \end{align*} 
+\end{proof}
+
+\begin{lem}
+    $\partial A$ is closed
+\end{lem}
+
+\begin{proof}
+    since $\partial A$ is intersection of two closed set.
+\end{proof}
+
+\begin{definition}[Isolated Point]
+    $x$ is isolated point of $A$ iff $x \in A \setminus A'$ 
+\end{definition}
+
+\begin{lem}
+$\overline{A} \setminus A' = A \setminus A'$
+\end{lem}
+\begin{proof}
+    \begin{align*}
+        \overline{A} \setminus A' &= \left( A \cup A'\right) \setminus A' \\
+        &=  A \setminus A'
+    \end{align*}
+\end{proof}
+
+\begin{definition}
+    $A$ is perfect set iff $A \subseteq A'$
+\end{definition}
+
+\subsection{Metric Space}
+
+\begin{thm}
+    \label{thm:2-2-1}
+    let $x$ be a limit point of $E$, then every open neighbor of $x$
+    contains infinitely many points of $E$
+\end{thm}
+
+\begin{proof}
+    suppose there is an open neighbor $V_x$ meets $V_x \setminus \{ x \}$ has finite points $y_1,y_2,..,y_n$
+    now consider neighbor $V_1$:
+
+    \begin{align*}
+        d_0 &= \min_{k \le n} d(x, y_k) \\
+        V_1 &= B(x,d_0/2)
+    \end{align*}
+
+    now $V_1 \setminus \{ x \}$ contains none element of $E$, which is contradict with $x$ is limit point.
+\end{proof}
+
+\begin{corollary}
+    A finite set $E$ has no limit points
+\end{corollary}
+
+
+\begin{corollary}
+    \label{col:2-2-3}
+    let $E$ be a set under metric space, and $A$ be a subset of $E$, and $U = E \setminus A$ is finite, then $A' = E'$
+\end{corollary}
+
+\begin{proof}
+    pick $x$ as limit point of $E$, since every open neighbor of $x$ $V$ contains infinitely many points of $E$,
+    then $V \cap A = V \cap (E \setminus U) = (V \cap E) \setminus U$  is also infinitely.
+\end{proof}
+
+\begin{definition}[Relative Topology]
+    let $(X, \mathscr{F})$ be a general topological space.
+    suppose $Y \subseteq X,\: E \subseteq Y$ is open relative to $Y$ iff $E = Y \cap G$ for some open subset $G$
+    of X, thus we construct a relative topological space $(Y, \mathscr{F}_Y)$
+\end{definition}
+
+\subsection{Compact sets}
+
+\begin{definition}
+    A subset $K$ of general topological space is said to be compact iff every open cover of
+    $K$ contains a finite subcover.
+\end{definition}
+
+\begin{thm}
+    suppose $K \subseteq Y \subseteq X$. Then $K$ is compact in $(Y, \mathscr{F}_Y)$ iff $K$ is compact in $(X, \mathscr{F}_X)$.
+\end{thm}
+
+\begin{proof}
+    let's assume $K$ is compact $(X, \mathscr{F}_X)$ at first, and for any open cover in $(Y, \mathscr{F}_Y)$:
+
+    \[
+        K \subseteq \bigcup_{\alpha \in I} V_{\alpha}
+    \]
+
+    since every $V_{\alpha}$ has some $V'_{\alpha} \in \mathscr{F}_X$ meets $V'_{\alpha} \cap Y = V_{\alpha}$, we got
+
+    \begin{align*}
+        K &\subseteq \bigcup_{\alpha \in I} V'_{\alpha} \cap Y \\ & \subseteq \bigcup_{\alpha \in I} V'_{\alpha} 
+    \end{align*}
+
+    this is an open cover of $K$ under $(X, \mathscr{F}_X)$, since $K$ is compact in $(X, \mathscr{F}_X)$, there exists 
+    a finite subcover:
+
+    \[
+        K \subseteq \bigcup_{n \le N} V'_n
+    \]
+
+    and
+
+    \begin{align*}
+        K \cap Y &\subseteq Y \cap \bigcup_{n \le N} V'_n \\
+        &\subseteq \bigcup_{n \le N} V'_n \cap Y \\
+        &\subseteq \bigcup_{n \le N} V_n  \\
+    \end{align*}
+
+    so we find finite subcover under $(Y, F_{Y})$
+
+    then we assume $K$ is compact under $(Y, \mathscr{F}_Y)$, for any open cover in $(X,\mathscr{F}_X)$:
+
+    \begin{align*}
+        K &\subseteq \bigcup_{\alpha \in I} V'_{\alpha} \\
+        K \cap Y &\subseteq Y \cap \bigcup_{\alpha \in I} V'_{\alpha} \\
+        K  &\subseteq \bigcup_{\alpha \in I} V'_{\alpha} \cap Y \\
+        K  &\subseteq \bigcup_{\alpha \in I} V_{\alpha}  \\
+    \end{align*}
+
+    because $V_{\alpha} \in \mathscr{F}_Y$, we got a open cover of $K$ under $(Y, \mathscr{F}_Y)$, by
+    $K$ is compact, we could find a finite subcover:
+
+    \[
+        K \subseteq \bigcup_{n \le N} V_n
+    \]
+
+    and we got our open cover under $(X, \mathscr{F}_X)$:
+
+
+    \[
+        K \subseteq \bigcup_{n \le N} V_n  \subseteq \bigcup_{n \le N} V'_n
+    \]
+\end{proof}
+
+\begin{thm}
+    let $K$ is a compact set under metric space $(X,d)$ and $K \ne X$, then $K$ is closed.
+\end{thm}
+
+\begin{proof}
+    let $p \in K^C$, for every $q \in K$, create a open ball $B(q, \epsilon_q)$ and cover $K$:
+
+    \[
+        K \subseteq \bigcup_{q \in K} B(q, \epsilon_{q}), \: \epsilon_{q} < \frac{1}{2}d(p, q)
+    \]
+
+    since $K$ is compact, there exists a finite sub cover
+
+    \[
+    K \subseteq \bigcup_{n=1}^{N} B(q_n, \epsilon_{n}), \: \epsilon_{n} < \frac{1}{2}d(p, q_n)
+    \]
+
+    then for every $y \in K$, we have 
+
+    \[
+y \in \bigcup_{n=1}^{N} B(q_n, \epsilon_{n})
+    \]
+
+    for every $y$, exists $1 \le n \le N$ such that
+
+    \[
+        d(y, q_n) < \epsilon_n < \frac{1}{2}d(p, q_n)
+    \]
+
+    for this $n$ we have
+
+    \begin{align*}
+        d(y, p) &\ge d(p,q_n) - d(y, q_n) > d(p,q_n) - \frac{1}{2}d(p, q_n) \\
+        & > \frac{1}{2}d(p, q_n) \ge \frac{1}{2}\min_{n \le N} \left( d(p, q_n) \right)
+    \end{align*}
+
+    now we set 
+
+    \[
+        r = \frac{1}{2}\min_{n \le N}d(p, q_n)
+    \]
+
+
+    so we got
+
+    \[
+        K \subseteq X \setminus B(p, r)
+    \]
+
+    thus we got
+
+    \[
+        B(p,r) \subseteq K^C
+    \]
+
+    so $p$ is a interior point of $K^C$, so $K^C$ is open and $K$ is closed.
+\end{proof}
+
+\begin{thm}
+    \label{thm:2-3-4}
+    let $K$ be a compact set and $J$ be a closed set and $J \subseteq K$, then $J$ is also compact
+\end{thm}
+
+\begin{proof}
+    let $J$ covered by a group of open sets $V_{\alpha},\, \alpha \in I$
+
+    \[
+        J \subseteq \bigcup_{\alpha \in I} V_{\alpha}
+    \]
+
+    then we have
+
+    \[
+        K \subseteq J \cup J^C \subseteq \left(\bigcup_{\alpha \in I} V_{\alpha}\right) \cup J^C
+    \]
+
+    since $K$ is compact, there exists a finite sub cover of $K$ such that
+
+    \[
+        J \subseteq K \subseteq \left(\bigcup_{n=1}^{N} V_{n}\right) \cup J^C
+    \]
+
+    then we have
+
+    \begin{align*}
+        J & \subseteq \left(\bigcup_{n=1}^{N} V_{n}\right) \cup J^C \\
+        J & \subseteq \left(\bigcup_{n=1}^{N} V_{n}\right) \cup J \\
+        J \cap J & \subseteq \left(\bigcup_{n=1}^{N} V_{n}\right) \cup (J \cap J^C) \\
+        J & \subseteq \bigcup_{n=1}^{N} V_{n}
+    \end{align*}
+
+\end{proof}
+
+\begin{thm}
+    let $K_{\alpha},\: \alpha \in I$ be a group of compact sets. And for any nonempty finite subset $J \subseteq I$ we have
+
+
+    \[
+        \bigcap_{\alpha \in J} K_{\alpha} \ne \emptyset
+    \]
+
+    then:
+
+    \[
+        \bigcap_{\alpha \in I} K_{\alpha} \ne \emptyset
+    \]
+\end{thm}
+
+\begin{proof}
+
+
+
+    pick any $K_1$ of  $\{ K_{\alpha}\}$, assume that
+
+    \[
+        K_1 \cap \left( \bigcap_{\alpha \in I} K_{\alpha} \right) = \emptyset
+    \]
+
+    then we have
+
+    \[
+        K_1 \subseteq \bigcup_{\alpha \in I}K_{\alpha}^C
+    \]
+
+    since $K_1$ is compact, and we have a open cover of $K_1$, there should exists a finite sub cover:
+
+    \[
+        K_1 \subseteq \bigcup_{n=1}^{N}K_{\alpha_n}^C
+    \]
+
+    so we have
+
+    \[
+        K_1 \cap K_{\alpha_1} .. \cap K_{\alpha_N} = \emptyset
+    \]
+
+    which is contradict with condition
+\end{proof}
+
+\begin{corollary}
+    \label{col:2-3-6}
+    let $K_n$ be a sequence of nonempty compact sets such that $K_n \supseteq K_{n+1}(n=1,2,3...)$
+    then 
+
+    \[
+        \bigcap_{n=1}^{\infty}K_n \ne \emptyset
+    \]
+
+\end{corollary}
+
+\begin{thm}
+    \label{thm:2-3-7}
+    let $E$ be an infinite set and $E \subseteq K$ where $K$ is a compact set in a metric space. 
+    then $E$ has at least one limit point in $K$
+\end{thm}
+
+\begin{proof}
+    for contradiction, assume  $E'$ is all limit points of $E$, and $E' \cap K = \emptyset$, then we have $K \subseteq (E')^C$
+
+    since $(E')^C$ could be written as
+
+    \[
+        (E')^C = \{ x: \exists r_x > 0,\, B(x, r_x) \cap E \subseteq \{ x \} \}
+    \]
+
+    so we have
+
+    \[
+        E \subseteq K \subseteq \bigcup_{x \in (E')^C} B(x, r_x) \quad B(x, r_x) \cap E \subseteq \{ x \}
+    \]
+
+    since $K$ is compact, there exists finite sub cover:
+
+
+    \[
+        E \subseteq K \subseteq \bigcup_{n=1}^{N} B(x_n, r_n) \quad B(x_n, r_n) \cap E \subseteq \{ x_n \}
+    \]
+
+    then we have
+
+    \[
+        E \cap \bigcup_{n=1}^{N} B(x_n, r_n) = E \subseteq \{ x_1, x_2, .. , x_n \}
+    \]
+
+    which is contradict with that $E$ is infinite.
+\end{proof}
+
+\begin{thm}
+    \label{lem:2-3-8}   
+    let $\{ I_n \}$ is a sequence of nonempty bounded and closed intervals in $\mathbb{R}$, such that $I_n \supseteq I_{n+1}(n=1,2,3, ...)$
+    then 
+
+    \[
+        \bigcap_{n=1}^{\infty} I_n \ne \emptyset
+    \]
+\end{thm}
+
+\begin{proof}
+    let $I_n = [a_n, b_n]$, by $I_n \supset I_{n+1}$, we got $a_n \le a_{n+1},\: b_{n+1} \le b_n, a_n \le b_n$:
+
+    we pick any $m$, by 
+
+    \begin{align*}
+        & a_1 \le a_2 .. \le a_m \le b_m \\
+        & a_{m+k} \le b_{m+k} \le b_m 
+    \end{align*}
+
+    we got $\forall 1 \le n , a_n \le b_m$, thus we can take sup :
+
+    \[
+        \sup_{n} a_n \le b_m
+    \]
+
+    since $m$ is arbitrary, we can take inf:
+
+    \[
+        \sup_{n} a_n \le \inf_{m} b_m
+    \]
+
+    now we consider $x = \sup_{n} a_n$, then $\forall n$, $x$ meets:
+    $a_n \le x \le b_n$, so 
+
+    \[
+        x \in \bigcap_{n=1}^{\infty}I_n
+    \]
+\end{proof}
+
+
+\begin{corollary}
+    \label{lem:2-3-9}
+    let $\{ I_n \}$ is a sequence of nonempty bounded and closed boxes in $\mathbb{R}^m$, such that $I_n \supseteq I_{n+1}(n=1,2,3, ...)$
+    then 
+
+    \[
+        \bigcap_{n=1}^{\infty} I_n \ne \emptyset
+    \]
+\end{corollary}
+
+\begin{proof}
+    we construct a projection functions: $f_1: \mathbb{R}^m \to \mathbb{R}$:
+
+    \[
+        f_1(x_1,x_2,..,x_m) = x_1
+    \]
+
+    let box $I_n = \prod_{k=1}^{m}[a_k^{(n)}, b_k^{(n)}]$, then the image of $I_n$ is:
+
+    \[
+        f_1(I_n) = [a_1^{(n)}, b_1^{(n)}]
+    \]
+
+    since $I_n \supseteq I_{n+1}$, we got $f_1(I_n) \supseteq f_1(I_{n+1})$, by our \autoref{lem:2-3-8}, we have:
+
+    \[
+        \bigcap_{n=1}^{\infty}f_1(I_n) \ne \emptyset
+    \]
+
+    we can define $f_2,f_3,..,f_m$ and got
+
+
+    \[
+        \forall k \le m,\: \bigcap_{n=1}^{\infty}f_{k}(I_n) \ne \emptyset
+    \]
+
+    consider $y = (y_1,y_2,..,y_m),\: y_k \in \bigcap_{n=1}^{\infty}f_{k}(I_n)$, we pick any $I_l$, we have:
+
+    \begin{align*}
+        \forall k \le m,\: y_k &\in \bigcap_{n=1}^{\infty}f_{k}(I_n) \subseteq f_k(I_l) \\
+        y_k & \in [a_k^{(l)}, b_k^{(l)}] \\
+        y & \in I_l
+    \end{align*}
+
+    thus we got
+
+    \[
+        y \in \bigcap_{n=1}^{\infty}I_n
+    \]
+
+\end{proof}
+
+\begin{thm}
+    \label{thm:2-3-10}
+    every bounded closed box under $\mathbb{R}^m$ is compact
+\end{thm}
+
+\begin{proof}
+    let $I_1$ :
+
+    \[
+        I_1 = \prod_{k=1}^{m} [a_k^{(1)},b_k^{(1)}] 
+    \]
+
+    be a bounded closed box.
+
+    Assume for contradiction that $I_1$ has an open cover, while contains none finite sub cover.
+    we divide $I_1$ into $2^m$ sub boxes by take $c_k^{(1)} = (a_k^{(1)} + b_k^{(1)}) / 2$ and got
+
+    \[
+        \prod_{k=1}^{m} [l_k^{(1)},r_k^{(1)}] \: \mathrm{where}\: (l_k^{(1)},r_k^{(1)}) = (a_k^{(1)},c_k^{(1)}) \:\mathrm{or} \: (c_k^{(1)},b_k^{(1)})
+    \]
+
+    since $I_1$ cannot be covered by finitely many subsets from open cover, at least one of the sub-boxes cannot be covered by a finite subcollection either.
+    Denote this one by $I_2$. Since $I_2$ is also a bounded and closed box, we continue the process and got
+    $I_3,I_4,...$
+
+    by $I_n \supseteq I_{n+1}$ and \autoref{lem:2-3-9}, we got
+
+    \[
+        \bigcap_{n=1}^{\infty}I_n \ne \emptyset
+    \]
+
+    let's pick $x^* \in \bigcap_{n=1}^{\infty}I_n$, since $x^* \in V$ for some open set $V$, where $V$ is a member of open cover of $I_1$, and there 
+    exists a open ball $B(x^*,r) \subseteq V$
+
+    let's define 
+
+    \[
+        L = \max_{k \le m} b_k^{(1)} - a_k^{(1)}
+    \]
+
+    then it is obviously that
+
+    \[
+    \forall x,y \in I_n, d(x,y) \le \frac{1}{2^{n-1}}mL
+    \]
+
+    which means there exists $N$ and $\forall y \in I_N, d(y, x^*) < r$, so $I_N$ could be covered by $V$, which is contradict with $I_N$
+    has none finite sub cover. 
+
+\end{proof}
+
+\begin{thm}
+    If $E \in \mathbb{R}^m$ has one of the following three properties, then it has the other two:
+
+    \begin{enumerate}
+        \item $E$ is closed and bounded
+
+        \item $E$ is compact
+
+        \item Every infinite subset of $E$ has a limit point in $E$
+    \end{enumerate}
+
+\end{thm}
+
+
+\begin{proof}
+    we prove $1 \to 2$ at first:
+    
+    if $E$ is closed an bounded, assume $E \subseteq I$ where $I$ is bounded and closed box. By \autoref{thm:2-3-10} Since $I$ is compact, and $E$ is a closed subset of $I$.
+    then $E$ is also compact.
+
+    then prove $2 \to 3$, this is equiv to \autoref{thm:2-3-7}
+
+    then $3 \to 1$:
+
+    for contradiction, assume $E$ is not bounded, then we pick subset of $E$:
+
+    \[
+        A = \{ x_n \},\: d(x_n, 0) \ge n
+    \]
+
+    assume $x* \in E$, then we got
+
+    \[
+        d(x_n, x^*) \ge d(x_n,0) - d(x^*,0) \ge n -d(x^*, 0)
+    \]
+
+    which indicates that $x^*$ cannot be limit point of $A$
+    because we can pick $n = N$ be large enough so that $d(x_n, x^*) \ge 1$, 
+    which indicates $x^*$ is not limit point of subset $\{ x_n\}_{n \ge N} $, and 
+    is contradict with \autoref{col:2-2-3}
+    so $E$ must be bounded.
+
+    for contradiction, assume $E$ is not closed. now we pick $x^* \in E' \setminus E$,
+
+    and pick $x_n \in E$ meets $d(x_n, x^*) \le 1/n$, then $A = \{ x_n \}$ has only one limit point $x^*$
+    while $x^* \notin E$
+    if $y^*$ is also a limit point of $A$, since $x_n$ is cauchy, we pick a
+    subset $\{ x_n\}_{n \ge N}$ so that $d(x_k, x_p) \le \epsilon$, since $x^*$ and $y^*$ are both
+    limit point of $\{ x_n\}_{n \ge N}$, we got
+
+    \begin{align*}
+        d(x_k, x^*) &\le \epsilon \\
+        d(x_p, y^*) &\le \epsilon \\
+        d(x_k, x_p) &\le \epsilon \\
+    \end{align*}
+
+    and
+
+    \[
+        d(x^*, y^*) \le d(x^*, x_k) + d(x_k, x_p) + d(x_p, y^*) \le 3\epsilon
+    \]
+
+    since $\epsilon$ is arbitrary, $d(x^*, y^*) = 0$
+
+\end{proof}
+
+\begin{thm}[Weierstrass]
+   Every bounded infinite subset of $\mathbb{R}^m$ has a limit point in $\mathbb{R}^m$ 
+\end{thm}
+
+\begin{proof}
+    let $E$ be a bounded infinite subset of $\mathbb{R}^m$, and pick a bounded box $I \supseteq E$.
+    since $I$ is compact and $E$ is infinite, then $E' \cap I$ contains at least one point by \autoref{thm:2-3-7} 
+\end{proof}
+
+\begin{thm}
+    \label{thm:2-3-13}
+    On topological space $(X, \mathscr{F})$, if every singe point set is closed, then every derive set is closed 
+\end{thm}
+
+\begin{proof}
+   let $E \subseteq X$ and 
+   
+   \[
+    E' = \{ x: \forall V \in \mathscr{F},\, x \in V,\, V \cap (E \setminus \{ x\}) \ne \emptyset \}
+   \]
+
+   then we have
+
+   \[
+    (E')^C = \{ x: \exists V \in \mathscr{F},\, x \in V,\, V \cap (E \setminus \{ x\}) = \emptyset \}
+   \]
+
+   consider that any $y \in V,\, y \ne x$: we have a open set $V \setminus (\{ x\})$:
+
+   \begin{align*}
+    (V \setminus \{x\} ) \cap (E \setminus \{y \}) &= V \cap E \cap (\{ x, y\})^C \\
+    & \subseteq \{ x \} \cap (\{x, y\})^C = \emptyset
+   \end{align*}
+
+
+   so for any $x \in (E')^C$ we have a open set $V_x$ which contains $x$ and
+
+   \begin{align*}
+        V_x \subseteq (E')^C
+   \end{align*}
+
+   
+   so $(E')^C$ can be written as union of open sets:
+
+   \[
+    (E')^C = \bigcup_{x \in (E')^C} V_x
+   \]
+
+   and $E'$ is closed
+
+\end{proof}
+
+\begin{thm}
+    let $A$ be a subset of metric space $X$, and for every sequence $x_n \in A$ has at least one subsequential limit, then $A$ is compact
+\end{thm}
+
+\begin{proof}
+    let $A$ have a group of open cover
+    \[
+        A \subseteq \bigcup_{\alpha \in I}V_{\alpha}
+    \]
+
+    and define $r(x): A \to \mathbb{R}^*$
+
+    \[
+        r(x) = \sup_{r \ge 0} \{ r: \exists \alpha \in I \mathrm{\: such \: that \:} B(x,r) \subseteq V_{\alpha} \}
+    \]
+
+    and define $r_0$ as
+
+    \[
+        r_0 = \inf_{x \in A} r(x)
+    \]
+
+    then we discuss on $r_0$:
+
+    \begin{enumerate}
+        \item we prove a lemma at first: for any convergent $x_n \in A$, we have
+
+        \[
+            \varlimsup_{n \to \infty}r(x_n) \ge r(\lim_{n \to \infty}x_n)
+        \]
+
+        consider $x \in A$ and
+
+        \[
+            \lim_{n \to \infty}x_n = x
+        \]
+
+        we prove that $B(x_n, r(x) -d(x_n,x)) \subseteq B(x,r(x))$
+
+        assume $y \in B(x_n, r(x) -d(x_n,x))$
+
+        then
+
+        \[
+            d(y,x) \le d(y,x_n) + d(x_n,x) < r(x) -d(x_n,x) +d(x_n,x) 
+        \]
+
+        and hence $y \in B(x,r(x))$
+
+        so we got $r(x_n) \ge r(x) - d(x_n,x)$
+
+        take $n \to \infty$ we have
+
+        \[
+            \varlimsup_{n \to \infty}r(x_n) \ge r(x)
+        \]
+
+
+        \item consider if $r_0 = 0$
+
+        by definition of $\inf$, there exists a sequence $x_n \in A$, such that
+
+        \[
+            \lim_{n \to \infty}r(x_n) = 0
+        \]
+
+        since $x_n \in A$, by condition there exists a sub sequence $x_{n_k}$ such that
+
+        \[
+            \lim_{k \to \infty}x_{n_{k}} = x_0 
+        \]
+
+        by our previous lemma we have
+
+        \[
+            r(x_0) \le \varlimsup_{k \to \infty}r(x_{n_{k}}) \le 0
+        \]
+
+        however since $x_0$ belongs to at lease one open set $V_{\alpha}$, so $r(x_0) > 0$, 
+        so $r_0 \ne 0 $
+
+        \item consider $0 < r_0 \le \infty$
+
+        we  take $0 < r_1 < \infty$ and $r_1 < r_0$, then for every $x \in A$, there exists
+        a ball $B(x, r_x),\, r_x \ge r_1$ and $B(x, r_x) \subseteq V_{\alpha}$ for some $\alpha \in I$
+
+        then we can construct a sequence $x_n$:
+
+        \begin{align*}
+            & x_1 \in A\: & B(x_1, r_1) \subseteq V_{1} \\
+            & x_2 \in A \setminus (V_1)\: & B(x_2, r_2) \subseteq V_2 \\
+            & x_3 \in A \setminus (V_1 \cup V_2) & \: B(x_3, r_3) \subseteq V_3 \\
+            & ...
+        \end{align*}
+
+        since $A$ cannot be covered by finite open sets $V_1, V_2, .. V_n$, so we can construct infinite $x_n$.
+        it is obviously that for any $j > i$ we have $d(x_i, x_j) \ge r_1$
+
+        so $x_n$ cannot contains any convergent sub sequence which is contradict.
+
+
+
+    \end{enumerate}
+\end{proof}
+
+\subsection{Perfect Sets}
+
+\begin{lem}
+    \label{lem:2-4-1}
+    let $P$ be a perfect set under metric space, and $V_0$ is an open set such that $V_0 \cap P \ne \emptyset$, and $x_0 \in P$.
+    then there exists open subset $V_1 \subseteq V_0$, which meets:
+
+    \begin{enumerate}
+        \item $x_0 \notin \overline{V_1}$
+        \item $V_1 \cap P \ne \emptyset$
+        \item $\overline{V_1} \subseteq V_0$
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    since $V_0 \cap P \ne \emptyset$ and by \autoref{thm:2-2-1} $V_0 \cap P$ is infinite, we take $x^* \in V_0 \cap P, x^* \ne x_0$, and open ball $B(x^*, r_0) \subseteq V$
+
+    if $x_0 \notin B(x^*, r_0)$ then $B(x^*, r_0/2)$ is $V_1$ what we want.
+
+    if $x_0 \in B(x^*, r_0)$, which means $0 < d(x^*, x_0) < r_0$, we pick $r_1 = d(x^*, x_0)/ 2$
+    then $B(x^*, r_1)$ is what we want.
+
+\end{proof}
+
+\begin{thm}
+    perfect set under metric space is closed
+\end{thm}
+
+\begin{proof}
+    $\overline{P} = P \cup P' = P'$, and by \autoref{thm:2-3-13} derive set under metric space is closed
+\end{proof}
+
+\begin{thm}
+    let $P$ be a nonempty perfect set in $\R$. Then P is uncountable.
+\end{thm}
+
+\begin{proof}
+    Assume $P$ is countable for contradiction, and expand it as: $P=\{  x_1,x_2,x_3,..\}$
+
+    by \autoref{lem:2-4-1}, pick $V_1 = B(x_1, r_1)$ at first, by $V_1 \cap P \ne \emptyset$, and $x_1 \in P$,
+    we can construct $V_2$ so that:
+    
+    \begin{enumerate}
+        \item $x_1 \notin \overline{V_2}$
+        \item $V_2 \cap P \ne \emptyset$
+        \item $\overline{V_2} \subseteq V_1$
+    \end{enumerate}
+
+    the we continue apply \autoref{lem:2-4-1} on $V_2$ and $x_2$, and got $V_3,V_4,..$ repeated.
+
+    consider $K_n = \overline{V_n} \cap P$, then $K_n$ is bounded and closed, and hence compact.
+
+    since $x_n \notin \overline{V_{n+1}}$, we got:
+    
+    \[
+        \bigcap_{n=1}^{\infty} K_n = \emptyset
+    \]
+
+    because $K_n \ne \emptyset$ and $K_{n} \supseteq K_{n+1}$, and $K_n$ is compact, the above result
+    is contradict with \autoref{col:2-3-6}
+\end{proof}
+
+\subsection{Connected Sets}
+
+\begin{thm}[Disjoint open set is separated]
+    let $V$ and $W$ be disjoint open set under topological space $(X, \mathscr{F})$, prove that:
+
+    \[
+        V \cap \overline{W} = \emptyset
+    \]
+\end{thm}
+
+\begin{proof}
+    \begin{align*}
+        V \cap \overline{W} &= V \cap (W \cup W') \\
+        & = V \cap W'
+    \end{align*}
+
+    since $V$ is open, for any $x \in V$, exists an open set $V_x,\: x \in V_x$ and $V_x \cap W = \emptyset$, so $V$
+    cannot contains any limit point of $W$, so 
+
+    \[
+        V \cap W' = \emptyset
+    \]
+\end{proof}
+
+\begin{definition}
+    let $C$ under topological space $(X, \mathscr{F})$ is not connected iff exists two nonempty open set $V, W \in \mathscr{F},\: V \cap W \cap C = \emptyset$, and
+
+    \begin{align*}
+        C \subseteq V \cup W \\
+        C \cap V \ne \emptyset \\ 
+        C \cap W \ne \emptyset \\ 
+        C \cap V \cap W = \emptyset
+    \end{align*}
+\end{definition}
+
+\begin{thm}
+    let $C$ under topological space $(X, \mathscr{F})$, then $C$ is not connected iff exists nonempty set $A, B$  such that
+
+    \begin{align*}
+        A \cap \overline{B} = \emptyset \\
+        B \cap \overline{A} = \emptyset \\
+        C = A \cup B
+    \end{align*}
+\end{thm}
+
+\begin{proof}
+   \begin{enumerate}
+    \item when $V \cap W \cap C = \emptyset$
+
+    let $A = V \cap C,\: B = W \cap C$, then we have
+
+    \begin{align*}
+        A \cap \overline{B} &= V \cap C \cap \overline{W \cap C} \\
+        & = V \cap C \cap ((W \cap C) \cup (W \cap C)') \\
+        &= V \cap C \cap (W \cap C)'
+    \end{align*}
+
+
+    since $(V \cap C) \cap (W \cap C) = \emptyset$, for any $x \in V \cap C$, there exists an open set $V$ such that
+
+    \[
+        V \cap (W \cap C) = \emptyset
+    \]
+
+    so $x$ cannot be limit point of $W \cap C$, so
+
+    \[
+        A \cap \overline{B} = \emptyset
+    \]
+
+    so we find $A, B$ that:
+
+    \begin{align*}
+        A \cap \overline{B} = \emptyset \\
+        B \cap \overline{A} = \emptyset \\
+        A \cup B = C
+    \end{align*}
+
+
+    \item when $C = A \cup B$
+
+    since we have 
+    \begin{align*}
+       A \cap \overline{B} = \emptyset \\ 
+        B \cap \overline{A} = \emptyset \\
+    \end{align*}
+
+    so we have
+
+
+    \begin{align*}
+       A \subseteq (\overline{B})^C \\
+       B \subseteq (\overline{A})^C \\
+    \end{align*}
+
+    let's define: $V = (\overline{A})^C$, $W = (\overline{B})^C$, then we have:
+
+    \begin{align*}
+        C \cap V &= (A \cup B) \cap (\overline{A})^C \supseteq B \ne \emptyset \\
+        C \cap W &= (A \cup B) \cap (\overline{B})^C \supseteq A \ne \emptyset \\
+        C &= A \cup B \subseteq V \cup W \\
+        C \cap V \cap W & = (A \cup B) \cap (\overline{A} \cup \overline{B})^C \\
+        & = (A \cup B) \cap (\overline{A \cup B})^C \\
+        & \subseteq (A \cup B) \cap (A \cup B)^C \subseteq \emptyset
+    \end{align*}
+    
+
+   \end{enumerate} 
+\end{proof}
+
+\begin{thm}
+    $I \in \mathbb{R}$, then $I$ is connected iff: $\forall x,y \in I, x <y$, $\forall x < z < y,\: z \in I$     
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Assume for contradiction $\exists x < z < y, z \notin I$ we define
+
+        \begin{align*}
+            A &= I \cap (-\infty, z) \\ 
+            B &= I \cap (z, \infty)
+        \end{align*}
+
+        then we have
+
+        \begin{align*}
+            A \cap \overline{B} & \subseteq A \cap \overline{I} \cap [z, \infty] = \emptyset \\
+            B \cap \overline{A} & \subseteq B \cap \overline{I} \cap (-\infty,z] = \emptyset \\
+            A \cup B &= I \setminus \{ z \} = I
+        \end{align*}
+
+        \item Assume for contradiction that $I$ is not connected, $I = A \cup B$ where nonempty set $A,B$ is separated:
+
+        \[
+        A \cap \overline{B} = \overline{A} \cap B = \emptyset
+        \]
+
+        let's pick $x \in A$ and $y \in B$, assume $x < y$, and we define
+
+        \[
+            z = \sup \left( A \cap [x,y] \right)
+        \]
+
+        by property of $\sup$ then we have $z \in \overline{A}$, so $z \notin B$
+
+        and $x \le z < y$
+
+        if $z \notin A$, then $z$ is what we want. 
+        
+        if $z \in A$, then $z \notin \overline{B}$, since $(\overline{B})^C$ is open, 
+        we pick a neighbor of $z$: $N(z, \epsilon),\, \epsilon < (y -z) / 2$ and $N(z, \epsilon) \subseteq (\overline{B})^C$
+        then $z' = z + \epsilon / 2$ is what we want
+        
+        because if $z' \in A$ by $x < z < z' < y$ we have $z' \in A \cap [x,y]$ which 
+        is contradict with definition of $\sup$
+
+
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}[Path connected indicates connected]
+    let $V, W \subseteq \mathbb{R}^n$ and $V \cap \overline{W} = \emptyset,\: \overline{V} \cap W = \emptyset$, prove:
+
+    for any $x \in V,\: y \in W$ and $\gamma: [0,1] \to \mathbb{R}^n$ is a continuous function, and  $\gamma(0) = x,\: \gamma(1) = y$
+
+    then $\exists 0 < t < 1, \gamma(t) \notin V \cup W$
+
+\end{thm}
+
+\begin{proof}
+    we define: 
+    
+    \begin{align*}
+        t_0 &= \sup_{0 \le t \le 1} \{ t: \gamma(t) \in V \} \\
+           z &= \gamma(t_0)
+    \end{align*}
+
+    let's define $t_n \to t_0, \gamma(t_n) \in V$, since $\overline{V}$ is closed and $\gamma$ is continuous, we have
+
+    \[
+        \lim_{n \to \infty}\gamma(t_n) = \gamma(t_0) \in \overline{V}
+    \]
+
+    since $z \in \overline{V}$ then we must have $z \notin W$ and $t_0 < 1$ let's discuss on if $z \in V$
+
+    \begin{enumerate}
+        \item $z \notin V$
+
+        then $t_0$ is what we want
+
+        \item $z \in V$
+
+        then we have $z \notin (\overline{W})^C$, let's define $F = (\overline{W})^C$, since $F$ is open, we have an open set $V_z \subseteq F$,
+        since $\gamma$ is continuous, so $\gamma^{-1}(V_z)$ is also an open set, and we have $t_0 \in \gamma^{-1}(V_z)$
+
+        let's pick $0 < \epsilon < 1 - t_0$ be small enough, so that $t_0 + \epsilon \in \gamma^{-1}(V_z)$
+
+        because if $z' \in V$, then $t_0 + \epsilon$ is contradict with that $t_0$ is sup.
+
+        so $t_0 + \epsilon$ is what we want
+    \end{enumerate}
+\end{proof}

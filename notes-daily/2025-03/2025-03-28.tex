@@ -1,0 +1,250 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{2025-03-28}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{行列式计算}
+
+\subsection{包含三角函数的行列式}
+
+\begin{align*}
+    A_n = \begin{vmatrix}
+        \cos x & 1 & 0 & 0 & .. & 0 & 0 & 0 \\
+        1 & 2\cos x & 1 & 0 & .. & 0 & 0 & 0 \\
+        0 & 1 & 2 \cos x & 1 &  .. & 0 & 0 & 0\\
+        .. & .. &.. &.. &.. &.. &.. & .. \\
+        0 & 0 & 0  & 0 &  .. & 1 & 2 \cos x & 1\\
+        0 & 0 & 0  & 0 &  .. & 0 & 1 & 2 \cos x\\
+    \end{vmatrix} =  D_n - \cos x D_{n-1}
+\end{align*}
+
+其中对 $D_n$ 有 $D_n = 2 \cos x D_{n-1} - D_{n-2}$
+
+用求根公式可以求解
+
+\begin{align*}
+\alpha + \beta &= 2 \cos x \\
+-\alpha \beta &= -1 \\
+y^2 - 2 \cos x y + 1 & = 0 
+\end{align*}
+
+得到当 $\alpha \ne \beta$ 时
+
+\begin{align*}
+\alpha &= \frac{2 \cos x + \sqrt{4 \cos^2 x - 4}}{2} = \cos x + i \sin x \\
+\beta &= \frac{2 \cos x - \sqrt{4 \cos^2 x - 4}}{2} = \cos x - i \sin x \\
+\end{align*}
+
+$D_n$ 可以计算出来
+
+\begin{align*}
+    D_n &= \frac{ (\cos x + i \sin x)^{n+1} - (\cos x - i \sin x)^{n+1} }{2 i \sin x} \\
+    &= \frac{e^{i(n+1)x}  - e^{-i(n+1)x}}{2 i \sin x} = \frac{\sin ((n+1)x)}{ \sin x}
+\end{align*}
+
+于是有
+
+\begin{align*}
+A_n = D_n - \cos x D_{n-1} &= \frac{\sin ((n+1)x)}{\sin x} - \cos x \frac{\sin (nx)}{\sin x} \\
+&= \frac{\cos (nx) \sin x}{\sin x} = \cos (nx)
+\end{align*}
+
+当 $\alpha = \beta = \cos x$ 时，还要满足 $\alpha \beta = 1$，所以此时必然有 $x = k \pi$
+
+\[
+D_n = (n+1)(\cos x)^n = (n+1)(-1)^{kn}
+\]
+
+而
+
+\begin{align*}
+    A_n &= D_n - \cos x D_{n-1} = (n+1)(-1)^{kn} - n(-1)^{k(n-1)}(-1)^k \\
+    &= (-1)^{kn} \\
+    \cos (nx) &= \cos (n k \pi) = (-1)^{kn}
+\end{align*}
+
+所以有
+
+\[
+A_n = \cos (nx)
+\]
+
+\subsection{递推}
+
+\begin{align*}
+    D_n &= \begin{vmatrix}
+        x_1 & y & y & .. & y & y \\
+        z & x_2 & y & .. & y & y \\
+        z & z & x_3 & .. & y & y \\
+        .. & .. &.. &.. &.. & .. \\
+        z & z & z &.. & x_{n-1} & y \\
+        z & z & z &.. & z & x_n \\
+    \end{vmatrix} = \begin{vmatrix}
+        x_1 & y & y & .. & y & 0 \\
+        z & x_2 & y & .. & y & 0 \\
+        z & z & x_3 & .. & y & 0 \\
+        .. & .. &.. &.. &.. & .. \\
+        z & z & z &.. & x_{n-1} & 0 \\
+        z & z & z &.. & z & x_n - y\\
+    \end{vmatrix} + \begin{vmatrix}
+        x_1 & y & y & .. & y & y \\
+        z & x_2 & y & .. & y & y \\
+        z & z & x_3 & .. & y & y \\
+        .. & .. &.. &.. &.. & .. \\
+        z & z & z &.. & x_{n-1} & y \\
+        z & z & z &.. & z & y \\
+    \end{vmatrix} \\
+    &= (x_n - y)D_{n-1} + y\prod_{k=1}^{n-1}(x_k - z)
+\end{align*}
+
+同理也有
+
+\[
+= (x_n - z) D_{n-1} + z\prod_{k=1}^{n-1}(x_k - y)
+\]
+
+若 $y \ne z$ 可以解得，克莱姆法则
+
+\begin{align*}
+D_n &= \frac{(x_n -y)z\prod_{k=1}^{n-1}(x_k -y) - (x_n -z)y \prod_{k=1}^{n-1}(x_k-z)}{z-y} \\
+&= \frac{1}{z-y}\left[z\prod_{k=1}^{n}(x_k -y) - y \prod_{k=1}^{n}(x_k-z)\right]
+\end{align*}
+
+\subsection{计算下列行列式的值}
+
+\begin{align*}
+    D_n &= \begin{vmatrix}
+        1-a_1 & a_2 & 0 & 0 & .. & 0 & 0 \\
+        -1 & 1-a_2 & a_3 & 0 & .. & 0 & 0 \\
+        0 & -1 & 1-a_3 & a_4 & .. & 0 & 0 \\
+        .. & .. &.. &.. &.. & .. & ..\\
+        0 & 0 & 0 & 0 &.. & 1-a_{n-1} & a_n\\
+        0 & 0 & 0 & 0 &.. & -1 & 1-a_n\\
+    \end{vmatrix} =     \begin{vmatrix}
+        -a_1 & 0 & 0 & 0 & .. & 0 & 1 \\
+        -1 & 1-a_2 & a_3 & 0 & .. & 0 & 0 \\
+        0 & -1 & 1-a_3 & a_4 & .. & 0 & 0 \\
+        .. & .. &.. &.. &.. & .. & ..\\
+        0 & 0 & 0 & 0 &.. & 1-a_{n-1} & a_n\\
+        0 & 0 & 0 & 0 &.. & -1 & 1-a_n\\
+    \end{vmatrix} \\
+    &= (-a_1)D_{n-1} + (-1)^{n+1}(-1)^{n-1} = -a_1D_{n-1} + 1
+\end{align*}
+
+\subsection{数学归纳法}
+
+\begin{align*}
+    \begin{vmatrix}
+        a_0 + a_1 & a_1 & 0 & 0 & .. & 0 & 0 \\
+        a_1 & a_1 + a_2 & a_2 & 0 & .. & 0 & 0 \\
+        0 & a_2 & a_2 + a_3 & a_3 & .. & 0 & 0 \\
+        ..& ..&..&..&..& .. & .. \\
+        0 & 0 & 0 & 0 & .. & a_{n-1} & a_{n-1} + a_n \\
+    \end{vmatrix}
+\end{align*}
+
+对 $a_i$ 作轮换，令 $b_i = a_{n-i}$，得到
+
+\begin{align*}
+    \begin{vmatrix}
+        b_n + b_{n-1} & b_{n-1} & 0 & 0 & .. & 0 & 0 \\
+        b_{n-1} & b_{n-1} + b_{n-2} & b_{n-2} & 0 & .. & 0 & 0 \\
+        0 & b_{n-2} & b_{n-2} + b_{n-3} & b_{n-3} & .. & 0 & 0 \\
+        ..& ..&..&..&..& .. & .. \\
+        0 & 0 & 0 & 0 & .. & b_1 & b_1 + b_0 \\
+    \end{vmatrix}
+\end{align*}
+
+然后得到递推式
+
+\[
+D_n = (b_n + b_{n-1})D_{n-1} - b_{n-1}^{2}D_{n-2}
+\]
+
+我们要证明 
+
+\[
+D_n = \prod_{i=0}^{n}b_i\left( \sum_{i=0}^{n}\frac{1}{b_i} \right)
+\]
+
+用数学归纳法
+
+\begin{align*}
+D_n &= (b_n + b_{n-1})D_{n-1} - b_{n-1}^{2}D_{n-2} \\
+    &= (b_n + b_{n-1})\prod_{i=0}^{n-1}b_i\left( \sum_{i=0}^{n-1}\frac{1}{b_i} \right) - b_{n-1}^2 \prod_{i=0}^{n-2}b_i\left( \sum_{i=0}^{n-2}\frac{1}{b_i} \right) \\
+    &= (b_n + b_{n-1})\prod_{i=0}^{n-1}b_i\left( \sum_{i=0}^{n-2}\frac{1}{b_i} + \frac{1}{b_{n-1}} \right) - b_{n-1} \prod_{i=0}^{n-1}b_i\left( \sum_{i=0}^{n-2}\frac{1}{b_i} \right) \\
+    &= \prod_{i=0}^{n}b_i\left( \sum_{i=0}^{n-1}\frac{1}{b_i} \right) + b_{n-1}\prod_{i=0}^{n-1}b_i \frac{1}{b_{n-1}} \\
+    &= \prod_{i=0}^{n}b_i\left( \sum_{i=0}^{n}\frac{1}{b_i} \right)
+\end{align*}
+
+\subsection{行列式函数的微分}
+
+令
+
+\begin{align*}
+    F(t) = \begin{vmatrix}
+        f_{11}(t) & f_{12}(t) & .. & f_{1n}(t)\\
+        f_{21}(t) & f_{22}(t) & .. & f_{2n}(t)\\
+        .. & .. & .. & .. \\
+        f_{n1}(t) & f_{n2}(t) & .. & f_{nn}(t)\\
+    \end{vmatrix}
+\end{align*}
+
+证明 
+
+\[
+\frac{\text{d} F}{\text{d}t} = \sum_{j=1}^{n}F_j(t)
+\]
+
+其中 
+
+\[
+F_j(t) = \begin{vmatrix}
+f_{11}(t) & f_{12}(t) & .. & f'_{1j}(t) & .. & f_{1n}(t)\\
+f_{21}(t) & f_{22}(t) & .. & f'_{2j}(t) & .. & f_{2n}(t)\\
+.. & .. & .. & .. & .. & .. \\
+f_{n1}(t) & f_{n2}(t) & .. & f'_{nj}(t) & .. & f_{nn}(t)\\
+\end{vmatrix}
+\]
+
+同样可以用数学归纳法，对 $F(t)$ 的第一列展开得到
+
+\begin{align*}
+F(t) = \sum_{i=1}^{n}f_{i1}(t)A_{i1}(t)
+\end{align*}
+
+两边同时微分得到
+
+\begin{align*}
+F'(t) = \sum_{i=1}^{n}f'_{i1}(t)A_{i1}(t) + f_{i1}(t)(-1)^{i+1}M'_{i1}(t)
+\end{align*}
+
+注意到有
+
+\[
+F_1(t) = \sum_{i=1}^{n}f'_{i1}(t)A_{i1}(t)
+\]
+
+而且有
+
+\begin{align*}
+\sum_{i=1}^{n}f_{i1}(t)(-1)^{i+1}M'_{i1}(t) &= \sum_{i=1}^{n}f_{i1}(t)(-1)^{i+1} \sum_{j=2}L_{ij} \\ 
+&= \sum_{j=2}^{n}\sum_{i=1}^{n}(-1)^{i+1}f_{i1}(t)L_{ij}
+\end{align*}
+
+这里用 $L_{ij}$ 表示 $M_{ij}$ 的 $F_j$，注意到当 $j$ 固定时有，思考下按第一列展开
+
+\[
+F_j = \sum_{i=1}^{n}(-1)^{i+1}f_{i1}(t)L_{ij}
+\]
+
+\end{document}
+

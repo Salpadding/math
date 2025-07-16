@@ -1,0 +1,122 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\subsection{Borel Sets}
+
+\begin{prop}
+    The rational set $\mathbb{Q}$ is not $G_{\delta}$. It cannot be expressed as countable intersection of open sets.
+\end{prop}
+
+\begin{proof}
+    For sake of contradiction, assume we have
+
+    \[
+        \mathbb{Q} = \bigcap_{n=1}^{\infty}V_n\quad V_n \, \text{is open}
+    \]
+
+    then we have
+
+    \begin{align*}
+        \mathbb{R} &= \left( \mathbb{R} \setminus \mathbb{Q} \right) \cup \mathbb{Q} \\
+        &= \left( \bigcup_{n=1}^{\infty}V_n^C \right) \cup \bigcup_{q \in \mathbb{Q}} \{ q \}
+    \end{align*}
+
+    Since $\mathbb{Q} \subseteq V_n$, then we have $\overline{\mathbb{Q}} \subseteq \overline{V_n} $, which means $\overline{V_n} = \mathbb{R}$.
+    so that $\text{int}\left({V_n^C} \right) = \emptyset$. as $V_n$ and $\{ q \}$ is closed and contains no interior point, 
+    by Baire Theorem, their countable union also contains no interior point, which is contradict with $\mathbb{R}$ contains interior point.
+\end{proof}
+
+\begin{definition}
+    no where dense set $X \subseteq \mathbb{R}^n$ is defined as 
+
+    \[
+        \mathring{\overline{X}} = \emptyset
+    \]
+\end{definition}
+
+\begin{prop}
+    let $G_n,\, n=1,2,..$ be a family of dense and open set where $\overline{G_n} = \mathbb{R}^n$. then 
+
+    \[
+        G= \bigcap_{n=1}^{\infty}G_n
+    \]
+
+    $G$ is also a dense set.
+\end{prop}
+
+\begin{proof}
+    we will prove that $\overline{G} = \mathbb{R}^n$, since for any set $X$, we have $(\mathring{X})^C = \overline{(X^C)}$, then we have
+
+    \begin{align*}
+        \overline{G}  &= \overline{(G^C)^C} = (\text{int} (G^C))^C \\
+        &= \left(\text{int} \left( \bigcup_{n=1}^{\infty} G_n^C \right)\right)^C
+    \end{align*}
+
+    since $G_n^C$ is closed, and $\text{int}(G_n^C) = \left( \overline{G_n} \right)^C = \emptyset$. so $G_n^C$ is closed and contains no interior point. 
+    by baire theorem, countable union of such closed set also contains no interior point, so
+
+    \[
+        \text{int} \left( \bigcup_{n=1}^{\infty} G_n^C \right) = \emptyset
+    \]
+
+    and complement of empty set is $\mathbb{R}^n$
+\end{proof}
+
+\begin{exercise}
+let $f_n \in C([a,b])$  and $f_n \to f$ pointwise, prove that $\forall t$
+
+\[
+\{ x \,\vert\, f(x) < t\}
+\]
+
+is $F_{\sigma}$ set
+
+
+\end{exercise}
+
+
+\begin{proof}
+we first prove that
+
+\[
+\{ x \,\vert\, f(x) < t\} = \bigcup_{k=1}^{\infty}\bigcap_{N=1}^{\infty}\bigcup_{n=N}^{\infty} \{ x \,\vert\, f_n(x) < t - \frac{1}{k} \}
+\]
+
+let $f(x) < t$, then there should exists $K \in \mathbb{N}$ so that $f(x) < t - 1/K < t$. since $f(x) < t - 1/K$ and
+
+\[
+\lim_{n \to \infty}f_n(x) < t - 1/K
+\]
+
+there should exists infinite $n$ so that  $f_n(x) < t - 1/K$, otherwise we will have $f(x) \ge t - 1/K$
+
+on the other hand, if we have $k$ and infinte $n$ so that $f_n(x) < t - 1/k$, by limit law, we have $f(x) \le t - 1/k$, so that 
+$f(x) < t$
+
+since $f_n$ is continuous, so 
+
+\[
+\bigcap_{N=1}^{\infty}\bigcup_{n=N}^{\infty} \{ x \,\vert\, f_n(x) < t - \frac{1}{k} \}
+\]
+
+should be $F_{\sigma}$
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+

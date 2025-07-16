@@ -1,0 +1,179 @@
+
+\begin{thm}[Vandermonde det]
+
+\end{thm}
+
+\begin{align*}
+    \begin{vmatrix}
+       1 & x_1 & x_1^2 & ... & x_1^{n-1} \\
+       1 & x_2 & x_2^2 & ... & x_2^{n-1} \\
+       ... & ... & ... & ... & ...\\
+       1 & x_n & x_n^2 & ... & x_n^{n-1} \\
+    \end{vmatrix} &= 
+    \begin{vmatrix}
+       1 & 0 & 0 & ... & 0 \\
+       1 & x_2-x_1 & x_2^2-x_1x_2 & ... & x_2^{n-1}-x_1(x_2^{n-2}) \\
+       ... & ... & ... & ... & ...\\
+       1 & x_n-x_1 & x_n^2-x_1x_n & ... & x_n^{n-1}-x_1(x_n^{n-2}) \\
+    \end{vmatrix}  \\
+    &= (x_2-x_1)(x_3-x_2)..(x_n-x_1) 
+    \begin{vmatrix}
+       1 & 0 & 0 & ... & 0 \\
+       1 & 1 & x_2 & ... & x_2^{n-2} \\
+       ... & ... & ... & ... & ...\\
+       1 & 1 & x_n & ... & x_n^{n-2} \\
+    \end{vmatrix}  \\
+    &= \begin{vmatrix}
+         1 & x_2 & ... & x_2^{n-2} \\
+         ... & ... & ... & ...\\
+         1 & x_n & ... & x_n^{n-2} \\
+    \end{vmatrix}\prod_{i=2}^{n}(x_i-x_1) \\
+    &= \prod_{i=1}^{n-1}\prod_{j=i+1}^{n}(x_j-x_i)
+\end{align*}
+
+
+\begin{definition}[linear space]
+properties:
+
+\begin{enumerate}
+    \item $\mathbf{x} + \mathbf{y} = \mathbf{y} + \mathbf{x}$
+    \item $\mathbf{x} + \mathbf{y} + \mathbf{z} = \mathbf{x} + (\mathbf{y} + \mathbf{z})$
+    \item $\mathbf{x} + (-\mathbf{x}) = \mathbf{0}$
+    \item $\mathbf{x} + \mathbf{0} = \mathbf{x}$
+    \item $a(\mathbf{x}+\mathbf{y}) = a\mathbf{x} + a\mathbf{y}$
+    \item $(a+b)\mathbf{x} = a\mathbf{x} + b\mathbf{x}$
+    \item $(ab)\mathbf{x} = a(b\mathbf{x})$
+    \item $1\mathbf{x} = \mathbf{x}$
+\end{enumerate}
+\end{definition}
+
+
+\begin{exercise}
+$-\mathbf{x}$ is unique
+\end{exercise}
+
+\begin{proof}
+assume $-\mathbf{x}$ has  $-\mathbf{x}_1$  and $-\mathbf{x}_2$
+
+then:
+
+\[
+    \mathbf{x} + (-\mathbf{x}_1) = \mathbf{0}
+\]
+
+both add $-\mathbf{x}_2$:
+
+\[
+    -\mathbf{x}_2 + \mathbf{x} + (-\mathbf{x}_1) = -\mathbf{x}_1 = -\mathbf{x}_2
+\]
+\end{proof}
+
+
+\begin{exercise}
+$0 \mathbf{x} = \mathbf{0}$
+\end{exercise}
+
+\begin{proof}
+    $0\mathbf{x} = (0+0)\mathbf{x} = 0\mathbf{x} + 0\mathbf{x}$ 
+    both add $0\mathbf{x}$'s inverse
+
+    \[
+        \mathbf{0} = 0 \mathbf{x}
+    \]
+\end{proof}
+
+
+
+
+\begin{exercise}
+$(-1) \mathbf{x} = -\mathbf{x}$
+\end{exercise}
+
+\begin{proof}
+\[
+    (-1)\mathbf{x} + 1 \mathbf{x} = 0\mathbf{x} = \mathbf{0}
+\]
+\end{proof}
+
+
+\begin{thm}[Laplace]
+select $k$ rows: $i_1, i_2, .. i_k \in K$ and select columns by $\binom{n}{k}$ 
+\[
+\mathrm{det}(A) = \sum_{J \in \binom{n}{k}} \mathrm{det}(A_{i \in I,\, j \in J})(-1)^{\sum I + \sum J} \mathrm{det}(A_{i \notin I,\, j \notin J})
+\]
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+    |A| &= \sum_{j=1}^{n}a_{i_r j}(-1)^{i_r + j} D \begin{bmatrix}
+       1 & 2 & .. & i_r - 1 & i_r + 1 & .. & n \\  
+       1 & 2 & .. & j - 1 & j + 1 & .. & n \\  
+    \end{bmatrix} \\
+    &= \sum_{j=1}^{n}a_{i_r j}(-1)^{i_r + j} 
+    \sum_{1 \le k_1 < .. < k_{r-1} \le n,\, k_{*} \ne j}
+    (-1)^{I_{r-1} + k_1 + k_2+ .. + k_{r-1}  - (n-j)} 
+    D \begin{bmatrix}
+        i_1 & i_2 & .. & i_{r-1} \\
+        k_1 & k_2 & .. & k_{r-1} \\
+    \end{bmatrix} \overline{D} \begin{bmatrix}
+        i_1 & i_2 & .. & i_{r-1} & i_r \\
+        j & k_1 & k_2 & .. & k_{r-1} \\
+    \end{bmatrix}
+\end{align*}
+\end{proof}
+
+
+
+% \subsection{}
+
+% 利用 Laplace 定理可以计算分块矩阵的行列式
+
+% 下面按照左边 $n$ 列展开得到。
+
+% \[
+% \begin{vmatrix}
+%     A_n & M \\
+%     O & B_m \\
+% \end{vmatrix} = \text{det}(A_n) \text{det}(B_m) (-1)^{2\binom{n+1}{2}} = \text{det}(A_n)\text{det}(B_m)
+% \]
+
+% 同理有
+
+
+% \[
+% \begin{vmatrix}
+%     A_n & O \\
+%     M & B_m \\
+% \end{vmatrix} = \text{det}(A_n) \text{det}(B_m)
+% \]
+
+% 此外要注意
+
+
+% \[
+% \begin{vmatrix}
+%     O & A_n \\
+%     B_m & M \\
+% \end{vmatrix} = \text{det}(A_n) \text{det}(B_m)(-1)^{n\binom{n+1}{2} + \frac{n^2(2m + n+1)}{2}}
+% \]
+
+% 注意到有
+
+% \[
+% n\binom{n+1}{2} + \frac{n^2(2m + n+1)}{2} = \frac{n^2}{2}(2(n+1) + 2m ) = n^2(n+1 + m)
+% \]
+
+% 因为我们只需要考虑奇偶性，所以可以对 $2$ 取模
+
+% \[
+% n^2(n+1+m) \equiv n + n + nm \equiv nm \quad \text{mod} 2
+% \]
+
+% 所以
+
+% \[
+% \begin{vmatrix}
+%     O & A_n \\
+%     B_m & M \\
+% \end{vmatrix} = \text{det}(A_n) \text{det}(B_m)(-1)^{nm}
+% \]

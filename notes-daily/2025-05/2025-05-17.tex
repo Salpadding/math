@@ -1,0 +1,608 @@
+\subsubsection{linear space}
+
+\begin{exercise}
+    let $A = \begin{bmatrix}
+        \alpha_1,\alpha_2, ..,\alpha_m
+    \end{bmatrix}$
+
+    prove: 
+
+    \[
+        \dim(\{ x: Ax = 0\}) = m - \mathrm{rank}(A)
+    \]
+\end{exercise}
+
+\begin{proof}
+    let $r = \mathrm{rank}(A)$
+
+    assume $\alpha_1, \alpha_2, .., \alpha_r$ be maximal independent list. so $\alpha_{r+1}, .., \alpha_{m}$ 
+    could be expressed as linear combination of them. assume
+
+    \begin{align*}
+        A_r &= \begin{bmatrix}
+            \alpha_1, \alpha_2, .., \alpha_r
+        \end{bmatrix} \\
+        A_rx_{r+1} &= \alpha_{r+1} \\
+        A_rx_{r+2} &= \alpha_{r+2} \\
+        .. \\
+        A_rx_{m} &= \alpha_{m} \\
+    \end{align*}
+
+
+    we first prove:
+
+    \[
+        \dim(\{ x: Ax = 0\}) \ge m - \mathrm{rank}(A)
+    \]
+
+    since $x_{r+1},  x_{r+2} , .., x_{m} \in F^r$, we can extend them to $F^m$ by append zeros.
+    now let's consider $-x_{r+1} + \mathbf{e}_{r+1}$:
+
+    \begin{align*}
+        A(-x_{r+1} + \mathbf{e}_{r+1}) &= -A_rx_{r+1} + \alpha_{r+1} = 0\\
+        A(-x_{r+2} + \mathbf{e}_{r+2}) &= -A_rx_{r+2} + \alpha_{r+2} = 0\\
+        .. \\
+        A(-x_{m} + \mathbf{e}_{m}) &= -A_rx_{m} + \alpha_{m} = 0\\
+    \end{align*}
+
+    so we got $m-r$ independent vectors meets $Ax = 0$, and $\mathrm{rank}(\{x: Ax = 0\}) \ge m - \mathrm{rank}(A)$
+
+    then we prove $\mathrm{rank}(\{x: Ax = 0\}) \le m - \mathrm{rank}(A)$
+
+    consider that $y =(y_1,y_2, ..,y_m)$ meets: $y_1\alpha_1 + y_2\alpha_2 + .. + y_r\alpha_r = -y_{r+1}\alpha_{r+1}+ .. + -y_m \alpha_m$, 
+
+    assume $\beta= -y_{r+1}\alpha_{r+1}+ .. - y_m \alpha_m$, we can expressed $\beta$ as unique linear combination of $\alpha_1, \alpha_2, .., \alpha_r$:
+
+    \[
+        \beta = -A_ry_{r+1}x_{r+1} + .. - A_ry_{m}x_{m}
+    \]
+
+    therefore, we must have, by take factor of $\alpha_k$:
+
+    \begin{align*}
+        -y_1 &= \mathbf{e}_1^T (y_{r+1}x_{r+1} + .. + y_{m}x_{m}) \\
+        -y_2 &= \mathbf{e}_2^T (y_{r+1}x_{r+1} + .. + y_{m}x_{m}) \\
+        .. \\
+        -y_r &= \mathbf{e}_r^T (y_{r+1}x_{r+1} + .. + y_{m}x_{m}) \\
+    \end{align*}
+
+    so we can express $y$ as:
+
+    \begin{align*}
+        y &= y_{r+1}(-x_{r+1} + \mathbf{e}_{r+1}) + .. + y_{m}(-x_{m} + \mathbf{e}_{m}) \\
+        &= -(y_{r+1}x_{r+1} + .. + y_m x_m) + y_{r+1}\mathbf{e}_{r+1} + .. +y_{r+1}\mathbf{e}_{r+1}
+    \end{align*}
+
+    you can verify it by take $k \le r$ and $\mathbf{e}_k^T y = y_k$ , and take $k > r$, got
+    $\mathbf{e}^k y = y_k$
+
+    so any $Ay = 0$ could be expressed as linear combination of $m-r$ vectors, 
+    so we got
+
+    \[
+        \dim(\{ x: Ax = 0\}) \le m - \mathrm{rank}(A)
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $\alpha_1, \alpha_2, .., \alpha_m$ could be expressed as linear combination of 
+    $\beta_1, \beta_2, .., \beta_n$ and $n > m$, both $\alpha_1, \alpha_2, .., \alpha_m$ 
+    and $\beta_1, \beta_2, .., \beta_n$ is independent.
+
+    prove: there exists a independent group $\alpha_1, \alpha_2, .., \alpha_m, \beta_{k_1}, .. \beta_{k_{n-m}}$
+\end{exercise}
+
+\begin{proof}
+    consider $\alpha_1, \alpha_2, .., \alpha_m$, since $m < n$, there should exists at least $1 \le j \le n$, that 
+    $\alpha_1, \alpha_2, .., \alpha_m, \beta_j$ is independent, otherwise we got $\mathrm{rank}(\beta_1,..\beta_n) \le \mathrm{rank}(\alpha_1, .., \alpha_m)$, which is contradict.
+
+    then we got $\alpha_1, \alpha_2, .., \alpha_m, \beta_{k_1}$, if $m+1 = n$, then we proved.
+    if $m+1 < n$, there should exists $k_2$ that $\alpha_1, \alpha_2, .., \alpha_m, \beta_{k_1}, \beta_{k_2}$ is independent.
+    otherwise we got $\mathrm{rank}(\beta_1,..,\beta_n) \le n \le m+1$, which is contradict.
+
+    then we continue at most $n-m$ times, and got independent set
+
+    \[
+\alpha_1, \alpha_2, .., \alpha_m, \beta_{k_1}, .. \beta_{k_{n-m}}
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $A \in \mathbb{R}^{n \times m}$
+    prove $\mathrm{rank}(A)$ is maximally dim of minor whose det is not zero.
+\end{exercise}
+
+\begin{proof}
+    let $r_1 = \mathrm{rank}(A)$ and $r_2$ is maximally dim of minor whose det is not zero.
+
+    steps:
+
+    \begin{enumerate}
+        \item $r_2 \le r_1$
+
+        for any minor contains more than $r_1$ rows, its rows should be linear dependent. so we got $\mathrm{det}(M) = 0$
+        and $r_2 \le r_1$
+
+        \item $r_2 \ge r_1$
+
+        since there a $r_1$ rows which is independent, and $r_1$ columns which is independent, we
+        select minor $M$ by those rows and columns, and one of its rows or columns is independent,
+        so $\mathrm{det}(M) \ne 0$ and $r_2 \ge r_1$
+    \end{enumerate}
+
+\end{proof}
+
+\begin{exercise}
+    let $A \in F^n$ prove: $A^2 = A$ iff $\mathrm{rank}(A) + \mathrm{rank}(I - A) = n$
+\end{exercise}
+
+\begin{proof}
+    \begin{align*}
+        \begin{bmatrix}
+            A & O \\
+            O & I-A \\
+        \end{bmatrix} & \to        \begin{bmatrix}
+            A & A \\
+            O & I-A \\
+        \end{bmatrix} \to         \begin{bmatrix}
+            A & A \\
+            A & I \\
+        \end{bmatrix} \\
+        & \to \begin{bmatrix}
+            A-A^2 & O \\
+            A & I \\
+        \end{bmatrix}
+    \end{align*}
+
+    so we got:
+
+    \begin{align*}
+        \mathrm{rank}(    \begin{bmatrix}
+            A & O \\
+            O & I-A \\
+        \end{bmatrix}) = \mathrm{rank}( \begin{bmatrix}
+            A-A^2 & O \\
+            A & I \\
+        \end{bmatrix}) = \mathrm{rank}(A) + \mathrm{rank}(I- A)
+    \end{align*}
+
+    notes that
+
+    \[
+\mathrm{rank}( \begin{bmatrix}
+            A-A^2 & O \\
+            A & I \\
+        \end{bmatrix}) = n
+    \] 
+
+    iff $A-A^2 = O$
+
+ 
+\end{proof}
+
+\begin{definition}[isomorphism]
+    let $U, V$ be linear space on field $F$, we say $U$ is isomorphism with $V$ iff there exists a bijective function $\phi: U \to V$, and:
+    
+    for any $x, y \in U$ we have $\phi(x + y) = \phi(x) + y$, and for any $x \in U, k \in F$
+    we have $\phi(kx) = k\phi(x)$
+\end{definition}
+
+\begin{exercise}
+   let $U$ is isomorphism with $V$, prove $V$ is isomorphism with $U$ 
+
+\end{exercise}
+
+\begin{proof}
+   for any $x', y' \in U$: we have $\phi^{-1}$ meets that
+
+   \begin{align*}
+    \phi^{-1}(x' + y') &= \phi^{-1}(\phi(x) + \phi(y)) = \phi^{-1}(\phi(x+y)) = x + y \\
+    &= \phi^{-1}(x') + \phi^{-1}(y')
+   \end{align*}
+
+   and
+
+   \begin{align*}
+    \phi^{-1}(kx') &= \phi^{-1}(k\phi(x)) = \phi^{-1}(\phi(kx)) \\
+    & = kx = k\phi^{-1}(x')
+   \end{align*}
+\end{proof}
+
+\begin{exercise}
+    prove: $U$ is isomorphism with $U$
+\end{exercise}
+
+\begin{proof}
+    replace $\phi$ with identity function $\mathrm{id}$:
+
+    \begin{align*}
+        \mathrm{id}(x + y) = x + y = \mathrm{id}(x) + \mathrm{id}(y)
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+   let $U$ is isomorphism with $V$, and $V$ is isomorphism with $W$, prove:
+
+   $U$ is isomorphism with $W$
+\end{exercise}
+
+\begin{proof}
+    let $\phi$ is isomorphism function between $U$ and $V$ and $\xi$ is isomorphism function between $V$ and $W$
+
+    let $h = \xi \circ \phi, h: U \to W$, $h$ is bijective, since composition of bijective is also bijective.
+
+    \begin{align*}
+        h(x+y) &= \xi(\phi(x+y)) = \xi(\phi(x) + \phi(y)) \\
+            & = \xi(\phi(x)) + \xi(\phi(y)) \\
+            &= h(x) + h(y) \\
+            \\
+        h(kx) &= \xi(\phi(kx)) = \xi(k\phi(x)) \\
+        &= k\xi(\phi(x)) = kh(x)
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let linear space $V$ on field $F$ has finite bases $v_1,v_2,..,v_n$, prove:
+    
+    $V$ is isomorphism with $F^n$
+\end{exercise}
+
+\begin{proof}
+    since every vector $v \in V$ could be expressed as linear combination of $v_1,v_2, ..,v_n$:
+
+    \[
+        v= x_1v_1 + x_2v_2 + .. + x_nv_n
+    \]
+
+    and here $(x_1,x_2,..,x_n)$ is unique, so we got a function from $V$ to $F^n$:
+
+    \[
+        \phi(v) = (x_1,x_2, .., x_n)\quad
+        v= x_1v_1 + x_2v_2 + .. + x_nv_n
+    \]
+
+    it is easy to verified that $\phi$ is injective and surjective, and
+
+    \begin{align*}
+        \phi(x+y) &= \phi(x) + \phi(y) \\
+        \phi(kx) &= k \phi(x)
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    if $U$ and $V$ is linear space on $F$, and $U$ is isomorphism with $V$ by function $\phi$
+
+    prove: $\phi(0) = 0$
+\end{exercise}
+
+\begin{proof}
+    by definition:
+    
+    $\phi(0) = \phi(0+0) = \phi(0) + \phi(0)$ and take negative of $\phi(0)$ we got
+
+    \[
+        \phi(0) = 0
+    \]
+\end{proof}
+
+\begin{exercise}
+    if $U$ and $V$ is linear space on $F$, then $U$ and $V$ is isomorphism iff $\dim U = \dim V$
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    if $\dim U = n$, then $U$ has basis $u_1,u_2,..,u_n$, so $U$ is isomorphism with $F^n$, also for $V$
+    since $U$ and $V$is both isomorphism with $F^n$, so they should be isomorphism
+
+    if $U$ and $V$ is isomorphism, and consider basis of $U$: $u_1, u_2, .., u_n$, we got
+    $\phi(u_1), \phi(u_2), .. , \phi(u_n)$, and if $\phi(u_1), \phi(u_2), ..,\phi(u_n)$ is dependent, we got
+
+    \begin{align*}
+        0 &= x_1\phi(u_1) + x_2\phi(u_2) + .. + x_n \phi(u_n) \\
+        &= \phi(x_1u_1 + x_2u_2 + .. + x_nu_n) = \phi(0) \\
+        \\
+        0 & = x_1u_1+x_2u_2 + .. + x_n u_n 
+    \end{align*}
+
+    which is contradict with $u_1,u_2,..,u_n$ is independent, so we got $n$ independent vectors in $V$ which means
+    $\dim V \ge n \ge \dim U$, on the other side $V$ is isomorphism with $W$, so
+    $\dim U \ge \dim V$
+
+    after all we got $\dim U = \dim V$
+\end{proof}
+
+\begin{exercise}
+    let $A=[\alpha_1,\alpha_2,..,\alpha_n]$ and $B=[\beta_1,\beta_2,..,\beta_n]$ both 
+    be basis of linear space $V$
+
+    assume $AX = B$, prove $\mathrm{rank}(X) = n$
+\end{exercise}
+
+\begin{proof}
+   if $\mathrm{rank}(X) < n$, then column vectors of $X$ is dependent, so exists $x$ meets $Xx = 0$ and 
+
+   $AXx = Bx = 0$, which is contradict with $B$ is independent
+\end{proof}
+
+\begin{exercise}
+    let $A=[\alpha_1,\alpha_2,..,\alpha_n]$ and $B=[\beta_1,\beta_2,..,\beta_n]$ both 
+    be basis of linear space $V$
+
+    assume $A = BX$
+
+    if $v_x \in V$ could be expressed as $v_x = Ax$, please express $v_x$ as linear combination of $B$
+\end{exercise}
+
+\begin{proof}
+   \begin{align*}
+        V_x = Ax = BXx = B(Xx)
+   \end{align*} 
+
+   so $v_x$ could be expressed as linear combination of $B$ as $Xx$
+\end{proof}
+
+\begin{exercise}
+    prove: $\dim V + W = \dim V + \dim W - \dim (V \cap W)$
+\end{exercise}
+
+\begin{proof}
+    let $V = \mathrm{span}(v_1, v_2, .., v_n)$ and $W = \mathrm{span}(w_1, w_2, .., w_m)$, and $V \cap W = \mathrm{span}(\alpha_1, \alpha_2,..,\alpha_p)$ 
+
+    so we can expand $V \cap W$ as $V = \mathrm{span}(\alpha_1,.., \alpha_p, v_{k_1}, .., v_{k_{n-p}})$
+
+    and $W = \mathrm{span}(\alpha_1,.., \alpha_p, w_{j_1}, .., v_{j_{m-p}})$
+
+    let $U = \mathrm{span}(\alpha_1,..,\alpha_p, v_{k_1},..,v_{k_{n-p}}, .., w_{j_1}, ..,w_{j_{m-p}})$
+
+    we first prove $U = V + W$:
+
+    it is obviously that $U \subseteq V + W$, consider $x + y \in V + W$ where $x \in V,\: y \in W$, then $x$
+    could be expressed as linear combination of $\alpha_1,..,\alpha_p,v_{k_1},..,v_{k_{n-p}}$  and $y$
+    could be expressed as linear combination of $\alpha_1,..,\alpha_p,w_{j_1},..,w_{j_{m-p}}$ so $x + y \in U$
+
+    after all, we got $U = V + W$
+
+    then we prove $\alpha_1,..,\alpha_p, v_{k_1},..,v_{k_{n-p}}, w_{j_1},..,w_{j_{m-p}}$ is independent
+
+    assume that:
+
+    \begin{align*}
+    0 &= x_1\alpha_1+.. + x_p\alpha_p + y_1v_{k_1} + .. + y_{n-p}v_{k_{n-p}} + c_1w_{j_1} + .. + c_{m-p}w_{j_{m-p}} \\
+    -(c_1w_{j_1} + .. + c_{m-p}w_{j_{m-p}}) &= x_1\alpha_1+.. + x_p\alpha_p + y_1v_{k_1} + .. + y_{n-p}v_{k_{n-p}} \\
+    \end{align*}
+
+    let's define
+
+    \begin{align*}
+        \beta = x_1\alpha_1+.. + x_p\alpha_p + y_1v_{k_1} + .. + y_{n-p}v_{k_{n-p}}
+    \end{align*}
+
+    then $\beta \in V \cap W$, then we must have $y_1 = y_2 = .. y_{n-p} = 0$, otherwise
+     from $\beta \in V \cap W$ we have $\alpha_1,..,\alpha_p, v_{k_1}, ..,v_{k_{n-p}}$ will be dependent
+
+     also for $c_1 =c_2 = .. = c_{m-p}$
+
+     then we got
+
+     \[
+        0 = x_1\alpha_1 + x_2 \alpha_2 + .. + x_p \alpha_p
+     \]
+
+     which indicates $x_1 = x_2 = .. = x_p = 0$
+
+     after all we got a basis of $V + W$ and $\dim V + W = p + n-p + m -p =n + m - p $
+
+\end{proof}
+
+\begin{exercise}
+    prove: $\dim V = 0$ iff $V = \{ 0 \}$
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item $\dim V = 0 \to V = \{ 0 \}$
+
+
+    if $V$ is linear space on $F$ and contains at least non-zero vector $v$, then $v$ is independent,
+    since $k \ne 0,\:kv = 0$ we got $k^{-1}kv = 1v = v = 0$ which is contradict with $v \ne 0$, so we got $\dim V \ge 1$
+
+        \item $V = \{ 0 \} \to \dim V = 0$
+
+        assume $V$ has basis $v_1, v_2,..,v_n$, since $v_1,v_2,..,v_n \in V$ then we got $v_1 = v_2 = .. = v_n = 0$
+        which is contradict with definition of basis. so $\dim V = 0$
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    let $V_1,V_2,..,V_m$ is linear subspace, and for any $i, 1 \le i \le m$, we have
+
+    \[
+        V_i \cap \sum_{j \ne i}V_j = 0
+    \]
+
+    then $V_1 + V_2 + .. + V_m$ is called direct sum of $V_1,V_2,..,V_m$, and written as
+
+    \[
+        V_1 \oplus V_2 \oplus ... \oplus V_m
+    \]
+\end{definition}
+
+\begin{exercise}
+    prove the below statements are identity:
+
+    \begin{enumerate}
+        \item $V = V_1 \oplus V_2 \oplus .. \oplus V_n $
+
+        \item for any $2 \le i \le m$:
+        
+        \[
+            V_i \cap (V_1 + V_2 + .. + V_{i-1}) = 0
+        \]
+
+        \item $\dim (V_1 + V_2 + .. + V_m) = \dim V_1 + \dim V_2 + .. + \dim V_m$
+
+        \item basis of $V_1, V_2, .. ,V_m$ is a basis of $V$
+
+        \item $v \in V$ has unique expression under $V_1 + V_2 + .. + V_m$: which is
+        if $v = u_1 + u_2 + .. + u_m,\: u_k \in V_k$ and $v = w_1 + w_2 + .. + w_m,\: w_k \in V_k$  then
+        $u_1 = w_1, u_2 = w_2, .. , u_m = w_m$
+
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item $1 \to 2$
+
+        \begin{align*}
+            V_i \cap (V_1 + V_2 + .. + V_{i-1}) \subseteq V_i \cap \sum_{j \ne i}V_j \subseteq 0
+        \end{align*}
+
+        \item $2 \to 3$
+
+        \begin{align*}
+            \dim(V_1 + V_2 + .. V_m) &= \dim((V_1 + V_2 + .. + V_{m-1}) + V_m) \\
+            &=  \dim(V_1 + .. + V_{m-1}) + \dim(V_m) - \dim((V_1 + V_2 + .. + V_{m-1}) \cap V_m)\\
+            &= \dim(V_1 + .. + V_{m-1}) + \dim(V_m) \\
+            & .. \\
+            & = \dim(V_1) + \dim(V_2) + .. + \dim(V_m)
+        \end{align*}
+
+        \item $3 \to 4$
+
+
+
+        since $V = V_1 + V_2 + .. + V_m$, for any $v \in V$, we have 
+
+        \[
+            v = v_1 + v_2 + .. + v_m,\quad v_i \in V_i
+        \]
+
+        so $v$ could be expressed as linear combination of basis of $V_1, V_2, ..,V_m$
+        let $B_1, B_2, .., B_m$'s column vectors be basis of $V_1, V_2, .., V_m$
+
+        so we got:
+
+        \begin{align*}
+            \mathrm{rank}(B_1, B_2, .., B_m) &\ge \dim V \ge \dim(V_1) + .. + \dim(V_m) \\
+            & \ge \mathrm{rank}(B_1) + \mathrm{rank}(B_2) + .. + \mathrm{rank}(B_m)
+        \end{align*}
+
+        so $B_1, B_2, .., B_m$ is independent
+
+
+        \item $4 \to 5$
+
+        assume $v = u_1 + .. + u_m = w_1 + .. + w_m$, then we got:
+
+        \[
+            (u_1 - w_1) + .. + (u_m - w_m) = 0
+        \]
+
+        pick basis of $V$: $B_1,B_2,..,B_m$ which is composed of basis of $V_1, V_2, .., V_m$
+
+        then we got:
+
+        \[
+            0 = (u_1 - w_1) + .. + (u_m - w_m) = B_1x_1 + .. + B_m x_m
+        \]
+
+        since $(B_1, B_2,..,B_m)$ is independent, we must have $x_1 = x_2 = .. = x_m = 0$
+
+        because $u_1 - w_1 \in V_1$, we had $u_1- w_1 = B_1y_1$, also for $u_2 - w_2,..,u_m - w_m$, then we got:
+
+        \begin{align*}
+            &B_1y_1 + .. + B_my_m = B_1x_1 + .. + B_m x_m \\
+            & B_1(x_1 - y_1) + .. + B(x_m - y_m) = 0 \\
+        \end{align*}
+
+        therefore we have $x_1 = y_1 = 0, .., x_m = y_m = 0$ and hence $u_1 - w_1 = u_2 - w_2 = .. = u_m - w_m = 0$
+
+        therefore $u_1 = w_1, u_2 = w_2, .. ,u_m = w_m$
+
+        \item $5 \to 1$
+
+        pick 
+        
+        \[
+        v \in V_i \cap \sum_{j \ne i}V_j
+        \]
+
+        we got two expression of $v$ under $V_1 + V_2 + .. + V_m$:
+
+        \begin{align*}
+            v &= 0+.. + v_i + 0 + .. + 0 \\
+            v &= v_1 + .. + v_{i-1} + 0 + v_{i+1} + .. + v_m 
+        \end{align*}
+
+        by $4$ we got $v_1 = v_2 = .. = v_m = 0$ so
+
+        \[
+V_i \cap \sum_{j \ne i}V_j= 0
+        \]
+
+
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    let $f: A \to B, g: f(A) \to C$ and $g \circ f: A \to C$
+
+    \begin{enumerate}
+        \item $g \circ f$ $\to$  $f$ is injective
+        \item $g \circ f$ is surjective $\to$ $g$ is surjective
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item assume $f$ is not injective, then we got $f(x_1) = f(x_2)$ and $g \circ f(x_1) = g \circ f(x_2)$
+
+        \item assume $g$ is not surjective
+
+        \begin{align*}
+            g \circ f(A) = g (f(A)) \\
+        \end{align*}
+
+        if $C \setminus g(f(A)) \ne \emptyset$ then if $C \setminus g \circ f(A) \ne \emptyset$
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    let $f: A \to B, g: B \to A$ and $g \circ f = \mathbf{1}_A$ and $f \circ g = \mathbf{1}_B$
+
+    prove:
+
+    $f,g$ are both bijective and $g = f^{-1}$
+\end{exercise}
+
+\begin{proof}
+    since $\mathbf{1}_A$ and $\mathbf{1}_B$ is injective,  so $f$ and $g$ is injective, 
+
+    since $\mathbf{1}_A$ and $\mathbf{1}_B$ is surjective,  so $g$ and $f$ is surjective, 
+
+    after all both $f,g$ is bijective, and:
+
+    \begin{align*}
+        g \circ f &= \mathbf{1}_A \\
+        g^{-1} \circ g \circ f &= g^{-1} \circ \mathbf{1}_A \\
+        \mathbf{1}_A \circ f & = g^{-1} \\
+        f &= g^{-1}
+    \end{align*}
+
+    also:
+
+
+    \begin{align*}
+        g \circ f \circ f^{-1} &= \mathbf{1}_A \circ f^{-1} \\
+        g \circ \mathbf{1}_B &=  \mathbf{1}_A \circ f^{-1} = f^{-1}\\
+        g  & = f^{-1}\\
+    \end{align*}
+\end{proof}

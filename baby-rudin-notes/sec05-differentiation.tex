@@ -1,0 +1,425 @@
+\section{Differentia}
+
+\subsection{The derivative of a real function}
+
+\begin{definition}
+    let $f: [a,b] \to \R$ For any $x \in [a,b]$ form the quotient:
+
+    \[
+        \phi(t) = \frac{f(t) -f(x)}{t-x} \quad (a < t <b,\: t \ne x)
+    \]
+
+    and define
+
+    \[
+        f'(x) = \lim_{t \to x} \phi(t)
+    \]
+\end{definition}
+
+\begin{thm}
+    if $f$ be defined on $[a,b]$,  if $f$ is differentiable at a point $x \in [a,b]$.
+    then $f$ is continuous at $x$
+\end{thm}
+
+\begin{proof}
+    by definition, $x$ is a limit point of $[a,b]$, assume $x_n \to x$.
+
+    by 
+    
+    \[
+    \frac{f(x_n) - f(x)}{  x_n - x}
+    \] converges, we got:
+
+    \begin{align}
+        \lim_{n \to \infty}f(x_n) - f(x) &= \lim_{n \to \infty}\frac{f(x_n) - f(x)}{x_n -x}(x_n - x) \\
+        &= \left(\lim_{n \to \infty}\frac{f(x_n) - f(x)}{x_n -x}\right) \left(\lim_{n \to \infty}x_n -x\right) \\
+        &= 0
+    \end{align}
+\end{proof}
+
+\begin{thm}
+    let $f,g$ are defined on $[a,b]$ and are differentiable at $x \in [a,b]$.
+
+    Then $f+g, fg, f/g$ are differentiable at $x$ and
+
+    \begin{enumerate}
+        \item $(f+g)'(x) = f'(x) + g'(x)$
+        \item $(fg)'(x) = f'(x)g(x) + f(x)g'(x)$ 
+        \item for $f/g$
+
+        \[
+            (\frac{f}{g})'(x) = \frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}
+        \]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    for (1), easily to prove by laws of limit
+
+    for (2):
+
+    \begin{align*}
+        \lim_{t \to x}\frac{f(t)g(t) - f(x)g(x)}{t-x} &= \lim_{t \to x}\frac{f(t)g(t) + f(t)g(x) - f(t)g(x) - f(x)g(x)}{t-x} \\
+        &= \lim_{t \to x}\frac{f(t)g(t) - f(t)g(x)}{t-x} + \lim_{t \to x}\frac{f(t)g(x) - f(x)g(x)}{t-x} \\
+        &= \left(\lim_{t \to x}f(t) \right)\left( \lim_{t \to x}\frac{g(t) - g(x)}{t-x} \right) + g(x)f'(x) \\
+        &= f(x)g'(x) + g(x)f'(x)
+    \end{align*}
+
+    for (3):
+
+    by: $(f/g \cdot g)' = f'$
+
+    \begin{align*}
+        (f/g)'g + g'(f/g) &= f' \\
+        (f/g)' &= (f' - g'(f/g))/g \\
+        (f/g)' &= (f'g - g'f)/g^2 \\
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    suppose $f$ is continuous on $[a,b]$, $f'(x)$ exists at some point $x \in [a,b]$
+    , $g$ is defined on an interval $I$ which contains the range of $f$, and $g$ is differentiable
+    at the point $f(x)$. If
+
+    \[
+        h(t) = g (f(t))
+    \]
+
+    then $h$ is differentiable at $x$, and 
+
+    \[
+        h'(x) = g'(f(x))f'(x)
+    \]
+\end{thm}
+
+\begin{proof}
+   pick $x_n \in [a,b]$  and $x_n \to x, x_n \ne x$, since $f$ is continuous on $[a,b]$. we got $f(x_n) \to f(x)$
+
+
+   Assume $f(x_n) = f(x)$ occurs finitely times, Then:
+
+   \begin{align*}
+        \lim_{n \to \infty}\frac{h(x_n) - h(x)}{x_n -x} &= \lim_{n \to \infty}\frac{g(f(x_n)) - g(f(x))}{x_n -x} \\
+        &=  \lim_{n \to \infty}\frac{g(f(x_n)) - g(f(x))}{f(x_n) -f(x)}\frac{f(x_n) - f(x)}{x_n -x} \\
+        &= g'(f(x)) f'(x)
+   \end{align*}
+
+   if $f(x_n) = f(x)$ occurs infinitely many times, consider:
+
+   \[
+    f'(x) = \lim_{n \to \infty}\frac{f(x_n) - f(x)}{x_n -x}
+   \]
+
+   which means $0$ is a subsequential limit of:
+   
+   \[
+        \frac{f(x_n) - f(x)}{x_n -x}
+   \]
+
+   thus we got $f'(x) = 0$, and we divide $\N$ by $X$ and $Y$:
+
+   \begin{align*}
+        X &= \{ n \in \N: f(x_n) - f(x) = 0\} \\
+        Y &= \N \setminus X
+   \end{align*}
+
+   and both $X$ and $Y$ is infinite, and
+
+   \begin{align*}
+        \lim_{n \to \infty, n \in X}\frac{h(x_n) - h(x)}{x_n -x} &= 0 \\
+   \end{align*}
+
+   \begin{align*}
+        & \lim_{n \to \infty, n \in Y}\frac{h(x_n) - h(x)}{x_n -x} \\
+        = &\lim_{n \to \infty, n \in Y}\frac{g(f(x_n)) - g(f(x))}{f(x_n) -f(x)}\frac{f(x_n) - f(x)}{x_n -x} \\ 
+        = & g'(f(x))f'(x) = 0
+   \end{align*}
+
+   combine $X$ and $Y$, we got
+
+   \[
+        \lim_{n \to \infty}\frac{h(x_n) - h(x)}{x_n -x} = 0 \\
+   \]
+
+   and $h'(x) = 0 = g'(f(x))f'(x)$
+
+\end{proof}
+
+
+\subsection{Mean Value Theorems}
+
+\begin{definition}[Local Maximum]
+    let $f: X \to \R$ be a real value function defined on a metric space $X$,
+    We say $f$ has a local maximum at a point $p \in X$ iff there exists $\delta > 0$  
+    such that $f(q) \le f(p)$ for all $q \in Y \cap B(p, \delta)$
+\end{definition}
+
+\begin{thm}
+    \label{thm:local-maximum-derive-zero}
+    let $f$ be defined on $[a,b]$, if $f$ has a local maximum at a point $x \in (a,b)$,
+    and if $f'(x)$ exists, then $f'(x) = 0$
+\end{thm}
+
+\begin{proof}
+   pick $x_n = x  + 1/n$  and $y_n = x - 1/n$ then:
+
+   \begin{align*}
+        f'(x) &= \lim_{n \to \infty}\frac{f(x_n) - f(x)}{1/n} \le 0 \\
+        f'(x) &= \lim_{n \to \infty}\frac{f(y_n) - f(x)}{-1/n} \ge 0 \\
+   \end{align*}
+   
+   thus we got $f'(x) = 0$
+\end{proof}
+
+\begin{thm}[Rolle's Theorem]
+    \label{thm:Rolle-Theorem}
+    let $f: [a,b] \to \R$ is continuous and differentiable on $(a,b)$ and $f(a) = f(b)$,
+    then there exists $x \in (a,b)$ so that $f'(x) = 0$
+\end{thm}
+
+\begin{proof}
+    let 
+    
+    \begin{align*}
+        M &= \sup_{x \in [a,b]} f(x) \\
+        m &= \inf_{x \in [a,b]} f(x) \\
+    \end{align*}
+
+    if $m = M$ then $f$ is constant, and $\forall x \in (a,b), \: f'(x) = 0$
+
+    if $m < M$, then at least one of $m \ne f(a), M \ne f(a)$ meets. Assume $M \ne f(a)$, then 
+    there exists $c \in (a,b)$ and $f(c) = M$, then $c$ becomes a local maximum, and $f'(c) = 0$
+\end{proof}
+
+
+\begin{thm}[Mean Value Theorem I]
+    let $f: [a,b] \to \R$ is continuous and differentiable on $(a,b)$
+    then there exists $c \in (a,b)$ so that $f'(c) = (f(b) - f(a))/(b-a)$
+\end{thm}
+
+\begin{proof}
+    define 
+
+    \[
+        g = f(x) - \frac{f(b) - f(a)}{b-a}(x-a)
+    \]
+
+    then $g$ is continuous on $[a,b]$ and differentiable on $(a,b)$, and $g(a) = g(b) = f(a)$
+
+    by \autoref{thm:Rolle-Theorem}, there exists $c \in (a,b)$ so that
+
+    \[
+        g'(c) = f'(c) - \frac{f(b) - f(a)}{b-a} =  0
+    \]
+
+    and 
+
+    \[
+        f'(c) = \frac{f(b) - f(a)}{b-a}
+    \]
+\end{proof}
+
+\begin{thm}[Mean Value Theorem II]
+    let $f,g: [a,b] \to \R$ is continuous and differentiable on $(a,b)$
+    and $g(b) \ne g(a), g'(x) \ne 0$
+
+    then there exists $c \in (a,b)$ so that:
+
+    \[
+        \frac{f(b)- f(a)}{g(b) -g(a)} = \frac{f'(c)}{g'(c)}
+    \]
+\end{thm}
+
+\begin{proof}
+    define:
+
+    \[
+        h(x)= \frac{f(b)- f(a)}{g(b) -g(a)}\left( g(x) - g(a) \right) - f(x)
+    \]
+
+    then $h(x) $ is continuous on $[a,b]$ and differentiable on $(a,b)$ and
+
+    \[
+        h(a) = h(b) = -f(a)
+    \]
+
+
+    by \autoref{thm:Rolle-Theorem}, there exists $c \in (a,b)$ so that
+
+    \[
+        h'(c) =\frac{f(b)- f(a)}{g(b) -g(a)} g'(c) - f'(c) = 0 
+    \]
+
+    which indicates
+
+    \[
+        \frac{f(b)- f(a)}{g(b) -g(a)} = \frac{f'(c)}{g'(c)}
+    \]
+\end{proof}
+
+\begin{thm}
+    suppose $f$ is differentiable in $(a,b)$
+
+    \begin{enumerate}
+        \item if $f'(x) \ge 0, \forall x \in (a,b)$, then $f$ is monotonically increasing
+        \item if $f'(x) = 0, \forall x \in (a,b)$, then $f$ is constant
+        \item if $f'(x) \le 0, \forall x \in (a,b)$, then $f$ is monotonically decreasing
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    for (1):
+
+    assume for contradiction that: exists $x,y \in (a,b),\: x < y$ and $f(x) > f(y)$, by mean theorem,
+    there exists $c \in (x,y)$ and $f'(c) = (f(y) - f(x))/(y-x) < 0$, which is contradict with $f'(x) \ge 0$
+
+    Similarly for (2) and (3)
+\end{proof}
+
+\subsection{The Continuity of Derivatives}
+
+\begin{thm}
+    suppose $f$ is a real differentiable function on $[a,b]$ and suppose
+    $f'(a) < \lambda < f'(b)$ Then there is a point $x \in (a,b)$ such that
+    $f'(x) = \lambda$
+\end{thm}
+
+\begin{proof}
+    let $g(t) = f(t) - \lambda t$, and we got $g'(a) < 0$ and $g'(b) > 0$,
+    take $t_n = a + 1/n$ and
+
+    \begin{align*}
+        \lim_{n \to \infty}\frac{g(t_n) - g(a)}{t_n - a} = g'(a) < 0
+    \end{align*}
+
+    which means there are infinitely $n$ such that $g(t_n) < g(a)$
+
+    similarly, if we assign $t_n = b - 1/n$, there are infinitely $n$
+    such that $g(t_n) > g(b)$, let's pick $a < t_1 < t_2 < b$ and 
+    $g(a) < g(t_1), g(t_2) < g(b)$, so $g$ attains its minimum on $ c \in (a,b)$ 
+
+    by  \autoref{thm:local-maximum-derive-zero}, $g'(c)= f'(c) - \lambda = 0$
+\end{proof}
+
+\input{./baby-rudin-notes/lhopital.tex}
+
+
+\subsection{Taylor's Theorem}
+
+\begin{thm}
+    suppose $f$ is a real function on $[a,b]$, $n$ is a positive integer,
+    $f^{(n-1)}$ is continuous on $[a,b]$ and $f^{(n)}(t)$ exists
+    for every $t \in (a,b)$. Let $\alpha, \beta$ be distinct points of $[a,b]$
+    , and define
+
+    \[
+        P(t) = \sum_{k=0}^{n-1}\frac{f^{(k)}(\alpha)}{k!}(t-\alpha)^k
+    \]
+
+    Then there exists a point $x$ between $\alpha$ and $\beta$ such that
+
+    \[
+        f(\beta) = P(\beta) + \frac{f^{(n)}(x)}{n!}(\beta - \alpha)^n
+    \]
+\end{thm}
+
+\begin{proof}
+    define:
+
+    \[
+        g(t) = f(t) - P(t) - M(t-\alpha)^n
+    \]
+
+    we apply differentiate for $n$ times, Then:
+
+    \[
+        g^{(n)}(t)= f^{(n)}(t) - Mn!
+    \]
+
+    when $t = \alpha$, by:
+
+    \begin{align*}
+        P^{(m)}(t) &= \sum_{k=m}^{n-1} \frac{f^{(k)}(\alpha)}{(k-m)!}(t-\alpha)^{k-m} \\
+        &= \sum_{k=0}^{n-1-m} \frac{f^{(k+m)}(\alpha)}{k!}(t-\alpha)^{k}
+    \end{align*}
+
+    thus:
+
+    \[
+        P^{(m)}(\alpha) = f^{(m)}(\alpha) \\
+    \]
+
+    And
+
+    \begin{align*}
+        g^{(k)}(\alpha) &= f^{(k)}(\alpha) - P^{(k)}(\alpha) = 0,\quad \forall k \le n-1
+    \end{align*}
+
+    since $g(\beta) = 0$, there exists $\alpha < x_1 < \beta$ so that $g^{(1)}(x_1) = 0$,
+
+    since $g^{(1)}(\alpha) = g^{(1)}(x_1) = 0$, there exists $\alpha < x_2 < x_1$ so that $g^{(2)}(x_2) = 0$,
+
+    after several steps, we got:
+
+    \begin{align*}
+        g^{(n-1)}(\alpha) &= g^{(n-1)}(x_{n-1}) = 0 \\
+        g^{(n)}(x_n) &= 0 \quad x_n \in (\alpha, x_{n-1})
+    \end{align*}
+
+    which indicates
+
+    \[
+        M = \frac{f^{(n)}(x_n)}{n!}
+    \]
+
+    by replace $t$ as $\beta$, we got
+
+    \[
+        f(\beta) = P(\beta) + \frac{f^{(n)}(x_n)}{n!}(\beta - \alpha)^n
+    \]
+\end{proof}
+
+
+\begin{thm}
+    suppose $\mathbf{f}: [a,b] \to \R^n$ and $\mathbf{f}$ is differentiable
+    in $(a,b)$. Then there exists $x \in (a,b)$ such that:
+
+    \[
+        \left| \mathbf{f}(b) - \mathbf{f}(a)\right| \le (b-a) \left| \mathbf{f}'(x) \right|
+    \]
+\end{thm}
+
+\begin{proof}
+    define $\mathbf{z} = \mathbf{f}(b) - \mathbf{f}(a)$ and $\phi: [a,b] \to \R$ by:
+
+    \[
+        \phi(t) = \langle \mathbf{z}, \mathbf{f}(t) \rangle
+    \]
+
+    it is easily to prove that $\phi$ is continuous in $[a,b]$ and differentiable in $(a,b)$, and that:
+
+    \[
+        \phi'(t) = \langle \mathbf{z}, \mathbf{f}'(t) \rangle
+    \]
+    
+    by mean theorem,
+    there exists $x \in (a,b)$ and
+
+    \begin{align*}
+        \phi(b) - \phi(a) &= (b-a)\phi'(x) =(b-a)\langle \mathbf{z}, \mathbf{f}'(x) \rangle \\
+        &= \langle \mathbf{z}, \mathbf{f}(b) \rangle - \langle \mathbf{z}, \mathbf{f}(a) \rangle \\
+        &= \langle \mathbf{z}, \mathbf{z} \rangle 
+    \end{align*}
+
+    by Cauchy inequality:
+
+    \[
+        \langle \mathbf{z}, \mathbf{z} \rangle = \left| (b-a)\langle \mathbf{z}, \mathbf{f}'(x) \rangle \right| \le (b-a) \lvert \mathbf{z} \rvert  \lvert \mathbf{f}'(x) \rvert
+    \]
+
+    by discuss on $\lvert \mathbf{z} \rvert = 0$ or not, we got
+
+    \[
+        \lvert\mathbf{f}(b) - \mathbf{f}(a) \rvert = \lvert \mathbf{z} \rvert \le (b-a)\lvert \mathbf{f}'(x) \rvert
+    \]
+\end{proof}

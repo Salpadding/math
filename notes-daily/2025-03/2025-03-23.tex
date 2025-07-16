@@ -1,0 +1,84 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input{../macros.tex}
+\title{Analysis on Newton's Method}
+\author{朱英杰}
+\date{2025-03-23}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+
+\section{Newton's Method}
+
+对 $f$ 在 $x_0$ 处作泰勒展开。
+
+\begin{align*}
+f(x^*) &= 0 = f(x_0) + f'(x_0)(x^* - x_0) + \frac{f^{(2)}(\xi(x_0))(x^* - x_0)^2}{2} \\
+0 &= \frac{f(x_0)}{f'(x_0)} + x^* - x_0 + \frac{f^{(2)}(\xi(x_0))(x^* - x_0)^2}{2f'(x_0)} \\
+x_{1} - x^*&= \frac{f^{(2)}(\xi(x_0))(x^* - x_0)^2}{2f'(x_0)}
+\end{align*}
+
+若 $x_0 \ne x^*$ 得到
+
+\begin{align*}
+\frac{\lvert x_1 - x^* \rvert }{\lvert x_0 - x^* \rvert}  = \lvert x^* - x_0 \rvert \frac{\lvert f^{(2)}(\xi(x_0)) \rvert}{ \lvert 2f'(x_0) \rvert}
+\end{align*}
+
+
+\section{收敛性分析}
+
+\subsection{收敛的充分条件}
+
+\begin{enumerate}
+    \item 存在区间 $I = (x^* - \delta, x^* + \delta]$ 满足有唯一的 $ x^* \in I,\, f(x^*) = 0$
+    \item 一阶导 $f'(x)$ 在 $I$ 上满足 $\exists c > 0,\, \forall x \in I,\, \lvert f'(x) \rvert \ge c$
+    \item 二阶导 $f^{(2)}(x)$ 在 $I$ 上满足 $\exists M \ge 0,\, \forall x \in I,\, \lvert f^{(2)}(x) \rvert \le M$
+    \item 初值 $x_0 \in I$ 而且有 $\lvert x^* - x_0 \rvert < \frac{2c}{M}$
+\end{enumerate}
+
+
+\subsection{收敛性证明}
+
+\subsubsection{$x_n \in I$}
+
+若 $\lvert x^* - x_0 \rvert = \epsilon < \frac{2c}{M}$，我们可以得到
+
+\[
+\lvert x^* - x_1 \rvert \le \epsilon
+\]
+
+同理可以得到 $\lvert x^* - x_n \rvert \le \epsilon$，所以有 $x_n \in I$
+
+\subsection{展开}
+
+令 $e_n = \lvert x^* - x_n \rvert$，
+
+展开后得到
+
+\begin{align*}
+e_1 & \le e_0^2 \frac{M}{2c} \\
+e_2 & \le e_1^2 \frac{M}{2c} \le e_0^4 (\frac{M}{2c}) ^3\\
+\end{align*}
+
+以此类推得到
+
+\[
+e_{n} \le e_0^{2^n}(\frac{M}{2c})^{2^n - 1} \le (e_0 \frac{M}{2c})^{2^n} \frac{2c}{M}
+\]
+
+若 $e_0 \frac{M}{2c} = \epsilon < 1$ 则有
+
+\[
+e_{n} \le \epsilon ^{2^n} \frac{2c}{M}
+\]
+
+所以
+
+\[
+\lim_{n \to \infty}e_n = 0
+\]
+
+
+\end{document}

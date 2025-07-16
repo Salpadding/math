@@ -1,0 +1,170 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\begin{exercise}
+    let $E \subseteq \mathbb{R}^n$ and $0 < \lambda < 1$, then exists open box $I$ such that
+
+    \[
+        \lambda m(I) < m(E \cap I)
+    \]
+\end{exercise}
+
+\begin{proof}
+    assume $m(E) < \infty$, otherwise we can choose finite subset of $E$. by definition of outer measure, 
+    for any $\epsilon > 0$, we can construct a sequence of open box $I_n$ such that
+
+    \[
+        \sum_{n=1}^{\infty}m(I_n) < m(E) + \epsilon
+    \]
+
+    let $\epsilon = (\lambda^{-1} - 1)m(E)$, then we have
+
+    \begin{align*}
+        \sum_{n=1}^{\infty}m(I_n) &< m(E) + \epsilon \\
+        \lambda \sum_{n=1}^{\infty}m(I_n) &< m(E)  \\
+    \end{align*}
+
+    and there must exists $n = n_0$, such that
+
+    \[
+        \lambda m(I_{n_0}) < m(E \cap I_{n_0})
+    \]
+
+    otherwise we have
+
+    \begin{align*}
+        \lambda m(I_{n}) &\ge m(E \cap I_{n_0}) \\
+        \lambda \sum_{n=1}^{\infty}m(I_{n}) &\ge \sum_{n=1}^{\infty} m(E \cap I_{n}) \ge \bigcup_{n=1}^{\infty}m(E \cap I_n)\\
+        \lambda \sum_{n=1}^{\infty}m(I_{n}) &\ge m(\bigcup_{n=1}^{\infty}E \cap I_n)\\
+        \lambda \sum_{n=1}^{\infty}m(I_{n}) &\ge m(E)\\
+    \end{align*}
+
+    take the below inequality
+
+    \[
+        \sum_{n=1}^{\infty}m(I_n) < m(E) + \epsilon \\
+    \]
+    
+    then we have
+
+    \begin{align*}
+        m(E) &< \lambda(m(E) + (\lambda ^{-1} -1)m(E)) \\
+        m(E) &< m(E)
+    \end{align*}
+
+    which is contradict
+\end{proof}
+
+\begin{thm}[Steinhaus's Theorem]
+    let $E \subseteq \mathbb{R}^n$ and $E$ is measurable, then
+
+    \[
+        E - E = \{ x -y \,\vert\, x,\,y \in E\}
+    \]
+
+    contains at least one interior point $0$
+\end{thm}
+
+
+\begin{proof}
+    let $1 - 2^{-(n+1)} < \lambda < 1$, then there exists an open box $I$ such that
+
+    \[
+        \lambda m(I) < m(I \cap E)
+    \]
+
+    let $\delta$ be the shortest verge of $I$, and define
+
+    \[
+        J = (\xi_1, \xi_2, .., \xi_n)\quad  \lvert \xi_k \rvert < \frac{\delta}{2}
+    \]
+
+    then we will prove $J \subset E - E$, we prove this by fix $x_0 \in J$, and $E \cap E + \{ x_0 \} \ne \emptyset$
+
+    \[
+        m(I \cap (I + \{ x_0 \}))
+    \]
+
+    let
+
+    \[
+        I = \prod_{i=1}^{n}(a_i, b_i)
+    \]
+
+    then we have
+
+    \begin{align*}
+        \delta & < b_i - a_i \\
+        I + \{ x_0 \} & = \prod_{i=1}^{n}(a_i + x_i, b_i + x_i) \\
+        I \cap \left( I + \{ x_0 \} \right) &= \prod_{i=1}^{n}( \max \{ a_i, a_i + x_i \}, \min \{ b_i, b_i + x_i\}) \\
+        \prod_{i=1}^{n}( a_i + \frac{\delta}{2}, b_i - \frac{\delta}{2}) & \subseteq I \cap \left( I + \{ x_0 \} \right)
+    \end{align*}
+
+    if $x_i \le 0 $, then
+
+    \begin{align*}
+        \max \{ a_i, a_i + x_i \} &= a_i \\
+        \min \{ b_i, b_i + x_i \} &= b_i - x_i \\
+    \end{align*}
+
+    we have
+
+    \begin{align*}
+        \min \{ b_i, b_i + x_i \} - \max \{ a_i, a_i + x_i \} = b_i - x_i - a_i > \frac{b_i - a_i}{2}
+    \end{align*}
+
+    which also holds for $x_i > 0$
+
+    so we have
+
+    \[
+        m(I \cap \left( I + \{ x_0 \} \right)) > 2^{-n} m(I)
+    \]
+
+    and 
+
+    \begin{align*}
+        m(I \cup \left( I + \{ x_0 \} \right)) &= m(I) + m(I + \{ x_0 \}) - m(I \cap \left( I + \{ x_0 \} \right) ) \\
+        & < (2 - 2^{-n}) m(I) < 2\lambda m(I)
+    \end{align*}
+
+    then we must have $\left( E \cap I \right) \cap \left( E \cap I + \{ x_0 \} \right) \ne \emptyset$ 
+    
+    otherwise we have
+
+    \begin{align*}
+    m(\left( E \cap I \right) \cup \left( E \cap I + \{ x_0 \} \right)) &= m(E \cap I) + m(\left( E \cap I + \{ x_0 \} \right)) \\
+    & > 2\lambda m(I)
+    \end{align*}
+
+    which is contradict with 
+
+    \[
+m(I \cup \left( I + \{ x_0 \} \right)) < 2 \lambda m(I)
+    \]
+
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+

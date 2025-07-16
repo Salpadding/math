@@ -1,0 +1,506 @@
+
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{macros.tex}
+\title{Inequality}
+\author{Yingjie Zhu}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Convex function}
+
+\subsection{Convex Function}
+
+\begin{definition}
+    let $f: E \to \mathbb{R}$, where $E$ is convex. Then $f$ is said to be convex, iff $\forall t \in [0,1], x,y \in E$
+
+    \[
+        f(tx + (1-t)y) \le t f(x) + (1-t)f(y)
+    \]
+\end{definition}
+
+\begin{thm}
+    $f: E \to \mathbb{R}$ where $E$ is convex, if $f$ is continuous, and $\forall x,y \in E$
+
+    \[
+        f( (x+y)/2) \le \frac{1}{2} \left( f(x) + f(y) \right)
+    \]
+
+    then $f$ is convex function.
+\end{thm}
+
+\begin{proof}
+    we pick any $x,y \in E$, and $t \in [0,1]$
+
+    we divide $[0,1]$ into $2^n$ pieces, and prove that, $\forall 0 \le k \le 2^n$:
+
+    \[
+        f(\frac{k}{2^n}x + (1-\frac{k}{2^n})y) \le \frac{k}{2^n} f(x) + (1-\frac{k}{2^n})f(y)
+    \]
+
+    when $n=0$, it is trivial, assume holds when $n=m$, we prove for $n=m+1$ 
+
+    consider:
+
+    \[
+        f(\frac{k}{2^{m+1}}x + (1-\frac{k}{2^{m+1}})y) 
+    \]
+
+    if $k$ is even, we have:
+
+
+    \[
+        f(\frac{k/2}{2^{m}}x + (1-\frac{k/2}{2^{m}})y) \le \frac{k/2}{2^m} f(x) + (1-\frac{k/2}{2^m})y
+    \]
+
+    if $k$ is odd, define $k= 2d + 1, 0 \le d < 2^m$, consider that $2d + 1 = d + d+1$ and
+
+    \[
+        \frac{2d+1}{2^{m+1}} = \frac{1}{2}\left(\frac{d}{2^m} + \frac{d+1}{2^m}  \right)
+    \]
+
+    now let's define:
+
+    \begin{align*}
+        p(m,k) & =  \frac{k}{2^{m}}x + (1-\frac{k}{2^{m}})y
+    \end{align*}
+
+    it is obviously that
+
+    \[
+        p(m,k_1 + k_2) = p(m,k_1) + p(m,k_2)
+    \]
+
+    and
+
+    \[
+        p(m+1,k) = \frac{1}{2}p(m,k)
+    \]
+
+    \begin{align*}
+        \frac{2d+1}{2^{m+1}}x + (1-\frac{2d+1}{2^{m+1}})y &= p(m+1, 2d+1) \\
+        &= p(m+1, d) + p(m+1, d+1)  \\
+        &= \frac{p(m, d) + p(m,d+1)}{2}
+    \end{align*}
+
+    thus we have
+
+    \begin{align*}
+        f(\frac{2d+1}{2^{m+1}}x + (1-\frac{2d+1}{2^{m+1}})y) &= f(\frac{p(m, d) + p(m,d+1)}{2}) \\
+        & \le \frac{1}{2}f(p(m,d)) + \frac{1}{2}f(p(m,d+1)) \\
+        & \le \frac{1}{2} \left( \frac{2d+1}{2^m}\right)f(x) + \frac{1}{2} \left( 2-\frac{2d+1}{2^m}\right)f(y) \\
+        & \le \frac{k}{2^{m+1}} f(x) + (1-\frac{k}{2^{m+1}})f(y)
+    \end{align*}
+
+    now let's define a sequence $t_n$:
+
+    \[
+        t_n = \frac{ [2^n t]}{2^n}
+    \]
+
+    by above lemma, we have
+
+    \[
+        f(t_nx + (1-t_n)y) \le t_n f(x) + (1-t_n)f(y)
+    \]
+
+    since $f$ is continuous, take $n \to \infty$, we got
+
+    \[
+        f(tx + (1-t)y) \le t f(x) + (1-t)f(y)
+    \]
+\end{proof}
+
+\begin{thm}
+    if $f: E \to \mathbb{R}$ where $E \subseteq \mathbb{R}$ is a convex set , and $f'' \ge 0$, then $f$ is convex
+\end{thm}
+
+\begin{proof}
+    we pick $x,y \in E$ and $x<y$, since $E$ is convex, we have $[x,y] \subseteq E$. Let's pick $t \in [0,1]$.
+    if $t = 0$ or $t = 1$, it is trivial. 
+
+    assume $0 < t < 1$ and $c = tx + (1-t)y$, then we got $c \in (x,y)$, by mean value theorem, we have
+
+    $f(c) - f(x) = f'(\xi_1)(c-x)$ and $f(y) - f(c) = f'(\xi_2)(y-c)$. by $f'(\xi_1) \le f'(\xi_2)$, we got
+
+    \[
+        \frac{f(c) - f(x)}{c-x} \le \frac{f(y) - f(c)}{y-c}
+    \]
+
+    and thus
+
+    \begin{align*}
+      (y-x) f(c) &\le (c-x)f(y) + (y-c)f(x) \\
+       f(c) &\le  \frac{y-c}{y-x}f(x) + \frac{c-x}{y-x} \\
+    \end{align*}
+
+    which means
+
+    \[
+        f(tx + (1-t)y) \le tf(x) + (1-t)f(y)
+    \]
+\end{proof}
+
+
+\begin{corollary}
+    $-\ln: (0, \infty) \to \mathbb{R}$ is convex
+\end{corollary}
+
+\begin{proof}
+    $(-\ln)'' = (1/x^2) >0$
+\end{proof}
+
+\begin{thm}
+    let $f: E \to \mathbb{R}$ be a convex function, where $E$ is convex, and $t_1,t_2,t_3,...,t_n \in [0,1]$ and $t_1+t_2+t_3+...t_n = 1$, $x_1,x_2,...,x_n \in E$
+
+    Then
+
+    \[
+        f(t_1x_1+t_2x_2+t_3x_3 + ... +t_n x_n) \le t_1f(x_1) + t_2f(x_2) + ... + t_nf(x_n)
+    \]
+\end{thm}
+
+\begin{proof}
+    we will prove $t_1x_1 + t_2x_2 + ... + t_nx_n \in E$ at first, and use induction.
+
+    assume $t_n \ne 0$, otherwise $0 \cdot x_n = 0$, fallback to $n-1$ case.
+
+    consider that:
+
+    \[
+        t_1x_1 + t_2x_2 + ... + t_nx_n = t_nx_n + (1-t_n)\left( \frac{t_1}{1-t_n}x_1 + .. + \frac{t_{n-1}}{1-t_{n}}x_{n-1} \right)
+    \]
+
+    because 
+
+    \[
+        \frac{t_1}{1-t_n} + ... + \frac{t_{n-1}}{1-t_n} = 1
+    \]
+
+    and $x_1,x_2,...,x_{n-1} \in E$, by hypothesis of induction
+
+    \[
+        \left( \frac{t_1}{1-t_n}x_1 + .. + \frac{t_{n-1}}{1-t_{n}}x_{n-1} \right) \in E
+    \]
+
+    and by property of convex:
+
+    \[
+        t_nx_n + (1-t_n)\left( \frac{t_1}{1-t_n}x_1 + .. + \frac{t_{n-1}}{1-t_{n}}x_{n-1} \right) \in E
+    \]
+
+    similarly, we have
+
+    \begin{align*}
+        &f\left(t_nx_n + (1-t_n)\left[ \frac{t_1}{1-t_n}x_1 + .. + \frac{t_{n-1}}{1-t_{n}}x_{n-1} \right]\right) \\
+        \le & t_nf(x_n) + (1-t_n) \left[ \frac{t_1}{1-t_n}f(x_1) + .. + \frac{t_{n-1}}{1-t_{n}}f(x_{n-1}) \right] \\
+        \le & t_1f(x_1) + t_2f(x_2) + ... + t_nf(x_n)
+    \end{align*}
+\end{proof}
+
+\begin{thm}[AM-GM Inequality]
+    let $t_1,t_2,...,t_n \in [0,1]$, $t_1 + t_2 + ... + t_n = 1$, and $x_1,x_2,x_3,...,x_n \in [0,\infty)$
+
+    Then
+
+    \[
+        x_1^{t_1}x_2^{t_2} ... x_n^{t_n} \le t_1x_1 + t_2x_2 + ... +t_nx_n 
+    \]
+\end{thm}
+
+\begin{proof}
+    by convex function $-\ln$, we got
+
+    \[
+        -\ln(t_1x_1 + t_2x_2 + ... +t_nx_n) \le - t_1 \ln x_1 -  t_2 \ln x_2 ... - t_n \ln x_n
+    \]
+
+    and thus
+
+
+    \[
+         t_1 \ln x_1 +  t_2 \ln x_2 ... + t_n \ln x_n \le \ln(t_1x_1 + t_2x_2 + ... +t_nx_n) 
+    \]
+
+    take exp on both side:
+
+    \[
+        x_1^{t_1}x_2^{t_2} ... x_n^{t_n} \le t_1x_1 + t_2x_2 + ... +t_nx_n 
+    \]
+\end{proof}
+
+
+\begin{thm}[Young's Inequality For products]
+    \[
+        ab \le \frac{a^p}{p} + \frac{b^q}{q} \quad \left( \frac{1}{p} + \frac{1}{q} = 1\right)
+    \]
+\end{thm}
+
+\begin{proof}
+   by AM-GM inequality, we have 
+
+   \[
+\frac{a^p}{p} + \frac{b^q}{q} \ge (a^p)^{1/p} (b^q)^{1/q} \ge ab
+   \]
+\end{proof}
+
+\begin{thm}[Hölder's inequality]
+    \[
+        \int |fg| \le  \left(\int |f|^p \right)^{1/p} \left(\int |g|^q \right)^{1/q} \quad \left( \frac{1}{p} + \frac{1}{q} = 1\right)
+    \] 
+
+    and
+
+    \[
+        \sum |x_n y_n| \le \left(\sum |x_n|^p \right)^{1/p} \left(\sum |y_n|^q \right)^{1/q}
+    \]
+\end{thm}
+
+\begin{proof}
+    define:
+
+    \begin{align*}
+        \| f\|_p = \left(\int |f|^p \right)^{1/p}
+    \end{align*}
+
+   \begin{align*}
+      \frac{|f||g|}{\| f\|_p\| g\|_q}  &\le \frac{|f|^p}{p (\| f\|_p)^p} +  \frac{|g|^q}{ q (\| g\|_q)^q} \\
+      \frac{\| fg \|_1}{\| f\|_p\| g\|_q}  &\le \frac{(\| f\|_p)^p}{p (\| f\|_p)^p} +  \frac{(\| g\|_q)^q}{ q (\| g\|_q)^q} \le 1\\ 
+   \end{align*} 
+
+   define
+
+   \begin{align*}
+        \mathbf{x} &= (x_1,x_2,...,x_n) \\
+        \mathbf{y} &= (y_1,y_2,...,y_n) \\
+        \|\mathbf{x} \|_p &= \left(\sum |x_n|^p \right)^{1/p} \\ 
+        \|\mathbf{y} \|_q &= \left(\sum |y_n|^q \right)^{1/q}  \\
+   \end{align*}
+
+   by
+
+   \begin{align*}
+        \frac{\left| x_n y_n\right|}{\|\mathbf{x} \|_p \|\mathbf{y} \|_q} \le \frac{|x_n|^p}{p \left(\|\mathbf{x} \|_p\right)^p} +  \frac{|y_n|^q}{q \left(\|\mathbf{x} \|_q\right)^q}
+   \end{align*}
+
+   sum up, then got
+
+
+   \begin{align*}
+        \frac{\sum \left| x_n y_n\right|}{\|\mathbf{x} \|_p \|\mathbf{y} \|_q} \le \frac{\left(\|\mathbf{x} \|_p\right)^p}{p \left(\|\mathbf{x} \|_p\right)^p} +  \frac{\left(\|\mathbf{y} \|_q\right)^q}{q \left(\|\mathbf{x} \|_q\right)^q} \le 1
+   \end{align*}
+\end{proof}
+
+\begin{thm}
+    let $g: [a,b] \to E$ be a integrable function, $E \subseteq \mathbb{R}$ is a convex set.
+    $f$ is continuous and convex function on $E$. 
+    And $p$ is non-negative probability density function on $[a,b]$
+
+    \[
+        \int_a^b p(x) \mathrm{d}x = 1
+    \]
+
+    Then
+
+    \[
+       f\left( \int_a^b g(x) p(x) \mathrm{d} x\right) \le \int_a^b p(x)f(g(x)) \mathrm{d} x
+    \]
+
+\end{thm}
+
+\begin{proof}
+    we divide $[a,b]$ into $n$ intervals:
+
+    \[
+        [a,b] = [x_0,x_1] \cup [x_1,x_2] \cup ... \cup [x_{n-1},x_n]
+    \]
+
+    and define:
+
+    \begin{align*}
+        c_k &= g(x_k) \quad k = 1,2,3,..., n\\
+        \xi_k &= \int_{x_{k-1}}^{x_k} p(x) \mathrm{d}x \quad k = 1,2,3,...,n
+    \end{align*}
+
+
+    \[
+        \int_a^b p(x) \mathrm{d}x = \sum_{k=1}^{n} \xi_k = 1
+    \]
+
+    and
+    
+    \[
+        0 \le \xi_k \le 1
+    \]
+
+    by property of convex function, we got
+
+    \[
+        f(\sum_{k=1}^{n} c_{k}\xi_k) \le \sum_{k=1}^{n}\xi_k f(c_k)
+    \]
+
+    let's define $\alpha$ length of riemann integral $\alpha:$
+
+    \[
+        \alpha(x) = \int_a^{x} p(t) \mathrm{d}t 
+    \]
+
+    then $\alpha$ is differentiable and $\alpha'(x) = p(x)$ is integrable, and by definition of riemann integral,
+    there exists a partition sequence, so that riemann sum converges to riemann integral.
+
+    \[
+        \lim_{n \to \infty}\sum_{k=1}^{n} c_{k}\xi_k = \int_a^b g(x) \mathrm{d} \alpha(x)
+    \]
+
+
+    and another partition sequence 
+
+    \[
+        \lim_{n \to \infty}\sum_{k=1}^{n}\xi_k f(c_k) = \int_a^b f(g(x)) \mathrm{d} \alpha(x)
+    \]
+
+    then we can apply their common refinement, by $f$ is continuous, let's take $n \to \infty$, then we got
+
+    \[
+        f\left(\int_a^b g(x) \mathrm{d} \alpha(x)\right) \le \int_a^b f(g(x)) \mathrm{d} \alpha(x)
+    \]
+
+    since $\alpha$ is differentiable and $\alpha'$ is integrable. we got
+
+
+    \begin{align*}
+        f\left(\int_a^b g(x) \mathrm{d} \alpha\right) &= f\left(\int_a^b g(x) \alpha' \mathrm{d}x \right) \\
+        &= f\left(\int_a^b p(x) g(x) \mathrm{d}x \right) \le \int_a^b f(g(x)) \alpha'(x) \mathrm{d}x = \int_a^b p(x) f(g(x)) \mathrm{d}x
+    \end{align*}
+    
+
+\end{proof}
+
+\begin{thm}[Minkowski Inequality]
+    \[
+        \| f + g\|_p \le \| f \|_p+ \|g\|_p
+    \]
+\end{thm}
+
+\begin{proof}
+    \begin{align*}
+        \int |f+g|^p &= \int |f+g||f+g|^{p-1} \le \int |f||f+g|^{p-1} + \int |g||f+g|^{p-1} \\
+        & \le \| f  \|_p \cdot \| (f + g)^{p-1} \|_q + \| g  \|_p \cdot \| (f + g)^{p-1} \|_q
+    \end{align*}
+
+    and consider that $1/p + 1/q = 1$, $(p-q)q = p$
+
+    \[
+        \| (f + g)^{p-1} \|_q = \left( \int |f+g|^{(p-1)q} \right)^{1/q} = \left( \int |f+g|^{p} \right)^{1/q}
+    \]
+
+    and we multiply 
+
+    \[
+        \left( \int |f+g|^{p} \right)^{-1/q}
+    \]
+
+    at both side, consider $-1/q = 1-1/p$ then:
+
+
+    \begin{align*}
+        \left(\int |f+g|^p\right) \left(\int |f+g|^p\right)^{1-1/p} & \le \| f  \|_p + \| g  \|_p  \\
+         \left(\int |f+g|^p\right)^{1/p} & \le \| f  \|_p + \| g  \|_p 
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    assume:
+
+
+    \[
+        \lim_{t \to \infty}\int_{-t}^{t} p(x) \ln \left(\frac{p(x)}{q(x)} \right) \mathrm{d}x = \int_{-\infty}^{\infty} p(x) \ln \left(\frac{p(x)}{q(x)} \right)  \mathrm{d}x
+    \]
+
+    exists, prove:
+
+    \[
+        0 \le \int_{-\infty}^{\infty} p(x) \ln \left(\frac{p(x)}{q(x)} \right)  \mathrm{d}x
+    \]
+\end{exercise}
+
+\begin{proof}
+
+    chose $a$ large enough so that
+
+    \[
+        \int_{-a}^{a} p(x) \mathrm{d}x > 0
+    \]
+
+    define:
+
+    \begin{align*}
+        S_a &= \int_{-a}^{a} p(x) \mathrm{d}x \\
+       \int_{-a}^{a} \frac{p(x)}{S_a} \mathrm{d}x &= 1
+    \end{align*}
+
+    by $-\ln$ is convex, apply jensen inequality over distribution $p(x)/S_a$ on $[-a,a]$
+
+    \begin{align*}
+        -\ln \left(\int_{-a}^{a}\frac{p(x)}{S_a} \frac{q(x)}{p(x)} \mathrm{d}x \right) &\le \int_{-a}^{a} \frac{p(x)}{S_a}\cdot\left( -\ln \left[\frac{q(x)}{p(x)}\right] \right) \mathrm{d}x\\
+        \ln S_a -\ln \left(\int_{-a}^{a} q(x) \mathrm{d}x \right) &\le \frac{1}{S_a}\int_{-a}^{a} p(x) \ln\left[\frac{p(x)}{q(x)}\right] \mathrm{d}x\\
+    \end{align*}
+
+    take $a \to \infty$, we got $S_a \to 1,\: \ln S_a \to 0$ and
+
+    \begin{align*}
+        \lim_{a \to \infty}\ln \left(\int_{-a}^{a} q(x) \mathrm{d}x \right) = 0
+    \end{align*}
+
+    thus:
+
+    \[
+        0 \le \int_{-\infty}^{\infty} p(x) \ln \left[\frac{p(x)}{q(x)} \right]
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $f: E \to \mathbb{R}$ be a convex function, and $f$ is differentiable at $a,b \in E$, where $a < b$,
+    prove that 
+
+    \[
+    f'(a) \le \frac{f(b) - f(a)}{b-a} \le f'(b)
+    \]
+    
+\end{exercise}
+
+\begin{proof}
+    define $x(t) = (1-t)a + tb$, because $x(t)$ is continuous and
+
+    \[
+        \lim_{t \to 0, t > 0}x(t) = a
+    \]
+
+    we have:
+
+    \begin{align*}
+        f'(a) &= \lim_{x \to a} \frac{f(x) - f(a)}{x-a} = \lim_{t \to 0, t > 0}\frac{f(x(t)) - f(a)}{x(t) - a} \\
+        &= \lim_{t \to 0, t > 0}\frac{f((1-t)a + tb) - f(a)}{x(t) - a} \\
+        & \le \lim_{t \to 0, t > 0}\frac{(1-t)f(a) + tf(b) - f(a)}{(1-t)a + tb - a} \le \frac{t(f(b) -  f(a))}{t(b-a)} \\
+        & \le \frac{f(b) - f(a)}{b-a}
+    \end{align*}
+
+    Similarly, take $t \to 1, t < 1$ we got
+
+    \[
+ \frac{f(b) - f(a)}{b-a}  \le f'(b)
+    \]
+
+    After all, we got:
+
+    \[
+ f'(a) \le \frac{f(b) - f(a)}{b-a}  \le f'(b)
+    \]
+\end{proof}
+
+\end{document}
+

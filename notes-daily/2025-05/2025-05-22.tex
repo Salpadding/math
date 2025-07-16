@@ -1,0 +1,42 @@
+\subsubsection{Number Theory}
+
+
+\begin{exercise}
+    let $f(x) = a_nx^n + a_{n-1}x^{n-1} + .. + a_0$ be polynomial, and $a_k \in \mathbb{Z},\: a_n \ne 0,\: (a_0,a_1,..,a_n) = 1$
+
+    and $g(x) = b_mx^m + b_{m-1}x^{m-1} + .. + b_0$ also be polynomial, and $b_k \in \mathbb{Z},\: b_m \ne 0,\: (b_0,b_1,..,b_m) = 1$
+
+    prove: $f(x)g(x)$ is also a primitive polynomial.
+\end{exercise}
+
+\begin{proof}
+    we expand $f(x)g(x)$ as:
+
+    \[
+        f(x)g(x) = c_0 + c_1x + .. + c_{n+m}x^{n+m}
+    \]
+
+    assume $f(x)g(x)$ is not primitive polynomial, there exists prime number $p$ and $p|c_k,\: \forall k \le n+m$
+
+    let's consider $a_k$, since $f(x)$ is primitive we define:
+
+    \[
+        t_1 = \min \{ t: p  \nmid  a_t \}
+    \]
+
+    and
+
+
+    \[
+        t_2 = \min \{ t: p  \nmid  b_t \}
+    \]
+
+    consider $c_{t_1 + t_2}$:
+
+    \begin{align*}
+        c_{t_1+t_2} &\equiv \sum_{k+s = t_1+t_2}a_kb_s \equiv \sum_{\substack{k < t_1 \cup s < t_2 \\ k + s = t_1 + t_2}}a_kb_s + \sum_{\substack{k \ge t_1, s \ge t_2 \\ k+s = t_1+t_2}}a_kb_s \mod p \\ 
+        & \equiv \sum_{\substack{k < t_1 \cup s < t_2 \\ k + s = t_1 + t_2}}0 + a_{t_1}b_{t_2} \mod p \\
+    \end{align*}
+
+    since $(p, a_{t_1}) = 1$ and $(p, b_{t_2}) = 1$ we got $(p,a_{t_1}b_{t_2}) = 1$ which is contradict with $p | c_{t_1 + t_2}$
+\end{proof}

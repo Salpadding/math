@@ -1,0 +1,239 @@
+
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{\today}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{数学分析}
+
+
+\subsection{多项式定理}
+
+\subsubsection{二项式定理}
+
+
+\[
+(x+y)^n = \sum_{i=0}^{n} \binom{n}{i}x^i y^{n-i}
+\]
+
+用数学归纳法很容易证明
+
+\begin{align*}
+(x+y)^{n+1} &= (x+y)^n(x+y) = (x+y)\sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k} \\
+&= \sum_{k=0}^{n}\binom{n}{k}x^{k+1}y^{n-k} + \sum_{k=0}^{n}\binom{n}{k}x^{k}y^{n+1-k} \\
+&= \sum_{k=1}^{n+1}\binom{n}{k-1}x^{k}y^{n+1-k} + \sum_{k=1}^{n}\binom{n}{k}x^{k}y^{n+1-k}  + y^{n+1}\\ 
+&= x^{n+1} + y^{n+1} + \sum_{k=1}^{n} \binom{n+1}{k}x^ky^{n+1-k} \\
+&= \sum_{k=0}^{n+1} \binom{n+1}{k}x^ky^{n+1-k}
+\end{align*}
+
+\subsubsection{计算 $(fg)^{(n)}$}
+用于计算导数
+
+\[
+(fg)^{(n)} = \sum_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}
+\]
+
+证明
+
+\begin{align*}
+    (fg)^{(n+1)} &= \text{d} \left( \sum_{k=0}^{k}\binom{n}{k}f^{(k)}g^{(n-k)} \right) \\
+    &= \sum_{k=0}^{n}\binom{n}{k}f^{(k+1)}g^{(n-k)}  + \sum_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n+1-k)} \\
+    &= f^{(n+1)} + g^{(n+1)} + \sum_{k=1}^{n}\binom{n}{k-1}f^{(k)}g^{(n+1-k)}  + \sum_{k=1}^{n}\binom{n}{k}f^{(k)}g^{(n+1-k)} \\
+    &= f^{(n+1)} + g^{(n+1)} + \sum_{k=1}^{n}\binom{n}{k}f^{(k)}g^{(n+1-k)} \\
+    &= \sum_{k=0}^{n+1}\binom{n+1}{k}f^{(k)}g^{(n-k)}
+\end{align*}
+
+\subsubsection{二元函数的 $n$ 阶导}
+
+$h(t) = f(b_1 + t(x-a_1), b_2 + t(y-a_2))$
+
+为了方便起见，我们采用如下递归定义的简写
+
+\[
+\frac{\text{d}^{n+1} f}{\text{d}t^{n+1}} = \frac{\text{d}}{\text{d} t}\left( \frac{\text{d}^n f}{\text{d}t^n} \right)
+\]
+
+对 partial derive 也是同理
+
+\[
+\frac{\partial^{n+1} f}{\partial x^{n+1}} = \frac{\partial}{\partial x}\left( \frac{\partial^n f}{\partial x^n} \right)
+\]
+
+这里 $\partial x^n$ 可以理解为 $\partial x\partial x .. \partial x$，根据克莱罗定理，对于$m$ 次连续可微的函数，它的$k,\, k \le m$ 次偏导和每次计算偏导的次序无关。
+所以以二元函数为例 $k$ 次可以写成如下的形式
+
+\[
+\frac{\partial^k f}{\partial x^{l} \partial y^{k-l}}
+\]
+
+
+令 $\alpha = b_1 + t(x-a_1),\, \beta = b_2 + t(y-a_2)$
+
+那么可以计算一阶导
+
+\begin{align*}
+    \frac{\text{d} h}{\text{d} t} = x\frac{\partial f}{\partial x}(\alpha, \beta) + y \frac{\partial f}{\partial y}(\alpha, \beta)
+\end{align*}
+
+再计算二阶导
+
+\begin{align*}
+    \frac{\text{d}^2 h}{\text{d} t^2} = x^2\frac{\partial^2 f}{\partial x^2}(\alpha, \beta) + 2xy \frac{\partial^2 f}{\partial x \partial y}(\alpha, \beta) + y^2 \frac{\partial^2 f}{\partial y^2}(\alpha, \beta)
+\end{align*}
+
+猜测有结论
+
+\[
+\frac{\text{d}^n h}{\text{d} t^n} = \sum_{k=0}^{n} \binom{n}{k} x^{k}y^{n-k}\frac{\partial^n f}{\partial x^{k} \partial y^{n-k}}(\alpha, \beta)
+\]
+
+用数学归纳法证明：
+
+\begin{align*}
+\frac{\text{d}^{n+1} h}{\text{d} t^{n+1}} & = \frac{\text{d}}{\text{d} t} \left( \frac{\text{d}^n h}{\text{d} t^n} \right) = \frac{\text{d}}{\text{d} t}\left( \sum_{k=0}^{n} \binom{n}{k} x^{k}y^{n-k}\frac{\partial^n f}{\partial x^{k} \partial y^{n-k}}(\alpha, \beta) \right) \\
+&= \sum_{k=0}^{n} \binom{n}{k} x^{k+1}y^{n-k}\frac{\partial^{n+1} f}{\partial x^{k+1} \partial y^{n-k}}(\alpha, \beta) + \sum_{k=0}^{n} \binom{n}{k} x^{k}y^{n+1-k}\frac{\partial^n f}{\partial x^{k} \partial y^{n+1-k}}(\alpha, \beta) \\
+&= x^{n+1} \frac{\partial^{n+1} f}{\partial x^{n+1}}(\alpha, \beta) + \sum_{k=1}^{n} \binom{n}{k-1} x^{k}y^{n+1-k}\frac{\partial^{n+1} f}{\partial x^{k} \partial y^{n+1-k}}(\alpha, \beta) \\
+& + y^{n+1} \frac{\partial^{n+1} f}{\partial y^{n+1}}(\alpha, \beta) + \sum_{k=1}^{n} \binom{n}{k} x^{k}y^{n+1-k}\frac{\partial^{n+1} f}{\partial x^{k} \partial y^{n+1-k}}(\alpha, \beta) \\
+&= x^{n+1} \frac{\partial^{n+1} f}{\partial x^{n+1}}(\alpha, \beta) + y^{n+1} \frac{\partial^{n+1} f}{\partial y^{n+1}}(\alpha, \beta) + \sum_{k=1}^{n} \binom{n+1}{k} x^{k}y^{n+1-k}\frac{\partial^{n+1} f}{\partial x^{k} \partial y^{n+1-k}}(\alpha, \beta) \\
+&= \sum_{k=0}^{n} \binom{n+1}{k} x^{k}y^{n+1-k}\frac{\partial^{n+1} f}{\partial x^{k} \partial y^{n+1-k}}(\alpha, \beta)
+\end{align*}
+
+\subsection{多项式定理}
+
+\subsubsection{多重组合数}
+
+针对更一般的多项式，例如
+
+\[
+(x_1 + x_2 + .. + x_m)^n
+\]
+
+那么有
+
+\[
+(x_1 + x_2 + .. + x_m)^n = \sum_{k_1 + k_2 + .. k_m = n}\binom{n}{k_1\,k_2..k_m}x_1^{k_1}x_2^{k_2}..x_m^{k_m}
+\]
+
+其中
+
+\[
+\binom{n}{k_1\,k_2..k_m} = \frac{n!}{k_1!k_2!..k_m!}
+\]
+
+也被称作多重组合数
+
+\subsubsection{证明}
+
+我们用数学归纳法证明
+
+\begin{align*}
+(x_1 + x_2 + .. + x_m + x_{m+1})^n &= \sum_{k=0}^{n}\binom{n}{k}(x_1 + x_2 + .. x_m)^{k}x_{m+1}^{n-k} \\
+&= \sum_{k=0}^{n}\binom{n}{k}\left( \sum_{l_1+l_2+..+l_m = k} \binom{k}{l_1\,l_2..l_m}x_1^{l_1}x_2^{l_2}..x_m^{l_m}\right)x_{m+1}^{n-k} \\
+&= \sum_{k=0}^{n}\left( \sum_{l_1+l_2+..+l_m = k,\, l_{m+1} = n-k} \binom{n}{l_1\,l_2..l_ml_{m+1}}x_1^{l_1}x_2^{l_2}..x_m^{l_m}x_{m+1}^{l_{m+1}}\right) \\ 
+&= \sum_{l_1+l_2+..+l_m + l_{m+1} = n} \binom{n}{l_1\,l_2..l_ml_{m+1}}x_1^{l_1}x_2^{l_2}..x_m^{l_m}x_{m+1}^{l_{m+1}}
+\end{align*}
+
+\subsubsection{组合数学问题}
+
+把 $n$ 个球分到 $m$ 个不同的盒子里，有多少种分法，允许空盒子，球必须全部分配，不能剩下。
+
+这个问题等于是回答了 $(x_1 + x_2 + .. + x_m)^n$ 有多少个不同类的项。
+
+\subsubsection{多元函数求导}
+
+令 $f: \mathbb{R}^m \to \mathbb{R} \in C^{n+1}$， $h(t) = f(b_1 + t(x_1-a_1), b_2 + t(x_2-a_2), .., b_m + t(x_m - a_m))$
+
+尝试计算 
+
+\[
+\frac{\text{d}^n h}{\text{d} t^n}
+\]
+
+根据多项式定理，我们可以先写出结论
+
+\begin{align*}
+\frac{\text{d}^n h}{\text{d} t^n} = \sum_{k_1 + k_2 + .. k_m = n}\frac{n!}{k_1!k_2!..k_m!}\frac{\partial ^n f}{\partial x_1^{k_1}\partial x_2^{k_2}..\partial x_m^{k_m}}(\mathbf{b} + t \mathbf{x-a})(x_1-a_1)^{k_1}(x_2-a_2)^{k_2}..(x_m-a_m)^{k_m}
+\end{align*}
+
+
+\subsection{多元函数的泰勒公式}
+
+为了便于表示，下面引入多重指标记号 $\alpha \in \mathbb{R}^n,\, \alpha = (\alpha_1, \alpha_2, .., \alpha_n),\, \alpha_i \in \mathbb{N}$，并定义 
+
+\[
+| \alpha | = \alpha_1 + \alpha_2 + .. + \alpha_n
+\]
+
+
+并定义 $\alpha !$  
+
+\[
+\alpha ! = \alpha_1!\alpha_2! .. \alpha_n!
+\]
+
+定义运算符 $D^{\alpha} \in  (\mathbb{R}^n \to \mathbb{R}) \to \mathbb{R}^n \to \mathbb{R}$
+
+\[
+D^{\alpha} f(x) = \frac{\partial^{| \alpha |}f}{\partial^{\alpha_1}_{x_1}\partial^{\alpha_2}_{x_2}..\partial^{\alpha_n}_{x_n}}(x)
+\]
+
+定义向量的 $\alpha$ 幂运算 $\mathbb{R}^n \to \mathbb{R}$
+
+\[
+(x_1,x_2,..,x_n)^{\alpha} = x_1^{\alpha_1}  x_2^{\alpha_2} ..  x_n^{\alpha_n}
+\]
+
+定理：设 $X \subseteq \mathbb{R}^n$ 是开的凸集，且 $f \in C^{m+1}$。$a = (a_1,a_2,..,a_n) \in X$。
+那么对任意 $x \in X$，存在 $\xi \in (0,1)$ 满足
+
+
+\[
+f(x) = \sum_{k=0}^{m} \sum_{ | \alpha | = k } \frac{D^{\alpha}f(a)}{\alpha !} \cdot (x-a)^{\alpha} + \sum_{|\alpha| = m+1} \frac{D^{\alpha} f(a+ \theta(x-a))}{\alpha!} \cdot (x-a)^{\alpha}
+\]
+
+证明：
+
+令 $h: [0,1] \to \mathbb{R}$ 
+
+\[
+h(t) =  f(a + t(x-a))
+\]
+
+\begin{enumerate}
+    \item 计算 $h^{k}(t)$
+
+    在多项式定理中，我们可以计算得到 $h(t)$ 的 $k$ 阶导数为
+
+    \[
+        h^{(k)}(t) =  \sum_{ | \alpha | = k } \frac{k!}{\alpha !} D^{\alpha}f(a+t(x-a))\cdot (x-a)^{\alpha}
+    \]
+
+    \item 对 $h(t)$ 运用一元函数的泰勒展开，以及拉格朗日余项
+
+    \[
+    h(1) = h(0) + h'(0) + \frac{1}{2!}h^{(2)}(0) + .. +\frac{1}{m!}h^{(m)}(0) + \frac{1}{(m+1)!}h^{(m+1)}(\theta)
+    \]
+
+    其中有 $0 < \theta < 1$
+
+    \item 展开 $h(1) = f(x),\, h(0) = f(a)$ 得到
+
+    \begin{align*}
+        f(x) &= \sum_{k=0}^{m}\frac{1}{k!}h^{(k)}(0) + \frac{1}{(m+1)!}\sum_{|\alpha| = m+1}\frac{1}{\alpha!}D^{\alpha}f(a + \theta(x-a))(x-a)^\alpha \\
+            &= \sum_{k=0}^{m}\sum_{|\alpha| = m} \frac{1}{\alpha !}D^{\alpha}f(a)(x-a)^\alpha + \frac{1}{(m+1)!}\sum_{|\alpha| = m+1}\frac{1}{\alpha!}D^{\alpha}f(a + \theta(x-a))(x-a)^\alpha
+    \end{align*}
+
+\end{enumerate}
+
+
+\end{document}
+
+

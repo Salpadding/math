@@ -1,0 +1,574 @@
+\subsubsection{Linear Space}
+
+\begin{exercise}
+    let $V_1$ and $V_2$ be linear subspace of $V$, prove:
+
+    $\mathrm{span}(V_1 \cup V_2) = V_1 + V_2$
+\end{exercise}
+
+\begin{proof}
+    since $V_1 \subseteq V_1 + V_2$ and $V_2 \subseteq V_1 + V_2$, so we have
+
+    $V_1 \cup V_2 \subseteq V_1 + V_2$, since linear span is minimal linear space contains $V_1 \cup V_2$,
+    so we have
+
+    \[
+        \mathrm{span}(V_1 \cup V_2) \subseteq V_1 + V_2
+    \]
+
+    on the other hand:
+
+    \begin{align*}
+        V_1 &\subseteq V_1 \cup V_2  \subseteq \mathrm{span}(V_1 \cup V_2) \\
+        V_2 &\subseteq V_1 \cup V_2  \subseteq \mathrm{span}(V_1 \cup V_2) \\
+        V_1 + V_2 & \subseteq \mathrm{span}(V_1 \cup V_2) + \mathrm{span}(V_1 \cup V_2) \\
+        V_1 + V_2 & \subseteq \mathrm{span}(V_1 \cup V_2)
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $\alpha_1, \alpha_2, .. , \alpha_n \in F^n$ and be linear independent, prove:
+
+    \[
+        \begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+        \end{bmatrix} x = \beta
+    \]
+
+    has unique solution and every vector $y$ could be expressed as linear combination of $\alpha_1, \alpha_2, .. ,  \alpha_n$
+\end{exercise}
+
+\begin{proof}
+    since $\alpha_1, \alpha_2, .. , \alpha_n$ is linear independent, we can do elementary operation:
+
+    let 
+    \[
+    \begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        a_{11} & a_{12} & .. & a_{1n} \\
+        a_{21} & a_{22} & .. & a_{2n} \\
+        .. & .. & .. & .. \\
+        a_{n1} & a_{n2} & .. & a_{nn} \\
+    \end{bmatrix}
+    \]
+
+    convert it as:
+
+
+    \[
+    Q_1\begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        \delta_1 & a_{12}^{(1)} & .. & a_{1n}^{(1)} \\
+        0 & a_{22}^{(1)} & .. & a_{2n}^{(1)} \\
+        .. & .. & .. & .. \\
+        0 & a_{n2}^{(1)} & .. & a_{nn}^{(1)} \\
+    \end{bmatrix} = \begin{bmatrix}
+            \alpha_1^{(1)^T} \\
+            \alpha_2^{(1)^T} \\
+            .. \\
+            \alpha_n^{(1)^T} \\
+    \end{bmatrix}
+    \]
+
+    and $\delta_1 \in \{0, 1\}$ 
+
+    also we can convert it as:
+
+
+    \[
+    Q_2Q_1\begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        \delta_1 & a_{12}^{(2)} & .. & a_{1n}^{(2)} \\
+        0 & \delta_2 & .. & a_{2n}^{(2)} \\
+        .. & .. & .. & .. \\
+        0 & 0 & .. & a_{nn}^{(2)} \\
+    \end{bmatrix} =  \begin{bmatrix}
+            \alpha_1^{(2)^T} \\
+            \alpha_2^{(2)^T} \\
+            .. \\
+            \alpha_n^{(2)^T} \\
+    \end{bmatrix}
+    \]
+
+    we can go ahead for at most $n$ steps and got
+
+
+    \[
+    Q_n..Q_2Q_1\begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        \delta_1 & a_{12}^{(n)} & .. & a_{1n}^{(n)} \\
+        0 & \delta_2 & .. & a_{2n}^{(n)} \\
+        .. & .. & .. & .. \\
+        0 & 0 & .. & \delta_n \\
+    \end{bmatrix} = \begin{bmatrix}
+            \alpha_1^{(n)^T} \\
+            \alpha_2^{(n)^T} \\
+            .. \\
+            \alpha_n^{(n)^T} \\
+    \end{bmatrix}
+    \]
+
+    and $\delta_1, \delta_2, .. \delta_n \in \{0, 1\}$ 
+
+    if exists $\delta_i = 0$, let $k$ be the maximal $i$ that $\delta_i = 0$, then we have
+    \[
+    Q_n..Q_2Q_1\begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        \delta_1 & a_{12}^{(n)} & .. & a_{1k}^{(n)} & a_{1k+1}^{(n)} & .. & a_{1n}^{(n)}\\
+        0 & \delta_2 & .. & a_{2k}^{(n)} & a_{2k+1}^{(n)} & .. & a_{2n}^{(n)}\\
+        .. & .. & .. & .. & .. & .. & .. \\
+        0 & 0 & .. & \delta_k &  a_{k,k+1}^{(n)} & ..& a_{k,n}^{(n)} \\
+        0 & 0 & .. & 0 &  1 & .. & a_{k+1,n}^{(n)} \\
+        .. & .. & .. & .. & .. & .. & .. \\
+        0 & 0 & .. & 0 &  0 & .. & 1\\
+    \end{bmatrix}
+    \]
+
+    then we do some elementary operation, then got:
+
+    \[
+    PQ_n..Q_2Q_1\begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        \delta_1 & a_{12}^{(n)} & .. & a_{1k}^{(n)} & 0 & .. & 0 \\
+        0 & \delta_2 & .. & a_{2k}^{(n)} & 0 & .. & 0\\
+        .. & .. & .. & .. & .. & .. & .. \\
+        0 & 0 & .. & \delta_k &  0 & ..& 0 \\
+        0 & 0 & .. & 0 &  1 & .. & 0 \\
+        .. & .. & .. & .. & .. & .. & .. \\
+        0 & 0 & .. & 0 &  0 & .. & 1\\
+    \end{bmatrix}= \begin{bmatrix}
+            \alpha_1^{(n+1)^T} \\
+            \alpha_2^{(n+1)^T} \\
+            .. \\
+            \alpha_n^{(n+1)^T} \\
+    \end{bmatrix}
+    \]
+
+    then $\alpha_k^{(n+1)}$ becomes zero vector, which is contradict with $\alpha_1, \alpha_2, .., \alpha_n$ is linear independent, so we have $\delta_1 = \delta_2 = .. \delta_n = 1$
+
+    then remove all scalar not equals to $0$ or $1$:
+
+    \[
+    P_n..P_2P_1Q_n..Q_2Q_1\begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        1 & 0 & .. & 0 \\
+        0 & 1 & .. & 0 \\
+        .. & .. & .. & .. \\
+        0 & 0 & .. & 1 \\
+    \end{bmatrix}
+    \]
+
+    let's define: $P= P_n...P_2P_1$ and $Q = Q_n..Q_2 Q_1$ and
+
+    \[
+        A = \begin{bmatrix}
+            \alpha_1^T \\
+            \alpha_2^T \\
+            .. \\
+            \alpha_n^T \\
+    \end{bmatrix}
+    \]
+
+    now we can express an $y \in F^n$ as linear combination of $\alpha_1, \alpha_2, .. , \alpha_n$
+
+    let $y= (y_1, y_2, .., y_n)$ then we have
+
+
+    \begin{align*}
+        y^T = y^T I = y^T PQA = \left(y^T PQ \right) A
+    \end{align*}
+
+    so $y^TPQ $ is what scalars we want
+
+    for solution of $Ax = b$: we have:
+
+    \[
+        x = Q^{-1}P^{-1}b
+    \]
+
+    if $Ax_1 = b$ and $Ax_2 = b$ we have $A(x_1 - x_2) = 0$ 
+
+    \begin{align*}
+        A(x_1 - x_2) &= 0 \\
+        PQA(x_1 - x_2) &= 0 \\
+        I(x_1 - x_2) & = x_1 - x_2 = 0 \\
+    \end{align*}
+
+    so $x_1 = x_2$
+\end{proof}
+
+\begin{exercise}
+    let $\alpha_1, \alpha_2, .. , \alpha_m \in F^n$ and $m > n$, prove: $\alpha_1, \alpha_2, .., \alpha_m$ is linear dependent
+\end{exercise}
+
+\begin{proof}
+   let: if $\alpha_1, \alpha_2, .. \alpha_n$ is linear dependent, then $\alpha_1, \alpha_2, .. \alpha_m$ is linear dependent
+
+   if $\alpha_1, \alpha_2, .. \alpha_n$ is not linear dependent, then $\alpha_{n+1}$ could be expressed as linear combination of 
+   $\alpha_1, \alpha_2, .. , \alpha_n$
+\end{proof}
+
+\begin{exercise}
+    let $\alpha_1, \alpha_2, .. \alpha_n$ be a group of vectors, and $\beta_1, \beta_2, .., \beta_m$ could be 
+    expressed as linear combination of $\alpha_1, \alpha_2, .. , \alpha_n$, if $m > n$, prove
+    $\beta_1, \beta_2, .. \beta_m$ is linear dependent.
+\end{exercise}
+
+\begin{proof}
+    let:
+
+    \[
+    [\alpha_1, \alpha_2, .. , \alpha_n] X = [\beta_1, \beta_2, .. , \beta_m]
+    \]
+
+    since $X \in F^{n \times m}$ and $m > 0$, there must has vector $x \in F^{n},\: x \ne 0$ and $Xx = 0$, then we got:
+
+    \[
+    [\alpha_1, \alpha_2, .. , \alpha_n] X x = 0 = [\beta_1, \beta_2, .. , \beta_m]x 
+    \]
+
+    so $\beta_1, \beta_2, .. , \beta_m$ should be linear dependent
+\end{proof}
+
+\begin{definition}[maximal linearly independent set]
+A set of vectors is maximally linearly independent if including any other vector would make it linearly dependent
+\end{definition}
+
+\begin{exercise}
+   prove: number of vectors inside two maximal linearly independent set is equal
+\end{exercise}
+
+\begin{proof}
+    since $\{ \alpha_1, \alpha_2, .., \alpha_n \}$ could be expressed as linear combination of
+    $\{ \beta_1, \beta_2, .., \beta_m \}$, and $\{ \alpha_1, \alpha_2, .., \alpha_n \}$
+    is independent, so $n \le m$, on the other hand $m \le n$, so $m = n$
+\end{proof}
+
+\begin{definition}[rank]
+    number of vectors inside maximal linearly independent set
+\end{definition}
+
+\begin{exercise}
+    if $\beta_1, \beta_2, .., \beta_m$ is independent iff $m = \mathrm{rank}(\beta_1, \beta_2, .., \beta_m)$
+\end{exercise}
+
+\begin{proof}
+steps:
+
+    if $\beta_1, \beta_2, .., \beta_m$ is independent, since we got $m$ independent vectors,
+    so $m \le r$, since there are at most $m$ vectors, we have $r \le m$, after all $m = r$
+
+    if $m = \mathrm{rank}(\beta_1, \beta_2, .., \beta_m)$, so we can pick $m$ vectors of them, 
+    since $\binom{m}{m} = 1$, there only one maximal independent set $(\beta_1, \beta_2, .., \beta_m)$
+\end{proof}
+
+\begin{exercise}
+    if $\beta_1, \beta_2, .., \beta_m$ could be expressed as linear combination of
+    $\alpha_1, \alpha_2, .., \alpha_n$, then $\mathrm{rank}(\beta_1, \beta_2, .., \beta_m) \le \mathrm{rank}(\alpha_1, \alpha_2, .., \alpha_n)$
+
+\end{exercise}
+
+\begin{proof}
+    let $\beta_{k_1}, \beta_{k_2}, .., \beta_{k_r}$ be maximal independent set. since it can be expressed 
+    as linear combination of $\alpha_{j_1}, \alpha_{j_2}, .. \alpha_{j_l}$
+
+    we must have $r \le l$
+\end{proof}
+
+
+\begin{exercise}
+    let 
+
+    \[
+    A = \begin{bmatrix}
+        \alpha_1 & \alpha_2 & .. & \alpha_m
+    \end{bmatrix}
+    \]
+    and $Q$ is elementary matrix, prove:
+
+    $QA$ is dependent iff $A$ is dependent
+
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    if $A$ is dependent we got $Ax = 0$ and $QAx = 0$
+
+    so $QA$ is dependent, we got $Ax = Q^{-1}QAx = Q^{-1}0 = 0$
+\end{proof}
+
+\begin{exercise}
+    prove: 
+    
+    \[
+        \mathrm{rank}_{\mathrm{col}}(A) =\mathrm{rank}_{\mathrm{col}}(QA)
+    \]
+\end{exercise}
+
+\begin{proof}
+    let $\alpha_{k_1}, \alpha_{k_2}, .., \alpha_{k_r}$ be maximally independent set, then
+
+    \[
+        Q \begin{bmatrix}
+        \alpha_{k_1} &  \alpha_{k_2} &  .. & \alpha_{k_r}
+        \end{bmatrix} = \begin{bmatrix}
+        Q\alpha_{k_1} &  Q\alpha_{k_2} &  .. & Q\alpha_{k_r}
+        \end{bmatrix}
+    \]
+
+    be independent under $QA$ so we got
+
+    \[
+        \mathrm{rank}_{\mathrm{col}}(A) \le \mathrm{rank}_{\mathrm{col}}(QA)
+    \]
+
+    on the other side, we got
+
+
+    \[
+        \mathrm{rank}_{\mathrm{col}}(A) \ge \mathrm{rank}_{\mathrm{col}}(QA)
+    \]
+
+    after all, we got
+
+
+    \[
+        \mathrm{rank}_{\mathrm{col}}(A)= \mathrm{rank}_{\mathrm{col}}(QA)
+    \]
+\end{proof}
+
+
+
+
+\begin{exercise}
+    prove: row rank is equal to column rank 
+\end{exercise}
+
+\begin{proof}
+   let 
+   
+   \[
+    A = \begin{bmatrix}
+        \alpha_1^T \\
+        \alpha_2^T \\
+        .. \\
+        \alpha_m^T \\
+    \end{bmatrix} = \begin{bmatrix}
+        \beta_1 & \beta_2 & .. & \beta_n
+    \end{bmatrix}
+   \]
+
+   and $\mathrm{rank}(\alpha_1, \alpha_2, .., \alpha_m) = r$, by elementary operation, we have:
+
+   \[
+    QA = \begin{bmatrix}
+        \alpha_1^T \\
+        \alpha_2^T \\
+        .. \\
+        \alpha_r^T \\
+        0 \\
+        .. \\
+        0 \\
+    \end{bmatrix} = Q\begin{bmatrix}
+        \beta_1 & \beta_2 & .. & \beta_n
+    \end{bmatrix}
+   \]
+
+   since $Q\begin{bmatrix}
+        \beta_1 & \beta_2 & .. & \beta_n
+    \end{bmatrix}$ could be expressed as linear combination of $e_1,e_2,..,e_r$, we got
+
+    \[
+        \mathrm{rank}_{\mathrm{col}}(A) = \mathrm{rank}_{\mathrm{col}}(QA) \le r
+    \]
+
+    we can prove 
+
+
+    \[
+        \mathrm{rank}_{\mathrm{row}}(A) \le \mathrm{rank}_{\mathrm{col}}(A)
+    \]
+
+    by discuss on $A^T$
+\end{proof}
+
+\begin{exercise}
+   $A \in F^{n \times n}$ is invertible iff $\mathrm{rank}(A) = n$
+\end{exercise}
+
+\begin{proof}
+    steps:
+    
+    \begin{enumerate}
+        \item if $\mathrm{rank}(A) = n$ 
+
+        then 
+
+        \[
+            A = \begin{bmatrix}
+                \alpha_1^T \\
+                \alpha_2^T \\
+                .. \\
+                \alpha_n^T \\
+            \end{bmatrix}
+        \]
+
+        is independent, and could be convert to identity:
+
+        \[
+            PQ A = I
+        \]
+
+        then we got $PQ = A^{-1}$
+
+        \item if $A$ is invertible
+
+
+        then we got 
+
+        \[
+            AA^{-1} = I
+        \]
+
+        since $I$ is linear combination of column vectors of $A$, so we got
+
+        \[
+            \mathrm{rank}(I) = n \le \mathrm{rank}(A)
+        \]
+
+        and $\mathrm{rank}(A) = n$
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    $A \in \mathbb{R}^{n \times n}$, then $|A| \ne 0$ iff $\mathrm{rank}(A) = n$
+
+    \begin{enumerate}
+        \item if $\mathrm{rank}(A) = n$
+
+        then we have
+
+        \[
+            PQA = I 
+        \]
+
+        and $A = Q^{-1}P^{-1}I$, since elementary operation cannot made det from non-zero value to $0$,
+        and $|I| = 1$, so $|A| \ne 0$
+
+        \item if $|A| \ne 0$
+
+        assume $\mathrm{rank}(A) < n$, then row vectors is dependent, so we got:
+
+        \[
+         QA = \begin{bmatrix}
+            \alpha_1 \\
+            \alpha_2 \\
+            .. \\
+            0 \\
+         \end{bmatrix}
+        \]
+
+        and $|QA| = 0$, which is contradict with $|A| \ne 0$
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    let $A \in F^{m \times n}$ then $Ax = b$ has solution iff 
+
+    \[
+        \mathrm{rank}(A) = \mathrm{rank}(\begin{bmatrix}
+            A & b
+        \end{bmatrix})
+    \]
+\end{exercise}
+
+\begin{proof}
+steps:
+
+\begin{enumerate}
+    \item if $Ax = b$ has solution
+
+    then $\begin{bmatrix}
+        A & b
+    \end{bmatrix}$ could be expressed as linear combination of $A$, so
+
+    \[
+        \mathrm{rank}(\begin{bmatrix}
+        A & b
+    \end{bmatrix}) \le \mathrm{rank}(A)
+    \]
+
+    since $A$ is subset of  $\begin{bmatrix}
+        A & b
+    \end{bmatrix}$, so we got
+
+    \[
+        \mathrm{rank}(\begin{bmatrix}
+        A & b
+    \end{bmatrix}) \ge \mathrm{rank}(A)
+    \]
+
+    after all we got
+
+    \[
+        \mathrm{rank}(\begin{bmatrix}
+        A & b
+    \end{bmatrix}) = \mathrm{rank}(A)
+    \]
+
+    \item if $        \mathrm{rank}(\begin{bmatrix}
+        A & b
+    \end{bmatrix}) = \mathrm{rank}(A)$
+
+
+    then let 
+
+    \[
+        A = \begin{bmatrix}
+            \alpha_1, \alpha_2, .., \alpha_n
+        \end{bmatrix}
+    \]
+
+    and $\alpha_1, \alpha_2,..,\alpha_r$ be maximally independent set of $A$. then
+
+    \[
+        \alpha_1, \alpha_2,..,\alpha_r, b
+    \]
+
+    should be dependent, otherwise we got $\mathrm{rank}(\begin{bmatrix}
+        A & b
+    \end{bmatrix}) \ge r + 1 > r$ 
+\end{enumerate}
+\end{proof}

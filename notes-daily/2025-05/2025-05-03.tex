@@ -1,0 +1,167 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\begin{exercise}
+    if $f_n$ is measurable, then 
+
+    \[
+        f(x) = \sup_{n=1}^{\infty}f_n(x)
+    \]
+
+    is also measurable
+\end{exercise}
+
+\begin{proof}
+   we have 
+   
+   \begin{align*}
+        \bigcup_{n=1}^{\infty}(-\infty, a_n) = (-\infty, \sup_{n=1}^{\infty}a_n)
+   \end{align*}
+
+   so 
+
+   \[
+    \{ x \vert f(x) > t \} = \bigcup_{n=1}^{\infty} \{ x \vert f_n(x) >  t\}
+   \]
+\end{proof}
+
+\begin{exercise}
+    if $f_n$ is measurable, then 
+
+    \[
+        f(x) = \inf_{n=1}^{\infty}f_n(x)
+    \]
+
+    is also measurable
+\end{exercise}
+
+\begin{proof}
+    
+\begin{align*}
+    & \bigcup_{j=1}^{\infty}\bigcap_{n=1}^{\infty}\bigcap_{k=1}^{\infty}(-\infty, a_n + \frac{1}{k} - \frac{1}{j}) = \bigcup_{j=1}^{\infty}\bigcap_{n=1}^{\infty}(-\infty, a_n  - \frac{1}{j}] \\
+    & = \bigcup_{j=1}^{\infty}(-\infty, \left( \inf_{n=1}^{\infty}a_n \right)  - \frac{1}{j}] \\
+    & = (-\infty, \left( \inf_{n=1}^{\infty}a_n \right))
+\end{align*}
+
+so we have
+
+\[
+    \{ x \vert f(x) > t \} = \bigcup_{j=1}^{\infty}\bigcap_{n=1}^{\infty}\bigcap_{k=1}^{\infty} \{ f_n(x) + \frac{1}{k} - \frac{1}{j} > t \}
+\]
+
+\end{proof}
+
+
+\begin{exercise}
+    if $f_n$ is measurable, then 
+
+    \[
+        f(x) = \varlimsup_{n \to \infty}f_n(x)
+    \]
+
+    is also measurable
+\end{exercise}
+
+\begin{proof}
+    
+    \[
+        f(x) = \inf_{n=1}^{\infty} \left( \sup_{m=n}^{\infty} f_m(x) \right)
+    \]
+
+    since
+
+    \[
+        h_n = \left( \sup_{m=n}^{\infty} f_m(x) \right)
+    \]
+
+    is measurable, so
+
+    \[
+        f(x) = \inf_{n=1}^{\infty} h_n(x)
+    \]
+
+    is measurable
+\end{proof}
+
+\begin{exercise}
+    prove that:
+    \[
+        \inf_{n=1}^{\infty} a_n = - \sup_{n=1}^{\infty}-a_n
+    \]
+\end{exercise}
+
+\begin{proof}
+    part 1:
+    \begin{align*}
+        \inf_{n=1}^{\infty} a_n &\le a_n \\
+        -a_n & \le -\inf_{n=1}^{\infty} a_n \\
+        \sup_{n=1}^{\infty} - a_n & \le -\inf_{n=1}^{\infty} a_n \\
+        \inf_{n=1}^{\infty} a_n & \le -\sup_{n=1}^{\infty} - a_n\\
+    \end{align*}
+
+    part 2:
+
+    \begin{align*}
+        -a_n &\le \sup_{n=1}^{\infty}-a_n \\
+-\sup_{n=1}^{\infty}-a_n & \le a_n \\
+-\sup_{n=1}^{\infty}-a_n & \le \inf_{n=1}^{\infty}a_n \\
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f$ be measurable, prove that $h(x) = \max (f(x), 0)$ is also measurable.
+\end{exercise}
+
+\begin{proof}
+    \[
+        \{ x \vert h(x) > t \}  = \{ x \vert f(x) > t \} \cup \{ x \vert 0 > t \}
+    \]
+\end{proof}
+
+
+\begin{exercise}
+    let $f$ be measurable, prove that $h(x) = \min (f(x), 0)$ is also measurable.
+\end{exercise}
+
+\begin{proof}
+    \[
+        \min(f(x), 0) = - \max(-f(x), 0)
+    \]
+\end{proof}
+
+
+\begin{exercise}
+    let $f$ be measurable, prove that $h(x) = \lvert f(x)\rvert$ is also measurable.
+\end{exercise}
+
+\begin{proof}
+    \[
+\lvert f(x)\rvert = \max(f(x), 0) + \min(f(x), 0)
+    \]
+\end{proof}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+

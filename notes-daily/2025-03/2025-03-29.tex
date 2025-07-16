@@ -1,0 +1,494 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{2025-03-29}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{内积}
+
+\subsection{内积的公理}
+
+\begin{align*}
+    \langle x, y\rangle &= \overline{\langle y, x\rangle} \\
+    \langle x+y , z \rangle &= \langle x, z\rangle + \langle y, z\rangle \\
+    \langle x, x \rangle & \ge 0 \quad \langle x, x \rangle = 0\quad \text{iff} \quad x = 0 \\
+    \langle \lambda x, y\rangle &= \lambda \langle x,y \rangle
+\end{align*}
+
+\subsection{推论}
+
+\subsubsection{右分配}
+
+\begin{align*}
+    \langle x, y+z \rangle  &= \overline{\langle y+z, x \rangle} = \overline{\langle y,x \rangle + \langle z, x\rangle} \\
+    &= \langle x,y \rangle + \langle x,z \rangle
+\end{align*}
+
+\subsubsection{自身的内积实数}
+
+\[
+\overline{ \langle x,x\rangle}= \langle x,x \rangle
+\]
+
+\subsubsection{右数乘}
+
+\begin{align*}
+\langle x , \lambda y \rangle &= \overline{ \langle \lambda y, x \rangle} = \overline{\lambda \langle y, x\rangle} \\
+&= \overline{\lambda} \langle x, y \rangle
+\end{align*}
+
+\subsection{模}
+
+有了内积后就可以定义模
+
+\[
+\lvert x \rvert  = \sqrt{ \langle x,x\rangle}
+\]
+
+\subsection{柯西不等式}
+
+证明
+
+\begin{align*}
+    \lvert \langle x,y \rangle \rvert &\le \lvert x \rvert \lvert y \rvert 
+\end{align*}
+
+用内积构造关于复数 $\lambda $ 的多项式
+
+\begin{align*}
+    \langle x + \lambda y, x + \lambda y \rangle &= \lvert x \rvert^2 + \lvert \lambda \rvert^2 \lvert y\rvert^2 + \overline{\lambda \langle y,x \rangle} + \lambda \langle y,x \rangle \\
+\end{align*}
+
+
+注意当 $\lvert y \rvert = 0$ 时有
+
+\[
+\langle x, 0\rangle = \langle x, 0\rangle +\langle x, 0\rangle
+\]
+
+得到
+
+\[
+\langle x, 0\rangle = 0
+\]
+
+现在我们可以认为 $\lvert y \rvert > 0$了
+
+因为条件对任意 $\lambda \in \mathbb{C}$ 都成立，所以可以令
+
+\[
+\lambda = -\frac{\langle x,y \rangle}{\lvert y\rvert^2}
+\]
+
+得到
+
+\begin{align*}
+\lvert x \rvert^2 + \frac{\lvert \langle x,y\rangle \rvert^2}{\lvert y \rvert ^2} - \frac{2}{\lvert y \rvert^2} \lvert \langle x, y\rangle \rvert^2 & \ge 0 \\
+\lvert \langle x,y\rangle \rvert^2 & \le \lvert x \rvert^2 \lvert y \rvert ^2 
+\end{align*}
+
+
+\subsection{柯西不等式等号成立条件}
+
+柯西不等式等号成立的条件是存在不全为0的复数 $\lambda_1$ 和 $\lambda_2$ 满足
+
+\[
+\lambda_1 x + \lambda_2 y = 0
+\]
+
+\begin{enumerate}
+    \item  充分性
+
+不妨令 $\lambda_1 \ne 0$，我们得到 $x = \lambda y$ 其中 $\lambda = -\lambda_2 / \lambda_1 $，于是得到
+
+\begin{align*}
+\lvert \langle x,y \rangle \rvert &= \lvert \langle \lambda y, y \rangle \rvert = \lvert \lambda \rvert \lvert y \rvert^2 \\ 
+\lvert x \rvert \lvert y \rvert &= \lvert \lambda \rvert \lvert y \rvert^2
+\end{align*}
+
+    \item 必要性
+
+我们用反证法，假设不成立，即不存在不全为0的 $\lambda_1$ 和 $\lambda_2$ 满足
+
+\[
+\lambda_1 x + \lambda_2 y = 0
+\]
+
+首先我们可以排除 $\lvert x \rvert = 0$ 的情况，因为此时令 $\lambda_1 = 1,\, \lambda_2 = 0$ 和假设矛盾。
+同理我们也可以排除 $\lvert y \rvert = 0$ 的情况。
+至此我们可以对任意 $\lambda \in \mathbb{C}$ 认为向量 $x + \lambda y$ 一定不是 $0$ 向量
+所以下面的条件成立
+
+\[
+\langle x + \lambda y,x + \lambda y \rangle > 0 
+\]
+
+然后把 
+
+\[
+\lambda = -\frac{\langle x,y \rangle}{\lvert y\rvert^2}
+\]
+
+代入得到
+
+\begin{align*}
+\lvert x \rvert^2 + \frac{\lvert \langle x,y\rangle \rvert^2}{\lvert y \rvert ^2} - \frac{2}{\lvert y \rvert^2} \lvert \langle x, y\rangle \rvert^2 & > 0 \\
+\lvert x \rvert \lvert y \rvert &> \lvert \langle x,y \rangle \rvert
+\end{align*}
+
+这个和柯西不等式等号成立矛盾。
+
+
+\end{enumerate}
+
+\subsection{三角不等式}
+
+由柯西不等式可以得出三角不等式，及其等号成立条件
+
+\begin{align*}
+    \lvert x - z\rvert^2 &= \lvert x - y + y -z \rvert^2 = \langle x-y + y-z, x-y+ y-z \rangle \\ 
+    &= \lvert x-y \rvert^2 + \lvert y-z\rvert^2 + \langle x-y, y-z \rangle + \langle y-z, x-y \rangle \\
+    & \le \lvert x-y \rvert^2 + \lvert y-z\rvert^2 + \lvert\langle x-y, y-z \rangle\rvert + \lvert\langle y-z, x-y \rangle \rvert \\
+    & \le \lvert x-y \rvert^2 + \lvert y-z \rvert^2 + 2 \lvert x-y \rvert \lvert y-z \rvert \\
+    & \le  (\lvert x-y \rvert + \lvert y-z \rvert)^2
+\end{align*}
+
+等号成立的充分必要条件是存在不全为0的复数 $\lambda_1$ 和 $\lambda_2$ 满足
+
+\begin{align*}
+\lambda_1 (x-y) + \lambda_2 (y-z) &= 0 \\
+\end{align*}
+
+而且
+
+\[
+\langle x-y, y-z\rangle
+\]
+
+必须是一个非负的实数。
+
+\section{实分析}
+
+\subsection{Cantor-Bernsteion 定理}
+
+若集合 $X$ 和 $Y$ 的某个真子集对等，且 $Y$ 和 $X$ 的某个真子集对等，那么 $X \sim Y$
+
+根据之前集合映射分解定理，存在 $X = A \cup A^C,\, Y = B \cup B^C$ 满足 $f(A) = B$ 且 $g(B^C) = A^C$。
+于是我们构造如下映射 $h: X \to Y$
+
+\[
+h(x) = \begin{cases}
+    f(x) & x \in A \\
+    g^{-1}(x) & x \notin A \\
+\end{cases}
+\]
+
+容易验证 $h$ 既是单射也是满射。
+
+\subsubsection{特例}
+
+若三个集合 $A,B,C$ 满足 $C \subseteq A \subseteq B$，且 $B \sim C$ 那么 $B \sim A$
+
+如果 $C = A$ 或者 $A = B$，易证。
+
+此外，因为 $B$ 和 $A$ 的真子集 $C$ 对等，$A$ 和 $B$ 的真子集 $A$ 对等，所以 $B \sim A$。
+
+\subsection{思考题}
+
+\begin{enumerate}
+    \item 设 $A_1 \subseteq A_2,\, B_1 \subseteq B_2$。若 $A_1 \sim B_1$ 且 $A_2 \sim B_2$ 举出反例不满足 $A_2 \setminus A_1 \sim B_2 \setminus B_1$
+
+令 $A_1 = \{2,3,4,5 .. \}$ 同时令 $B_1 = \{3,4,5,6 .. \}$，$A_2 = B_2 = \mathbb{N}$，此时显然有 $A_1 \sim B_1,\, A_2 \sim B_2$，
+但 $A_2 \setminus A_1 = \{ 1\},\, B_2 \setminus B_1 = \{ 1, 2\}$
+
+    \item 若 $A \setminus B \sim B \setminus A$，那么 $A \sim B$
+    
+已知我们有双射 $f: A \setminus B \to B \setminus A$，于是我们构造函数 $h: A \to B$
+
+\[
+h(x) = \begin{cases}
+    f(x) & x \notin B \\
+    x & x \in B
+\end{cases}
+\]
+
+先证明 $h$ 是单射，显然若 $x_1,\,x_2 \in B$ 或者 $x_1,\, x_2 \notin B$ 时必然有 $h(x_1) \ne h(x_2)$。
+不妨设 $x_1 \notin B,\, x_2 \in B$，那么 $h(x_1) = f(x_1) \notin A$ 而 $h(x_2) = x_2 \in A$，所以 $h(x_1) \ne h(x_2)$。
+
+继续证明 $h$ 是满射，取 $x \in B$，若 $x \notin A$，那么必然存在 $x_0$ 满足 $h(x_0) = f(x_0) = x$。此外
+若 $x \in A \cap B$，那么有 $h(x) = x$
+
+所以 $A \sim B$
+
+\item 若 $A \subseteq B$ 且 $A \sim A \cup C$，证明 $B \sim B \cup C$
+
+我们已知双射 $f: A  \to A \cup C$，构造映射 $h: B \to B \cup C$
+
+\[
+h(x) = \begin{cases}
+    f(x) & x \in A \\
+    x & x \notin A
+\end{cases}
+\]
+
+易证 $h$ 是单射，我们继续证明 $h$ 是满射，若 $x \in B \cup C$，若 $x \in A \cup C$ ，那么 $x \in h(B)$。
+如果 $x \notin (A \cup C)$ 那么有
+
+\begin{align*}
+x \in (B \cup C) \cap (A \cup C)^C &= (B \cup C) \cap (A^C \cap C^C)  \\
+&= B \cap A^C \cap C^C
+\end{align*}
+
+所以 $x \in B$ 且 $x \notin A$，所以有 $h(x) = x$
+
+\end{enumerate}
+
+\subsection{一些巧妙的可数集}
+
+\subsubsection{单调函数的不连续点}
+
+$f: \mathbb{R} \to \mathbb{R}$ 是严格单调增的，那么它的不连续点一定是至多可数的。
+
+我们按照以下过程证明
+
+\begin{enumerate}
+    \item 左右极限都存在，且左极限小于等于右极限
+
+    单调函数的任一点处的左右极限都存在，任取一点 $x_0$，那么 $\forall x < x_0$ 必然有 $f(x) < f(x_0)$。
+    我们取收敛 $x_n < x_0$ 且 $x_n$ 收敛到 $x_0$，那么 $f(x_n)$，我们取
+
+\[
+L(x_0) = \sup \{ f(x) \vert x < x_0 \}
+\]
+
+容易验证 $f$ 在 $x_0$ 处的左极限就是 $L(x_0)$，同理可以定义 
+
+\[
+R(x_0) = \inf \{ f(x) \vert x > x_0 \}
+\]
+
+并且有
+
+\[
+L(x_0) \le f(x_0) \le R(x_0)
+\]
+
+若 $f$ 在 $x_0$ 处不连续，那么必然有 $L(x_0) < R(x_0)$
+
+对于任意两个不连续的点 $x_1 < x_2$，那必然有
+
+\[
+L(x_1) < R(x_1) < L(x_2) < R(x_2)
+\]
+
+这里 $R(x_1)$ 不可能和 $L(x_2)$ 相等，否则 $x_1$ 和 $x_2$ 之间不满足严格单调增。
+
+\item 不连续点可以映射到不相交的开区间
+
+根据上面的推论可以的得到这个结论
+
+\item 不相交的开区间是可数的
+
+不相交的开区间可以一一映射到有理数
+
+\end{enumerate}
+
+\subsubsection{收敛到正无穷的点}
+
+对 $f: \mathbb{R} \to \mathbb{R}$ 构造集合 $E$
+
+\[
+E = \{ x \,\vert\, \lim_{y \to x}f(y) = \infty \}
+\]
+
+那么 $E$ 是可数集。
+
+分成以下过程证明
+
+\begin{enumerate}
+    \item $E$ 中的所有点都是孤立点
+
+令 
+
+\[
+E_N = \{ x \in E \,\vert\, f(x) \le N\}
+\]
+
+显然
+
+\[
+E = \bigcup_{N=1}^{\infty} E_N
+\]
+
+我们将用反证法证明 $E_N$ 是孤立的点集，从而证明 $E_N$ 是可数集。
+
+假设 $E_N$ 包含一个极限点 $x_0$，那么我们可以构造序列 $x_n \ne x_0$ 满足 $x_n$ 收敛到 $x_0$。
+同时我们可以代入 
+
+\[
+\lim_{y \to x_0}f(y) = \infty
+\]
+
+得到
+
+\[
+\lim_{n \to \infty}f(x_n) = \infty
+\]
+
+这个显然和 $f(x_n) \le N$ 矛盾了。
+
+所以 $E_N$ 是孤立的点集，从而 $E_N$ 是可数的，因为 $E$ 是可数集的可数并，所以 $E$ 也是可数的。
+
+
+\end{enumerate}
+
+\subsection{convex function}
+
+\subsubsection{定义}
+
+$f: X \to \mathbb{R}$ 是 convex 定义为，$\forall a \le b\, \in X,\, 0 \le t \le 1$ 满足
+
+\[
+f((1-t)a + tb) \le (1-t)f(a) + tf(b)
+\]
+
+\subsubsection{中值定义}
+
+如果 $f$ 连续，那么 $f: X \to \mathbb{R}$ 也可以定义为 $\forall x \le y\, \in [a,b]$
+
+\[
+f(\frac{x+y}{2}) \le \frac{f(x) + f(y)}{2}
+\]
+
+令 $x(t) = (1-t)a + tb,\, y(t) = (1-t)f(a) + tf(b)$
+
+证明：我们用数学归纳法证明当 $t = p/2^n,\, p \in \{ p \in \mathbb{N} \,\vert \, 0 \le p \le 2^n \}$ 时 $f(x(t)) \le y(t)$ 成立，当 $n=1$ 时显然成立。然后我们假设 $n=k$ 时成立，然后证明
+$n=k+1$ 是也成立。注意到若
+
+\[
+t = \frac{p}{2^{k+1}}
+\]
+
+当 $p$ 是偶数时
+
+\[
+t = \frac{p/2}{2^k}
+\]
+
+可以直接带入，
+当 $p$ 是奇数时令 $p = 2c+1$
+
+\[
+t = \frac{2c+1}{2^{k+1}} = \frac{1}{2}\left(\frac{c}{2^k} + \frac{c+1}{2^k}\right)
+\]
+
+
+代入中值convex的性质得到
+
+\begin{align*}
+f(x(t)) &= f(\frac{1}{2}\left(x(\frac{c}{2^k}) + x(\frac{c+1}{2^k})\right)) \le \frac{1}{2}\left( f(x(\frac{c}{2^k})) + f(x(\frac{c+1}{2^k})) \right) \\
+& \le \frac{1}{2}\left( y(\frac{c}{2^k})  + y(\frac{c+1}{2^k})\right) \le \frac{1}{2}y(2t) \le y(t)
+\end{align*}
+
+然后我们再利用 $f$ 连续这一性质，构造收敛到 $t$ 的 $t_n$
+
+\[
+t_n = \frac{\lfloor t 2^n \rfloor}{2^n}
+\]
+
+所以我们有
+
+\begin{align*}
+f(x(t_n)) - y(t_n) \le 0
+\end{align*}
+
+然后我们对 $n$ 取极限得到，注意到这里 $f(x(t_n))$ 和 $y(t_n)$ 是连续的，所以我们可以交换运算次序。
+
+\begin{align*}
+f(x(t)) - y(t)= \lim_{n \to \infty}f(x(t_n)) - y(t_n) \le 0
+\end{align*}
+
+所以得到
+
+\[
+f(x(t)) \le y(t)
+\]
+
+\subsubsection{一阶导单调增}
+
+若 $f: X \to \mathbb{R}$ 是 convex 并且可微，那么它的导函数一定是单调的。
+
+对 $a < b \in X$，我们取 $a < x < b$，定义 $t = (x-a)/(b-a)$ 得到
+
+\begin{align*}
+    f(x) &\le f(a) + (x-a)\frac{f(b) - f(a)}{b-a} \\
+    \frac{f(x) - f(a)}{x-a} & \le \frac{f(b) - f(a)}{b-a}
+\end{align*}
+
+然后 $x \to a$ 取极限得到
+
+\[
+f'(a) \le \frac{f(b) - f(a)}{b-a}
+\]
+
+对上面的式子稍加变形得到
+
+\begin{align*}
+    f(x) &\le f(a) + (x-b + b - a)\frac{f(b) - f(a)}{b-a} \\
+    f(x) & \le f(a) + (x-b)\frac{f(b) - f(a)}{b-a} + f(b) - f(a) \\
+    \frac{f(x) - f(b)}{x-b} &\ge \frac{f(b) - f(a)}{b-a} 
+\end{align*}
+
+这里因为 $x-b < 0$ ，所以两边同时除以的时候不等号要改变
+
+然后对 $x \to b$ 去极限得到
+
+\[
+f'(b) \ge \frac{f(b) - f(a)}{b-a} \ge f'(a)
+\]
+
+\subsubsection{一阶导单调增反推 convex}
+
+取 $a < x < b$ ，利用中值定理得到
+
+\begin{align*}
+\frac{f(x) - f(a)}{x-a} &\le \frac{f(b) - f(x)}{b-x} \\
+bf(x) - bf(a) + xf(a) &\le xf(b) -af(b) + af(x)  \\
+(b-a)f(x) & \le (b-x)f(a) + (x-a)f(b)
+\end{align*}
+
+对于 $0 < t < 1$，只需要令 $x = (1-t)a + tb$ 即可证明
+
+\subsubsection{积分性质}
+
+对于可积的 convex 函数 $f$，有
+
+\[
+\int_{a}^{b} f(x) \text{d} x  \le (b-a)\frac{f(a) + f(b)}{2}
+\]
+
+证明，令 $x=(1-t)a + tb,\, y(t) = (1-t)f(a) + tf(b)$
+
+\[
+\int_{a}^{b} f(x(t)) \text{d} x \le  \int_{a}^{b}y(t) \text{d} x
+\]
+
+我们利用 $t = (x-a)/(b-a)$ 把 $y(t)$ 还原成关于 $x$ 的表达式得到
+
+\begin{align*}
+\int_{a}^{b} f(x(t)) \text{d} x &\le  \int_{a}^{b}y(t) \text{d} x \\
+& \le \int_{a}^{b}f(a)+ \frac{x-a}{b-a}(f(b) - f(a)) \\
+& \le (b-a)f(a) + (\frac{b+a}{2}-a)(f(b) - f(a)) \\
+& \le (b-a)f(a) + (\frac{b-a}{2})(f(b) - f(a)) \\
+& \le \frac{1}{2}(b-a)\left( f(a) + f(b) \right)
+\end{align*}
+
+\end{document}
+

@@ -1,0 +1,332 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\begin{exercise}
+    let $f: \Omega \to \mathbb{R}$ be simple non-negative measurable function. And $E_k \subseteq \Omega $ be a sequence of increasing
+    measurable sets. 
+    And let
+
+    \[
+        E = \bigcup_{k=1}^{\infty}E_k
+    \]
+
+    then we have
+
+    \[
+        \int_{E}f(x) \mathrm{d}x = \lim_{k \to \infty}\int_{E_k}f(x) \mathrm{d}x
+    \]
+
+\end{exercise}
+
+\begin{proof}
+    since $f$ is simple non-negative measurable function on $\Omega$, and $E_k$ is measurable. So $f$ is also a simple non-negative measurable function on $E_k$.
+
+    let 
+
+    \[
+        f(x) = \sum_{i=1}^{N}c_i \chi_{F_i}\quad x \in \Omega
+    \]
+
+    then $f(x)$ also be
+
+
+    \[
+        f(x) = \sum_{i=1}^{N}c_i \chi_{F_i \cap E_k}\quad x \in E_k
+    \]
+
+    so we have
+
+    \[
+        \int_{E_k} f(x) \mathrm{d}x = \sum_{i=1}^{N}c_i m(F_i \cap E_k)
+    \]
+
+    and 
+
+
+    \[
+        \lim_{k \to \infty}\int_{E_k} f(x) \mathrm{d}x = \sum_{i=1}^{N}c_i \lim_{k \to \infty}m(F_i \cap E_k)
+    \]
+
+    since $F_i \cap E_k$ is increasing and measurable, so we have
+
+    \[
+        \lim_{k \to \infty}m(F_i \cap E_k) = m(\lim_{k \to \infty}\left( F_i \cap E_k \right)) = m(F_i \cap E)
+    \]
+
+    so 
+
+    \begin{align*}
+        \lim_{k \to \infty}\int_{E_k} f(x) \mathrm{d}x &= \sum_{i=1}^{N}c_i \lim_{k \to \infty}m(F_i \cap E_k) \\
+        &= \sum_{i=1}^{N}c_i m(F_i \cap E) = \int_{E}f(x) \mathrm{d}x
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f_n: \Omega \to \mathbb{R}^*$ be increasing non-negative measurable functions. and $f_n \to f$ point wise.
+    then we have 
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega}f_n(x) \mathrm{d}x = \int_{\Omega}f(x) \mathrm{d}x
+    \]
+\end{exercise}
+
+\begin{proof}
+    since $f_n$ is measurable and $f_n \to f$, so $f$ is also measurable. and $f$ is non-negative. So
+
+    \[
+        \int_{\Omega}f(x) \mathrm{d}x
+    \]
+
+    is well defined.
+
+    since $f_k \le f$, so we have
+
+    \[
+        \int_{\Omega}f_k(x) \mathrm{d}x \le \int_{\Omega}f(x) \mathrm{d}x
+    \]
+
+    take $k \to \infty$, we have
+
+    \[
+        \lim_{k \to \infty}\int_{\Omega}f_k(x) \mathrm{d}x \le \int_{\Omega}f(x) \mathrm{d}x
+    \]
+
+    consider a simple non-negative function $h: \Omega \to \mathbb{R}$, and $h(x) \le f(x)$, take any $c \in (0,1)$, we have
+
+    \[
+        \lim_{k \to \infty}f_k(x) = f(x) \ge ch(x)
+    \]
+
+    let 
+
+    \[
+        E_k = \{x: f_k(x) \ge ch(x) \}
+    \]
+
+    we have increasing sets $E_k$ and
+
+    \[
+        \Omega = \bigcup_{k=1}^{\infty}E_k
+    \]
+
+    so we have
+
+    \[
+    \int_{E_k}ch(x)\mathrm{d}x \le \int_{E_k}f_k(x) \mathrm{d}x \le \int_{\Omega}f_k(x) \mathrm{d}x
+    \]
+
+    take $k \to \infty$, we have
+
+    \[
+    \lim_{k \to \infty}\int_{\Omega}f_k(x) \mathrm{d}x \ge c \int_{\Omega}h(x) \mathrm{d}x
+    \]
+
+    take $c \to 1$, we have
+
+
+    \[
+    \lim_{k \to \infty}\int_{\Omega}f_k(x) \mathrm{d}x \ge  \int_{\Omega}h(x) \mathrm{d}x
+    \]
+
+    by definition of integral on non-negative measurable function take
+
+    \[
+        \int_{\Omega}h(x) \mathrm{d}x \to \int_{\Omega}f(x) \mathrm{d}x
+    \]
+
+    then we have
+
+    \[
+    \lim_{k \to \infty}\int_{\Omega}f_k(x) \mathrm{d}x \ge  \int_{\Omega}f(x) \mathrm{d}x
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $f: \Omega \to \mathbb{R}^*$ and $g: \Omega \to \mathbb{R}^*$ be non-negative measurable function, then we have
+
+    \[
+        \int_{\Omega}f(x) + g(x) \mathrm{d}x = \int_{\Omega}f(x) \mathrm{d}x + \int_{\Omega} g(x) \mathrm{d}x
+    \]
+\end{exercise}
+
+\begin{proof}
+    since $f: \Omega \to \mathbb{R}^*$ is non-negative measurable function, then there exists a sequence of 
+    simple non-negative function $f_n: \Omega \to \mathbb{R}$ and $f_n \to f$ point wise. Also for $g$ and $g_n$
+    by law of limits we have $f_n + g_n \to f + g$ point wise, and $f_n + g_n$ be increasing
+
+    then we have
+
+    \begin{align*}
+        \int_{\Omega}f(x) \mathrm{d}x + \int_{\Omega} g(x) \mathrm{d}x &= \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x + \lim_{n \to \infty}\int_{\Omega}g_n \mathrm{d}x \\
+        &= \lim_{n \to \infty}\left( \int_{\Omega}f_n(x) \mathrm{d}x + \int_{\Omega}g_n(x) \mathrm{d}x\right) \\
+        &= \lim_{n \to \infty}\left( \int_{\Omega} \left( f_n+g_n \right) \mathrm{d}x \right) \\
+        &= \int_{\Omega} \left( f + g \right) \mathrm{d}x
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f_n: \Omega \to \mathbb{R}$ be decreasing non-negative measurable function sequence. And $f_n \to f$ point wise.
+    then we have
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x = \int_{\Omega}f \mathrm{d}x
+    \]
+
+\end{exercise}
+
+\begin{proof}
+    since $f_1, f_2, .. $ is decreasing. let $g_1 = f_1, g_2 = f_1 - f_2, ..$. then $g_n$ is increasing and non-negative. and $g_n \to f_1 - f$ point wise
+
+    so we have
+
+    \[
+        \lim_{n \to \infty}\int_{\Omega}g_n \mathrm{d}x = \int_{\Omega}f_1 - f \mathrm{d}x
+    \]
+
+
+    add items to both side:
+
+    \begin{align*}
+        \lim_{n \to \infty}\int_{\Omega}g_n \mathrm{d}x + \int_{\Omega}f \mathrm{d}x &= \int_{\Omega}f_1 - f \mathrm{d}x + \int_{\Omega}f \mathrm{d}x \\
+        \lim_{n \to \infty}\int_{\Omega}g_n \mathrm{d}x + \int_{\Omega}f \mathrm{d}x &= \int_{\Omega}f_1 \mathrm{d}x \\
+        \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x + \lim_{n \to \infty}\int_{\Omega}g_n \mathrm{d}x + \int_{\Omega}f \mathrm{d}x &= \int_{\Omega}f_1 \mathrm{d}x + \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x\\
+        \lim_{n \to \infty}\int_{\Omega}\left(f_n + g_n\right) \mathrm{d}x  + \int_{\Omega}f \mathrm{d}x &= \int_{\Omega}f_1 \mathrm{d}x + \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x\\ 
+        \int_{\Omega}f_1 \mathrm{d}x + \int_{\Omega}f \mathrm{d}x &= \int_{\Omega}f_1 \mathrm{d}x + \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x \\
+        \int_{\Omega}f \mathrm{d}x &= \lim_{n \to \infty}\int_{\Omega}f_n \mathrm{d}x \\
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f: \Omega \to \mathbb{R}$ be simple non-negative measurable function. And $E \subseteq \Omega$. Then we have
+
+    \[
+        \int_{E} f \mathrm{d}x = \int_{\Omega} f(x)\chi_{E}(x) \mathrm{d}x
+    \]
+\end{exercise}
+
+\begin{proof}
+   let 
+   
+   \[
+    f(x) = \sum_{i=1}^{N}c_i \chi_{F_i}(x) \quad x \in \Omega
+   \]
+
+
+   then we have
+
+   \begin{align*}
+    \int_{E}f \mathrm{d}x &= \sum_{i=1}^{N} c_i m(F_i \cap E) \\
+   \end{align*}
+
+   and $f \chi_{E}$ is simple non-negative measurable function on $E \cap F_1, E \cap F_2, .., \Omega \setminus E$
+
+   \begin{align*}
+    \int_{\Omega}f \chi_{E} \mathrm{d}x  = \sum_{i=1}^{N} c_i m(E \cap F_i) + 0
+   \end{align*}
+\end{proof}
+
+
+\begin{exercise}
+    let non-negative measurable function $f: \Omega \to \mathbb{R}^*$ and $g \to \mathbb{R}^*$ meets 
+
+    \[
+        f(x) = g(x)\quad \text{a.e.}
+    \]
+
+    prove that
+
+    \[
+        \int_{\Omega}f \mathrm{d}x = \int_{\Omega}g \mathrm{d}x
+    \]
+
+    let 
+
+    \[
+        E = \{ x \in \Omega : f(x) = g(x) \}
+    \]
+
+    and $E' = \Omega \setminus E$
+
+    then we have
+
+    \begin{align*}
+        \int_{\Omega}f \mathrm{d}x &= \int_{\Omega}f(\chi_{E} + \chi_{E'}) \mathrm{d}x \\
+        &= \int_{E}f \mathrm{d}x  + \int_{E'}f\mathrm{d}x \\
+        &= \int_{E}g \mathrm{d}x  + \int_{E'}f\mathrm{d}x \\
+        &= \int_{E}g \mathrm{d}x  + 0 \\
+        &= \int_{E}g \mathrm{d}x  + \int_{E'}g\mathrm{d}x \\
+        &= \int_{\Omega}g \mathrm{d}x
+    \end{align*}
+\end{exercise}
+
+\begin{thm}[Fatou's Theorem]
+    let $f_n: \Omega \to \mathbb{R}^*$ be sequence of non-negative measurable functions. Then
+
+    \[
+        \int_{\Omega} \left(\varliminf_{n \to \infty} f_n \right) \mathrm{d}x \le \varliminf_{n \to \infty} \int_{\Omega} f_n \mathrm{d}x
+    \]
+\end{thm}
+
+\begin{proof}
+    let 
+
+    \[
+        h_n(x) = \inf_{m \ge n}f_m(x)
+    \]
+
+    then we have
+
+    \[
+        \varliminf_{n \to \infty}f_n = \lim_{n \to \infty} h_n
+    \]
+
+    and
+
+    \[  
+        h_n \le h_{n+1}
+    \]
+
+    by Beppo levi's theorem we have
+
+    \[
+\int_{\Omega} \left(\varliminf_{n \to \infty} f_n \right) \mathrm{d}x = \lim_{n \to \infty} \int_{\Omega}h_n \mathrm{d}x
+    \]
+
+    since we have
+
+    \[
+        h_n \le f_n
+    \]
+
+    so we have
+
+    \[
+\int_{\Omega} \left(\varliminf_{n \to \infty} f_n \right) \mathrm{d}x = \lim_{n \to \infty} \int_{\Omega}h_n \mathrm{d}x \le \lim_{n \to \infty} \int_{\Omega}f_n \mathrm{d}x
+    \]
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

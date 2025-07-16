@@ -1,0 +1,265 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{book}
+\input\input{macros.tex}
+\title{Math Notes Summary}
+\author{Yingjie Zhu}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Topology}
+
+\section{Topological Space}
+
+we derive some lemma on general topological space:
+
+\subsection{interior, closure and connected}
+
+\begin{lem}
+    if $A \subseteq B$ then $A' \subseteq B'$
+\end{lem}
+
+\begin{proof}
+    $V_x \cap (A \setminus \{ x \}) \subseteq V_x \cap (B \setminus \{ x \})$
+\end{proof}
+
+\begin{lem}
+   $(\mathring{A}) ^C \subseteq A^C \cup (A^C)'$ 
+\end{lem}
+
+\begin{proof}
+    let $x \notin \mathring{A} $, then for every open sets $V_x$ contains $x$, we must have
+
+    \[
+        V_x \cap A^C \ne \emptyset
+    \]
+
+    then we discuss on if $x \in A$:
+
+    \begin{enumerate}
+        \item $x \in A$
+        then we have $x \notin A^C$ and:
+
+        \[
+            V_x \cap \left( A^C \setminus \{ x \} \right) = V_x \cap A^C \ne \emptyset
+        \]
+
+        so we have $x \in (A^C)'$
+
+
+        \item $x \notin A$
+
+        then we have $x \in A^C$
+
+        after all, we conclude that $x \in A^C \cup (A^C)'$
+    \end{enumerate}
+\end{proof}
+
+\begin{lem}
+    $A \cup A'$ is closed
+\end{lem}
+
+\begin{proof}
+    consider $(A \cup A')^C = A^C \cap (A')^C$, for any $x \notin A$ and $x \notin A'$, there exists 
+    a open set $V_x$ such that:
+
+    \[
+        V_x \cap (A \setminus \{ x \}) = V_x \cap A = \emptyset
+    \]
+
+    consider any other $y \in V_x$, we have $y \notin A$ and $y \notin A'$. so $A^C \cap (A')^C$ is open 
+    and $A \cup A'$ is closed
+\end{proof}
+
+
+\begin{lem}
+    if $A \subseteq E$ and $E$ is closed, then we have
+
+    \[
+        A' \subseteq E
+    \]
+\end{lem}
+
+\begin{proof}
+    since $A \subseteq E$, then we have $E^C \subseteq A^C$
+
+    then for every $x \in E^C$ we got a open set $E^C$ contains $x$ and
+
+    \[
+        E^C \cap (A \setminus \{ x \}) = \emptyset
+    \]
+
+    so $x \notin A'$  and
+
+    \begin{align*}
+        E^C & \subseteq (A')^C \\
+        A' & \subseteq E
+    \end{align*}
+\end{proof}
+
+\begin{lem}
+    identical definition of closure: 
+
+    \begin{enumerate}
+        \item $\overline{A}$ is minimal closed set which is contains $A$
+        \item $\overline{A} = A \cup A'$
+    \end{enumerate}
+\end{lem}
+
+
+\begin{proof} 
+
+divide into multiple steps:
+
+    \begin{enumerate}
+        \item $A \cup A'$ is closed
+
+        \item assume $A \subseteq E$ and $E$ is closed
+
+        then we have 
+
+        \begin{align*}
+            A & \subseteq E \\
+            A' & \subseteq E \\
+            A \cup A' & \subseteq E \\
+        \end{align*}
+    \end{enumerate}  
+
+$A \cup A'$ is minimal closed set which contains $A$, on the other hand, 
+if $E$ meets that $E$ is minimal closed set contains $A$:
+
+\begin{enumerate}
+    \item since $A \cup A'$ is closed, we have
+
+    \[
+        E \subseteq A \cup A'
+    \]
+
+    \item since $E$ is closed, by our previous discussion on $A \cup A'$, we have
+
+    \[
+        A \cup A' \subseteq E
+    \]
+\end{enumerate}
+
+after all, we have $E = A \cup A'$
+
+
+\end{proof}
+
+\begin{lem}
+    identical definition of closed set:
+
+    \begin{enumerate}
+        \item $A^C$ is open
+        \item $A = \overline{A}$
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+steps:
+
+if $A^C$ is open, since $A \subseteq A$ then we have $A' \subseteq A$
+
+\begin{align*}
+    \overline{A} &= A \cup A' \subseteq A \cup A \\
+    A & \subseteq A \cup A' \subseteq \overline{A} \\
+    A &= \overline{A} \\
+\end{align*}
+
+on the other hand, if $A = \overline{A}$, then $A = A \cup A'$, since $A \cup A'$ is closed, so $A$ is closed too.
+
+\end{proof}
+
+
+\begin{lem}
+    $(\mathring{A})^C = \overline{A^C}$
+\end{lem}
+
+\begin{proof}
+
+divided into two steps
+
+    \begin{enumerate}
+        \item $\overline{A^C} \subseteq (\mathring{A})^C $
+
+        \begin{align*}
+            \mathring{A} &\subseteq A \\
+            A^C & \subseteq (\mathring{A})^C \\
+            \overline{A^C} & \subseteq \overline{(\mathring{A})^C} \subseteq (\mathring{A})^C \\
+        \end{align*}
+
+        \item $(\mathring{A})^C \subseteq \overline{A^C}$
+
+        \[
+            (\mathring{A})^C \subseteq A^C \cup (A^C)' \subseteq \overline{A^C}
+        \]
+    \end{enumerate}
+\end{proof}
+
+\begin{lem}
+    $\text{int}{(A \cap B)} = \mathring{A} \cap \mathring{B}$
+
+\end{lem}
+
+\begin{proof}
+
+\begin{align*}
+    \mathring{A} &\subseteq A \\
+    \mathring{B} &\subseteq B \\
+    \mathring{A} \cap \mathring{B} & \subseteq A \cap B \\
+    \text{int}(\mathring{A} \cap \mathring{B}) & \subseteq \text{int}(A \cap B) \\
+    \mathring{A} \cap \mathring{B} & \subseteq \text{int}(A \cap B) \\
+\end{align*}
+
+and
+
+\begin{align*}
+    A \cap B &\subseteq A \\
+    \text{int}(A \cap B) &\subseteq \mathring{A} \\
+    A \cap B &\subseteq B \\
+    \text{int}(A \cap B) &\subseteq \mathring{B} \\
+\text{int}(A \cap B) & \subseteq \mathring{A} \cap \mathring{B}
+\end{align*}
+
+\end{proof}
+
+\begin{lem}
+    $\overline{A \cup B} = \overline{A} \cup \overline{B}$
+\end{lem}
+
+let $E = A^C,\: F = B^C$
+
+\begin{proof}
+    \begin{align*}
+        \overline{A} \cup \overline{B} &= \overline{E^C} \cup \overline{F^C} \\
+        &= (\mathring{E})^C \cup (\mathring{F})^C 
+        = (\mathring{E} \cap \mathring{F})^C \\
+        &= (\text{int}(E \cap F))^C 
+        = \overline{(E \cap F)^C} \\
+        &= \overline{E^C \cup F^C} = \overline{A \cup B}
+    \end{align*}
+\end{proof}
+
+\input{2025-05/2025-05-11.tex}
+
+\subsection{convergence}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

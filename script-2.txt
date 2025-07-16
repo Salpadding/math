@@ -1,0 +1,25 @@
+now let's focus on consumer side.
+
+
+Let's check our created workflow.
+
+The namespace of this workflow is default. 
+And the workflow type is SyncUserWorkflow. 
+The queue name is com.sap.sbnc.plan.temporal.SyncUserWorkflow.
+
+For the consumer side, we need to make sure that 
+we connected to the same temporal server, same name space, same task queue name, 
+listen to same workflow type, compared with producer
+
+This is java code to register worker. 
+
+because our spring profile is not cloud, 
+temporal auto configuration will connect to local server, same with producer.
+
+The workflow client created by auto configuration connect to the 'default' namespace, 
+by local_config.yaml, also same with producer.
+
+
+Before start our server, there are no available workers.
+So our consumer should connect to the default namespace.
+

@@ -1,0 +1,114 @@
+
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{macros.tex}
+\title{Cheat Sheet}
+\author{Yingjie Zhu}
+
+
+\begin{document}
+\maketitle
+
+
+\section{Topology}
+
+\subsection{interior, closure}
+
+\begin{align*}
+    \overline{A \cap B} &\subseteq \overline{A} \cap \overline{B} \quad \text{also holds for arbitrary sets} \\
+    \overline{A \cup B} &= \overline{A} \cup \overline{B} \\
+    \mathrm{int}(A \cap B) &= \mathrm{int}(A) \cap \mathrm{int}(B) \\
+    \mathrm{int}(A \cup B) &\supseteq \mathrm{int}(A) \cup \mathrm{int}(B) \quad \text{also holds for arbitrary sets}
+\end{align*}
+
+\subsection{image, pre image}
+
+The below theorem also holds for arbitrary number of sets.
+\begin{align*}
+f(A \cap B) &\subseteq f(A) \cap f(B)  \\
+f(A \cup B) & =  f(A) \cup f(B) \\
+f^{-1}(A \cap B) & =  f^{-1}(A) \cup f^{-1}(B) \\
+f^{-1}(A \cup B) & =  f^{-1}(A) \cup f^{-1}(B) \\
+E  & \subseteq f^{-1}(f(E)) \\
+E  & \supseteq f(f^{-1}(E)) \\
+\end{align*}
+
+\section{Series}
+
+\subsection{sum by parts}
+
+
+\begin{align*}
+    A_n &= \sum_{k=0}^{n}a_k \\
+    \sum_{n=k}^{p} a_nb_n &= \sum_{n=k}^{p-1}A_n(b_n - b_{n+1}) + A_pb_p - A_{k-1}b_k
+\end{align*}
+
+\subsection{Bounded unit complex power series}
+
+Series
+
+\[
+    \sum_{n=0}^{\infty} z^n ,\: z \ne 1,\: \lvert z\rvert = 1
+\]
+
+is bounded
+
+\section{Inequality}
+
+\subsection{Cauchy Inequality}
+
+\[
+    \lvert \langle x, y \rangle \rvert \le \lvert x \rvert \lvert y \rvert
+\]
+
+
+\subsection{Holder's Inequality}
+
+\begin{align*}
+    \int |fg| \le \left(\int f^p\right)^{1/p} \left(\int g^q\right)^{1/q}
+\end{align*}
+
+
+or
+
+\[
+    \| fg \|_1 \le \| f \|_p \| g \|_q
+\]
+
+and
+
+\begin{align*}
+    \sum |x_n y_n| \le \left(\sum \left|x_n \right|^p\right)^{1/p}  \left(\sum \left|y_n \right|^q\right)^{1/q}
+\end{align*}
+
+or
+
+
+
+with $p,q > 1$
+
+\subsection{Minkowski Inequality}
+
+\begin{align*}
+   \left( \int \left| f + g \right|^p \right)^{1/p} \le \left( \int \left| f \right|^p \right)^{1/p} + \left( \int \left| g \right|^p \right)^{1/p}
+\end{align*}
+
+or
+
+\begin{align*}
+    \| f + g\|_p \le \| f \|_p + \| g \|_p
+\end{align*}
+
+\section{sup and inf}
+
+\begin{align*}
+    \sup \max (f,g) &= \max (\sup f, \sup g) \\
+    \sup \min (f,g) &\le \min (\sup f, \sup g) \\
+    \inf \min (f,g) &= \min (\inf f, \inf g) \\
+    \inf \max (f,g) &\ge \max (\inf f, \inf g) \\
+\end{align*}
+
+
+
+\end{document}
+

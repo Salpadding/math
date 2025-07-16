@@ -1,0 +1,48 @@
+In this video, i will show you how
+to start a local temporal server. And then,
+submit a workflow to temporal server.
+
+There is a UI from the local temporal server.
+So we can visualize our result.
+
+
+Let's start with a local temporal sever.
+My local temporal server were installed via 
+homebrew. If you had not installed the temporal server yet, you can install it by homebrew.
+
+Like 'brew install temporal',
+since i had installed the temporal server.
+
+I can start the local temporal server immediately.
+
+temporal server start-dev
+
+This is a temporal server for development only, and
+ it will clear all data after restart. This is good for develop or test.
+
+The log output of temporal shows there is a ui at localhost 8233. let's go to the ui.
+
+You can observe workflows by this ui. Since we don't create any workflow yet, the list is empty.
+
+Let's write a junit test and submit a temporal workflow. This is code repository for idp-service.
+
+The temporal auto configuration will try to connect to local temporal server if current spring profile is not cloud.
+
+And the temporal auto configuration will initialize  Temporal Context, workflow client.
+
+workflow client is required for submit workflow.
+
+This is java code of create a workflow for synchronize users.
+
+As you can see, we can create a workflow object easily by  temporal boot strap. We need to define the id of workflow, and the queue name, the interface of workflow.
+
+The interface should be annotated with workflow interface. And a method annotated with workflow method.
+
+we can start the workflow asynchronously by this method, WorkflowClient.start 
+
+Let's run our junit test.
+
+ok
+
+Let's go to temporal ui, 
+As you can see, we created a workflow successfully.

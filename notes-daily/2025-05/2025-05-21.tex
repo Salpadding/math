@@ -1,0 +1,684 @@
+\subsubsection{Number Theory}
+
+\begin{exercise}
+    prove: for the below the lcm $L$ of $a_1,a_2,..,a_n$, for any $c$ which meets $a_k | c, \forall k \le n$
+    we have $c | L$
+\end{exercise}
+
+\begin{proof}
+   since $L \le c$, assume $c = qL + r$, then we got $r = c - qL$ which is also a common multiplier,
+   so we must have $r = 0$
+\end{proof}
+
+
+\begin{exercise}
+    prove the below definition of gcd of $a_1,a_2,..,a_n$ is identical:
+
+    \begin{enumerate}
+        \item maximum integer which divided $a_1,a_2,..,a_n$
+
+        \item
+
+        \[
+            \gcd(a_1,a_2,..,a_n) = \min \left( \{ \left|x_1a_1 + x_2a_2 + .. + x_na_n \right| \} \cap \{1,2,..\} \right)
+        \]
+
+        \item 
+
+        \[
+            \gcd(a_1,a_2,..,a_n) = \mathrm{lcm} \{ d: d | a_k,\: \forall k \le n \}
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    let 
+
+    \[
+        d = \min \left( \{ \left|x_1a_1 + x_2a_2 + .. + x_na_n \right| \} \cap \{1,2,..\} \right)
+    \]
+
+    for any $c | a_k,\: \forall k \le n$, we have $c|d$ and thus $c \le d$, then we prove $d | a_1$,
+    since $d \le a_1$, let $a_1 = qd + r$, thus we got $r = a_1 -qd$ which is also a linear combination of $a_1,a_2,..,a_n$ and $r < d$
+    so we must have $r = 0$, this also holds for $a_2,a_3,..,a_n$
+
+
+    let 
+
+    \[
+        E = \{ d: d | a_k,\: \forall k \le n \}
+    \]
+
+    and
+
+    \[
+        d_0 = \mathrm{lcm} E
+    \]
+
+    since $\forall d \in E, d | a_1$, by definition of $\mathrm{lcm}$,  we have $d_0 | a_1$,
+    which also holds for $a_2,a_3,..,a_n$, so $d$ is also a common divisor. and for any $d \in E$
+    by $d | d_0$, we have $d \le d_0$
+\end{proof}
+
+\begin{exercise}[Chinese Reminder Theorem]
+    let $a_1,a_2,..,a_n$ is pairwise co-prime $r_1 < a_1,r_2 < a_2, .., r_n < a_n$ 
+    prove: exists integer $x$ which meets:
+
+    \[
+        x \equiv r_k \mod a_k,\: \forall k \le n
+    \]
+
+\end{exercise}
+
+\begin{proof}
+    let's consider $a_1$, let $m_1 = a_2a_3..a_n$
+
+    since $(a_2, a_1) = 1,\: (a_3,a_1) = 1$ then we got $(a_2a_3,a_1) = 1$, and $(m_1, a_1) = 1$
+    so there exists $u_1, v_1$ so that
+
+    \[
+        u_1m_1 + v_1a_1  = 1
+    \]
+
+    pick $y_1 = u_1m_1$, we got $y_1 \equiv \delta_{k,1} \mod a_k$, similar we can pick $y_2,..,y_n$ which meets:
+
+    \[
+        y_p \equiv \delta_{p,k} \mod a_k, \forall k,p \le n
+    \]
+
+    define 
+
+    \[
+        x = \sum_{p=1}^{n}r_py_p
+    \]
+
+    then we got
+
+    \[
+        \sum_{p=1}^{n}r_py_p \equiv \sum_{p=1}^{n}r_p\delta_{p,k}  \equiv r_p \mod a_k
+    \]
+\end{proof}
+
+\begin{definition}
+    let $f(x), g(x)$ be polynomial on field $F$, we say $f(x) \sim g(x)$ if there exists $c \in F$, such that $g(x) = cf(x)$,
+    it is easy to verify:
+
+    \begin{align*}
+        f(x) & \sim f(x) \\
+        f(x) & \sim g(x),\: g(x) \sim h(x),\: \text{ then } \: f(x) \sim h(x) \\
+        f(x) & \sim g(x),\: \text{then } \: g(x) \sim f(x)
+    \end{align*}
+\end{definition}
+
+\begin{exercise}
+    let $f(x) \sim h(x)$ and $\deg f(x) > -\infty$, prove $f(x) | g(x)$ iff $h(x) | g(x)$
+\end{exercise}
+
+\begin{proof}
+    obviously
+\end{proof}
+
+\begin{exercise}
+    let $f(x), g(x)$ be polynomial on field $F$, and $\deg g(x) > -\infty$, prove: exists unique $r(x)$ and $q(x)$ meets:
+
+    \[
+        f(x) = q(x)g(x) + r(x),\: \deg r(x) < \deg g(x)
+    \]
+
+\end{exercise}
+
+\begin{proof}
+existence:
+
+    \begin{enumerate}
+        \item $\deg f(x) = -\infty$
+
+        if $\deg f(x) = -\infty$, let $q(x) = 0,\: r(x) = 0$, then we got $0 = 0 g(x) + 0$, where $\deg 0 = -\infty < \deg g(x)$
+
+        \item $\deg g(x) = 0$
+
+        obviously, let $q(x) = f(x)/g(x),\: r(x) = 0$
+
+        \item $\deg f(x) = n,\: n \ge 0, \deg g(x) > 0$
+
+        \begin{enumerate}
+            \item $n < m$
+
+            let $q(x) = 0, r(x) = f(x)$
+
+            \item $n \ge m$
+
+            let 
+
+
+            then we use induction on $n-m$
+
+            if $n-m = 0$
+
+            \begin{align*}
+                f(x) &= a_nx^n + .. + a_0,\: a_n \ne 0 \\
+                g(x) &= b_nx^n + .. + b_0,\: b_n \ne 0 \\
+            \end{align*}
+
+            then we got 
+            \begin{align*}
+                q(x) &= \frac{a_n}{b_n} \\
+                r(x) &= f(x) - q(x)g(x) = (a_{n-1}-b_{n-1}\frac{a_n}{b_n})x_{n-1} + .. + (a_{0}-b_{0}\frac{a_n}{b_n}) \\
+                \deg r(x) & \le n-1
+            \end{align*}
+
+            consider when $n = m + k+1$
+
+            \begin{align*}
+                f(x) &= a_{m+k+1}x^{m+k+1} + .. + a_0,\: a_{m+k+1} \ne 0 \\
+                &= x(a_{m+k}x^{m+k} + .. + a_1) + a_0 \\
+                &= x h(x) + a_0
+            \end{align*}
+
+            let $h(x) = q(x)g(x) + r(x)$, we got $f(x) = xq(x)g(x) + xr(x) + a_0$
+
+            since $\deg r(x) < \deg g(x)$ thus $\deg xr(x) \le \deg g(x)$
+            and $\deg xr(x) + a_0 \le \deg g(x) $ because $\deg a_0 = 0 < \deg g(x)$
+            
+            if $\deg xr(x) + a_0 < \deg g(x)$, then $xr(x) + a_0$ is what we want
+
+            if $\deg xr(x) + a_0 = \deg g(x) $  so we have
+
+            \[
+                xr(x) + a_0 = q'(x)g(x) + r'(x)
+            \]
+
+            and
+
+            \[
+                f(x) = g(x)(xq(x) + q'(x)) + r'(x)
+            \]
+
+            so $r'(x)$ is what we want
+        \end{enumerate}
+    \end{enumerate}
+
+unique:
+    let $f(x) = q_1(x)g(x) + r_1(x) = q_2(x)g(x) + r_2(x)$, so we got:
+
+    \[
+        g(x)(q_1(x) - q_2(x)) = r_2(x) - r_1(x)
+    \]
+
+    if $q_1(x)  - q_2(x) \ne 0$, we got $\deg g(x)(q_1(x) - q_2(x)) \ge \deg g(x)$, which is contradict with
+
+    \[
+        \deg r_1(x) - r_2(x) \le \min \deg r_1(x), \deg r_2(x) < \deg g(x)
+    \]
+
+    so we must have $q_1(x) = q_2(x),\: r_1(x) = r_2(x)$
+
+\end{proof}
+
+\begin{definition}
+    let $\deg g(x) > -\infty$, we say $g(x) | f(x)$ iff exists $h(x)$ so that $g(x)h(x) = f(x)$
+\end{definition}
+
+\begin{exercise}
+    $g(x) | 0$
+\end{exercise}
+
+\begin{proof}
+    obviously: $g(x) 0 = 0$
+\end{proof}
+
+\begin{exercise}
+    for $g(x),f(x),\: \deg g(x) > -\infty$, take :
+
+    \[
+        f(x) = q(x)g(x) + r(x),\: \deg r(x) < \deg g(x)
+    \]
+
+    then $g(x) | f(x)$ iff $r(x) = 0$
+\end{exercise}
+
+\begin{proof}
+    we have $f(x)= h(x)g(x) + 0$ and $\deg 0 = -\infty < \deg g(x)$, since this representation is unique, so we must have
+
+    \begin{align*}
+        q(x) &= h(x) \\
+        r(x) &= 0 
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f(x) | g(x)$ and $g(x) | f(x)$, prove: $f(x) \sim g(x)$
+\end{exercise}
+
+\begin{proof}
+    let
+
+    \begin{align*}
+        f(x) &= h_1(x)g(x) \\
+        g(x) &= h_2(x)f(x) 
+    \end{align*}
+
+    then we have: $\deg f(x) = \deg g(x)$, and $\deg h_1(x) = 0$, so $h_1(x) = c$ for some $c \in F$, and same for $h_2(x)$,
+
+\end{proof}
+
+\begin{definition}
+    let $\deg f_k(x) > -\infty$ we say $h(x)$ is gcd of $f_1(x), f_2(x),..,f_n(x)$ iff 
+
+    \begin{enumerate}
+        \item $h(x) | f_k(x),\: \forall k \le n$
+
+        \item $\forall g(x) | f_k(x),\: \forall k \le n$, we have $g(x) | h(x)$
+    \end{enumerate}
+\end{definition}
+
+\begin{exercise}
+    prove: if $f(x) | g(x)$, then $\deg f(x) \le \deg g(x)$
+\end{exercise}
+
+\begin{proof}
+    obviously
+\end{proof}
+
+
+
+\begin{exercise}
+    if $\deg f(x) > -\infty,\: \deg g(x) > -\infty$ then gcd of $f(x), g(x)$ exists and unique
+\end{exercise}
+
+\begin{proof}
+existence:
+  
+   assume $\deg f(x) \le \deg g(x)$, we use induction on $\deg f(x)$
+
+   if $\deg f(x) = 0$, let $\deg h(x) = 0$ and $h(x) \sim 1$
+
+   let $\deg f(x) = k$, and $g(x) = q(x)f(x) + r(x)$
+
+   if $\deg r(x) = -\infty$, then $(f(x),g(x)) = f(x)$
+
+   if $\deg r(x) > -\infty$
+   
+   then we got
+
+   \[
+        \gcd(f(x), g(x)) \sim \gcd(r(x), f(x))
+   \]
+
+
+   since $\deg r(x) < k$, by hypo of induction, so $\gcd(f(x), g(x))$ exists
+
+unique:
+
+    let $h_1(x) = \gcd(f(x), g(x)),\: h_2(x) = \gcd(f(x), g(x))$ by $h_1(x) | h_2(x)$ and $h_2(x) | h_1(x)$
+    we have $h_1(x) \sim h_2(x)$
+   
+\end{proof}
+
+\begin{exercise}
+    we have $(f_1, f_2, f_3) \sim ((f_1,f_2),f_3) \sim (f_1, (f_2,f_3))$
+\end{exercise}
+
+\begin{proof}
+    by definition of $\gcd$
+\end{proof}
+
+\begin{definition}
+    we say $f(x), g(x)$ is co-prime iff $(f,g) = 1$
+\end{definition}
+
+\begin{exercise}
+    
+    let $(f_1,f_2,..,f_n)$ meets $\deg f_k \ge 0$ and
+
+    \[
+        E = \{ g = u_1f_1 + u_2f_2 + .. + u_nf_n: \deg g > -\infty \}
+    \]
+
+    prove:
+
+    \[
+        (f_1,f_2,..,f_n) \in E,\: \forall g \in E,\: \deg g \ge \deg (f_1,f_2,..,f_n)
+    \]
+\end{exercise}
+
+\begin{proof}
+    let $g \in E$ and  $\forall h \in E, \deg g \le \deg h$, let $f_1 = qg + r$, since $r = f_1 -qg$,
+    thus we must have $\deg r = -\infty$, so $g | f_k,\: \forall k \le n$
+
+    and $g$ must be $\gcd$ of $f_1,f_2,..,f_n$, thus $g$ is unique
+\end{proof}
+
+\begin{exercise}
+    prove: $(f,g)$ is co-prime iff exists $u(x), v(x)$ meets: $uf + vg = 1$
+\end{exercise}
+
+\begin{proof}
+    obviously, by above exercise
+\end{proof}
+
+\begin{exercise}
+    $f_1 | g,\: f_2 | g$ and $(f_1,f_2) = 1$,
+    then $f_1f_2 | g$
+
+\end{exercise}
+
+\begin{proof}
+    by $f_1f_2 | f_2g,\: f_1f_2 | f_1g$, take $uf_1 | vf_2 = 1$, we got
+
+    \[
+        f_1f_2 | g
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $(f,g)= 1$ and $f | gh$, prove $f | h$
+\end{exercise}
+
+\begin{proof}
+    let $f | fh, \: f|gh$, take $uf + vg = 1$, we got $f | h$
+\end{proof}
+
+\begin{exercise}
+    let $(f,g) = d$, prove $(f/d, g/d) = 1$
+\end{exercise}
+
+\begin{proof}
+    take $uf + vg = d$, then we got
+
+    \[
+        u\frac{f}{d} + v \frac{g}{d} = 1
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $(f,g) =d$, prove $(hf,hg) = hd$
+\end{exercise}
+
+\begin{proof}
+    let $w = (hf, hg)$
+
+    by $d | f,\: hd | hf,\: hd | hg\:$ we have $hd | w$
+
+    by $w | hf, h | hf$ we have $h | w$, so $w/h | f$, similar we have $w/h | g$,  
+    thus we got $w/h | d,\: w | hd$
+\end{proof}
+
+\begin{exercise}
+    let $(f,h) = 1, (g,h) = 1$, prove $(fg, h) = 1$
+\end{exercise}
+
+\begin{proof}
+    let $u_1f + v_1h =1,\: u_2g + v_2h = 1$, then:
+
+    \[
+        u_1u_2fg + kh = 1
+    \]
+\end{proof}
+
+\begin{exercise}
+    lcm of $f,g$ $[f,g]$ exists and $[f,g](f,g) \sim fg$
+\end{exercise}
+
+\begin{proof}
+    consider $w = fg/(f,g)$, since $f| w $ and $g| w$, so we got $[f,g] | w$
+
+    let $u = f/(f,g)$ and $v = g/(f,g)$, since $(u,v) = 1$, by $f | [f,g]$ we have $u | [f,g]/(f,g)$
+    and $v | [f,g]/(f,g)$, so we got $uv | [f,g]/(f,g)$ thus $w | [f,g]$
+
+    so we got $w \sim [f,g]$ which means $fg \sim [f,g](f,g)$
+\end{proof}
+
+\begin{exercise}
+    let $g_1,g_2,..,g_n$ be pairwise co-prime and $r_1,r_2,..,r_n$ be any polynomial. then exists polynomial  $f$ meets
+
+    \begin{align*}
+        f &\equiv r_1 \mod g_1 \\
+        f &\equiv r_2 \mod g_2 \\
+        .. & ..  \\
+        f &\equiv r_n \mod g_n \\
+    \end{align*}
+\end{exercise}
+
+\begin{proof}
+    consider $g_1$ and $m_1 = g_2g_3..g_n$ since $(g_1,m_1) = 1$ we have
+
+    \[
+        u_1g_1 + v_1m_1 = 1
+    \]
+
+    let's pick $y_1 = v_1m_1$, then $y_1 \equiv \delta_{k,1} \mod a_k$, similar we got
+    $y_1,y_2,..,y_n$ and $y_p \equiv \delta_{k,p} \mod a_k$
+
+    consider $f = r_1y_1 + r_2y_2 + .. + r_ny_n$, then we got
+
+    \begin{align*}
+        f &\equiv \sum_{p=1}^{n}r_py_p \equiv \sum_{p=1}^{n}r_p \delta_{p,k} \mod a_k \\
+        & \equiv r_p \mod a_k
+    \end{align*}
+\end{proof}
+
+\begin{definition}[Prime Polynomial]
+    let $f(x)$ be polynomial on field $F$, we say $f(x)$ is not prime, iff $\deg f(x) = 0$
+    or $\exists h,g,\: 0 < \deg h, 0 < \deg g $ and $f = hg$
+    otherwise $f$ is prime
+\end{definition}
+
+\begin{exercise}
+    let $p$ is prime polynomial on field $F$, and $g$ is any polynomial,
+    prove: $(g,f) = 1$ or $f | g$
+\end{exercise}
+
+\begin{proof}
+    we discuss on $\deg g$
+
+    \begin{enumerate}
+        \item $\deg g = -\infty$
+
+        then $f|g$
+
+        \item $\deg g > -\infty$
+
+        assume $h =(g,f)$ and $\deg h > 0$, which means $f,g$ is not co-prime, 
+        then $f$ could be written as $f = h (f/h)$, then we must have $\deg (f/h) = 0$
+        thus we got $f \sim h$ and $f | g$
+
+        
+    \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+    let $p$ be prime polynomial, and $f,g $ is polynomial on field $F$, if $p | fg$, then we have
+    $p | f$ or $p | g$
+\end{exercise}
+
+\begin{proof}
+    if $p$ not divide $f$ then $(p,f) = 1$, since $p|fg$, so we got $p|g$
+\end{proof}
+
+
+\begin{exercise}
+let $f$ be a polynomial on field $F$ and $\deg f > 0$, then $f$ could be written finite product of prime polynomials:
+
+\[
+    f = p_1p_2..p_n
+\]
+
+and this representation is unique
+\end{exercise}
+
+\begin{proof}
+    we use induction on $\deg f$, if $\deg f = 1$ then $f$ is prime 
+
+    if $\deg = n$ and $f$ is not prime, then $f$ could be written as
+
+    \[
+        f = gh
+    \]
+
+    since $\deg g < \deg f$ and $\deg h < \deg f$, so both of them could be decomposition,
+    let $g = p_1p_2..p_m$ and $h = q_1q_2..q_s$, then
+
+    \[
+        f = p_1p_2..p_mq_1q_2..q_s
+    \]
+
+    then we prove this representation is unique
+
+    let
+
+    \[
+        f = p_1p_2..p_n = q_1q_2..q_s
+    \]
+
+    since $p_1 | q_1q_2..q_s$ there must exists $q_t$ meets $p_1 | q_t$, we can do some rearrange on $q_1q_2..q_s$ assume $t=1$ because $q_1$
+    is also prime we have $q_1/p_1 \sim 1$, remove $p_1$ and $q_1$ from both side, we got
+
+    \[
+        p_2..p_n = q_2q_3..q_s
+    \]
+
+    take $n$ times, we got $s=n$
+
+    \begin{align*}
+        p_1 &\sim q_1 \\
+        p_2 &\sim q_2 \\
+        .. & .. \\
+        p_n &\sim q_n \\
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $f,g$ be prime polynomial and $f \ne g$, and $n,m \ge 0$, prove: $(f^n, g^m) = 1$
+\end{exercise}
+
+\begin{proof}
+   if $n = 0$ or $m = 0$, it is obviously, assume $n=1$, we use induction on $m$,
+   when $m=1$, since $g$ cannot divide $f$, otherwise we got $\deg (f/g) = 0$and $f \sim g$
+   so we have $(f,g) = 1$, if $(f,g^k) = 1$ by $(f,g) = 1$ we got $(f,g^{k+1}) = 1$
+
+   similarly, we continue use induction on $n$,
+   assume $(f^k, g^m) = 1,\forall m$, since $(f,g^m) = 1$ we got $(f^{k+1}, g^{m}) = 1$
+\end{proof}
+
+\begin{exercise}
+    let $p$ be prime polynomial, and $n,m \ge 0$, prove
+
+    $p^n | p^m$ iff $n \le m$
+\end{exercise}
+
+\begin{proof}
+    assume $p^n | p^m$, we use induction on $n$, if $n = 0$, then $n \le m$, assume $p^k | p^m$ imply $k \le m$, let's consider if $p^{k+1} | p^m$
+    
+    then we got $(pp^k) | pp^{m-1}$ and $p^{k} | p^{m-1}$, so we got $k \le m -1$ and $k + 1 \le m$
+\end{proof}
+
+\begin{exercise}
+    let $f = p_1^{e_1}..p_n^{e_n}$ where $p_1,p_2,..,p_n$ is prime  polynomial,
+    and $g = p_1^{s_1}..p_n^{s_n}$, then $g | p$ iff $\forall k \le n, s_k \le e_k$
+\end{exercise}
+
+\begin{proof}
+    consider $p^{s_1} | g$ while $p^{s_1+1}$ not divide $g$, since $p_1^{s_1} | p_1^{e_1}..p_n^{e_n}$ 
+    
+    we have $p_1^{s_1} | p_1^{e_1}$ thus $s_1 \le e_1$, and similar for $s_1,e_2 ..$
+\end{proof}
+
+\begin{exercise}
+    let $f(x)$ be polynomial on $F$, prove $f(x)$ has no repeated factors iff
+    $(f, f') = 1$
+\end{exercise}
+
+\begin{proof}
+    assume $f$ has repeated factor $p$, so $f = p^m g$ and $m > 1$ 
+    thus we got
+
+    \[
+        f' = mp^{m-1}g + p^mg' = p^{m-1}(mg + pg')
+    \]
+
+    if $f$ as repeated factor, then $(f,f') \ne 1$ because they have common divisor $p^{m-1}$
+
+    so $(f,f') = 1$ imply $f$ contains no repeated factor
+
+    if $f$ has no repeated multiplier, then $f$ has format:
+
+    \[
+        f = p_1p_2..p_n 
+    \]
+
+   and 
+
+   \begin{align*}
+    f' &= p_1'(p_2..p_n) + p_1(p_2..p_n)' \\
+    &= p_1'p_2..p_n + p_1p_2'..p_n + .. + p_1p_2..p_n'
+   \end{align*}
+
+   assume $p_1 | f'$ then we got $p_1|p_1'p_2..p_n$ thus we got $p_1 | p_1'$ which is contradict with $\deg p_1' < \deg p_1$,
+   similarly we have $\forall k \le n, p_k \nmid f'$ and $(p_k, f') = 1$, so we got
+
+   \[
+    (p_1p_2..p_n, f') = 1
+   \]
+
+\end{proof}
+
+\begin{exercise}
+    let $d = (f, f')$ then $f/d$ has no repeated factor, and $f/d$ contains all distinct factors of $f$
+\end{exercise}
+
+\begin{proof}
+    let 
+    
+    \[
+        f = p_1^{e_1}p_2^{e_2}..p_n^{e_n},\: e_k \ge 1
+    \]
+
+    then we got
+
+    \begin{align*}
+        f' = \sum_{k=1}^{n} e_kp_k'\prod_{m = 1}^{n}p_m^{e_m - \delta_{m,k}}
+    \end{align*}
+
+    let
+
+
+    \[
+        h = \prod_{m=1}^{n}p_m^{e_m - 1}
+    \]
+
+    and
+
+    \[
+        u = e_1p_1'p_2p_3..p_n + e_2p_1p_2'..p_n  + .. e_np_1p_2..p_{n-1}p_n'
+    \]
+
+    and we got 
+
+    \begin{align*}
+        f &= p_1p_2..p_nh \\
+        f' &= hu
+    \end{align*}
+
+    and
+
+    \begin{align*}
+        (p_1, u) &= 1 \\
+        (p_2, u) &= 1 \\
+        .. \\
+        (p_n, u) &= 1 \\
+        (p_1p_2..p_n, u) &= 1
+    \end{align*}
+
+    then $h | f',\: h |f$ consider any $g | f$ and $g | f'$
+
+    by
+
+    \begin{align*}
+        g &| p_1p_2..p_n h \\
+        g &| uh 
+    \end{align*}
+
+    since $(p_1p_2..p_n, u)= 1$, we got $g | h$, so $(f,f') = h$ and $f/h = p_1p_2..p_n$ which contains no repeated factor 
+    and has all distinct factors of $f$
+\end{proof}

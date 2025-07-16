@@ -1,0 +1,300 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\subsection{Exercise}
+
+\begin{lem}
+    $E$ is a perfect set iff it is closed and contains no isolated points.
+\end{lem}
+
+\begin{proof}
+    let $E$ be a perfect set such that $E = E'$, then we have
+
+    \[
+        \overline{E} = E \cup E' = E
+    \]
+
+    so $E$ is closed, and isolated points have
+
+    \[
+        E \setminus E' = E \setminus E = \emptyset
+    \]
+
+    On the other hand, if $E$ is closed and has no isolated points, then we have
+
+    \begin{align*}
+        E \setminus E' &= \emptyset \\
+        E & \subseteq E' \\ 
+        E \cup E' &= E \\
+        E' & \subseteq E
+    \end{align*}
+\end{proof}
+
+
+\begin{lem}
+    let $x$ be a limit point of $E$, $E \subseteq \mathbb{R}^n$, and $y \in E$, then $x$ is also a limit point of $E \setminus y$ 
+\end{lem}
+
+\begin{proof}
+    since $x$ is a limit point of $E$, there should exists a distinct sequence $x_n$ and
+
+    \[
+        \lim_{n \to \infty}x_n = x
+    \]
+
+    then we can construct a sequence of $E \setminus \{ y \}$ by remove $y$ of $x_n$. Since $x_n$ 
+    is distinct, so $y$ occurs at most once. So $x$ is a limit point of $E \setminus \{ y \}$
+\end{proof}
+
+\begin{exercise}
+    Perfect Set on $\mathbb{R}^n$ is not countable. 
+\end{exercise}
+
+\begin{proof}
+    let $E$ be a non empty perfect set and assume it is countable so that
+
+    \[
+        E = \{ x_1, x_2, .. \}
+    \]
+
+    since every finite set under $\mathbb{R}^n$ has isolated points, so $E$ cannot be finite.
+
+    we first pick $y_1 \in E \setminus \{ x_1 \}$, since $y_1$ is a limit point of $E \setminus \{ x_1 \}$. 
+    there should exists an open qube $Q_1$ conatins $y_1$, and $x_1 \notin \overline{Q_1}$
+
+    let's consider $E \setminus \{ x_2 \}$, since $y_1$ is limit point of $E \setminus \{ x_2 \}$, and $Q_1$ is a openset contains $y_1$ so
+    we have
+
+    \[
+       \text{int}(Q_1) \cap \left( E \setminus \{ x_2 \} \right) \ne \emptyset
+    \]
+
+    now we can select $y_2 \in \text{int}(Q_1) \cap E \setminus \{ x_2 \}$, and we can create open cube $Q_2$ contains 
+    $y_2$, so that $Q_2 \subseteq Q_1$, and $\{ x_1, x_2 \} \cap \overline{Q_2} = \emptyset$
+
+    let's consider $E \setminus \{ x_3 \}$, since $y_2$ is a limit point of $E \setminus \{ x_3 \}$, and $Q_2$ is an
+    open set contains $y_2$, so we have
+
+    \[
+       \text{int}(Q_2) \cap \left( E \setminus \{ x_3 \} \right) \ne \emptyset
+    \]
+
+    now we can select $y_3 \in \text{int}(Q_2) \cap \left( E \setminus \{ x_3 \} \right)$
+    as $Q_2$ is open, and $\{ x_1, x_2 \} \cap Q_2 = \emptyset$. so we can create 
+    a smaller qube $Q_3$ contains $y_3$ so that $\{x_1 ,x_2, x_3 \} \cap \overline{Q_3} = \emptyset$
+
+    so we can create a sequence $y_n$ and open qube $Q_n$ contains $y_n$, and also a 
+    sequence of closed cube $\overline{Q_n}$
+
+    let's consider $\overline{Q_n}$, since $\overline{Q_n}$ is closed and non empty, by cantor's theorm,
+    we have
+
+    \[
+        \bigcap_{n=1}^{\infty}\overline{Q_n} \ne \emptyset
+    \]
+
+    howevery, for any $x_n \in E$, the qube $\overline{Q_{n}}$ not contains $x_n$,
+    which is contradict.
+\end{proof}
+
+\begin{definition}[Distance]
+    in a metric space $(X,d)$, the distance between point $x$ and set $E$ is defined as
+
+    \[
+        d(x, E) = \inf \{ d(x,y) \vert y \in E \}
+    \]
+\end{definition}
+
+\begin{definition}[Distance]
+    in a metric space $(X, d)$, the distance between two set $A$ and $B$ is defined as 
+
+    \[
+        d(A, B) = \inf \{ d(x,y) \vert x \in A,\, y \in B \}
+    \]
+\end{definition}
+
+\begin{lem}
+    we have $d(A,B) = \inf \{ d(x,B) \vert x \in A \}$
+\end{lem}
+
+\begin{proof}
+    let $\alpha = \inf \{ d(x,B) \vert x \in A \}$, and $\beta = d(A,B)$ since inferior is a limit point, where exists $x_n \in A$ such that
+
+    \[
+        \alpha = \lim_{n \to \infty}d(x_n, B)
+    \]
+
+    for every $x_n$, we have a sequence $y_m \in B$
+
+    \[
+        d(x_n, B) = \lim_{m \to \infty}d(x_n, y_m)
+    \]
+
+    since $d(x_n, y_m) \ge \beta$, by law of limit $d(x_n, B) \ge \beta$, take $n \to \infty$, we have $d(x, B) \ge \beta$
+
+    on the other hand, $\beta$ could be expressed as a limit 
+
+    \[
+        \beta = \lim_{n \to \infty}d(x_n, y_n)
+    \]
+
+    by definition of inferior, we have
+
+    \[
+        d(x_n, y_n) \ge d(x_n, B) \ge \alpha
+    \]
+    
+    take $n \to \infty$, we have 
+
+    \[
+        \lim_{n \to \infty}d(x_n, y_n ) \ge \lim_{n \to \infty}d(x_n, B) \ge \alpha
+    \]
+
+    so as
+
+    \[
+        \beta \ge \alpha
+    \]
+
+\end{proof}
+
+\begin{lem}
+    let $E$ be a set under metric space $(X,d)$, and $x \in X$, and there exists a closed ball $\overline{B}(x, r)$
+    such that $\overline{B}(x,r) \cap E \ne \emptyset$, then we have
+
+    \[
+        d(x, E) = d(x, E \cap \overline{B}(x,r))
+    \]
+\end{lem}
+
+\begin{proof}
+    we first prove that $d(x, E) \le d(x, E \cap \overline{B}(x,r))$, since $E \cap \overline{B}(x,r) \subseteq E$, and
+    inferior of subset should not less than its super set. so we have
+
+    \[
+        d(x, E) \le d(x, E \cap \overline{B}(x,r))
+    \]
+
+    then we prove $d(x, E) \ge d(x, E \cap \overline{B}(x,r))$, we will discuss on elements of $E$. For any point $y \in E$,
+    if $y \in \overline{B}(x,r)$, then $x \in E \cap \overline{B}(x,r)$, so by definition of inferior. we have
+
+    \[
+        d(x, y) \ge d(x, E \cap \overline{B}(x,r))
+    \]
+
+    on the other hand, if $y \notin \overline{B}(x,r)$, by definition of ball, we have $d(x,y) \ge r$. since
+    $E \cap \overline{B}(x,r) \ne \emptyset$. we can find $y' \in E \cap \overline{B}(x,r) $, and $d(x,y') \le r$.
+    so we have $d(x,y) \ge r \ge d(x,y') \ge d(x, E \cap \overline{B}(x,r))$
+
+    after discussion, for every point $y \in E$, we have $d(x,y) \ge d(x, E \cap \overline{B}(x,r))$, after take inferior on $y$, we have
+
+    \[
+        d(x,E) \ge d(x, E \cap \overline{B}(x,r))
+    \]
+
+    after all, $d(x,E) = d(x, E \cap \overline{B}(x,r))$
+\end{proof}
+
+\begin{lem}
+    let $E$ be a closed and non empty set under metric space $(X,d)$. and $x \in X$, then exists $y \in E$ such that 
+    $d(x,y) = d(x, E)$
+\end{lem}
+
+\begin{proof}
+   we select a element $y_0$ of $E$, and inspect $d(x,y_0)$. if $d(x,y_0) = 0$, then $y_0$ is the $y$ what we want. because
+   $d(x,y_0) = d(x, E) = 0$. 
+   
+   if $d(x, y_0) > 0$, we set $r_0 = d(x,y_0)$, and create a closed ball $\overline{B}(x,r_0)$. since
+   $y_0 \in E \cap \overline{B}(x, r_0)$, then $E \cap \overline{B}(x, r_0) \ne \emptyset$. by our proved lemma, we have
+
+   \[
+    d(x, E) = d(x, E \cap \overline{B}(x, r_0))
+   \]
+
+   we create a function $g: E \cap \overline{B}(x, r_0) \to \mathbb{R}$, and
+
+   \[
+    g(y) = d(x, y)
+   \]
+
+   since $g$ is a continuous function on a compact set $E \cap \overline{B}(x, r_0)$. so there
+   should exists $y_1$ such that
+
+   \[
+    g(y_1) = \inf \{ d(x,y) \vert y \in E \cap \overline{B}(x, r_0)\}
+   \]
+
+   and $y_1$ is what we want
+\end{proof}
+
+\begin{lem}
+    let $(X,d)$ be a metric space and $E \subseteq X$, then function $f: X \to \mathbb{R},\, f(x) = d(x, E)$
+    is uniformly continuous.
+\end{lem}
+
+\begin{proof}
+    consider two point $x,y \in X$.  then for any point $z \in E$, we have 
+
+    \begin{align*}
+        d(x,z) &\le d(x,y) + d(y,z) \\
+        d(x, E) - d(y,z) &\le d(x,z) -d(y,z) \le d(x,y) \\
+    \end{align*}
+
+    since we could select arbitrary $z$, so we can select a sequence $z_n$ and such that
+
+    \begin{align*}
+        \lim_{n \to \infty}d(y,z_n) &= d(y,E) 
+    \end{align*}
+
+    then we have
+
+    \[
+        d(x, E) - d(y,z_n)  \le d(x,y) \\
+    \]
+
+    take $n \to \infty$, then we got
+
+    \[
+        d(x,E) - d(y,E) \le d(x,y)
+    \]
+
+    also we will got
+
+    \[
+        d(y,E) - d(x,E) \le d(x,y)
+    \]
+
+    if use below triangle inequality
+
+    \[
+        d(y,z) \le d(y,x) + d(x,z)
+    \]
+
+    so we have
+
+    \[
+        \lvert d(y,E) - d(x,E) \rvert \le d(x,y)
+    \]
+
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+

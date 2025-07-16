@@ -1,0 +1,84 @@
+\subsubsection{Linear Mapping}
+
+\begin{exercise}
+let $V, U$ both be linear space on field $F$, and $\phi: V \to U$ is a linear mapping, define
+
+\[
+    \mathrm{Im}(\phi) = \phi(V)
+\]
+
+and
+
+\[
+    \mathrm{Ker}(\phi) = \{x \in V: \phi(x) = 0\}
+\]
+
+prove: $\mathrm{Im}(\phi)$ and $\mathrm{Ker}(\phi)$ is linear space
+\end{exercise}
+
+\begin{proof}
+    obviously
+\end{proof}
+
+\begin{exercise}
+    prove: $\phi$ is surjective iff $\dim \mathrm{Im}(\phi) = \dim U$, and $\phi$ is injective iff $\mathrm{Ker}(\phi) = 0$
+\end{exercise}
+
+\begin{proof}
+    pick a basis $e_1, e_2, .., e_n$ of $V$, we got
+
+    \[
+        \mathrm{Im}(\phi) = \mathrm{span}(\phi(e_1), \phi(e_2), .., \phi(e_n))
+    \]
+
+    if $\mathrm{Im}(\phi) = U$, we must have $\dim \mathrm{Im}(\phi) = \dim U$
+    
+    on the other hand, we pick a basis of $\mathrm{Im}(\phi)= \{ f_1,f_2,..,f_n \}$ and $U$
+    has a basis $g_1,g_2,..,g_n$,  and there are some linear combination so that:
+
+    \[
+        [g_1,g_2,..,g_n]A =  [f_1,f_2,..,f_n]
+    \]
+
+    and $A$ must be invertible
+
+    if $\phi$ is injective, let's define $\phi(x) = 0$, since $\phi(0) = 0$, then we got $x=0$
+    
+    on ther other hand, if $\mathrm{Ker}(\phi) = 0$, let $\phi(x) = \phi(y)$ then we got $x-y \in \mathrm{Ker}(\phi)$
+    thus we got $x=y$
+\end{proof}
+
+\begin{exercise}
+    let $V, U$ is linear space on field $F$ and $\dim V = n,\: \dim U = m$, $\phi: V \to U$
+    is a linear mapping, and $T(\phi) = A$
+
+    prove: $\mathrm{rank}(\phi) = \mathrm{rank}(A)$ and $\dim \mathrm{Ker}(\phi) = n - \mathrm{rank}(A)$
+\end{exercise}
+
+\begin{proof}
+    let $V$ has a basis $\{ e_1, e_2, .., e_n \}$ and $U$ has a basis $\{ f_1,f_2,..,f_m\}$ 
+    and $\eta_1: V \to F^n,\: \eta_2: U \to F^m$, we will show that $\mathrm{Ker}(\phi)$ is isomorphism with $\mathrm{Ker}(A)$ by $\eta_1$
+
+    we first prove $\eta_1$ is well define, which means $\eta_1(x) \in \mathrm{Ker}(A)$,
+
+    then we prove $\eta_1$ is surjective, which means $\forall x \in \mathrm{Ker}(A), \eta_1^{-1}(x) \in \mathrm{Ker}(\phi)$
+
+    since isomorphism linear space has same dimension. we have
+
+    \[
+        \dim \mathrm{Ker}(\phi) = \dim \mathrm{Ker}(A) = n - \mathrm{rank}(A)
+    \]
+
+    also we will prove $\mathrm{Im}(\phi)$ is isomorphism with $\mathrm{Im}(A)$ by mapping $\eta_2$
+
+    we first prove $\eta_2$ is well define, which means $\eta_2(x) \in \mathrm{Im}(A)$,
+
+
+    then we prove $\eta_2$ is surjective, which means $\forall x \in \mathrm{Im}(A), \eta_2^{-1}(x) \in \mathrm{Im}(\phi)$
+
+    since isomorphism linear space has same dimension. we have
+
+    \[
+        \dim \mathrm{Im}(\phi) = \dim \mathrm{Im}(A) = \mathrm{rank}(A)
+    \]
+\end{proof}

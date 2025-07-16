@@ -1,0 +1,52 @@
+\subsubsection{Algebra}
+
+\begin{exercise}
+let $f(x)$ is polynomial of integer coefficient and reducible on $\mathbb{Q}$, then $f(x)$ could be factored 
+as two integer coefficient polynomial.
+\end{exercise}
+
+\begin{proof}
+    let $f(x) = h(x)g(x)$, $h(x)$ and $g(x)$ are polynomial on $\mathbb{Q}$,    
+
+    let $h(x) = a h'(x)$, where $a \in \mathbb{Q}$ and $h'(x)$ is primitive polynomial, 
+    and $g(x) = b g'(x)$, where $b \in \mathbb{Q}$ and $g'(x)$ is primitive polynomial, 
+    then we have $f(x) = ab\left(h'(x) g'(x) \right)$
+
+    since $h'(x)g'(x)$ is primitive polynomial, if $ab \notin \mathbb{Z}$, let $ab = p/q, (p, q) = 1$
+
+    since $ab h'(x)g'(x)$ is a polynomial of integer coefficient, then $q$ must divide every coefficient of $h'(x)g'(x)$,
+    which is contradict with $h'(x)g'(x)$ is primitive polynomial.
+
+\end{proof}
+
+\begin{exercise}
+    let $f(x)$ be a polynomial of integer coefficient. 
+
+    \[
+        f(x) = a_0 + a_1x + .. + a_nx^{n}
+    \]
+    
+    $p$ is a prime number and $\, \forall i \le n -1,\, p \mid a_i,$ and $p$ not divide $a_n$ and $p^2$ not divide $a_0$,
+    then $f(x)$ is irreducible at $\mathbb{Q}$
+\end{exercise}
+
+\begin{proof}
+    let $f(x)= g(x)h(x)$ and
+
+    \begin{align*}
+        g(x)h(x)= \left(b_0 + b_1x+ .. + b_sx^s \right)\left(c_0 + c_1x+ .. + c_tx^t \right)
+    \end{align*}
+
+    because $p \mid b_0c_0$, and $p^2$ not divide $b_0c_0$, we must have $p$ divide exactly one of $b_0, c_0$,
+    let's assume $p \mid b_0$
+
+    since $b_sc_t = a_n$ and $p$ not divide $a_n$, we must have $p$ not divide $b_s$, we pick $k$ so that
+
+    $p \mid b_0, p \mid b_1, .., p \mid b_k$ and $p$ not divide $b_{k+1}$, let's consider $a_{k+1}$:
+
+    \[
+        a_{k+1} = b_0s_{k+1} + b_1s_{k} + .. + b_{k}s_1 + b_{k+1}s_0
+    \]
+
+    since $p \mid a_{k+1}$, we have $p \mid b_{k+1}s_0$, which is contradict with $b$ not divide both $b_{k+1}$ and $s_0$
+\end{proof}

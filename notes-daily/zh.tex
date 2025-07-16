@@ -1,0 +1,55 @@
+%!LW recipe=latexmk (xelatex)
+\documentclass[11pt,a4paper]{ctexart}
+% math 
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+% cross reference, use \autoref instead of \ref
+\usepackage{aliascnt}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+
+\geometry{left=1.5cm, right=1.5cm, top=2cm, bottom=2cm}
+
+\newtheorem{thm}{Theorem}[section]
+
+\newaliascnt{lem}{thm}
+\newaliascnt{prop}{thm}
+\newaliascnt{definition}{thm}
+\newaliascnt{exercise}{thm}
+\newaliascnt{corollary}{thm}
+
+\theoremstyle{definition}
+\newtheorem{lem}[lem]{引理}
+\newtheorem{prop}[prop]{命题}
+\newtheorem{definition}[definition]{定义}
+\newtheorem{exercise}[exercise]{Exercise}
+\newtheorem{corollary}[corollary]{Corollary}
+
+\def\lemautorefname{Lemma}
+\def\thmautorefname{Theorm}
+\aliascntresetthe{lem}
+\aliascntresetthe{prop}
+\aliascntresetthe{definition}
+\aliascntresetthe{exercise}
+\aliascntresetthe{corollary}
+
+\begin{document}
+
+
+\section{new}
+
+\begin{lem}
+    引理
+\end{lem}
+
+\begin{prop}
+    proo
+\end{prop}
+
+\begin{definition}
+    这是定义
+\end{definition}
+
+\end{document}
+

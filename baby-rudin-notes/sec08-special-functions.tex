@@ -1,0 +1,1710 @@
+\section{Some Special Functions}
+
+\subsection{Power Series}
+
+\begin{thm}
+suppose series  
+
+\[
+    \sum_{n=0}^\infty c_nx^n
+\]
+
+and $R \in \mathbb{R}^*$ is
+
+\[
+    R = \left(\varlimsup_{n \to \infty} \left| c_n \right|^{1/n} \right)^{-1}
+\]
+
+and define
+
+\[
+    f(x) = \sum_{n=0}^{\infty} c_n x^n \left( |x| < R\right)
+\]
+
+Then $f$ converges uniformly on $[-R + \epsilon, R -\epsilon]$ for every $\epsilon >0$.
+
+The function $f$ is continuous and differentiable in $(-R,R)$, and 
+
+\[
+    f'(x) = \sum_{n=1}^{\infty}nc_nx^{n-1}
+\]
+\end{thm}
+
+\begin{proof}
+    Let $\epsilon > 0$ given, consider when $|x| \le R - \epsilon$
+
+    \begin{align*}
+        \varlimsup_{n \to \infty}\left| c_n x^n \right|^{1/n} &= \varlimsup_{n \to \infty}\left| c_n\right|^{1/n} \left| x \right| \\
+        & \le \varlimsup_{n \to \infty}\left| c_n\right|^{1/n} (R-\epsilon) < 1
+    \end{align*}
+
+    and since $\sum_{n=0}^{\infty}\left| c_n (R-\epsilon)^n \right|$ converges, 
+    by Weierstrass M-test, $\sum_{n=0}^{\infty} c_n x^n$ converges uniformly
+
+    Then we prove $f$ is differentiable. pick $x \in (-R, R)$, there should exists $\epsilon > 0$,
+    so that $x \in [-R + \epsilon, R -\epsilon]$
+
+    consider 
+
+    \[
+        h(x) = \sum_{n=1}^{\infty}nc_nx^{n-1} \quad x \in [-R + \epsilon, R - \epsilon]
+    \]
+
+    then $h(x)$ has radius:
+
+    \begin{align*}
+        \varlimsup_{n \to \infty} \left| nc_n \right| ^{1/n} &= \varlimsup_{n \to \infty} \left| n \right| ^{1/n} \cdot \varlimsup_{n \to \infty} \left| c_n \right| ^{1/n} \\
+        &= \varlimsup_{n \to \infty} \left| c_n \right| ^{1/n}
+    \end{align*}
+
+    which indicates $h(x)$ and $f(x)$ has same radius, so $h(x)$ uniformly converges on $[-R + \epsilon, R-\epsilon]$.
+
+    by property of uniformly convergence, we have
+
+    \begin{align*}
+        \left(\sum_{n=0}^{\infty} c_n x^n \right)' &= \sum_{n=0}^{\infty} \left(c_n x^n \right)' \\
+        &= \sum_{n=1}^{\infty} nc_nx^{n-1} = \sum_{n=0}^{\infty}(n+1)c_{n+1}x^n
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    Power series has derivatives of all orders in $(-R, R)$, which are given by:
+
+    \[
+        \frac{\mathrm{d}^k}{\mathrm{d}x^k}\left( \sum_{n=0}^{\infty}c_n x^n \right) = \sum_{n=k}^{\infty}\frac{n!}{(n-k)!}c_nx^{n-k}
+    \]
+
+\end{corollary}
+
+\begin{thm}
+    suppose $\sum c_n$ converges. Put
+
+    \[
+        f(x) = \sum_{n=0}^{\infty}c_n x^n \quad x \in (-1,1)
+    \]
+
+    Then
+
+    \[
+        \lim_{x \to 1}f(x) = \sum_{n=0}^{\infty}c_n x^n
+    \]
+\end{thm}
+
+\begin{proof}
+    since $\sum c_n$ converges, we got
+
+    \[
+        \varlimsup_{n \to \infty}\left| c_n \right|^{1/n} \le 1
+    \]
+
+    and radius of power series $R \ge 1$. which indicates $f$ is well defined and converges uniformly on $[-1 + \epsilon, 1-\epsilon], \forall \epsilon >0$
+
+    Let $s_n = c_0 + c_1 + ... + c_n, s_{-1} = 0$, Then
+
+    \begin{align*}
+        \sum_{n=0}^{m} c_n x^n &= \sum_{n=0}^{m} (s_n -s_{n-1}) x^n = \sum_{n=0}^{m} s_n  x^n -  \sum_{n=0}^{m} s_{n-1}  x^n \\
+        &= \sum_{n=0}^{m} s_n  x^n -  \sum_{n=0}^{m-1} s_n  x^{n+1} \\
+        &= (1-x)\sum_{n=0}^{m-1} s_n  x^n + s_mx^m
+    \end{align*}
+
+    For $|x| < 1$, let $m \to \infty$ and obtain
+
+    \[
+        f(x) = (1-x)\sum_{n=0}^{\infty}s_nx^n
+    \]
+
+    suppose 
+    
+    \[
+    s = \lim_{n \to \infty}s_n
+    \]
+
+    let $\epsilon > 0$ be given. Chose $N$ so that $\forall n \ge N$, 
+    $|s_n -s| \le \epsilon$. Then since
+
+    \[
+        (1-x)\sum_{n=0}^{\infty} x^n = 1 \quad (|x| < 1)
+    \]
+
+    consider when $0 < x < 1$
+
+    \begin{align*}
+        \left| f(x) -s \right| &= \left| (1-x)\sum_{n=0}^{\infty}(s_n-s) x^n  \right| \\
+        & \le (1-x) \left( \sum_{n=0}^{N} \left| s_n -s \right|   + \sum_{n=N+1}^{\infty} \left| s_n -s \right| |x|^n \right) \\
+        & \le (1-x) \left( \sum_{n=0}^{N} \left| s_n -s \right|  \right) + (1-x)\epsilon \left(\sum_{n=N+1}^{\infty}  |x|^n  \right) \\
+        & \le (1-x) \left( \sum_{n=0}^{N} \left| s_n -s \right| \right) + \epsilon \frac{1-x}{1- |x|} \\
+        & \le (1-x) \left( \sum_{n=0}^{N} \left| s_n -s \right| \right) + \epsilon 
+    \end{align*}
+
+    take $x \to 1$, we got
+
+    \[
+        \left| f(x) -s \right| \to \epsilon
+    \]
+
+    since $\epsilon$ can be arbitrary small, so 
+
+    \[
+        \lim_{x \to 1}f(x) = s
+    \]
+
+\end{proof}
+
+\begin{thm}
+    as an application, if $\sum a_n = A$, $\sum b_n =B$, and $\sum c_n = C$.
+    if $c_n = a_0b_n + a_1b_{n-1}  + ... + a_nb_0$, then $C = AB$       
+\end{thm}
+
+\begin{proof}
+    let 
+
+    \begin{align*}
+        f(x) &= \sum_{n=0}^{\infty} a_n x^n \\
+        g(x) &= \sum_{n=0}^{\infty} b_n x^n \\
+        h(x) &= \sum_{n=0}^{\infty} c_n x^n \\
+    \end{align*}
+
+    when $x \in (-1,1)$, $f,g,h$ are both uniformly convergent.
+    and
+
+    \[
+        f(x)g(x) = h(x)
+    \]
+
+    if we take $x \to 1$, then:
+
+    \[
+        \lim_{x \to 1}f(x)g(x) = \lim_{x \to 1}h(x)
+    \]
+
+    which indicates:
+
+    \[
+        A B = C
+    \]
+\end{proof}
+
+\begin{thm}
+    given a double sequence $\{ a_{i,j} \}, i,j = 1,2,3,...$.
+    suppose that
+
+    \[
+        \sum_{j=1}^{\infty}|a_{i,j}| = s_i \quad (i=1,2,3,...)
+    \]
+
+    and $\sum s_i$ converges
+
+    Then
+
+    \[
+        \sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{i,j} = \sum_{j=1}^{\infty}\sum_{i=1}^{\infty}a_{i,j}
+    \]
+\end{thm}
+
+\begin{proof}
+    let $E$ be a countable set, $E = \{ x_0, x_1, x_2, ...\}$.
+    and suppose $x_n \to x_0$ as $n \to \infty$
+
+    Define
+
+    \begin{align*}
+        f_i(x_0) &= \sum_{j=1}^{\infty}a_{i,j} \\
+        f_i(x_n) &= \sum_{j=1}^{n}a_{i,j} \\
+        g(x) &= \sum_{i=1}^{\infty} f_i(x) \\
+    \end{align*}
+
+    Then each $f_i$ is continuous at $x_0$.
+    Since $|f_i(x)| \le s_i$, by M-test, $\sum f_i$ converges uniformly.
+    So $g$ is also continuous at $x_0$.
+
+    and thus:
+
+    \begin{align*}
+        \sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{i,j} &= \sum_{i=1}^{\infty}f_i(x_0) = g(x_0) \\
+        &= \lim_{n \to \infty} g(x_n) = \lim_{n \to \infty}\sum_{i=1}^{\infty} f_i(x_n) \\
+        &= \lim_{n \to \infty} \sum_{i=1}^{\infty} \sum_{j=1}^{n} a_{i,j} \\
+        &= \lim_{n \to \infty} \sum_{j=1}^{n} \sum_{i=1}^{\infty} a_{i,j} = \sum_{j=1}^{\infty} \sum_{i=1}^{\infty} a_{i,j}
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    suppose 
+
+    \[
+        f(x) = \sum_{n=0}^{\infty}c_n x^n
+    \]
+
+    and the series converging in $|x| < R$
+    If $-R < a < R$, then $f$ can be expanded in a power series about the point
+    $x = a$, and
+
+    \[
+        f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n
+    \]
+\end{thm}
+
+\begin{proof}
+    \begin{align*}
+        f(x) &= \sum_{n=0}^{\infty} c_n(x-a + a)^n \\
+        &=\sum_{n=0}^{\infty} c_n \sum_{m=0}^{n}\binom{n}{m}(x-a)^ma^{n-m}  \\
+        &= \lim_{N \to \infty}\sum_{n=0}^{N}\sum_{m=0}^{n} c_n \binom{n}{m}(x-a)^ma^{n-m} \\
+        &= \lim_{N \to \infty}\sum_{m=0}^{N}\sum_{n=m}^{N} c_n \binom{n}{m}(x-a)^ma^{n-m} \\ 
+        &= \sum_{m=0}^{\infty}\sum_{n=m}^{\infty} c_n \binom{n}{m}(x-a)^ma^{n-m} \\ 
+        &= \sum_{m=0}^{\infty}\left(\sum_{n=m}^{\infty} c_n \binom{n}{m} a^{n-m} \right)(x-a)^m \\ 
+    \end{align*}
+
+    and:
+
+    \begin{align*}
+        \frac{f^{(m)}(a)}{m!} &= \sum_{n=m}^{\infty} c_n\frac{n!}{m!(n-m)!}a^{n-m} \\
+        &= \sum_{n=m}^{\infty} c_n\binom{n}{m}a^{n-m}
+    \end{align*}
+
+    and
+
+    \[
+        \sum_{n=0}^{N}\sum_{m=0}^{n} \left| c_n \binom{n}{m}(x-a)^ma^{n-m} \right| = \sum_{n=0}^{N}|c_n| (|x-a| + |a|)^n
+    \]
+
+    which requires $|x-a| + |a| < R$
+\end{proof}
+
+\begin{thm}
+    suppose $\sum a_n x^n$ and $\sum b_n x^n$ converge in the segment $S=(-R,R)$.
+    Let $E$ be the set of all $x \in S$ at which
+
+    \[
+        \sum_{n=0}^{\infty}a_nx^n =\sum_{n=0}^{\infty}b_nx^n
+    \]
+
+    If $E$ has a limit point in $S$, then $a_n = b_n$ for $n=1,2,3,...$
+\end{thm}
+
+\begin{proof}
+    put $c_n = a_n - b_n$, and
+
+
+    \[
+        f(x) = \sum_{n=0}^{\infty}c_n x^n
+    \]
+
+    we will prove $E'$ is open. If $x_0 \in E'$, then $f(x)$ could be expanded as:
+
+    \[
+        f(x) = \sum_{n=0}^{\infty}d_n (x-x_0)^n \quad (|x-x_0| < R - |x_0|)
+    \]
+
+    where 
+
+    \[
+        d_n = \frac{f^{(n)}(x_0)}{n!}
+    \]
+
+    let $k$ be the smallest non-negative integer such that $d_k \ne 0$. Then
+
+    \begin{align*}
+        f(x) &= \sum_{n=k}^{\infty}d_k (x-x_0)^n  \\
+        &= \sum_{n=0}^{\infty}d_{n+k}(x-x_0)^{n+k} \\
+        &= (x-x_0)^k \sum_{n=0}^{\infty}d_{n+k}(x-x_0)^n
+    \end{align*}
+
+    define
+
+    \[
+        g(x) = \sum_{n=0}^{\infty}d_{n+k}(x-x_0)^n
+    \]
+
+    since $g$ is continuous at $x_0$ and $g(x_0) = d_k \ne 0$. 
+    there exists $\delta > 0$, such that $g(x) \ne 0$ if $|x-x_0| < \delta$ 
+    But this contradicts the fact $x_0$ is limit point of $E$.
+
+    So $d_n = 0, \forall n$, so that $f(x) = 0$ for all $x$ when expand near $x_0$.
+    This shows $A$ is open. 
+
+    Since $A$ is open, and $S \setminus A$ is also open. so $A$ and $S \setminus A$ are separated,
+    by $S$ is connected, one of $A$ or $S \setminus A$ should be empty.
+
+    since $A$ is not empty, then $S \setminus A$ is empty, and $A = S$
+
+    \begin{align*}
+        E &= f^{-1}(\{ 0 \}) \subseteq S \\
+        A &\subseteq \overline{E} = E \subseteq S \\
+        S \setminus A &= \emptyset \\
+        S \subseteq & A \\
+        S & \subseteq A  \subseteq E  \subseteq S \\
+        A &= E  = S
+    \end{align*}
+\end{proof}
+
+\subsection{Trigonometric Functions}
+
+\begin{definition}
+    \begin{align*}
+        \sin x &= \frac{\mathrm{e}^{\mathrm{i} x} - \mathrm{e}^{- \mathrm{i} x}}{2i} \\
+        \cos x &= \frac{\mathrm{e}^{\mathrm{i} x} + \mathrm{e}^{- \mathrm{i} x}}{2} \\
+    \end{align*}
+
+    by this definition, we got
+
+    \begin{align*}
+        \mathrm{e}^{\mathrm{i} x} &= \cos x + \mathrm{i} \sin x \\
+        \mathrm{e}^{- \mathrm{i} x} &= \cos x - \mathrm{i} \sin x \\
+    \end{align*}
+
+    and thus
+
+
+    \[
+        \left| \mathrm{e}^{\mathrm{i} x} \right| = \sqrt{\mathrm{e}^{\mathrm{i} x} \cdot \mathrm{e}^{- \mathrm{i} x}} = \sqrt{(\cos x)^2 + (\sin x)^2}  = 1
+    \]
+\end{definition}
+
+\begin{thm}
+    there exists positive number $x$ such that $\cos x = 0$.
+\end{thm}
+
+\begin{proof}
+    Since $\cos 0$ = 1, if $\forall x > 0, \cos x \ne 0$, by continuity of $\cos x$, we have $\cos x > 0, \forall x >0$.
+    And hence $(\sin x)' > 0, \forall x > 0$. So $\sin x$ is strictly increasing.
+    Since $\sin x = 0$, we have $\sin x > 0, \forall x >0$.
+
+    Hence if $0 < x <y$, we have
+
+    \[
+        (\sin x)(y-x) \le \int_{x}^{y} \sin t \mathrm{d}t \le \cos x - \cos y \le 2
+    \]
+
+    which is contradict with $\sin x(y-x)$ can be arbitrary large when $y \to \infty$
+\end{proof}
+
+\begin{thm}
+    we define $\pi$ as
+
+    \[
+        \frac{\pi}{2} =  \inf \{ x: \cos x = 0 \}
+    \]
+
+    Then:
+
+    \begin{enumerate}
+        \item $\cos (\pi / 2) = 0$
+        \item $\sin (\pi/2) = 1$
+        \item $\mathrm{e}^{\pi i} = -1$
+        \item $\mathrm{e}^{z + 2\pi i} = \mathrm{e}^z$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+   steps:
+   
+   \begin{enumerate}
+    \item easily to prove by continuity of $\cos$, and $\{ 0 \}$ is closed.
+
+    \item since $| \sin (\pi /2) |  = 1$,
+
+    And 
+
+    \[
+        \sin (\pi /2) = \int_0^{\pi} \cos t \mathrm{d}t \ge 0
+    \]
+    
+    so $\sin (\pi / 2) = 1$
+
+    \item $\mathrm{e}^{\pi i} = (\cos (\pi / 2) + i \sin(\pi /2))^2 = -1$
+
+    \item see:
+    
+    \begin{align*}
+        \mathrm{e}^{z + 2\pi i} = \mathrm{e}^z (\mathrm{e}^{\pi i})^2 = \mathrm{e}^z
+    \end{align*}
+   \end{enumerate}
+
+\end{proof}
+
+\begin{thm}
+    \begin{enumerate}
+        \item $\cos$ and $\sin$ are periodic, with period $2 \pi$
+        \item if $0 < t < 2\pi, \exp(it) \ne 1$
+        \item if $z$ is a complex number with $|z| = 1$, there exists a unique $t \in [0,2\pi)$
+        such that $\exp(it) = z$
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+    \item see:
+    
+    \begin{align*}
+        \cos(x+ 2\pi) &= \frac{\exp(i(x+2\pi)) + \exp(i(-1)(x+2\pi))}{2} \\
+        &= \frac{\mathrm{e}^{ix} + \mathrm{e}^{-ix}}{2} = \cos x\\
+        \sin(x+ 2\pi) &= \frac{\exp(i(x+2\pi)) - \exp(i(-1)(x+2\pi))}{2i} \\
+        &= \frac{\mathrm{e}^{ix} - \mathrm{e}^{-ix}}{2i} = \sin x\\
+    \end{align*}
+
+    \item consider:
+
+    define $x = \cos t,\: y = \sin t, t \in (0,\pi/ 2)$
+    
+    \begin{align}
+        \mathrm{e}^{4it} = (x + iy)^4 = x^4 - 6x^2y^2 + y^4 + 4i xy(x^2 - y^2)
+    \end{align}
+
+    when $\mathrm{e}^{4it}$ is real we got $x = 0$ or $y = 0$ or $x^2 = y^2$
+
+    since $xy \ne 0$ by $t \in (0,\pi/2)$. which indicates $x^2 = y^2$, thus we got
+    $\mathrm{e}^{4it} = -1$, so $\forall t \in (0,\pi /2)$, $\mathrm{e}^{i(4t)} \ne 1$.
+    and $\forall t \in (0,2\pi), \mathrm{e}^{it} \ne 1$
+
+    \item fix $z \in \mathbb{C}$ and $|z| = 1$. 
+
+    then define: $x = \mathrm{Re}(z)$ and $y = \mathrm{Im}(z)$, by $|z| = 1$ we got $x^2 + y^2 = 1$
+    and $0 \le |x| \le 1, 0 \le |y| \le 1$
+
+
+    we discuss in two cases:
+
+    \begin{enumerate}
+        \item $xy \ge 0$
+
+        there should exists $\theta \in [0,\pi/2]$ and $\sin \theta = |y|$, and $\cos \theta = |x|$
+        
+        if $x \ge 0$ and $y \ge 0$ then $\theta$ is what we want.
+
+        in other case, $\theta + \pi$ is what we want.
+
+        \item $xy < 0$
+
+        there should exists $\theta \in [0,\pi/2]$ and $\cos \theta = |y|$, and $\sin \theta = |x|$
+
+        if $x < 0, y > 0$, then $\theta + \pi/2$ is what we want.
+
+        \begin{align*}
+            \cos (\theta + \pi/2) & =  -\sin \theta = - |x| = x \\
+            \sin (\theta + \pi/2) & =  \cos \theta = y
+        \end{align*}
+
+        if $x > 0, y < 0$, then $\theta + 3\pi/2$ is what we want.
+
+        \begin{align*}
+            \cos (\theta + 3\pi/2) & =  \sin \theta = |x| = x \\
+            \sin (\theta + 3\pi/2) & =  -\cos \theta = -|y| = y
+        \end{align*}
+    \end{enumerate}
+
+    we need to prove $\theta$ is unique. if $\theta_1 \ne \theta_2$ and $\mathrm{e}^{i\theta_1} = \mathrm{e}^{i \theta_2}$,
+    assume $\theta_1 < \theta_2$, then we got $\mathrm{e}^{i(\theta_2 - \theta_1)} = 1$, which is contradict with $e^{it} \ne 1, \forall t \in (0,2\pi)$
+
+    \end{enumerate}
+
+    
+    
+\end{proof}
+
+\subsection{Algebraic Completeness of The Complex Field}
+
+\begin{thm}
+    suppose $a_0,a_1,...,a_n$ are complex numbers, $n \ge 1$, $a_n \ne 0$
+
+    and 
+
+    \[
+        P(z) = \sum_{k=0}^n a_kz^k
+    \]
+
+    Then $P(z) = 0$ for some complex number $z$.
+\end{thm}
+
+\begin{proof}
+    assume $a_n = 1$. Put
+
+    \[
+        \mu = \inf_{z \in \mathbb{C}} \left| P(z)\right|
+    \]
+
+    Then:
+
+    \begin{align}
+        \left| P(z)\right| &= \left|z^n + a_{n-1}z^{n-1} + ... + a_0 \right| \\
+        &= \left| z\right|^n \left| 1 + \frac{a_{n-1}}{z} + \frac{a_{n-2}}{z^2} + ... + \frac{a_0}{z^n}\right| \\
+        & \ge\left| z\right|^n \left(1- \left|\frac{a_{n-1}}{z} \right| - ... - \left|\frac{a_{0}}{z^n} \right|\right)
+    \end{align}
+
+    as $\left| z \right| \to \infty$ we got $\left| P(z)\right| \to \infty$
+
+    so there exists $r_0$ such that $|P(z)| \ge \mu + 1, \forall |z| \ge r_0$
+
+
+    we will prove:
+
+    \[
+        \mu = \inf_{|z| \le r_0} \left| P(z)\right| 
+    \]
+
+    assume sequence $z_n \in \mathbb{C}$ and $|P(z_n)| \to \mu$, since $\mu + 1 > \mu$, there exists $N, \forall n \ge N$,
+    $|P(z_n)| < \mu + 1$, and thus $|z_n| \le r_0$, so $z_n$ locates in disc when $n$ sufficient large.
+
+    and thus
+
+    \[
+        \inf_{|z| \le r_0} \left| P(z)\right| \le z_n \quad n \ge N
+    \]
+
+    take $n \to \infty$, we got
+
+    \[
+        \inf_{|z| \le r_0} \left| P(z)\right| \le \mu
+    \]
+
+    by $\inf$ between subset and super set, we got
+
+    \[
+        \inf_{|z| \le r_0} \left| P(z)\right| = \mu
+    \]
+
+    Since $|P(z)|$ is continuous on the closed disc with center $0$ and radius $r_0$.
+
+
+
+    There exists $z_0$ such that $| z_0 | \le r_0$ and $|P(z_0)| = \mu$.
+
+    If $\mu > 0$, consider $Q(z) = P(z+z_0) / P(z_0)$. Then $Q(0)= 1$ 
+    
+    And
+
+    $|Q(z)| \ge 1 $ for all $z$. consider
+
+    \[
+        |Q(z)| = \frac{|P(z+z_0)|}{|P(z_0)|} \ge \frac{\mu}{P(z_0)} \ge 1
+    \]
+
+    Since $Q(z)$ is a non constant polynomial, otherwise we got $P(z) = P(z_0) Q(z-z_0)$ is also constant, contradict with $a_n \ne 0$.
+
+    There exists a smallest integer $k$, such that
+
+    \[
+        Q(z) = 1+ b_kz^k +... + b_nz^n \quad |b_k| \ne 0
+    \]
+
+    then there exists $\theta \in \mathbb{R}$ such that
+
+    \[
+        \mathrm{e}^{\mathrm{i} k\theta} = - \frac{|b_k|}{b_k}
+    \]
+
+    If $r > 0$  and $r^k| b_k| < 1$ we got
+
+    \[
+        |1 + b_kr^k \mathrm{e}^{\mathrm{i} k\theta} | = |1 - r^k |b_k| | = 1 - r^k |b_k|
+    \]
+
+    so that
+
+    \begin{align*}
+        \left| Q(r \mathrm{e}^{\mathrm{i} \theta}) \right| &= \left| 1-r^k|b_k| -r^{k+1} \mathrm{e}^{\mathrm{i} \theta} b_{k+1}\frac{|b_k|}{b_k} - ... - r^{n} \mathrm{e}^{\mathrm{i} (n-k)\theta} b_{n}\frac{|b_k|}{b_k} \right| \\ 
+        & \le \left| 1-r^k|b_k| \right| + r^k\left| r \mathrm{e}^{\mathrm{i} \theta} b_{k+1}\frac{|b_k|}{b_k} - ... - r^{n-k} \mathrm{e}^{\mathrm{i} (n-k)\theta} b_{n}\frac{|b_k|}{b_k} \right| \\
+        & \le 1-r^k|b_k| +r^k\left( r|b_{k+1}| + ... + r^{n-k}|b_n| \right) \\
+        & \le 1 - r^k\left( |b_k| - r \left(|b_{k+1}| + ... + |b_n| \right) \right) \\
+    \end{align*}
+
+    pick $r > 0$ sufficient small, we  got $|Q(r\mathrm{e}^{\mathrm{i} \theta})| < 1$,
+    which is contradict with $|Q(z)| \ge 1$, thus we got $\mu = 0$
+
+\end{proof}
+
+\subsection{Fourier Series}
+
+\begin{definition}
+    a trigonometric polynomial is a finite sum of the form
+
+    \[
+        f(x) = \sum_{n=0}^{N}\left(a_n \cos nx + b_n \sin nx \right) \quad a_n,b_n \in \mathbb{C}
+    \]
+\end{definition}
+
+\begin{thm}
+    a trigonometric polynomial has form
+
+    \[
+        \sum_{n=-N}^{N} c_n \mathrm{e}^{inx}
+    \]
+\end{thm}
+
+\begin{proof}
+   consider:
+   
+   \begin{align}
+        a_n \cos nx + b_n \sin n x = \mathrm{e}^{\mathrm{i} nx} \left( \frac{a_n - \mathrm{i}b_n}{2} \right) + \mathrm{e}^{-\mathrm{i} nx} \left( \frac{a_n + \mathrm{i}b_n}{2} \right)
+   \end{align}
+
+   which means:
+
+   \begin{align*}
+        c_n &= \frac{a_n - \mathrm{i}b_n}{2} \quad n \ge 0 \\
+        c_{-n} &= \frac{a_n + \mathrm{i}b_n}{2}  \quad n < 0 \\
+   \end{align*}
+
+
+\end{proof}
+
+\begin{thm}
+    if 
+
+    \[
+        f(x) = \sum_{n=-N}^{N} c_n \mathrm{e}^{\mathrm{i} nx}
+    \]
+
+    Then
+
+    \[
+        c_n = \frac{1}{2 \pi} \int_{-\pi}^{\pi}f(x) \mathrm{e}^{-\mathrm{i}nx}
+    \]
+\end{thm}
+
+\begin{proof}
+    since
+    
+   \begin{align*}
+    \frac{1}{2 \pi} \int_{- \pi}^{\pi} \mathrm{e}^{\mathrm{i} nx} \mathrm{d}x &= \frac{1}{2 \pi} \int_{- \pi}^{\pi} \cos nx \mathrm{d}x + \frac{\mathrm{i}}{2 \pi} \int_{- \pi}^{\pi} \sin nx \mathrm{d}x \\
+    &= \begin{cases}
+        0 & |n| > 0\\
+        1 & n = 0 \\
+    \end{cases}
+   \end{align*}
+
+   define
+
+   \[
+        f(x) = \sum_{n=-N}^{N} c_n \mathrm{e}^{\mathrm{i} nx}
+   \] 
+
+   multiply by $\mathrm{e}^{- \mathrm{i}m x}$, then integrate:
+
+   \begin{align*}
+    \int_{-\pi}^{\pi}f(x)\mathrm{e}^{- \mathrm{i} mx} &= \sum_{n=-N}^{N} \int_{-\pi}^{\pi} c_n \mathrm{e}^{\mathrm{i} (n-m)x}  \\
+    &=  2\pi c_m
+   \end{align*}
+\end{proof}
+
+
+\begin{thm}
+    let 
+    \[
+        f(x) = \sum_{n=-N}^{N} c_n \mathrm{e}^{\mathrm{i} nx}
+    \]
+
+    then $f$ is real valued function iff $c_{-n} = \overline{c_n}$
+\end{thm}
+
+\begin{proof}
+    if $c_{-n} = \overline{c_{n}}$
+
+    Then
+
+
+    \begin{align*}
+        f(x) &= c_0 + \sum_{n=1}^{N} c_n \mathrm{e}^{\mathrm{i} nx} + c_{-n} \mathrm{e}^{\mathrm{i} (-n)x}  \\
+    \end{align*}
+
+    because
+
+    \[
+c_{-n} \mathrm{e}^{\mathrm{i} (-n)x} = \overline{c_n \mathrm{e}^{\mathrm{i} nx} }
+    \]
+
+    and $c_0 $ is real by $\overline{c_0} = c_0 $. so $f(x)$ is real if $c_{-n} = \overline{c_n}$
+
+    on the other hand, if $f$ is real valued. since
+
+    \begin{align*}
+        c_m &= \int_{-\pi}^{\pi}f(x)\mathrm{e}^{- \mathrm{i} mx}  \\
+        c_{-m} &= \int_{-\pi}^{\pi}f(x)\mathrm{e}^{\mathrm{i} mx}  \\
+    \end{align*}
+
+    it is obviously that $\overline{c_m} = c_{-m}$
+\end{proof}
+
+\begin{definition}[orthonormal]
+    a function sequence $\{ \phi_n \}$ is orthonormal iff:
+    
+    \begin{enumerate}
+        \item integration
+    
+        \[
+            \int_{a}^b \phi_n \overline{ \phi_m} = \delta_{n,m}
+        \]
+
+    \end{enumerate}
+\end{definition}
+
+\begin{thm}
+    let $\{ \phi_n\}$ be orthonormal on $[a,b]$. Let
+
+    \[
+        s_n(x) = \sum_{m=1}^{n} c_m \phi_m(x)
+    \]
+
+    and
+
+    \[
+        t_n(x) = \sum_{m=1}^{n} \gamma_m \phi_m (x)
+    \]
+
+    Then:
+
+    \[
+        \int_a^b \left| f- s_n\right|^2 \mathrm{d}x \le \int_a^b \left| f- t_n\right|^2 \mathrm{d}x
+    \]
+\end{thm}
+
+\begin{proof}
+    define inner product:
+
+    \[
+        \langle f, g \rangle = \int_a^b f \cdot \overline{g} \mathrm{d}x
+    \]
+
+    consider coefficients:
+
+    \[
+        c_m = \int_a^b f(x) \overline{\phi_m(x)} \mathrm{d}x = \langle f, \phi_m \rangle
+    \]
+
+    \begin{align*}
+        c &= [c_1,c_2,...,c_n] \\
+        \gamma &= [\gamma_1,\gamma_2,...,\gamma_n]
+    \end{align*}
+
+    by $c_m = \langle f , \phi_m \rangle$, we got:
+
+    \begin{align*}
+        \langle f, t_n \rangle &= \langle f, \sum_{m=1}^{n} \gamma_m \phi_m \rangle = \sum_{m=1}^{n}  \langle f, \gamma_m \phi_m \rangle \\
+        &= \sum_{m=1}^{n}\overline{\gamma_m} c_m = \langle c, \gamma\rangle
+    \end{align*}
+
+    and
+
+
+    \begin{align*}
+        \langle t_n, t_n \rangle &= \langle \sum_{m=1}^{n} \gamma_m \phi_m, \sum_{m=1}^{n} \gamma_m \phi_m \rangle \\
+        &= \sum_{k=1}^{n}\sum_{m=1}^{n}\langle  \gamma_k \phi_k,  \gamma_m \phi_m \rangle \\
+        &= \sum_{m=1}^{n} | \gamma_m| ^2 = \langle \gamma, \gamma \rangle
+    \end{align*}
+
+    similar for
+
+
+    \begin{align*}
+        \langle s_n, s_n \rangle &= \sum_{m=1}^{n} \left| c_m\right|^2 = \langle c, c \rangle
+    \end{align*}
+
+    and
+
+    \begin{align*}
+        \langle f, s_n \rangle &= \sum_{m=1}^{n} \left| c_m\right|^2 = \langle c, c \rangle
+    \end{align*}
+
+    and thus(hint: $\langle \gamma -c , \gamma -c \rangle = \langle \gamma, \gamma \rangle + \langle c,c \rangle - \langle \gamma,c \rangle - \langle c, \gamma \rangle$)
+
+    \begin{align}
+        \langle f -t_n , f-t_n \rangle &= \langle f, f\rangle + \sum_{m=1}^{n} | \gamma_m| ^2 - \sum_{m=1}^{n}\overline{\gamma_m} c_m - \sum_{m=1}^{n}\gamma_m \overline{c_m} \\ 
+        &= \langle f, f\rangle + \langle \gamma, \gamma \rangle - \langle c, \gamma \rangle - \langle \gamma,c \rangle \\
+        &= \langle f, f\rangle + \langle \gamma -c, \gamma -c \rangle - \langle c, c \rangle
+    \end{align}
+
+    and
+
+
+    \begin{align}
+        \langle f -s_n , f-s_n \rangle &= \langle f, f\rangle - \langle c,c \rangle
+    \end{align}
+
+    so
+
+    \[
+\langle f -t_n , f-t_n \rangle -  \langle f -s_n , f-s_n \rangle = \langle \gamma -c , \gamma -c \rangle \ge 0
+    \]
+
+    and equal holds iff $\gamma_m = c_m, \forall 1 \le m \le n$, so
+
+    \[
+        \langle f - s_n ,f- s_n \rangle \le \langle f - t_n ,f- t_n \rangle
+    \]
+\end{proof}
+
+\begin{corollary}[Bessel Inequality]
+    \[
+        \sum_{n=1}^{\infty} \left| c_n \right|^2 \le \int_a^b \left| f(x) \right|^2 \mathrm{d}x
+    \] 
+\end{corollary}
+
+\begin{proof}
+    by $\langle f -s_n , f-s_n \rangle \ge 0$ we got 
+
+    \[
+        \langle c, c \rangle \le \langle f, f \rangle
+    \]
+
+    then take $n \to \infty$, we got
+
+    \[
+        \sum_{n=1}^{\infty} \left| c_n \right|^2 \le  \int_a^b \left| f(x)\right|^2 \mathrm{d}x
+    \]
+\end{proof}
+
+\begin{definition}[Dirichlet Kernel]
+    \[
+        D_N(x) = \sum_{n=-N}^{N} \mathrm{e}^{\mathrm{i} n x}
+    \]
+\end{definition}
+
+\begin{thm}
+    \[
+        D_N(x) = \sum_{n=-N}^{N} \mathrm{e}^{\mathrm{i} n x} = \frac{\sin (N + 1/2)x}{\sin (x/2)}
+    \]
+\end{thm}
+
+\begin{proof}
+    \begin{align*}
+        (\mathrm{e}^{\mathrm{i} x} - 1)\sum_{n=-N}^{N} \mathrm{e}^{\mathrm{i} n x} &= \sum_{n=-N}^{N} \mathrm{e}^{\mathrm{i}(n+1) x} - \sum_{n=-N}^{N} \mathrm{e}^{\mathrm{i} n x} \\
+        &= \sum_{n=-N+1}^{N+1} \mathrm{e}^{\mathrm{i} n x} - \sum_{n=-N}^{N} \mathrm{e}^{\mathrm{i} n x} \\
+        &= \mathrm{e}^{\mathrm{i}(N+1)x} - \mathrm{e}^{- \mathrm{i}Nx}
+    \end{align*}
+
+    thus
+
+    \begin{align*}
+        D_N(x) &= (\mathrm{e}^{\mathrm{i}(N+1)x} - \mathrm{e}^{- \mathrm{i}Nx})/(\mathrm{e}^{\mathrm{i} x} - 1) \\
+        &= \frac{\mathrm{e}^{\mathrm{i}(N+1/2)x} - \mathrm{e}^{- \mathrm{i}(N+1/2)x}}{\mathrm{e}^{\mathrm{i} x/2} - \mathrm{e}^{- \mathrm{i} x/2}} \\
+        &= \frac{\sin (N+1/2)x}{\sin (x/2)}
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    \[
+        \sum_{n=-N}^{N} \frac{1}{2\pi} \left(\int_{-\pi}^{\pi} f(t) \mathrm{e}^{- \mathrm{i}nt} \mathrm{d} t\right) \mathrm{e}^{\mathrm{i}nx}
+    \]
+\end{thm}
+
+\begin{proof}
+    \begin{align*}
+        & \sum_{n=-N}^{N} \frac{1}{2\pi} \left(\int_{-\pi}^{\pi} f(t) \mathrm{e}^{- \mathrm{i}nt} \mathrm{d} t\right) \mathrm{e}^{\mathrm{i}nx} \\
+        &=  \frac{1}{2\pi}\int_{-\pi}^{\pi} \sum_{n=-N}^{N}  \left( f(t) \mathrm{e}^{- \mathrm{i}nt} \mathrm{d} t\right) \mathrm{e}^{\mathrm{i}nx} \\
+        &=  \frac{1}{2\pi}\int_{-\pi}^{\pi} \sum_{n=-N}^{N}  \left( f(t) \mathrm{e}^{\mathrm{i}n(t-x)} \mathrm{d} t\right)  \\
+        &=  \frac{1}{2\pi}\int_{-\pi}^{\pi} f(t) D_N(t-x) \mathrm{d}t  \\
+        &=  \frac{1}{2\pi} f \ast D_N = \frac{1}{2\pi} D_N \ast f
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    If, for some $x$, there are constants $\delta > 0$ and $M < \infty$,
+    such that
+
+    \[
+        \left| f(x+t) - f(x) \right|\le M|t|
+    \]
+
+    for all $t \in (-\delta, \delta)$, then
+
+    \[
+        \lim_{N \to \infty} s_N(f; x) = f(x)
+    \]
+\end{thm}
+
+\begin{proof}
+    define
+
+    \[
+        g(t) = \frac{f(x-t) - f(x)}{\sin (t/2)}
+    \]
+
+    for $0 < |t| \le \pi$, put $g(0) = 0$.
+
+    \[
+        \frac{1}{2 \pi} \int_{- \pi}^{\pi} D_N(x) \mathrm{d} x = 1
+    \]
+
+    so
+
+    \begin{align*}
+        s_N(f;x) - f(x) &= \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x-t) D_N(t) \mathrm{d}t - \frac{1}{2 \pi} \int_{- \pi}^{\pi} f(x) D_N(t) \mathrm{d} t \\
+        &=\frac{1}{2 \pi} \int_{- \pi}^{\pi} \left(f(x-t) - f(x)\right) D_N(t) \mathrm{d} t \\
+        &=\frac{1}{2 \pi} \int_{- \pi}^{\pi} g(t) \sin \left((N + 1/2)t \right) \mathrm{d} t \\
+        &=\frac{1}{2 \pi} \int_{- \pi}^{\pi} g(t) \sin \left(Nt \right) \cos (t/2) \mathrm{d} t + \frac{1}{2 \pi} \int_{- \pi}^{\pi} g(t) \cos \left(Nt \right) \sin (t/2) \mathrm{d} t \\
+    \end{align*}
+
+    because:
+
+    \begin{align*}
+        \lim_{N \to \infty} \int_{-\pi}^{\pi} \sin (Nt) \mathrm{d}t &= 0 \\
+        \lim_{N \to \infty} \int_{-\pi}^{\pi} \cos (Nt) \mathrm{d}t &= 0
+    \end{align*}
+
+    and $g(t) \cos (t/2)$ and $g(t) \sin(t/2)$ is bounded, so
+
+    \[
+        \lim_{N \to \infty}s_N(f;x) - f(x) = 0
+    \]
+\end{proof}
+
+\subsection{Fejer's Kernel}
+
+\begin{definition}[Periodic Convolution]
+    let $f,g: \mathbb{R} \to \mathbb{C}$ be $2\pi$ periodic continuous function. 
+
+    Then $f \ast g: \mathbb{R} \to \mathbb{C}$ is defined as:
+
+    \[
+        f \ast g(x) = \int_{-\pi}^{\pi} f(t)g(x - t) \mathrm{d}t
+    \]
+\end{definition}
+
+\begin{thm}
+    let $f,g, h: \mathbb{R} \to \mathbb{C}$ be $2\pi$ periodic continuous function. 
+    
+    Then:
+
+    \begin{enumerate}
+        \item $f \ast g$ is also $2\pi$ periodic continuous function.
+
+        \item $f \ast g = g \ast f$
+
+        \item $f \ast (g + h) = f \ast g + f \ast h$ and $(f+g) \ast h = f \ast h + g \ast h$
+
+        \item $\forall z \in \mathbb{C}, c (f\ast g) = (cf) \ast g = f \ast (cg)$
+
+        \item let trigonometric polynomial $S_N$ as
+
+        \[
+            S_N(x) = \sum_{n=-N}^{N} c_n\mathrm{e}^{\mathrm{i}nx}
+        \]
+
+        Then
+
+        \[
+            f \ast S_N
+        \]
+
+        is also a trigonometric polynomial
+
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    proofs:
+
+    \begin{enumerate}
+        \item $f \ast g$ is continuous and $2\pi$ periodic:
+        
+        define $u = f\ast g$, by $g$ is uniformly continuous in a closed interval:
+
+        \begin{align*}
+            \left| u(x + \delta) - u(x) \right|&= \left|\int_{-\pi}^{\pi} f(t)\left(g(x+ \delta  - t) - g(x-t)\right)\mathrm{d}t \right|\\
+            & \le  \int_{-\pi}^{\pi} \left| f(t) \right| \left|g(x+ \delta  - t) - g(x-t) \right|\mathrm{d} t  \\
+            & \le \int_{-\pi}^{\pi} M_1 \left|g(x+ \delta  - t) - g(x-t) \right|\mathrm{d} t \\
+            &\le M_1 \epsilon
+        \end{align*}
+
+        And periodic:
+
+        \begin{align*}
+            u(x + 2\pi) &= \int_{-\pi}^{\pi} f(t)g(x+ 2\pi  - t) \mathrm{d}t  \\
+            &= \int_{-\pi}^{\pi} f(t)g(x  - t) \mathrm{d}t = u(x)
+        \end{align*}
+
+        \item $f \ast g = g \ast f$
+
+        by change of variable theorem:
+
+        \begin{align*}
+         g \ast f &= \int_{-\pi}^{\pi} g(t)f(x - t) \mathrm{d}t    \\
+         &= -\int_{-\pi}^{\pi} g(x-(x-t))f(x - t) \mathrm{d}(x-t) \\
+         &= -\int_{x+\pi}^{x-\pi} g(x-t)f(t) \mathrm{d}t \\
+         &= \int_{x-\pi}^{x+\pi} g(x-t)f(t) \mathrm{d}t \\
+        \end{align*}
+
+        thus we got
+
+        \[
+ g \ast f =\int_{x-\pi}^{x+\pi} g(x-t)f(t) \mathrm{d}t = \int_{-\pi}^{\pi} g(x-t)f(t) \mathrm{d}t = f \ast g
+        \]
+
+        \item $f \ast (g+h) = f \ast g + f \ast h$
+
+        by property of integral
+
+        \item $c f \ast g$
+
+        by property of integral
+
+        \item $f \ast S_N$:
+    
+        \begin{align*}
+           f \ast \left(\sum_{n=-N}^{N} c_n\mathrm{e}^{\mathrm{i}nx} \right)  =\int_{-\pi}^{\pi} \left(f(t) \sum_{n=-N}^{N} c_n\mathrm{e}^{\mathrm{i}n(x-t)}\right) \mathrm{d}t = \sum_{n=-N}^{N}\left(\mathrm{e}^{\mathrm{i}nx}c_n\int_{-\pi}^{\pi} f(t) \mathrm{e}^{-\mathrm{i}nt} \mathrm{d}t \right) 
+        \end{align*}
+
+        if we define
+
+        \[
+            d_n = c_n\int_{-\pi}^{\pi} f(t) \mathrm{e}^{-\mathrm{i}nt} \mathrm{d}t 
+        \]
+
+        then we have
+
+        \[
+f \ast \left(\sum_{n=-N}^{N} c_n\mathrm{e}^{\mathrm{i}nx} \right) = \sum_{n=-N}^{N} d_n \mathrm{e}^{\mathrm{i}nx}
+        \]
+
+        so if $f$ is continuous and $2\pi $ periodic, its convolution with trigonometric polynomial is also a trigonometric polynomial.
+    \end{enumerate}
+
+
+\end{proof}
+
+\begin{thm}[Fejer Kernel]
+    define: $F_N$ as
+
+    \[
+        F_N = \sum_{n=-N}^{N}\left(1 - \frac{|n|}{N}\right) \mathrm{e}^{\mathrm{i}nx}
+    \]
+
+    Then:
+
+    \begin{enumerate}
+        \item \[
+            F_N = \frac{1}{N} \left| \sum_{n=0}^{N-1} \mathrm{e}^{ \mathrm{i} nx } \right|^2
+        \]
+
+
+        \item \[
+        1 + \mathrm{e}^{\mathrm{i}x} + ... + \mathrm{e}^{\mathrm{i}(n-1)x} =  \mathrm{e}^{\frac{\mathrm{i}(n-1)x}{2}} \frac{\sin (\frac{nx}{2})}{\sin(\frac{x}{2})}
+    \]
+
+        \item \[
+            F_N(x)= \begin{cases}
+            \frac{1}{N} \frac{\sin^2 ((Nx)/2)}{\sin^2 (x/2)} & x \ne 2k \pi\\
+            N & x = 2k \pi
+            \end{cases}
+        \]
+
+        \item \[
+            \int_{-\pi}^{\pi}F_N(x) \mathrm{d}x = 2\pi
+        \]
+
+        \item $\forall \epsilon > 0, 0 < \delta < \pi, \exists N_{\epsilon}, \forall N \ge N_{\epsilon}$:
+
+        $\forall \delta \le |x| \le \pi,\: \left| F_N(x)\right| \le \epsilon$ 
+    \end{enumerate}
+\end{thm}
+
+
+\begin{proof}
+    \begin{enumerate}
+        \item first
+
+    consider:
+
+    \begin{align*}
+        \left| \sum_{n=0}^{N-1} \mathrm{e}^{ \mathrm{i} nx } \right|^2 &= \left(\sum_{n=0}^{N-1} \mathrm{e}^{ \mathrm{i} nx } \right) \cdot \overline{\left(\sum_{n=0}^{N-1} \mathrm{e}^{ \mathrm{i} nx } \right)} \\
+        &= \left(\sum_{n=0}^{N-1} \mathrm{e}^{ \mathrm{i} nx } \right) \cdot \left(\sum_{n=0}^{N-1} \mathrm{e}^{- \mathrm{i} nx } \right) \\
+        &= \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} \mathrm{e}^{\mathrm{i}(n-m)x}
+    \end{align*}
+
+    define $k = n -m $, and we fix $0 \le n \le N-1$, then the range of $n-m$ is $\{n-N+1, n-N+2,..., n \}$, 
+    if we want to $k$ located in this range,
+
+    \[
+      n-N + 1 \le  k \le n
+    \]
+
+    then $n$ is required that: $k \le n \le k + N -1$, if $k$ is non-negative, then $k \le n \le N-1$, number of such $n$ is $N-k$.
+
+    if $k$ is negative, then $n$ is required that $0 \le n \le N- 1- |k|$, the number of such $n$ is $N - |k|$
+
+    after all, we have
+
+    \[
+\sum_{n=0}^{N-1} \sum_{m=0}^{N-1} \mathrm{e}^{ \mathrm{i}(n-m)x} = \sum_{k=-(N-1)}^{N-1}\left( N - |k| \right) \mathrm{e}^{\mathrm{i} k x}
+    \]
+    
+    because when $|k| = N$, $N - |k| = 0$, so:
+
+    \[
+\sum_{k=-(N-1)}^{N-1}\left( N - |k| \right) \mathrm{e}^{ \mathrm{i} k x} = \sum_{k=-N}^{N}\left( N - |k| \right) \mathrm{e}^{ \mathrm{i} k x}
+    \]
+
+    and thus
+
+    \begin{align*}
+\frac{1}{N} \left| \sum_{n=0}^{N-1} \mathrm{e}^{ \mathrm{i} nx } \right|^2 &= \frac{1}{N}\sum_{k=-N}^{N}\left( N - |k| \right) \mathrm{e}^{\mathrm{i} k x}  \\
+&= \sum_{k=-N}^{N}\left( 1 - \frac{|k|}{N} \right) \mathrm{e}^{ \mathrm{i} k x}
+    \end{align*}
+
+
+    \item second
+
+    \begin{align*}
+        1 + \mathrm{e}^{\mathrm{i}x} + ... + \mathrm{e}^{\mathrm{i}(n-1)x} &= \frac{\mathrm{e}^{\mathrm{i}nx} - 1}{\mathrm{e}^{ix} - 1} \\
+        &= \frac{\mathrm{e}^{\frac{\mathrm{i}nx}{2}} \left( \mathrm{e}^{\frac{\mathrm{i}nx}{2}} - \mathrm{e}^{\frac{-\mathrm{i}nx}{2}}\right)}{\mathrm{e}^{\frac{\mathrm{i}x}{2}}\mathrm{e}^{\frac{\mathrm{i}x}{2}} - \mathrm{e}^{\frac{-\mathrm{i}x}{2}}} \\
+        &= \mathrm{e}^{\frac{\mathrm{i}(n-1)x}{2}} \frac{\sin (\frac{nx}{2})}{\sin(\frac{x}{2})}
+    \end{align*}
+
+    \item third
+
+    \begin{align*}
+         F_N(x) &= \frac{1}{N}\left|\mathrm{e}^{\frac{\mathrm{i}(N-1)x}{2}} \frac{\sin (\frac{Nx}{2})}{\sin(\frac{x}{2})} \right|^2 \\
+        &= \frac{1}{N} \frac{\sin^2 ((Nx)/2)}{\sin^2 (x/2)}
+    \end{align*}
+
+    \item 4th
+
+    \begin{align*}
+        \int_{-\pi}^{\pi}F_N(x) \mathrm{d}x &= \sum_{n=-N}^{N}\int_{-\pi}^{\pi}\left(1 - \frac{|n|}{N} \right) \mathrm{e}^{\mathrm{i}nx} \mathrm{d}x \\
+        &= \sum_{n=-N}^{N}\left(1 - \frac{|n|}{N} \right)\int_{-\pi}^{\pi} \mathrm{e}^{\mathrm{i}nx} \mathrm{d}x\\
+        &= \int_{-\pi}^{\pi} 1\mathrm{d}x + \sum_{0 < |n| \le N}\left(1 - \frac{|n|}{N} \right)\int_{-\pi}^{\pi} \mathrm{e}^{\mathrm{i}nx} \mathrm{d}x \\
+        &= 2\pi
+    \end{align*}
+
+    \item 5th
+
+    by:
+
+    \[
+        F_N(x)= \frac{1}{N} \frac{\sin^2 ((Nx)/2)}{\sin^2 (x/2)}
+    \]
+
+    we have
+
+    \[
+        F_N(x) \le \frac{1}{N} \frac{1}{\sin^2 (x/2)} \le\frac{1}{N} \frac{1}{\sin^2 (\delta/2)}
+    \]
+
+    so pick $N_{\epsilon}$ that
+
+    \[
+        N_{\epsilon} = \frac{1}{\epsilon \sin^2(\delta/2)}
+    \]
+    
+    \end{enumerate}
+
+\end{proof}
+
+\begin{thm}
+    \label{thm:trigonometric-polynomial-uniformly-convergence}
+    let $f: \mathbb{R} \to \mathbb{C}$ which is continuous and $2\pi$ periodic. And $\epsilon > 0$, then there exists
+    a trigonometric polynomial $P$ such that $\| f - P\|_\infty \le \epsilon$
+\end{thm}
+
+\begin{proof}
+    let $\epsilon$ be arbitrary small positive real number, and fix $0 < \delta < \pi$.
+
+    so that $\delta$ meets $f$ uniformly continuous condition.
+    
+    Assume trigonometric $P$ meets:
+
+    \begin{enumerate}
+        \item $P$ is real value function and $P \ge 0$
+
+        \item integral:
+        
+        \[
+            \int_{-\pi}^{\pi} P(x) \mathrm{d}x  = 1
+        \]
+
+        \item $\forall \delta \le |x| \le \pi, P(x) \le \epsilon$
+    \end{enumerate}
+
+    assume $f$ is bounded by $M$, and then consider $\left| f \ast P - f \right|_\infty$:
+
+    \begin{align*}
+        \left| f \ast P - f \right| &= \left| \int_{-\pi}^{\pi}f(t) P(x-t)\mathrm{d}t - f(x) \right| \\
+        &= \left| \int_{-\pi}^{\pi}f(t) P(x-t)\mathrm{d}t - \int_{-\pi}^{\pi}f(x) P(t) \mathrm{d}t\right| \\
+        &= \left| \int_{-\pi}^{\pi}P(t) f(x-t)\mathrm{d}t - \int_{-\pi}^{\pi}f(x) P(t) \mathrm{d}t\right| \\
+        &= \left| \int_{-\pi}^{\pi}P(t) \left(f(x-t) - f(x)\right)  \mathrm{d}t\right| \\ 
+        &\le  \int_{-\pi}^{\pi} \left| P(t) \right| \left|f(x-t) - f(x)\right|  \mathrm{d}t \\ 
+        &\le  \int_{-\pi}^{-\delta} \left| P(t) \right| \left|f(x-t) - f(x)\right|  \mathrm{d}t + \int_{\delta}^{\pi} \left| P(t) \right| \left|f(x-t) - f(x)\right|  \mathrm{d}t \\ 
+        & + \int_{-\delta}^{\delta} \left| P(t) \right| \left|f(x-t) - f(x)\right|  \mathrm{d}t \\
+        & \le \int_{-\pi}^{-\delta} \epsilon \left|f(x-t) - f(x)\right| \mathrm{d}t + \int_{\delta}^{\pi} \epsilon \left|f(x-t) - f(x)\right| \mathrm{d}t \\
+        & + \int_{-\delta}^{\delta} \left| P(t) \right| \epsilon  \mathrm{d}t \\
+        & \le 4M\epsilon(\pi-\delta) + \epsilon
+    \end{align*}
+
+    now we can pick Fejer kernel $F_N/2\pi$ as $P$ and construct uniformly convergent trigonometric polynomial $f \ast F_N$
+\end{proof}
+
+\begin{thm}[Parseval's Theorem]
+    suppose $f$ and $g$ are riemann integrable with period $2\pi$ and 
+
+    define inner product of function as:
+
+    \begin{align*}
+        \langle f, g \rangle &= \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) \overline{g(x)} \mathrm{d}x \\
+        \| f \|_2 &= \sqrt{\langle f, f \rangle}
+    \end{align*}
+
+
+    \begin{align*}
+        c_n &= \langle f, \mathrm{e}^{\mathrm{i}n x} \rangle \\
+        \gamma_n &= \langle g, \mathrm{e}^{\mathrm{i}n x} \rangle \\
+        S_N(x) &= \sum_{n=-N}^{N} c_n \mathrm{e}^{\mathrm{i}nx} \\
+        c^{(N)} &= [c_{-N}, c_{-{N-1}},..., c_0, c_1,c_2,...,c_N] \\
+        \gamma^{(N)} &= [\gamma_{-N}, \gamma_{-{N-1}},..., \gamma_0, \gamma_1,\gamma_2,...,\gamma_N] \\
+    \end{align*}
+
+    Then:
+
+    \begin{enumerate}
+        \item \[
+            \lim_{N \to \infty} \| f - S_N \|_2 = 0
+        \]
+
+        \item \[
+            \langle f, g \rangle  = \lim_{N \to \infty} \langle c^{(N)}, \gamma^{(N)}\rangle
+        \]
+
+        \item \[
+            \langle f, f\rangle = \lim_{N \to \infty} \langle c^{(N)}, c^{(N)}\rangle
+        \]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+\begin{enumerate}
+    \item first
+
+pick $\epsilon > 0$, let $h$ be a continuous function $h$ so that $\| f - h\|_2 \le \epsilon$.
+by \autoref{thm:trigonometric-polynomial-uniformly-convergence}, there is a trigonometric polynomial $P$
+so that $\| h - P \|_{\infty} \le \epsilon$, and thus $\| h - P \|_2 \le \epsilon$. If we expand $P$ as
+
+\[
+    \sum_{n=-N_{\epsilon}}^{N_\epsilon} \gamma_n \mathrm{e}^{\mathrm{i}nx}
+\]
+
+then we have:
+
+\[
+\|f -\sum_{n=-N_{\epsilon}}^{N_\epsilon} \langle f, \mathrm{e}^{\mathrm{i}nx}\rangle \mathrm{e}^{\mathrm{i}nx}\|_2 \le \|f -\sum_{n=-N_{\epsilon}}^{N_\epsilon} \gamma_n \mathrm{e}^{\mathrm{i}nx}\|_2
+\]
+
+which indicates that
+
+\[
+    \lim_{N \to \infty} \| f - S_N \|_2 = 0
+\]
+
+    \item second
+
+    consider $\langle S_N ,g \rangle$:
+
+    \begin{align*}
+        \langle S_N, g \rangle &= \langle \sum_{n=-N}^{N}\langle f, \mathrm{e}^{\mathrm{i}nx} \rangle\mathrm{e}^{\mathrm{i}nx}, g \rangle \\
+&=\sum_{n=-N}^{N} \langle f, \mathrm{e}^{\mathrm{i}nx} \rangle \cdot \langle \mathrm{e}^{\mathrm{i}nx}, g \rangle \\ 
+&=\sum_{n=-N}^{N} \langle f, \mathrm{e}^{\mathrm{i}nx} \rangle \cdot \overline{\langle g, \mathrm{e}^{\mathrm{i}nx}\rangle} \\ 
+&= \langle c^{(N)}, \gamma^{(N)}\rangle
+    \end{align*}
+
+    and
+
+    \begin{align*}
+        \left|\langle f, g \rangle - \langle S_N, g \rangle \right| &= \left|\langle f, g \rangle - \langle c^{(N)}, \gamma^{(N)}\rangle \right| \\
+        &= \left|\langle f- S_N, g \rangle \right| \le \| f - S_N\|_2 \| g \|_2
+    \end{align*}
+
+    since $\| f- S_N \|_2 \to 0$ and $\| g \|_2$ is bounded, we got
+
+    \[
+        \lim_{N \to \infty} \langle c^{(N)}, \gamma^{(N)}\rangle = \sum_{n=-\infty}^{\infty} c_n \overline{\gamma_n} = \langle f ,g  \rangle
+    \]
+
+    \item 3rd
+
+    by:
+
+    \[
+        \langle f - S_N , f - S_N \rangle = \langle f,f \rangle - \sum_{n=-N}^{N}\left|c_n^{(N)} \right|^2  \to 0
+    \]
+
+    we got
+
+    \[
+\sum_{n=-\infty}^{\infty}\left|c_n^{(N)} \right|^2 = \langle f, f \rangle
+    \]
+\end{enumerate}
+
+
+\end{proof}
+
+
+\subsection{Exercises}
+
+\begin{exercise}
+Prove:
+
+\begin{enumerate}
+    \item \[ \lim_{x \to 0} \frac{b^x - 1}{x} = \ln b\]
+\end{enumerate}
+
+\begin{proof}
+    \item \[ 
+        \lim_{x \to 0} \frac{b^x - 1}{x} = \lim_{x \to 0} \frac{\mathrm{e}^{\ln b \cdot x} - 1}{ \ln b \cdot x} \ln b = \mathrm{e}^0 \ln b = \ln b
+    \]
+\end{proof}
+\end{exercise}
+
+
+\begin{exercise}
+    Put
+
+    \[
+        s_N = 1 + 1/2 + ... + 1/N
+    \]
+
+    prove
+
+    \[
+        \lim_{N \to \infty} s_N - \ln N
+    \]
+
+    exists
+
+\end{exercise}
+
+\begin{proof}
+    is it obviously that
+
+    \begin{align*}
+ \sum_{n=2}^{N+1} \frac{1}{n}  \le \int_1^{N} \frac{1}{x} = \ln N \le \sum_{n=1}^{N} \frac{1}{n}
+    \end{align*}
+
+    and
+
+    \[
+        \lim_{N \to \infty}\sum_{n=1}^{N} \frac{1}{n} -\sum_{n=2}^{N+1} \frac{1}{n} = 1
+    \]
+
+    which means
+
+    \[
+        0 \le S_N - \ln N \le 1- \frac{1}{N+1}
+    \]
+
+    consider $c_N = S_N - \ln N$, we will prove $c_N$ is monotonically:
+
+    \[
+        c_{N+1} - c_N = \frac{1}{N+1} + \ln (1 - \frac{1}{N+1})
+    \]
+
+    and consider when $0 < \epsilon < 1$
+
+    \[
+       \ln1 - \ln (1 - \epsilon) = \int_{1-\epsilon}^{1} \frac{1}{t} \mathrm{d}t \ge \int_{1-\epsilon}^{1} 1 \mathrm{d}t \ge  \epsilon
+    \]
+
+    so we got
+
+    \[
+        \ln(1-\epsilon) \le -\epsilon
+    \]
+    
+    which means:
+
+    \[
+        c_{N+1} - c_N = \frac{1}{N+1} + \ln (1 - \frac{1}{N+1}) \le 0
+    \]
+
+    so $s_N - \ln N$ is monotonically decreasing and bounded, and hence converges.
+\end{proof}
+
+
+\begin{exercise}
+    prove $\sum 1/p $ diverges, where $p$ is prime number
+\end{exercise}
+
+\begin{proof}
+    consider $1,2,3,...,N$, and let $p_k$ be the maximum prime number which divide any of $1,2,3,...,N$ 
+
+    and assume $s$ be large enough so that $2^s > N$. consider the below products:
+
+    \[
+        \prod_{i=1}^{k}(1+ \frac{1}{p_i^2} + \frac{1}{p_i^3} + ... +\frac{1}{p_i^s}) = \sum_{0 \le s_1,s_2,...,s_k \le s} \frac{1}{p_1^{s_1}} \frac{1}{p_2^{s_2}} ... \frac{1}{p_k^{s_k}}
+    \]
+
+    for any $n \le N$, assume it could be decomposed as:
+
+    \[
+        n = p_1^{s_1}p_2^{s_2} ... p_k^{s_k}
+    \]
+
+    we must have $s_1, s_2,...,s_k < s$. so $1/n = (1/{p_1}^{s_1}) (1/{p_2}^{s_2}) ... (1/{p_k}^{s_k})$ must be an item of:
+
+    \[
+        \sum_{0 \le s_1,s_2,...,s_k \le s} \frac{1}{p_1^{s_1}} \frac{1}{p_2^{s_2}} ... \frac{1}{p_k^{s_k}}
+    \]
+
+    thus we got
+
+    \begin{align*}
+        \sum_{n=1}^{N}\frac{1}{n} &\le \prod_{i=1}^{k}(1+ \frac{1}{p_i^2} + \frac{1}{p_i^3} + ... +\frac{1}{p_i^s})  \\
+        &\le \prod_{i=1}^{k}\sum_{j=0}^{\infty}\frac{1}{p_i^j} \le \prod_{i=1}^{k}\frac{1}{1-1/p_i} \\
+    \end{align*}
+
+    consider that when $x \in [0,1/2]$, let 
+
+    \begin{align*}
+        f(x) &= 1/(1-x) \\
+        g(x) &= \exp (2x) \\
+    \end{align*}
+
+    and
+
+    \begin{align*}
+        \frac{g(x)}{f(x)} &= (1-x)\mathrm{e}^{2x} \\
+        \left(\frac{g(x)}{f(x)}\right)' &= (1-2x) \mathrm{e}^{2x} \ge 0
+    \end{align*}
+
+    which means 
+
+    \[
+        \frac{g(x)}{f(x)} \ge \frac{g(0)}{f(0)} = 1
+    \]
+
+    thus we got $g(x) \ge f(x)$, because $1/p_i \in [0,1/2]$, thus we have
+
+    \begin{align*}
+        \sum_{n=1}^{N}\frac{1}{n} &\le \sum_{i=1}^{k} \frac{1}{1-1/p_i} \\
+        & \le \prod_{i=1}^{k} \mathrm{e}^{2/p_i}  \le \exp \left(  2\sum_{i=1}^{k} \frac{1}{p_i} \right)
+    \end{align*}
+
+    which indicates:
+
+    \[
+        \sum_{i=1}^{k} \frac{1}{p_i} \ge \frac{1}{2}\ln \left( \sum_{n=1}^{N} \frac{1}{n} \right)
+    \]
+
+    since 
+
+    \[
+        \lim_{N \to \infty} \sum_{n=1}^{N} \frac{1}{n}  = \infty
+    \]
+
+    hence $\sum_{i=1}^{k} \frac{1}{p_i}$ diverges
+
+\end{proof}
+
+\begin{exercise}
+    suppose $f: \mathbb{R} \to \mathbb{R}$ and $f(x)f(y) = f(x+y)$, and $f$ is continuous. prove that
+
+    \[
+        f(x) = \mathrm{e}^{cx}
+    \]
+
+    or
+
+    \[
+        f(x) = 0
+    \]
+
+    where $c \in \mathbb{R}$ is a constant
+\end{exercise}
+
+\begin{proof}
+    first, we discuss on if there exists $x_0 \in \mathbb{R}$ and $f(x_0) = 0$
+
+    if there exists such $x_0$, for any $x \ne x_0$, we have
+
+    \[
+        f(x) = f(x - x_0 + x_0) = f(x-x_0)f(x_0) = 0
+    \]
+
+    thus $f(x) = 0$ anywhere.
+
+    if $f(x) \ne 0$, by $f(x)f(y) = f(x+y)$, let's check $f(0)$, since
+
+    \begin{align*}
+        f(0+0) &= f(0) = f(0)^2 \\
+        f(0)(f(0)-1) &= 1
+    \end{align*}
+
+    let's define $g(x) = \ln \left| f(x)\right|$
+    
+    we will prove that $g(kx) = kg(x), \forall k \in \mathbb{N}$, by induction:
+    $g((k+1)x) = g(kx + x) = g(kx) + g(x) = kg(x) + g(x) = (k+1)g(x) $
+
+    for negative integer, we have $g(-kx) + g(kx) = g(0) = 0$ and thus $g(-kx) = 0- kg(x) = -kg(x)$
+
+    for rational number, consider that $q = m/n$, we have
+
+    \begin{align*}
+        g(x) &= g(n \cdot \frac{x}{n}) = n g(\frac{x}{n}) \\
+        g(\frac{x}{n}) &= \frac{1}{n}g(x) \\
+        g(\frac{m}{n}x) &= g(m \frac{x}{n}) = mg(\frac{x}{n}) \\
+        &= \frac{m}{n}g(x)
+    \end{align*}
+
+    for real number $r$, take rational number sequence $q_n \to r$, by $g$ is continuous:
+
+
+    \begin{align*}
+        g(rx) &= g(\lim_{n \to \infty} q_n x) = \lim_{n \to \infty}g( q_n x) \\
+        &=\lim_{n \to \infty}q_n g( x) =r g(x)
+    \end{align*}
+    
+    now we proved $\forall r \in \mathbb{R}, g(rx) = rg(x)$, assign $x = 1$, we got
+
+    \[
+        g(r) = rg(1) 
+    \]
+
+    let's define $g(1) = c$, then we got
+
+    \[
+        g(x) = cx
+    \]
+
+    and
+
+    \[
+        \left| f(x)\right| = \mathrm{e}^{cx}
+    \]
+
+    since $f \ne 0$ and continuous, $f$ should be positive or negative. but $f(0) = 1 > 0$, so 
+    $f$ is positive, and hence
+
+    \[
+        f(x) = \mathrm{e}^{cx}
+    \]
+
+\end{proof}
+
+\begin{exercise}
+    suppose $0 < \delta < \pi$ and
+
+    \[
+        f(x) = \begin{cases}
+            0 & \delta < |x| \le \pi \\
+            1 & |x| \le \delta \\
+        \end{cases}
+    \]
+
+    and $f(x + 2\pi) =f(x)$ for all $x$
+
+    Then
+
+    \begin{enumerate}
+        \item compute the Fourier coefficients of $f$
+
+        \item conclude that
+
+        \[
+            \sum_{n=1}^{\infty}\frac{\sin (n \delta)}{n} = \frac{\pi - \delta}{2}
+        \]
+
+        \item deduce from parseval's theorem that
+
+        \[
+\sum_{n=1}^{\infty} \frac{\sin^2 (n \delta)}{n^2 \delta} =  \frac{\pi - \delta}{2}
+        \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \item coefficients:
+
+    when $n \ne 0$
+    \begin{align*}
+        c_n &= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(t) \mathrm{e}^{-\mathrm{i}nt} \mathrm{d}t \\
+        &= \frac{1}{2\pi}\int_{-\delta}^{\delta}  \mathrm{e}^{-\mathrm{i}nt} \mathrm{d}t \\
+        &= \frac{1}{-2\mathrm{i}\cdot n\pi}\left(\mathrm{e}^{- \mathrm{i}n \delta} - \mathrm{e}^{\mathrm{i}n \delta} \right) \\
+        &= \frac{1}{-2\mathrm{i}\cdot n\pi}\left( -2 \mathrm{i} \sin n \delta \right) \\
+        &= \frac{\sin (n \delta)}{ n\pi}
+    \end{align*} 
+
+    when $n = 0$
+
+    \[
+        c_0 = \frac{1}{2\pi}\int_{-\delta}^{\delta} f(t)  \mathrm{d}t = \frac{\delta}{\pi}
+    \]
+
+        \item conclusion:
+
+        because when $x,y \in (-\delta, \delta)$, $|f(x) - f(y) | = 0$, so we have
+        
+        \begin{align*}
+            f(0) &= 1 = \sum_{-\infty}^{\infty}c_n \mathrm{e}^{\mathrm{i} n \cdot 0} \\
+            &= \sum_{-\infty}^{\infty}c_n = \sum_{-\infty}^{\infty}\frac{\sin (n \delta)}{ n\pi} \\
+            &= \frac{\delta}{\pi} + 2\sum_{n=1}^{\infty} \frac{\sin (n \delta)}{n \pi}
+        \end{align*}
+
+        thus we got:
+
+        \[
+\sum_{n=1}^{\infty} \frac{\sin (n \delta)}{n} =  \frac{\pi - \delta}{2}
+        \]
+
+        \item apply parseval's theorem:
+        
+        \begin{align*}
+            \sum_{n=-N}^{N} \|\langle f, \mathrm{e}^{\mathrm{i}nx} \rangle\|_2 &= \langle f,f \rangle \\
+            \frac{\delta^2}{\pi^2} + 2\sum_{n=1}^{\infty} \frac{\sin^2 (n \delta)}{n^2 \pi^2} &= \frac{1}{2\pi} 2\delta = \frac{\delta}{\pi} \\
+\sum_{n=1}^{\infty} \frac{\sin^2 (n \delta)}{n^2 \delta} &= \frac{\pi - \delta}{2}
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+
+\begin{exercise}
+    calculate:
+
+    \[
+        0 + \sin x + \sin (2x) + ... + \sin ((n-1) x)
+    \]
+
+    and
+
+    \[
+        1 + \cos x + \cos (2x) + ... + \cos ((n-1) x) 
+    \]
+\end{exercise}
+
+\begin{proof}
+    consider:
+    
+    \begin{align*}
+        1 + \mathrm{e}^{\mathrm{i}x} + ... + \mathrm{e}^{\mathrm{i}(n-1)x} &= \frac{\mathrm{e}^{\mathrm{i}nx} - 1}{\mathrm{e}^{ix} - 1} \\
+        &= \frac{\mathrm{e}^{\frac{\mathrm{i}nx}{2}} \left( \mathrm{e}^{\frac{\mathrm{i}nx}{2}} - \mathrm{e}^{\frac{-\mathrm{i}nx}{2}}\right)}{\mathrm{e}^{\frac{\mathrm{i}x}{2}}\mathrm{e}^{\frac{\mathrm{i}x}{2}} - \mathrm{e}^{\frac{-\mathrm{i}x}{2}}} \\
+        &= \mathrm{e}^{\frac{\mathrm{i}(n-1)x}{2}} \frac{\sin (\frac{nx}{2})}{\sin(\frac{x}{2})}
+    \end{align*}
+
+    thus we have
+
+    \begin{align*}
+        1 + \cos x + \cos (2x) + ... + \cos ((n-1) x)  &=  \frac{\cos (\frac{(n-1)x}{2}) \sin (\frac{nx}{2})}{\sin(\frac{x}{2})} \\
+        0 + \sin x + \sin (2x) + ... + \sin ((n-1) x) &= \frac{\sin (\frac{(n-1)x}{2}) \sin (\frac{nx}{2})}{\sin(\frac{x}{2})}
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    prove:
+
+    \[
+        \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+    \]
+\end{exercise}
+
+\begin{proof}
+    define 
+
+    \[
+        f(x) = \begin{cases}
+            0 & x = -\pi, \pi \\
+            x & x \ne -\pi, \pi
+        \end{cases}
+    \]
+
+    by parseval's theorem:
+
+    \begin{align*}
+        \sum_{n=-\infty}^{\infty} \left|\langle x, \mathrm{e}^{\mathrm{i}nx}\rangle \right|^2 &= \langle f, f \rangle \\
+        2\sum_{n=1}^{\infty} \frac{1}{n^2}  &= \frac{\pi^2}{3}
+    \end{align*}
+\end{proof}

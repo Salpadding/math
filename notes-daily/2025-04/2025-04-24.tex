@@ -1,0 +1,148 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Theory of Real Variable Function}
+
+\begin{exercise}
+    let $A$ and $B$ be measurable set, then $A \cup B$ is also measurable.
+\end{exercise}
+
+\begin{proof}
+    \begin{align*}
+        m^*(T) & \le m^*(T \cap (A \cup B)) + m^*(T \cap (A \cup B)^C) \\
+            & \le m^*(T \cap A \cap B) + m^*(T \cap A \cap B^C) + m^*(T \cap A^C \cap B) + m^*(T \cap A^C \cap B^C) \\
+            & \le m^*(T \cap A) + m^*(T \cap A^C) \\
+            & \le m^*(T)
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $A$ and $B$ be disjoint measurable sets. then we have
+    \[
+        m^(A \cup B) = m^(A) + m^(B)
+    \]
+\end{exercise}
+
+\begin{proof}
+    we take the definition on $A$ is measurable:
+
+    \begin{align*}
+        m^*(A \cup B) &= m^*((A \cup B) \cap A) + m^*((A \cup B) \cap A^C) \\
+        &= m^*(A) + m^*(B)
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let $E_n$ be a sequence of measurable of disjoint sets. then their countable union $E$
+
+    \[
+        E = \bigcup_{n=1}^{\infty}E_n
+    \]
+
+    is also measurable.
+\end{exercise}
+
+
+\begin{proof}
+    we take finite parts of $E$, let 
+
+    \[
+        S_k = \bigcup_{n=1}^{k}E_n
+    \]
+
+    and $S = E$
+
+
+    since $S_k$ is measurable, then we have
+
+    \begin{align*}
+        m^*(T) \ge m^*(T \cap S_k) + m^*(T \cap S_k^C) \\
+        \ge \sum_{n=1}^{k}m^*(T \cap E_n) + m^*(T \cap S_k^C) \\
+        \ge \sum_{n=1}^{k}m^*(T \cap E_n) + m^*(T \cap S^C)
+    \end{align*}
+
+    take $k \to \infty$, then we have
+
+    \[
+        m^*(T) \ge \sum_{n=1}^{\infty}m^*(T \cap E_n) + m^*(T \cap S^C)
+    \]
+    
+    consider the property of outer measure, then we have
+
+    \[
+        m^*(T) \ge m^*(T \cap S) + m^*(T \cap S^C)
+    \]
+
+    so $S$ is measurable
+\end{proof}
+
+\begin{exercise}
+    let $E_n$ be a sequence of disjoint measurable sets, then we have
+
+    \[
+        m^*(\bigcup_{n=1}^{\infty}E_n) = \sum_{n=1}^{\infty}m^*(E_n)
+    \]
+\end{exercise}
+
+\begin{proof}
+    we will use conclusion from previous exercise. let $S=E$ 
+    \[
+        m^*(T) \ge \sum_{n=1}^{\infty}m^*(T \cap E_n) + m^*(T \cap S^C)
+    \]
+
+    let $T = S$, then we have
+
+    \begin{align*}
+        m^*(S) & \ge \sum_{n=1}^{\infty}m^*(E_n) + m^*(\emptyset) \\
+        & \ge \sum_{n=1}^{\infty}m^*(E_n)
+    \end{align*}
+
+    so we have
+
+    \[
+        m^*(S) = \sum_{n=1}^{\infty}m^*(E_n)
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $E_n$ be a sequence of measurable sets, and they don't have to be disjoint. then
+    theire countable union is measurable.
+\end{exercise}
+
+\begin{proof}
+    take  $A_0 = \emptyset$ and 
+
+    \[
+        A_{n} = \bigcup_{k=1}^{n}E_n \setminus \bigcup_{k=1}^{n-1}E_n
+    \]
+
+    then $A_0, A_1, ..$ is a sequence of disjoint measurable sets.
+
+    and we have
+
+    \[
+        E = \bigcup_{n=0}^{\infty}A_n
+    \]
+
+    so $E$ is measurable.
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

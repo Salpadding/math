@@ -1,0 +1,364 @@
+\subsubsection{Sequence}
+
+\begin{exercise}[Abel Lemma]
+    prove: 
+
+    \[
+        \sum_{k=m}^{p}a_k(b_{k+1}-b_k) = a_{n+1}b_{n+1} -a_mb_m - \sum_{k=m}^{p}b_{k+1}(a_{k+1} - a_{k})
+    \]
+\end{exercise}
+
+\begin{proof}
+    \begin{align*}
+         \sum_{k=m}^{p}a_k(b_{k+1}-b_k) &= a_m(b_{m+1} - b_m) + a_{m+1}(b_{m+2} - b_{m+1}) + .. + a_{p}(b_{p+1} -b_p) \\
+         &= b_{m+1}(a_m - a_{m+1}) + b_{m+2}(a_{m+1} - a_{m+2}) + .. + b_{p} + b_{p+1}(a_p - a_{p+1}) + b_{p+1}a_{p+1} - a_mb_m \\
+         &= b_{p+1}a_{p+1} -a_mb_m -\sum_{k=m}^{p}b_{k+1}(a_{k+1} - a_{k})
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    let :
+    
+    \[
+    \sup_{N \ge 1}\left| \sum_{n=1}^{N}a_n \right| < \infty
+    \]
+
+    and $b_1 \ge b_2 \ge b_3 ...,\: b_n \to 0$ 
+
+    prove:
+
+    \[
+        \sum_{n=1}^{\infty}a_nb_n
+    \]
+
+    converges
+\end{exercise}
+
+\begin{proof}
+    let's define
+    
+    \[
+    \sup_{N \ge 1}\left| \sum_{n=1}^{N}a_n \right| = M
+    \]
+
+    and
+
+    \[
+        A_n = \sum_{k=1}^{n}a_k,\: A_0 = 0
+    \]
+    \begin{align*}
+        \left| \sum_{k=m}^{p}a_kb_k \right| &= \left| \sum_{k=m}^{p}b_k(A_k - A_{k-1}) \right| \\
+        &= \left| A_pb_{p+1} - A_{m-1}b_m -\sum_{k=m}^{p}A_k(b_{k+1}- b_k) \right| \\
+        & \le \left| A_pb_{p+1} \right| + \left| A_{m-1}b_{m} \right| + \sum_{k=m}^{p} \lvert A_k\rvert (b_k - b_{k+1}) \\
+        & \le M(|b_{p+1}| + |b_{m}|) + M (b_m - b_{p+1})
+    \end{align*}
+
+    as $m,p \to \infty$ we have $\lvert b_m \rvert \to 0$ and $b_m - b_{p+1} \to 0$
+
+    so 
+    \[
+        \sum_{n=1}^{\infty}a_nb_n
+    \]
+
+    converges
+\end{proof}
+
+\begin{exercise}
+    let $a_n \ge 0$ and $a_1 \ge a_2 \ge a_3 .. $ and $a_n \to 0$, prove:
+
+    \[
+        \sum_{n=1}^{\infty}(-1)^n a_n
+    \]
+
+    converges
+\end{exercise}
+
+\begin{proof}
+    since 
+    \[
+        \sup_{N \ge 1}\left| \sum_{n=1}^{N} (-1)^n \right| \le 1
+    \] 
+
+    and $a_1 \ge a_2 \ge a_3 ..,\: a_n \ge 0$
+
+    so
+
+    \[
+        \sum_{n=1}^{\infty}a_n(-1)^n  
+    \]
+
+    converges
+\end{proof}
+
+\begin{exercise}
+    define  
+
+    \[
+        \text{e} = \sum_{n=0}^{\infty}\frac{1}{n!}
+    \]
+
+    prove:
+
+    \[
+        \lim_{n \to \infty}(1+\frac{1}{n})^n = \text{e}
+    \]
+\end{exercise}
+
+\begin{proof}
+    we fix $m > 0$ at first, and let $n > m$
+    \begin{align*}
+        (1+\frac{1}{n})^{n} &= \sum_{k=0}^{n}\binom{n}{k}(\frac{1}{n})^k \\
+        &= 1 + 1 + \frac{1}{2!}(1-\frac{1}{n}) +\frac{1}{3!}(1-\frac{1}{n})(1-\frac{2}{n}) + .. + \frac{1}{n!}(1-\frac{1}{n})..(1-\frac{n-1}{n}) \\
+        &= 1 + 1 + \frac{1}{2!}(1-\frac{1}{n}) + .. + \frac{1}{m!}(1-\frac{1}{n})..(1-\frac{m-1}{n}) + .. + \frac{1}{n!}(1-\frac{1}{n})..(1-\frac{n-1}{n})\\
+        & \ge 1 + 1 + \frac{1}{2!}(1-\frac{1}{n}) + .. + \frac{1}{m!}(1-\frac{1}{n})
+    \end{align*}
+
+    take $n \to \infty$, we have
+
+    \begin{align*}
+        \varliminf_{n \to \infty}(1+\frac{1}{n})^n &\ge 1 + 1 + \frac{1}{2!}(1-\frac{1}{n}) + .. + \frac{1}{m!}(1-\frac{1}{n}) \\
+        &\ge 1 + 1 + \frac{1}{2!} + .. + \frac{1}{m!}
+    \end{align*}
+
+    since $m$ is arbitrary, take $m \to \infty$, we have
+
+    \[
+        \varliminf_{n \to \infty}(1+\frac{1}{n})^n \ge \text{e}
+    \]
+\end{proof}
+
+\begin{exercise}
+    let
+
+    \[
+        \sum_{n=0}^{\infty} \lvert a_n \rvert < \infty
+    \]
+
+    and
+
+    \[
+        \sum_{n=0}^{\infty} b_n
+    \]
+
+    converges
+
+    prove:
+
+    \[
+        \sum_{N=0}^{\infty}(a_0b_N + a_1b_{N-1} + .. + a_Nb_0) = \left(\sum_{n=1}^{\infty} a_n \right)\left(\sum_{n=1}^{\infty} b_n \right)
+    \]
+\end{exercise}
+
+\begin{proof}
+    let's define
+
+    \begin{align*}
+        A_n &= \sum_{k=0}^{n}a_k \\
+        B_n &= \sum_{k=0}^{n}b_k \\
+        \beta_n &= \sum_{k=0}^{\infty}b_k - B_n \\
+        \sum_{n=1}^{\infty}\lvert A_n \rvert &= M
+    \end{align*}
+
+    \begin{align*}
+        & a_0b_0 + (a_0b_1 + a_1b_0) + .. + (a_0b_N + a_1b_{N-1} + .. + a_Nb_0) \\
+        & = a_0B_N + a_1B_{N-1} + .. + a_NB_0 \\
+        &= a_0(B - \beta_N) + a_1(B-\beta_{N-1}) + .. + a_N(B-\beta_{0}) \\
+        &= A_NB - \left( a_0\beta_N + a_1 \beta_{N-1} + .. + a_N\beta_{0}\right)
+    \end{align*}    
+
+    we fix $m > 0$ and let $N > m$, then we have
+
+    \begin{align*}
+        & \lvert a_0\beta_N + a_1 \beta_{N-1} + .. + a_N\beta_{0} \rvert \\
+        & = \lvert a_0\beta_N + a_1 \beta_{N-1} + .. + a_m\beta_{N-m} + a_{m+1}\beta_{N-(m+1)} + .. + a_N\beta_{0} \rvert \\
+        & \le \lvert \beta_0a_N + \beta_1 a_{N-1} + .. + \beta_ma_{N-m} \rvert + \lvert \beta_{m+1}a_{N-(m+1)} + .. + \beta_Na_{0} \rvert \\
+        & \le \lvert \beta_0a_N + \beta_1 a_{N-1} + .. + \beta_ma_{N-m} \rvert + \epsilon_m M \\
+    \end{align*}
+
+    take $N \to \infty$, we have
+
+    \[
+        \lim_{N \to \infty}\lvert a_0\beta_N + a_1 \beta_{N-1} + .. + a_N\beta_{0} \rvert \le \epsilon_m M
+    \]
+
+    since $m$ is arbitrary, take $\epsilon_m \to 0$, we have
+
+    \[
+        \lim_{N \to \infty}\lvert a_0\beta_N + a_1 \beta_{N-1} + .. + a_N\beta_{0} \rvert = 0
+    \]
+
+    so we have
+
+    \[
+        \lim_{N \to \infty}a_0b_0 + (a_0b_1 + a_1b_0) + .. + (a_0b_N + a_1b_{N-1} + .. + a_Nb_0) = AB
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $\sum a_n$ convergent while not absolutely convergent, and $-\infty \le \alpha \le \beta \le \infty$ 
+    
+    prove: exists a rearrangement $a_{n_k}$ such that
+
+    \begin{align*}
+        \varlimsup_{N \to \infty}\sum_{k=1}^{N}a_{n_k} = \beta \\
+        \varliminf_{N \to \infty}\sum_{k=1}^{N}a_{n_k} = \alpha \\
+    \end{align*}
+
+\end{exercise}
+
+\begin{proof}
+    let's define:
+
+    \begin{align*}
+        a_n^{+} &= \frac{|a_n| + a_n}{2} \\
+        a_n^{-} &= \frac{|a_n| - a_n}{2} \\
+    \end{align*}
+
+    then we have:
+
+    \begin{align*}
+        \sum_{n=1}^{\infty}a_n^{+} = \sum_{n=1}^{\infty}a_n^{-} = \infty
+    \end{align*}
+
+    because:
+
+    \begin{enumerate}
+        \item if $\sum a_n^+$ and $\sum a_n^{-}$ both converges, then $a_n = a_n^+ + a_n^-$ is absolutely convergent.
+
+        \item if one of $\sum a_n^+$ and $\sum a_n^{-}$ converges, then we have
+
+        \[
+            \sum_{n=1}^{N}a_n^+ -\sum_{n=1}^{N}a_n^- = \sum_{n=1}^{N}a_n
+        \]
+
+        for example, if $\sum a_n^+$ converges, then 
+
+        \[
+        \sum_{n=1}^{N}a_n^- =\sum_{n=1}^{N}a_n^+ - \sum_{n=1}^{N}a_n
+        \]
+
+        which is bounded, so $\sum a_n^-$ will also convergent
+    \end{enumerate}
+
+    now we define $\alpha_n \to \alpha$ and $\beta_n \to \beta$, and $p_1, p_2, ..$ be non-negative item of $a_n$ while $q_1, q_2, .. $
+    be negative items. Both $p_k$ and $q_k$ should be infinite, otherwise $a_n$ would be absolutely convergent.
+
+    now we define $m_1$ be minimal integer that satisfy:
+
+    \[
+        p_1 + p_2 + .. + p_{m_1} > \beta_1
+    \]
+
+    and $k_1$ be minimal integer that satisfy
+
+    \[
+        p_1 + p_2 + .. + p_{m_1} - q_1 -q_2 - .. -q_{k_1} < \alpha_1
+    \]
+
+    since $\sum p_k = \infty$ and $\sum q_k = \infty$, we can construct infinite $m_1,m_2, ...$ and $k_1,k_2, ..$
+
+    then we define :
+
+    \begin{align*}
+        S_{m_1} & = P_1 = p_1 + p_2 + .. + p_{m_1} > \beta_1\\
+        S_{m_1 + k_1} &= Q_1 = P_1 - q_1 -q_2 - .. - q_{k_1} < \alpha_1 \\
+        S_{m_1 + k_1 + m_2}  &= P_2 = Q_1 + p_{m_1 + 1} + .. + p_{m_2} > \beta_2 \\
+        S_{m_1 + k_1 + m_2 + k_2} =Q_2 &= P_2 - q_{k_1 + 1} -q_{k_1 + 2} - .. - q_{k_2} < \alpha_2 \\
+        ..
+    \end{align*}
+
+    so for every $\beta_n$ we have some partial sum that $S_{f(n)} > \beta_n$, take $n \to \infty$ then we have
+
+    \[
+        \varlimsup_{n \to \infty} S_{n} \ge \varlimsup_{n \to \infty} S_{f(n)} \ge \varlimsup_{n \to \infty} \beta_n \ge \beta
+    \]
+
+    similar we have:
+
+    
+    \[
+           \varliminf_{n \to \infty} S_{n} \le \varliminf_{n \to \infty} S_{g(n)} \le \varliminf_{n \to \infty} \alpha_n \le \alpha
+    \]
+
+    consider that:
+
+    \begin{align*}
+       & P_n - p_{m_n} \le \beta_n < P_n \\
+       & |P_n - \beta_n | \le \lvert p_{m_n} \rvert \\
+       & \lim_{n \to \infty} P_n  = \beta
+    \end{align*}
+
+    since every partial sum $S_n$ less than some $P_{h(n)}$, so we have:
+
+    \[
+        \varlimsup_{n \to \infty}S_n \le \limsup_{n \to \infty}P_{h(n)} \le \beta
+    \]
+
+    after we proved:
+
+    \[
+        \varlimsup_{n \to \infty}S_n = \beta
+    \]
+
+    similarly we can prove
+
+    \[
+        \varliminf_{n \to \infty}S_n = \beta
+    \]
+
+\end{proof}
+
+\begin{exercise}
+    let $a_n \in \mathbb{C}$ and $a_n$ converges absolutely, prove: any rearrangement converges and has same limitation.
+\end{exercise}
+
+\begin{proof}
+    we define
+
+    \[
+        A = \sum_{n=1}^{\infty}a_n
+    \]
+
+    and
+
+
+    \[
+        M = \sum_{n=1}^{\infty} \lvert a_n \rvert
+    \]
+
+    we fix $m > 0$ at first, so that
+
+    \[
+        \sum_{k=m+1}^{\infty}\lvert a_k \rvert < \epsilon_m
+    \]
+
+    and
+
+    \[
+        \lvert \sum_{k=1}^{m}a_k - A \rvert < \epsilon_m
+    \]
+    
+    and let $N > f^{-1}(k), \: \forall k \le m$  
+
+
+
+    \begin{align*}
+        \left| \sum_{k=1}^{N}a_{f(k)} - A \right| &= \left| \sum_{k=1}^{m}a_k - A + \sum_{k \in X}a_k \right|,\: X = \{ f(k): f(k) > m, k \le N \} \\
+        & \le \left| \sum_{k=1}^{m}a_k - A \right| + \sum_{k=m+1}^{\infty} \lvert a_k\rvert \\
+        & \le 2 \epsilon_m
+    \end{align*}
+
+    take $N \to \infty$, we have
+
+    \[
+        \varlimsup_{N \to \infty}\left| \sum_{k=1}^{N}a_{f(k)} - A \right| \le 2\epsilon_m
+    \]
+
+    since $\epsilon_m$ is arbitrary small, so we have
+
+    \[
+\lim_{N \to \infty}\left| \sum_{k=1}^{N}a_{f(k)} - A \right| = 0
+    \]
+
+
+\end{proof}

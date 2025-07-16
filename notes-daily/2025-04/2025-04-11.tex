@@ -1,0 +1,414 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input\input{../macros.tex}
+\title{Learning Notes}
+\author{Yingjie Zhu}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\section{Basic Set Theory}
+
+\begin{lem}
+    $A \subseteq B$ iff $A \cap B = A$
+\end{lem}
+
+\begin{proof}
+    since $x \in A \subseteq A \cap B$, so $x \in B$
+\end{proof}
+
+\begin{lem}
+    $A \subseteq B$ iff $A \cap B^C = \emptyset$
+\end{lem}
+
+\begin{proof}
+    \begin{align*}
+        A \cap B^C &= \emptyset \\
+        A \setminus \left(A \cap B^C\right) &= A \\
+        \left( A \cap A^C \right) \cup \left( A \cap B \right) &= A \\
+        A \cap B = A 
+    \end{align*}
+
+    on the other hand, if $A \subseteq B$, then
+
+    \begin{align*}
+        A \cap B  &= A \\
+        A \setminus \left(A \cap B \right) &= \emptyset \\
+        A \cap B^C &= \emptyset
+    \end{align*}
+\end{proof}
+
+\begin{lem}
+    $A \subsetneq B$ iff $A \cap B^C \ne \emptyset$
+\end{lem}
+
+\begin{lem}
+    $A \subseteq B$ iff $A \cap B = A$
+\end{lem}
+
+\begin{lem}
+    $f(A \cup B) = f(A) \cup f(B)$
+\end{lem}
+
+
+\begin{lem}
+    $f(A \cap B) \subseteq f(A) \cap f(B)$
+\end{lem}
+
+
+\begin{lem}
+    $f(f^{-1}(A)) \subseteq A$, the equal always holds on when $f$ is surjective.
+\end{lem}
+
+
+\begin{lem}
+    $A \subseteq f^{-1}(f(A))$, the equal holds on when $f$ is injective.
+\end{lem}
+
+\section{Pointwise Topology}
+
+\subsection{Open and Interior}
+
+\begin{definition}[Interior point]
+    $x$ is an interior point of $A$ iff exists open set $V_x \subseteq A,\; x \in V_x$ 
+\end{definition}
+
+
+\begin{definition}
+    \[
+        \text{int}(A) = \{ x \;\text{ is interior point of}\; A \}
+    \]
+\end{definition}
+
+\begin{lem}
+    $\text{int}(A) \subseteq A$
+\end{lem}
+
+\begin{proof}
+    proved by definition, $x \in V_x,\; V_x \subseteq A$
+\end{proof}
+
+
+\begin{lem}
+    $\text{int}(A)$ is always open 
+\end{lem}
+
+\begin{proof}
+    We can write $A$ as
+
+    \[
+        A = \bigcup_{x \in A}V_x
+    \]
+
+    since arbitrary union of open sets $V_x$ is also open, so $A$ is open.
+\end{proof}
+
+\begin{lem}
+    $A$ is open iff $\text{int}(A) = A$
+\end{lem}
+
+\begin{proof}
+    if $A$ is open, then every point of $A$ is interior point, since we can let $V_x = A$ which is open.
+\end{proof}
+
+\begin{corollary}
+   $\text{int}(A)$ is largest open set which is sub set of $A$
+\end{corollary}
+
+\begin{proof}
+    \begin{align*}
+        V &\subseteq A \\
+        \text{int}(V) &\subseteq \text{int}(A) \\
+        V &\subseteq \text{int}(A) \\
+    \end{align*}
+
+    so we can denote $\text{int}(A)$ as
+
+    \[
+        \text{int}(A) = \bigcup_{V \subseteq A,\; V\;\text{is open}}V
+    \]
+\end{proof}
+
+
+\begin{lem}
+$\text{int}(A \cap B) = \text{int}(A) \cap \text{int}(B)$
+
+\end{lem}
+
+\begin{proof}
+    let $x \in \text{int}(A \cap B)$, so we have open set $V \subseteq A \cap B,\; x \in V$. so 
+    $V \subseteq A,\; V \subseteq B$, so $x \in \text{int}(A)$ and $x \in \text{int}(B)$. 
+
+    on the other hand, if $x$ in both $\text{int}(A)$ and $\text{int}(B)$, there exists open set $V_A \subseteq V$
+    and open set $V_B \in B$, since finite intersection of open set is open, so we have open set $V_A \cap V_B \subseteq A \cap B$,
+    and $x \in V_A,\; x \in V_B$, so $x \in \text{int}(A \cap B)$
+\end{proof}
+
+
+\begin{lem}
+$\text{int}(A) \cup \text{int}(B)  \subseteq \text{int}(A \cup B)$
+\end{lem}
+
+\begin{proof}
+\begin{align*}
+    \text{int}(A) &\subseteq \text{int}(A \cup B) \\
+    \text{int}(B) &\subseteq \text{int}(A \cup B) \\
+\text{int}(A) \cup \text{int}(B) & \subseteq \text{int}(A \cup B)
+\end{align*}
+\end{proof}
+
+\subsection{Limit Point and Closure}
+
+\begin{definition}[Limit point]
+   A limit point of $A$ is that, for every open set $V$ contains $x$, $A \cap \left( V \setminus \{x\} \right) \ne \emptyset$.
+   Pay attention that a limit point $x$ of $A$ may not in $A$. 
+\end{definition}
+
+\begin{definition}[Derived set]
+    Derived set $A'$ of $A$ is all its limit point.
+\end{definition}
+
+\begin{definition}[Closure]
+    Closure $\overline{A}$ of $A$ is defined as $A \cup A'$
+\end{definition}
+
+
+
+\begin{lem}
+    $\text{int}(A) \cap (A^C)' = \emptyset$
+\end{lem}
+
+\begin{proof}
+    assume $x \in \text{int}(A)$ and $x \in (A^C)'$, then we have $x \in V_x \subseteq A$, and 
+    $(V_x \setminus \{ x\}) \cap A^C = V_x \cap A^C \ne \emptyset$
+
+    however we have
+
+    \[
+        V_x \cap A^C \subseteq A \cap A^C = \emptyset
+    \]
+\end{proof}
+
+
+\begin{lem}
+    $\left( \text{int}(A) \right)^C \subseteq (A^C)'$
+\end{lem}
+
+\begin{proof}
+    since $x \notin \text{int}(A)$, so for every $V_x$ contains $x$, $V_x \cap A^C \ne \emptyset$ and we have
+
+    \begin{align*}
+        \left( V_x \setminus \{ x \} \right) \cap A^C &= V_x \cap \left( A^C \setminus \{ x \} \right)  \\
+        &= V_x \cap A^C  \ne \emptyset
+    \end{align*}
+\end{proof}
+
+\begin{lem}
+    $\overline{A^C} = \left( \text{int}(A) \right)^C $
+\end{lem}
+
+\begin{proof}
+    we first prove $\overline{A^C} \subseteq \left( \text{int}(A) \right)^C$. since $\overline{A^C} = A^C \cup \left(A^C\right)'$. 
+    
+    as $\text{int}(A) \subseteq A$, so $A^C \subseteq \left(\text{int}(A) \right)^C$
+    
+    on the other hand, since $\text{int}(A) \cap (A^C)' = \emptyset$, then we have $(A^C)' \subseteq (\text{int}(A))^C$, combine them 
+    we have 
+
+    \begin{align*}
+        A^C &\subseteq \left(\text{int}(A) \right)^C \\
+        (A^C)' & \subseteq \left(\text{int}(A) \right)^C \\
+        \overline{A^C} &\subseteq A^C \cup (A^C)' \subseteq \left(\text{int}(A) \right)^C
+    \end{align*}
+
+    then we prove $(\text{int}(A))^C \subseteq \overline{A^C}$
+
+    since $\text{int}(A)^C \subseteq (A^C)'$  so we have
+
+    \[
+        \text{int}(A)^C \subseteq (A^C)' \cup A^C \subseteq \overline{A^C}
+    \]
+
+\end{proof}
+
+
+\begin{lem}
+   $\overline{A}$ is closed 
+\end{lem}
+
+\begin{proof}
+    $(\overline{A})^C = \text{int}(A^C)$
+\end{proof}
+
+\begin{lem}
+    $A$ is closed iff $A = \overline{A}$
+\end{lem}
+
+\begin{proof}
+    \begin{align*}
+        A &= \overline{A} \\
+        A^C &= (\overline{A})^C = \text{int}(A^C) \\
+        A^C & \: \text{is open}
+    \end{align*}
+\end{proof}
+
+\begin{lem}
+    $\overline{A}$ is minimal closed set which is super set of $A$
+\end{lem}
+
+\begin{proof}
+    let $A \subseteq Y$ and $Y$ is closed. then we have
+
+    \begin{align*}
+        A &\subseteq Y \\
+        \overline{A} &\subseteq \overline{Y} \subseteq Y
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    We can denote closure of $A$ as below
+
+    \[
+        \overline{A} = \bigcap_{B \supseteq A,\, B\; \text{is closed}}B
+    \]
+\end{corollary}
+
+\begin{lem}
+    $\overline{A} \cup \overline{B} = \overline{A \cup B}$
+\end{lem}
+
+\begin{proof}
+    take complement on both side
+
+    \begin{align*}
+        \text{int}(A^C) \cap \text{int}(B^C) &= \text{int}(A^C \cap B^C) \\
+        \overline{A} \cup \overline{B} &= \overline{A \cup B}
+    \end{align*}
+\end{proof}
+
+
+\begin{lem}
+    $\overline{A} \cap \overline{B} \subseteq \overline{A \cap B}$
+\end{lem}
+
+
+\begin{proof}
+    take complement on both side:
+    \begin{align*}
+        \text{int}(A^C) \cup \text{int}(B^C) &\subseteq \text{int}(A^C \cup B^C) \\
+        \overline{A \cap B} & \subseteq \overline{A} \cap \overline{B} 
+    \end{align*}
+\end{proof}
+
+\section{Boundary Point, Isolated Point}
+
+\begin{definition}[Boundary Point]
+    Boundary point of $A$ is defined as 
+    
+    \[
+    \partial A = \left(\text{int}(A) \right)^C \cap \left(\text{int}(A^C) \right)^C
+    \]
+\end{definition}
+
+\begin{lem}
+    $\partial A = \overline{A} \setminus \text{int}(A)$
+\end{lem}
+
+\begin{proof}
+   \begin{align*}
+    \partial A &= \left(\text{int}(A) \right)^C \cap \left(\text{int}(A^C) \right)^C \\
+    &= \left(\text{int}(A) \right)^C \cap \overline{A} \\
+    &= \overline{A} \setminus \text{int}(A)
+   \end{align*} 
+\end{proof}
+
+\begin{lem}
+    $\partial A$ is closed
+\end{lem}
+
+\begin{proof}
+    since $A$ is intersection of two closed set.
+\end{proof}
+
+
+\begin{lem}
+    $\partial A$ contains no interior point
+\end{lem}
+
+\begin{proof}
+    \begin{align*}
+        \text{int}(\partial A) &= \text{int}(\overline{A^C} \cap \overline{A}) \\
+        & \subseteq \text{int}(\overline{A \cap A^C}) \\
+        & \subseteq \text{int}(\overline{\emptyset}) \\
+        & \subseteq \emptyset
+    \end{align*}
+\end{proof}
+
+if $\overline{A}$ has no interior point, $A$ is called no where dense set.
+
+\begin{definition}[Isolated Point]
+    $x$ is isolated point of $A$ iff $x \in A \setminus A'$ 
+\end{definition}
+
+\begin{lem}
+    \begin{align*}
+        \overline{A} \setminus A' &= \left( A \cup A'\right) \setminus A' \\
+        &=  A \setminus A'
+    \end{align*}
+\end{lem}
+
+\section{Continuity}
+
+\begin{lem}
+    continuous funtion maps compact set to compact set
+\end{lem}
+
+\begin{proof}
+    let $A \subseteq X$ and $A$ is compact, and we let $f(A)$ covered by arbitrary number of open sets
+
+    \begin{align*}
+        f(A) \subseteq \bigcup_{\alpha \in I}V_{\alpha}
+    \end{align*}
+
+    then we have
+
+    \[
+        A \subseteq f^{-1}(f(A)) \subseteq \bigcup_{\alpha \in I}f^{-1}(V_{\alpha})
+    \]
+
+    since $f$ is continus, whose preimage of open set is open, now we have a open cover of $A$
+
+    \[
+        A \subseteq \bigcup_{\alpha \in I}f^{-1}(V_{\alpha})
+    \]
+
+    so there is a finite sub cover $V_1, V_2, .. V_m$ such that
+
+    \[
+        A \subseteq \bigcup_{k=1}^{m}f^{-1}(V_{k})
+    \]
+
+    so we have
+
+    \[
+        f(A)\subseteq \bigcup_{k=1}^{m}f(f^{-1}(V_{k})) \subseteq \bigcup_{k=1}^{m}V_k
+    \]
+
+    notice that
+
+    \[
+        f(f^{-1}(A)) \subseteq A
+    \]
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+

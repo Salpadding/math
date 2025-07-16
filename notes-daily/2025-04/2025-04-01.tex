@@ -1,0 +1,333 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{\today}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{4月书单及进度}
+
+\subsection{初等数论-潘承洞-p71}
+
+\subsection{实变函数论-周民强-p21}
+
+\subsection{高等代数白皮书-谢启鸿-p30}
+
+\subsection{复变函数论-钟玉泉-p0}
+\subsection{复变函数论学习指导书-钟玉泉-p0}
+
+
+\section{初等数论}
+
+\subsection{算数基本定理}
+
+\subsubsection{引理 I}
+
+任意合数都可以分解成素数的乘积
+
+证明：先证明存在性，用反证法，假设存在合数 $a > 1$ 无法分解成素数的乘积，那么一定存在最小的合数不能分解成素数的乘积，
+但是这个合数可以分解成更小的数，而且它分解出的数也不能被素数整除，所以矛盾了。
+
+
+\subsubsection{引理 II}
+
+任意两个素数都是互素的。
+
+证明很容易，素数的因子只有1和它自身，所以两个素数的公共因子只有1
+
+
+\subsubsection{算数基本定理}
+
+任意一个大于1的正整数都可以分解成有限个素数的乘积，而且分解形式唯一。
+
+证明：存在性在引理I中证明过了。现在证明唯一性，假设大于1的数 $a$ 有两种分解形式
+
+\begin{align*}
+    a &= p_1p_2..p_n, \quad p_1 \le p_2 \le .. \le p_n \\
+    a &= q_1q_2..q_m, \quad q_1 \le q_2 \le .. \le q_m \\
+\end{align*}
+
+我们先证明 $p_1 = q_1$，假设 $p_1 \ne q_1$，这样 $p_1$ 和 $q_1$ 是互素的，然后根据 $q_1 \vert p_1 p_2 .. p_n$
+我们可以得到在 $p_2, p_3, .. , p_n$ 中一定存在 $p_k$ 满足 $q_1 \vert p_k$，所以 $p_1 \le q_1 = p_k$，同理我们可以找到 $l > 1$ 满足
+$q_1 \le p_1 = q_l$，然后我们得到了 $p_1 = q_1$。
+
+得到 $p_1 = q_1$ 后，我们利用消去律我可以证明 $p_1 = q_1, p_2 = q_2, .. , p_n = q_n$。
+
+\subsection{算数基本定理推论}
+
+\subsubsection{因子枚举}
+
+若 $a = p_1^{e_1}p_2^{e_2}..p_k^{e_k},\quad p_i \text{ is prime} \quad 1 \le e_i $，那么 $d \vert a$ 的充分必要条件是
+
+\[
+d = p_1^{s_1}p_2^{s_2}..p_k^{s_k},\quad s_i \le e_i,\quad 0 \le s_i \le e_i
+\]
+
+充分性很容易证明 
+
+\[
+a = \left(\prod_{i=1}^{k}p_i^{e_i - s_i}\right)d
+\]
+
+必要性：
+
+假设存在 $d$ 可以分解出 $p_j^{s_j}$ 且 $s_j > e_j$，那么有 $p_j^{s_j} \vert p_1^{e_1}p_2^{e_2}..p_k^{e_k}$，利用消去律可以把右边的 $p_j^{e_j}$ 消除掉。
+然后利用互素的性质，可以把右边的素数全部去掉，得到了矛盾。
+
+同理，如果$d$ 可以分解出 $p_{k+1}$ 这种 $a$ 分解不出来的素数，一样可以用互素的性质，把$a$ 的分解中的素数逐个去掉。
+
+\subsubsection{除数函数}
+
+除数函数 $\tau(a)$ 定义为 $a$ 因子数量。若 $a$ 有标准素因数分解 
+
+\[
+a = \prod_{i=1}^{k}p_i^{e_i}
+\]
+
+那么 
+
+\[
+\tau(a) = (e_1 + 1)(e_2 + 1) .. (e_k + 1)
+\]
+
+其实就是素数次数的组合。
+
+\subsubsection{除数和函数}
+
+除数函数 $\sigma(a)$ 定义为 $a$ 所有因子的和。若 $a$ 有标准素因数分解 
+
+
+\[
+a = \prod_{i=1}^{k}p_i^{e_i}
+\]
+
+那么
+
+\begin{align*}
+    \sigma(a) &= \sum_{i_1=0}^{e_1} \sum_{i_2=0}^{e_2} .. \sum_{i_k=0}^{e_k} (p_1^{i_1}p_2^{i_2}..p_k^{i_k}) \\
+    &= \sum_{i_1=0}^{e_1} ..\sum_{i_{k-1}=0}^{e_{k-1}} (p_1^{i_1}p_2^{i_2}..p_{k-1}^{i_{k-1}})\sum_{i_k=0}^{e_k} p_k^{i_k} \\
+    &= \sum_{i_1=0}^{e_1} ..\sum_{i_{k-1}=0}^{e_{k-1}} (p_1^{i_1}p_2^{i_2}..p_{k-1}^{i_{k-1}})\sigma(p_k^{e_k})
+    & .. \\
+    &= \sigma(p_1^{e_1})\sigma(p_2^{e_2}).. \sigma(p_k^{e_k}) \\
+    &= \prod_{i=1}^{k}\frac{p^{e_i+1}-1}{p-1}
+\end{align*}
+
+\subsection{取整函数}
+
+\subsubsection{定义}
+
+$\lfloor x \rfloor,\, x \in \mathbb{R}$ 定义为不超过 $x$ 的最大整数。
+
+\subsubsection{向上取整}
+
+向上取整，也就是不小于 $x$ 的最小整数可以表示为 $-\lfloor - x \rfloor$
+
+当 $x$ 不是整数时
+
+\begin{align*}
+    -\lfloor -x \rfloor &= - \lfloor -\lfloor x \rfloor - \{ x \} \rfloor \\
+    &= - \lfloor -\lfloor x \rfloor - 1 + 1 - \{ x \} \rfloor  \\
+    &= \lfloor x \rfloor + 1
+\end{align*}
+
+\subsubsection{整除个数}
+
+$1,2,..,N$ 被正整数 $a$ 整除的正整数的个数为 $\lfloor N/a \rfloor$
+
+令 $c = ka$ 且 $1 \le c \le N$，得到 $1 \le ka \le N$，因为 $k' = \lfloor N / a \rfloor$ 满足
+
+\[
+k' \le N/a < k' + 1
+\]
+
+所以对任意 $1 \le k \le k'$ 都有 $1 \le ka \le N$，而 $(k'+1)a > N$。
+所以我们可以从 $\{ 1,2,.,k' \}$ 到被 $a$ 整除且小于等于 $N$ 的正整数构造双射。
+
+\subsection{$n!$的素因式分解}
+
+\subsubsection{恰好整除}
+
+定义 $\alpha = \alpha(p,n!)$ 
+
+\[
+\alpha(p,n!) = \max \{ m \,\vert\, p^m \,\vert\, n! \}
+\]
+
+为什么要定义恰好整除，为了方便构造不相交的集合，方便对这些不相交的集合取并。
+
+\subsubsection{定理}
+
+\[
+\alpha(p,n!) = \sum_{j=1}^{\infty}\lfloor \frac{n}{p^j}\rfloor
+\]
+
+\subsubsection{证明}
+
+我们先令 
+
+\[
+c_j =\lfloor \frac{n}{p^j} \rfloor 
+\]
+
+首先 $c_j$ 是 $1,2,..,n$ 中被 $p^j$ 整除的正整数的个数，那么 $c_{j} - c_{j+1}$ 就是 $1,2,..,n$ 刚好被 $p^{j}$ 整除的个数。
+
+注意到 $1,2,..,n$ 中的某个数，如果它可以被 $p^j$ 恰好整除，就不可能被 $p^{k},\, k \ne j$ 恰好整除，
+所以我们可以对 $j$ 进行枚举。
+
+如果 $1,2,..,n$ 中的某个数，被 $p^{j}$ 恰好整除，它就贡献了一个 $j$ 个素因子，我们要计算 $n!$ 的素因数分解，
+只需要把这些 $j$ 都加起来即可。
+
+所以有
+
+\begin{align*}
+\alpha(p,n!) &= \sum_{j=1}^{\infty}j(c_{j} - c_{j+1}) = \sum_{j=1}^{\infty}jc_{j} - \sum_{j=1}^{\infty}jc_{j+1} \\
+    &= c_1 + \sum_{j=1}^{\infty}(j+1)c_{j+1} - \sum_{j=1}^{\infty}jc_{j+1} \\
+    &= c_1 + \sum_{j=1}^{\infty}c_{j+1} = \sum_{j=1}^{\infty}c_j \\
+    &= \sum_{j=1}^{\infty} \lfloor \frac{n}{p^j} \rfloor
+\end{align*}
+
+\section{高等代数}
+
+\subsection{升阶法}
+
+\subsubsection{case 1}
+
+\begin{align*}
+    |A| &= \begin{vmatrix}
+        1 + x_1 & 1 + x_1^2 & .. & 1+x_1^n \\
+        1 + x_2 & 1 + x_2^2 & .. & 1+x_2^n \\
+        .. & .. & .. & .. \\
+        1 + x_n & 1 + x_n^2 & .. & 1+x_n^n \\
+    \end{vmatrix} =     
+    \begin{vmatrix}
+        1 & 0 & 0 & .. & 0 \\
+        1 & 1 + x_1 & 1 + x_1^2 & .. & 1+x_1^n \\
+        1 & 1 + x_2 & 1 + x_2^2 & .. & 1+x_2^n \\
+        1 & .. & .. & .. & .. \\
+        1 & 1 + x_n & 1 + x_n^2 & .. & 1+x_n^n \\
+    \end{vmatrix} \\
+    & =     \begin{vmatrix}
+        1 & -1 & -1 & .. & -1 \\
+        1 &  x_1 & x_1^2 & .. & x_1^n \\
+        1 &  x_2 &  x_2^2 & .. & x_2^n \\
+        1 & .. & .. & .. & .. \\
+        1 &  x_n &  x_n^2 & .. & x_n^n \\
+    \end{vmatrix} = \begin{vmatrix}
+        2 & 0 & 0 & .. & 0 \\
+        1 &  x_1 & x_1^2 & .. & x_1^n \\
+        1 &  x_2 &  x_2^2 & .. & x_2^n \\
+        1 & .. & .. & .. & .. \\
+        1 &  x_n &  x_n^2 & .. & x_n^n \\
+    \end{vmatrix} + \begin{vmatrix}
+        -1 & -1 & -1 & .. & -1 \\
+        1 &  x_1 & x_1^2 & .. & x_1^n \\
+        1 &  x_2 &  x_2^2 & .. & x_2^n \\
+        1 & .. & .. & .. & .. \\
+        1 &  x_n &  x_n^2 & .. & x_n^n \\
+    \end{vmatrix} \\
+    &= 2x_1x_2..x_n \prod_{1 \le i < j \le n}\left( x_j - x_i\right) + (-1)\prod_{0 \le i < j \le n}(x_j - x_i) \quad x_0 = 1 \\
+    &= 2x_1x_2..x_n \prod_{1 \le i < j \le n}\left( x_j - x_i\right) - (x_1-1)(x_2-1)..(x_n-1)\prod_{1 \le i < j \le n}\left(x_j - x_i\right) \\
+    &= \left[ 2x_1x_2..x_n - (x_1-1)(x_2-1)..(x_n-1)\right]\prod_{1 \le i < j \le n}\left( x_j - x_i\right)
+\end{align*}
+
+\subsubsection{经典的待定系数}
+
+\begin{align*}
+    |A| = \begin{vmatrix}
+        1 & x_1 & .. & x_1^{i-1} & x_1^{i+1} & .. & x_1^n \\
+        1 & x_2 & .. & x_2^{i-1} & x_2^{i+1} & .. & x_2^n \\
+         .. & ..& ..& ..& ..& ..& .. \\
+        1 & x_n & .. & x_n^{i-1} & x_n^{i+1} & .. & x_n^n \\
+    \end{vmatrix}
+\end{align*}
+
+补充一列，再补充一行得到 Vandermonde 行列式
+
+\begin{align*}
+|B| &= \begin{vmatrix}
+1 & x_1 & .. & x_1^{i-1} & x_1^{i} & x_1^{i+1} & .. & x_1^n \\ 
+1 & x_2 & .. & x_2^{i-1} & x_2^{i} & x_2^{i+1} & .. & x_2^n \\ 
+.. &.. &.. &.. &.. &.. & .. & .. \\
+1 & x_n & .. & x_n^{i-1} & x_n^{i} & x_n^{i+1} & .. & x_n^n \\ 
+1 & y & .. & y^{i-1} & y^{i} & y^{i+1} & .. & y^n \\ 
+\end{vmatrix} \\
+&= (y-x_1)(y-x_2)..(y-x_n) \prod_{1 \le i < j \le n}\left(x_j - x_i\right)
+\end{align*}
+
+令
+
+\[
+p = \prod_{1 \le i < j \le n}\left(x_j - x_i\right)
+\]
+
+我们得到 $y^i$ 项的系数为
+
+\[
+c_i= p(-1)^{n-i}\sum_{\sigma \in \binom{n}{n-i}}\prod_{j=1}^{n-i}x_{\sigma(j)}
+\]
+
+这里 $\sigma \in \binom{n}{n-i}$ 表示从 $1,2,3,..,n$ 选取 $n-i$ 个得到的所有的组合
+
+然后我们利用如下的等式
+
+\[
+\text{factor of \:}y_i(|B|) = (-1)^{n+i}|A| = c_i
+\]
+
+所以
+
+\[
+|A| = \prod_{1 \le i < j \le n}\left(x_j - x_i\right)\sum_{\sigma \in \binom{n}{n-i}}\prod_{j=1}^{n-i}x_{\sigma(j)}
+\]
+
+\section{实变函数论}
+
+\subsection{点集拓扑}
+
+设 $E \subseteq \mathbb{R}$ 是可数集，那么存在 $x \in \mathbb{R}$ 满足
+
+\[
+E \cap E + x = \emptyset
+\]
+
+证明：
+
+若 $E \cap E +x \ne \emptyset$，那么存在 $y \in E$ 且 $y \in E + x$，那么有
+
+\[
+\exists z \in E,\, z + x = y
+\]
+
+如果对任意 $x$ 都有 $E \cap E + x = \emptyset$，那么 $x$ 都可以表示成 $E$ 中两个数的差。
+
+显然 $\mathbb{R}$ 和 $E \times E$ 不是等势的。
+
+
+\section{复变函数论}
+
+\subsection{三角函数}
+
+\subsubsection{重要性质}
+
+\begin{align*}
+    \text{e}^{\text{i}\theta} &= \cos \theta + \text{i} \sin \theta \\
+    \cos \theta &= \frac{\text{e}^{\text{i}\theta} + \text{e}^{-\text{i}\theta}}{2} \\
+    \sin \theta &= \frac{\text{e}^{\text{i}\theta} - \text{e}^{-\text{i}\theta}}{2\text{i}} \\
+    \text{e}^{\text{i}(\theta + \phi)} &= \text{e}^{\text{i}\theta}\text{e}^{\text{i}\phi} \\ 
+    &= \cos \theta \cos \phi - \sin \theta \sin \phi + \text{i}\left( \sin \theta \cos \phi + \cos \theta \sin \theta \right) \\
+    \cos(\theta + \phi) &= \cos \theta \cos \phi - \sin \theta \sin \phi \\
+    \sin(\theta + \phi) &=  \sin \theta \cos \phi + \cos \theta \sin \theta  \\
+    2 \sin\frac{\theta + \phi}{2} \cos \frac{\theta - \phi}{2} &= 2 \frac{\text{e}^{\text{i}(\alpha+\beta)} - \text{e}^{-\text{i}(\alpha+\beta)} +\text{e}^{\text{i}(\alpha-\beta)} - \text{e}^{-\text{i}(\alpha-\beta)} }{4 \text{i}} \\
+    &= \sin \theta + \sin \phi \\
+    2 \cos \frac{\theta + \phi}{2} \cos \frac{\theta - \phi}{2} &= 2 \frac{\text{e}^{\text{i}(\alpha+\beta)} + \text{e}^{-\text{i}(\alpha+\beta)} +\text{e}^{\text{i}(\alpha-\beta)} + \text{e}^{-\text{i}(\alpha-\beta)} }{4 \text{i}} \\
+    &= \cos \theta + \cos \phi \\
+\end{align*}
+
+\end{document}
+

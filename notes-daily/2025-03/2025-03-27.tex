@@ -1,0 +1,278 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{2025-03-27}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{指数函数分析}
+
+\subsection{$\exp(x+y)$ 分析}
+
+对两个绝对收敛的序列作积得到
+
+\[
+\lim_{n \to \infty}A_n\lim_{n \to \infty}B_n = \lim_{n \to \infty} A_nB_n
+\]
+
+展开 $A_nB_n$ 得到
+
+\begin{align*}
+A_nB_n &=(\sum_{i=0}^{n}a_n)(\sum_{i=0}^{n}b_n) = \sum_{i=0}^{n}\sum_{j=0}^{n}a_nb_n \\
+&= \sum_{k=0}^{2n}c_k
+\end{align*}
+
+其中 
+
+\[
+c_k = \sum_{i=0}^{k}a_ib_{k-i}
+\]
+
+注意到有二项展开
+
+\[
+\sum_{i=0}^{k}a_ib_{k-i} = \frac{x^i}{i!}\frac{y^{k-i}}{(k-i)!} = \frac{(x+y)^k}{k!}
+\]
+
+所以，令
+
+\[
+C_n = \sum_{i=0}^{n}\frac{(x+y)^i}{i!} = \sum_{k=0}^{n}c_{k}
+\]
+
+得到
+
+\[
+A_nB_n = C_{2n}
+\]
+
+两边取极限得到
+
+\[
+\lim_{n \to \infty}A_n \lim_{n \to \infty}B_n = \lim_{n \to \infty}C_{2n} = \exp(x+y)
+\]
+
+\subsection{$\exp(x) = e^x$}
+
+先证明 $x$ 是正整数的情况
+
+\[
+\exp(n) = \exp(1+1+..+1) = (\exp(1))^n = e^n
+\]
+
+在证明 $x$ 是负整数的情况
+
+\[
+\exp(-n)\exp(n) = \exp(0) = 1
+\]
+
+由此得到
+
+\[
+\exp(-n) = \frac{1}{\exp(n)} = \frac{1}{e^n} = e^{-n}
+\]
+
+继续证明 $x=1/n$的情况
+
+\[
+(\exp(\frac{1}{n}))^n = \exp(\frac{1}{n} + .. + \frac{1}{n}) = e
+\]
+
+所以得到
+
+\[
+\exp(\frac{1}{n}) = e^{1/n}
+\]
+
+用同样的方法可以证明对有理数 $q = n/m$ 有
+
+\[
+\exp(q) = e^q
+\]
+
+对于实数 $r$ ，我们要用公理构造一个有理数列 $q_n$ 收敛到 $r$，根据指数函数的连续性得到
+
+\[
+\lim_{n \to \infty}\exp(q_n) = \lim_{n \to \infty}e^{q_n} = \exp(r) = e^r
+\]
+
+\subsection{$D \exp(x) = \exp(x)$}
+
+幂级数的前 $n$ 项和都是连续可微的，所以幂级数在收敛半径内一定可微，而且可以用逐项微分计算。
+
+\begin{align*}
+D \exp(x) &= D(1 + x + \frac{x^2}{2!} + .. + \frac{x^n}{n!} + ..) \\
+&= 1 + x + .. + \frac{x^{n-1}}{(n-1)!} + ..  \\
+&= \exp(x)
+\end{align*}
+
+\subsection{解斐波那契数列}
+
+令 $a_1 = a_2 = 1$，递推式子为 $a_{n+2}  = a_{n+1} + a_{n} $
+
+用待定系数法，假设有
+
+\begin{align*}
+    a_{n+2} - \alpha a_{n+1} &= \beta(a_{n+1} - \alpha a_{n}) \\
+    a_{n+2} &= (\alpha + \beta)a_{n+1} - \alpha \beta a_n
+\end{align*}
+
+所以得到
+
+\begin{align*}
+    \alpha + \beta &= 1 \\
+    -\alpha\beta &= 1
+\end{align*}
+
+所以 $\alpha,\, \beta$ 是下面方程的两个根，思考下 vieta 定理
+
+\[
+x^2 - x - 1 = 0
+\]
+
+用求根公式计算得到
+
+\[
+\alpha = \frac{1+\sqrt{5}}{2},\, \beta = \frac{1-\sqrt{5}}{2}
+\]
+
+注意到 $\alpha$ 和 $\beta$ 具有轮换对称性，所以我们可以求解出 $a_{n+2} - \alpha a_{n+1}$ 和  $a_{n+2} - \beta a_{n+1}$ 的表达式
+
+\begin{align*}
+ a_{n+2} - \alpha a_{n+1} &= (1-\alpha) \beta^{n} = \beta^{n+1}  \\
+ a_{n+2} - \beta a_{n+1} &= (1-\beta) \alpha^{n} = \alpha^{n+1}  \\
+\end{align*}
+
+然后消去 $a_{n+2}$ 得到
+
+\[
+(\alpha - \beta)a_{n+1} = \alpha^{n+1} -  \beta^{n+1}
+\]
+
+化简得到
+
+\[
+a_{n+1} = \frac{1}{\sqrt{5}}((\frac{1+\sqrt{5}}{2})^{n+1} - (\frac{1-\sqrt{5}}{2})^{n+1})
+\]
+
+把 $n+1$ 都换成 $n$
+
+\[
+a_{n} = \frac{1}{\sqrt{5}}((\frac{1+\sqrt{5}}{2})^{n} - (\frac{1-\sqrt{5}}{2})^{n})
+\]
+
+\section{行列式计算}
+
+\subsection{三对角行列式}
+
+\subsubsection{递推公式}
+
+计算三对角行列式，按最后一列展开
+
+\begin{align*}
+    D_n = \begin{vmatrix}
+        a_1 & b_1 & 0 & 0 & .. & 0 & 0 \\
+        c_1 & a_2 & b_2 & 0 & .. & 0 & 0 \\
+        0 & c_2 & a_3 & b_3 & .. & 0 & 0 \\
+        .. & .. & .. & .. & .. & .. & .. \\
+        0 & 0 & 0 & 0 & ..& a_{n-1} & b_{n-1} \\
+        0 & 0 & 0 & 0 & .. & c_{n-1} & a_n \\
+    \end{vmatrix} &= a_nD_{n-1} + (-1)^nb_{n-1} \begin{vmatrix}
+        a_1 & b_1 & 0 & 0 & .. & 0 & 0 \\
+        c_1 & a_2 & b_2 & 0 & .. & 0 & 0 \\
+        0 & c_2 & a_3 & b_3 & .. & 0 & 0 \\
+        .. & .. & .. & .. & .. & .. & .. \\
+        0 & 0 & 0 & 0 & ..& a_{n-2} & b_{n-2} \\
+        0 & 0 & 0 & 0 & .. & 0 & c_{n-1} \\
+    \end{vmatrix}  \\
+    &= a_nD_{n-1} + (-1)b_{n-1}c_{n-1}D_{n-2} \\
+    &= a_nD_{n-1} - b_{n-1}c_{n-1}D_{n-2}
+\end{align*}
+
+\subsubsection{特殊情况}
+
+计算
+
+\begin{align*}
+\begin{vmatrix}
+    a & b & 0 & 0 & .. & 0 & 0 \\
+    c & a & b & 0 & .. & 0 & 0 \\
+    0 & c & a & b & .. & 0 & 0 \\
+    .. & .. & .. & .. & .. & .. & .. \\
+    0 & 0 & 0 & 0 & ..& a & b \\
+    0 & 0 & 0 & 0 & .. & c & a \\
+\end{vmatrix}
+\end{align*}
+
+我们可以得到递推式 
+
+\[
+D_{n+2} = aD_{n+1} - bcD_{n}
+\]
+
+然后令
+
+\begin{align*}
+a &= \alpha + \beta  \\
+-bc &= -\alpha \beta  \\
+\end{align*}
+
+也就是 $\alpha,\, \beta$ 是方程
+
+\[
+x^2 - ax +bc = 0
+\]
+
+的根
+
+得到
+
+\begin{align*}
+D_{n+2} - \alpha D_{n+1} &= \beta(D_{n+1} - \alpha D_{n} )  \\
+D_{n+2} - \beta D_{n+1} &= \alpha (D_{n+1} - \beta D_{n} )  \\
+\end{align*}
+
+由 $D_0 = 1,\, D_1 = a$ 可以计算得到
+
+\begin{align*}
+D_{n+1}  - \alpha D_{n} &= \beta^{n}(a - \alpha) = \beta^{n+1} \\
+D_{n+1}  - \beta D_{n} &= \alpha^{n}(a - \alpha) = \alpha^{n+1}\\
+\end{align*}
+
+消去 $D_{n+1}$ 得到
+
+\[
+(\alpha - \beta)D_n = \alpha^{n+1} - \beta^{n+1}
+\]
+
+若 $a^2 = 4bc$ 也就是 $\alpha = \beta$ 时
+
+有
+
+\[
+\alpha = \beta = \frac{a}{2}
+\]
+
+\[
+D_{n+1} = \frac{a}{2}(D_n + (\frac{a}{2})^{n})
+\]
+
+经过归纳可以得到
+
+\[
+D_n = (n+1)(\frac{a}{2})^n
+\]
+
+若 $\alpha \ne \beta$，那么有
+
+\[
+D_n = \frac{\alpha^{n+1}- \beta^{n+1}}{\alpha - \beta}
+\]
+
+\end{document}

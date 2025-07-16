@@ -1,0 +1,306 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{\today}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{初等数论}
+
+\subsection{不定方程}
+
+\subsubsection{定理}
+
+不定方程 
+
+\[
+a_1x_1 + a_2x_2 + .. a_nx_n = b
+\]
+
+有解的充分必要条件是
+
+\[
+(a_1,a_2,..,a_n) \vert b
+\]
+
+进而，令 $d = (a_1,a_2,..a_n)$ 那么该方程和
+
+\[
+\frac{a_1}{d}x_1 + \frac{a_2}{d}x_1 + .. + \frac{a_n}{d}x_n = \frac{b}{d}
+\]
+
+同解。
+
+证明：
+
+\begin{enumerate}
+    \item 充分性
+
+    因为最大公约数是线性组合，所以存在 $x_1', x_2', .. x_n'$ 满足
+
+    \[
+    a_1x_1' + a_2x_2' + .. a_n x_n' = d
+    \]
+
+    若 $d \vert b$ 因此有
+
+    \[
+    \frac{d}{b}a_1x_1' + \frac{d}{b}a_2x_2' + .. \frac{d}{b}a_n x_n' = b
+    \]
+
+    即有解 $x_i = dx_i'/b$
+
+    \item 必要性
+    
+    可以看到 $b$ 是 $a_1,a_2,..,a_n$ 的线性组合，根据公约数的性质有
+
+    \[
+        d \vert b
+    \]
+
+\subsubsection{通解推导}
+
+若 $(a_1,a_2) = 1$，而且不定方程有一个特解 $x_1', x_2'$
+
+\[
+a_1x_1 + a_2x_2 = b
+\]
+
+首先我们可以观察到左边，令 $f(x_1,x_2) = a_1x_1 + a_2x_2$，
+显然有 $f(x_1-a_2, x_2 + a_1) = f(x_1, x_2)$，所以我们可以猜测通解可以表示为一个特解加上一项的形式
+
+\begin{align*}
+x_1 = x_1' - a_2 t \\
+x_2 = x_2' + a_1 t \\
+\end{align*}
+
+其中 $t \in \mathbb{Z}$
+
+下面给出证明
+
+\begin{enumerate}
+    \item 充分性
+
+    易证
+
+    \item 必要性
+
+    若有 $a_1x_1 + a_2x_2 = b$，我们得到 $a_1(x_1 - x_1') = -a_2(x_2 - x_2')$，所以有 $a_1 \vert x_2-x_2'$，
+    于是令 $x_2 - x_2' = t a_1$，得到 $a_1(x_1 -x_1') = -ta_1a_2$，利用消去律得到 $x_1 - x_1' = -ta_2$
+\end{enumerate}
+
+对于更一般的情况，即 $a_1, a_2$ 不互素时，可以转化成互素的方程。
+
+
+
+\end{enumerate}
+
+\subsubsection{辗转相除解不定方程}
+
+\begin{align*}
+    15x_1 + 10x_2 + 6x_3 &= 61 \\
+    6x_3 &= 61 - 15x_1 -10x_2 \\
+    x_3 &= 10 - 2x_1 -2x_2 + \frac{1}{6}\left(1 - 3x_1 + 2x_2\right) \\
+\end{align*}
+
+于是得到不定方程
+
+\[
+6x_4 = 1 - 3x_1 + 2x_2
+\]
+
+用同样的方法得到
+
+\[
+x_2 = 3x_4 + x_1 + \frac{1}{2}\left(x_1-1\right)
+\]
+
+转化为方程
+
+\[
+2x_5 - x_1 = -1
+\]
+
+易得到解为
+
+\begin{align*}
+    x_1 &= 1 + 2x_5  \\
+    x_2 &= 3x_4 + 1 + 2x_5 + x_5 = 3x_4 + 3x_5 + 1 \\
+    x_3 &= 10 -2(3x_4 + 5x_5 + 2) + x_4 \\
+\end{align*}
+
+\section{实变函数论}
+
+\subsection{点集拓扑}
+
+构建一个在有理数点上间断，在无理数点上连续的函数。
+
+构造 $f: (a,b) \to \mathbb{R}$，记 $(a,b)$ 上所有的有理数为 $q_1,q_2,..,q_n,..$，定义 $f$ 为
+
+\[
+f(x) = \sum_{q_n < x} \frac{1}{n^2}
+\]
+
+我们先证明 $f$ 在有理点上间断，取有理数 $q = q_N$，则
+
+下面开始用 $f(x+0)$ 表示在$x$ 处的右极限，用 $f(x-0)$ 表示在$x$处的左极限
+
+\begin{align*}
+f(q + 0) &\ge f(q) + \frac{1}{N^2}  \\
+f(q - 0) & \le f(q) \\
+f(q+0) - f(q-0) &\ge \frac{1}{N^2}
+\end{align*}
+
+所以 $f$ 在有理点间断。
+
+我们继续证明 $f$ 在无理点连续，为此我们要先证明一个引理，取任意实数 $r$，令
+
+\[
+\alpha(n) = \min \{ l \,\vert\, r < q_l < r + \frac{1}{n}\}
+\]
+
+显然 $\alpha(n+1) \ge \alpha(n)$，我们将用反证法证明
+
+\[
+\lim_{n \to \infty} \alpha(n) = \infty
+\]
+
+假设 $\alpha(n)$ 有界，那么存在正整数 $M$，满足对任意的 $n$ 都有
+
+\[
+\{ q_m \,\vert\, m \le M \} \cap (r, r+\frac{1}{n}) \ne \emptyset
+\]
+
+这显然是不可能的，我们可以对所有 $1 \le m \le M$ 计算 $\lvert q_m - r\rvert$ 的最小值，然后取一个足够大的 $n$ 即可让它们交集是空集。
+
+利用 $\alpha(n)$ 可以计算 $f(r+0)$，注意到 
+
+\[
+f(r+\frac{1}{n}) - f(r) \le \sum_{j=\alpha(n)}^{\infty}\frac{1}{j^2}
+\]
+
+两边同时取极限得到
+
+\[
+\lim_{n \to \infty}f(r + \frac{1}{n}) \le f(r)
+\]
+
+利用 $f$ 的单调性，和两边夹法则得到
+
+\[
+f(r+0) = f(r)
+\]
+
+同理我们可以证明 $f(r-0) = f(r)$
+
+\section{高等代数}
+
+\subsection{组合定义}
+
+行列式的组合定义为，若  $|A|$ 是 $n$ 阶行列式
+
+\[
+|A| = \sum_{\sigma \in S_n} (-1)^{\sigma} a_{1\sigma(1)}a_{2\sigma(2)}..a_{n\sigma(n)}
+\]
+
+其中 $S_n$ 是 $n$ 阶对称群
+
+\[
+(-1)^{\sigma} = \begin{cases}
+    -1 & \sigma \text{\quad is odd} \\
+    1 & \sigma \text{\quad is even} \\
+\end{cases}
+\]
+
+\subsection{行列式函数求导}
+
+\begin{align*}
+    F(t) = \begin{vmatrix}
+        f_{11}(t) & f_{12}(t) & .. & f_{1n}(t) \\
+        f_{21}(t) & f_{22}(t) & .. & f_{2n}(t) \\
+        .. & .. &.. &..  \\
+        f_{n1}(t) & f_{n2}(t) & .. & f_{nn}(t) \\
+    \end{vmatrix}
+\end{align*}
+
+于是有
+
+\begin{align*}
+    F(t) &= \sum_{\sigma \in S_n} (-1)^{\sigma} \prod_{j=1}^{n}f_{\sigma(j)j} \\
+    F'(t) &= \sum_{\sigma \in S_n} (-1)^{\sigma} \sum_{j=1}^{n}f'_{\sigma(j)j}\prod_{k \ne j}f_{ \sigma(k)k} \\
+    &= \sum_{j=1}^{n}\sum_{\sigma \in S_n} (-1)^{\sigma} f'_{\sigma(j)j}\prod_{k \ne j}f_{\sigma(k)k} \\
+    &= \sum_{j=1}^{n}F_j
+\end{align*}
+
+其中 
+
+\[
+F_j = \begin{vmatrix}
+    f_{11}(t) & f_{12}(t) & .. & f'_{1j}(t) & .. & f_{1n}(t) \\
+    f_{21}(t) & f_{22}(t) & .. & f'_{2j}(t) &.. & f_{2n}(t) \\
+    .. & .. &.. &.. & .. \\
+    f_{n1}(t) & f_{n2}(t) & .. & f'_{nj}(t) & .. & f_{nn}(t) \\
+\end{vmatrix}
+\]
+
+\subsection{计算多项式系数}
+
+计算下列多项式的最高次项和 $n-1$ 次项的系数
+
+\[
+f(x) = \begin{vmatrix}
+    x-a_{11} & -a_{12} & .. & -a_{1n} \\
+    -a_{21} & x-a_{22} & .. & -a_{2n} \\
+    .. & .. & .. & .. \\
+    -a_{n1} & -a_{n2} & .. & x-a_{nn} \\
+\end{vmatrix}
+\]
+
+最高次项系数为 $1$，$n-1$ 次项系数为
+
+\[
+-(a_{11} + a_{22} + .. + a_{nn})
+\]
+
+我们分析那些组合可以生成至少 $n-1$ 次的多项式
+
+考虑对称群 $S_n$ 上的置换 $\sigma$，如有至少  $n-1$ 个不同的整数 $i_1,i_2,..,i_{n-1}$满足 $\sigma(i_1) = i_1, \sigma(i_2) = i_2, .., \sigma(i_{n-1}) = i_{n-1}$
+根据抽屉原理，那么 $\sigma$ 必然是恒等映射，所以只要对角线上会出现 $x^{n-1}$ 项。
+
+\subsection{反对称行列式}
+
+证明奇数阶反对称行列式等于 $0$，反对称行列式有 $a_{ij}= -a_{ji}$
+
+根据反对称行列式的性质有
+
+\begin{align*}
+    |A| &= \sum_{\sigma \in S_n}(-1)^{\sigma}\prod_{i=1}^{n}a_{i \sigma(i)} \\
+    &= \sum_{\sigma \in S_n}(-1)^{\sigma}(-1)^n\prod_{i=1}^{n}a_{\sigma(i)i} \quad \text{hint:\:} n \:\text{is odd} \\
+    &= (-1)\sum_{\sigma \in S_n}(-1)^{\sigma}\prod_{i=1}^{n}a_{\sigma(i)\sigma^{-1}(\sigma(i))} \\
+    &= (-1)\sum_{\sigma \in S_n}(-1)^{\sigma}\prod_{i=1}^{n}a_{i\sigma^{-1}(i)} \\
+    &= (-1)\sum_{\sigma \in S_n}(-1)^{\sigma^{-1}}\prod_{i=1}^{n}a_{i\sigma^{-1}(i)} \\ 
+    &= - |A|
+\end{align*}
+
+注意到 $\sigma$ 是置换，所以对任意  $f: \mathbb{N} \to R$，注意这里 $R$ 代表一个交换环， 有 $f(\sigma(1)) + f(\sigma(2)) + .. + f(\sigma(n)) = f(1) + f(2) + .. + f(n)$
+和 $f(\sigma(1))f(\sigma(2))..f(\sigma(n)) = f(1)f(2)..f(n)$
+
+\subsection{整数行列式}
+
+$|A|$ 每个元素都是整数且 $|A|$ 能整除它的任意元素，证明 $|A|^2 =1 $
+
+\begin{align*}
+    |A| = \sum_{\sigma \in S_n}(-1)^{\sigma}\prod_{i=1}^{n}a_{i \sigma(i)}
+\end{align*}
+
+可以看到展开后的每一项都是元素的线性组合，所有 $|A|^n$ 整除$ |A|$，所以 $|A|^2$ 只能是 $1$
+
+\end{document}
+
+

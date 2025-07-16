@@ -1,0 +1,1481 @@
+\section{Riemann Integral}
+
+\subsection{Definition of Riemann Integral}
+
+\begin{definition}[Partition, Upper Integral, Lower Integral, Riemann Integral]
+    Definitions:
+
+    \begin{enumerate}
+        \item Partition
+
+    let $[a,b]$ be a interval. A partition $P$ of $[a,b]$ is defined as a finite set of points
+    $x_0,x_1,...,x_{n-1},x_n$ where:
+    
+    \[
+        a=x_0 < x_1 < x_2 ... < x_{n-1} < x_n = b
+    \]
+
+        \item Upper Integral, Lower Integral
+
+
+    Assume $f: [a,b] \to \R$ is bounded.
+
+    and we define:
+
+    \begin{align*}
+        \Delta_i &= x_i - x_{i-1} \quad (i=1,2,3,..,n) \\
+        M_i &= \sup f(x) \quad x_{i-1} \le x \le x_i \\
+        m_i &= \inf f(x) \quad x_{i-1} \le x \le x_i\\
+        U(P, f) &= \sum_{i=1}^{n} M_i \Delta_i \\
+        L(P, f) &= \sum_{i=1}^{n} m_i \Delta_i \\
+    \end{align*}
+
+    and finally:
+
+    \begin{align*}
+        \overline{\int}_a^b f \mathrm{d} x &= \inf U(P, f) \quad  P \: \text{is arbitrary partition of}\: [a,b] \\
+        \underline{\int}_a^b f \mathrm{d} x &= \sup L(P, f) \quad P \: \text{is arbitrary partition of}\: [a,b]
+    \end{align*}
+
+    \item Riemann Integral
+
+    If $f$ have:
+
+    \[
+        \overline{\int}_a^b f \mathrm{d} x  = \underline{\int}_a^b f \mathrm{d} x  = L
+    \]
+
+    then define Riemann integral of $f$ on $[a,b]$ as
+
+    \[
+        \int_a^b f \mathrm{d} x  = L
+    \]
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Riemann-Stieltjes Integral]
+    let $\alpha: [a,b] \to \R$ be a monotonically increasing function. By replace definition of $\Delta_i$, we got 
+    Riemann-Stieltjes Integral:
+
+    \[
+        \Delta_i = \Delta \alpha_i = \alpha(x_i) - \alpha(x_{i-1})
+    \]
+
+    And Riemann integral become a special case if $\alpha(x) = x$
+
+    For Riemann-Stieltjes integral, we will use $U(P,f,\alpha)$ and $L(P,f,\alpha)$ instead of $U(P,f)$ and $L(P,f)$
+
+    Also for upper Integral, lower integral of riemann-stieltjes integral:
+
+    \begin{align*}
+        \overline{\int}_a^b f \mathrm{d} \alpha \quad \underline{\int}_a^b f \mathrm{d} \alpha 
+        \quad \int_a^b f \mathrm{d} \alpha \\
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Refinement]
+    let $P, P^*$ be a partition of $[a,b]$. We say $P^*$ is a refinement of $P$ iff $P \subseteq P^*$
+\end{definition}
+
+\begin{thm}
+    if $P, P^*$ both be partition of $[a,b]$. And $P \subseteq P^*$, then
+
+    \begin{align*}
+       U(P^*,f, \alpha) \le U(P,f) \\
+       L(P^*,f, \alpha) \ge L(P,f) \\
+    \end{align*}
+
+    This theorem could be understand as: $U(P, f, \alpha)$ is monotonically decreasing function of $P$, 
+    and $L(P, f, \alpha)$ is monotonically increasing of $P$
+\end{thm}
+
+\begin{proof}
+   suppose $P^* \setminus P  = \{ v \}$ 
+
+   and $P = \{ x_0, x_1,x_2,...,x_n \}$, $P^* = \{ x_0, x_1,x_2,...x_k,v,x_{k+1},...x_n \}$
+
+   let's define $s|_a^b: \R \times \R \to \R$
+
+   \[
+        s|_{a}^{b} = \sup f(x) \quad  a \le x \le b
+   \]
+
+   and $\alpha|_a^b: \R \times \R \to \R$
+
+   \begin{align*}
+    \alpha|_{a}^{b} &= \alpha(b) - \alpha(a) \\
+    u &= x_k \\
+    w &=  x_{k+1}
+   \end{align*}
+
+   then 
+
+   \begin{align*}
+    U(P^*,f, \alpha) - U(P,f, \alpha) &= s|_{u}^{v}\alpha|_{u}^{v} + s|_{v}^{w}\alpha|_{v}^{w} - s|_{u}^{w}\alpha|_{u}^{w}\\
+    & \le s|_{u}^{w}\alpha|_{u}^{v} + s|_{u}^{w}\alpha|_{v}^{w} - s|_{u}^{w}\alpha|_{u}^{w} \\
+    & \le s|_{u}^{w}\left(\alpha|_{u}^{v} + \alpha|_{v}^{w}\right) - s|_{u}^{w}\alpha|_{u}^{w} \le 0 \\
+    & \le s|_{u}^{w}\alpha|_{u}^{w} - s|_{u}^{w}\alpha|_{u}^{w} \le 0
+   \end{align*}
+
+   if $P^* \setminus P$ contains $k$ elements, we can apply above conclusion for $k$ times
+
+   Similarly for $L(P,f, \alpha)$
+\end{proof}
+
+\begin{thm}
+    Upper Integral and Lower Integral is well defined. And
+
+    \[
+        \underline{\int}_a^b f(x) \mathrm{d} \alpha  \le \overline{\int}_a^b f(x) \mathrm{d} \alpha
+    \]
+\end{thm}
+
+\begin{proof}
+    if $f$ is bounded on $[a,b]$, that is exists $m, M \in \R$, and
+
+    \[
+        m \le f(x) \le M \quad \forall x \in [a,b]
+    \]
+
+    we will prove $U(P, f, \alpha)$ and $L(P,f, \alpha)$ is both bounded:
+
+    \begin{align*}
+        U(P, f, \alpha) &= \sum_{i=1}^{n} M_i \Delta \alpha_i \\
+        & \le \sum_{i=1}^{n} M \Delta \alpha_i \le M(\alpha(b)- \alpha(a))\\
+        U(P, f, \alpha) & \ge m(\alpha(b)-\alpha(a))
+    \end{align*}
+
+    Similarly for $L(P,f, \alpha)$.
+
+    Then we define:
+
+    \begin{align*}
+        \underline{\int}_a^b f \mathrm{d} \alpha &= L^- \\
+        \overline{\int}_a^b f \mathrm{d} \alpha &= L^+ \\
+    \end{align*}
+
+    So Upper integral and Lower integral is well defined.
+
+    Consider we have two sequence of partition $\{ P_n \}, \{ Q_n \}$, and
+
+    \begin{align*}
+        \lim_{n \to \infty}U(P_n, f, \alpha) &= L^+ \\
+        \lim_{n \to \infty}L(Q_n, f, \alpha) &= L^- \\
+    \end{align*}
+
+    consider common refinement of $P_n$ and $Q_n$: $ P_n \cup Q_n$
+
+    then we got:
+
+    \[
+        L(Q_n, f, \alpha) \le L(P_n \cup Q_n, f, \alpha) \le U(P_n \cup Q_n, f, \alpha) \le U(P_n, f, \alpha)
+    \]
+
+    by law of limit, we got $L^- \le L^+$
+
+\end{proof}
+
+\begin{thm}
+    $f: [a,b] \to \R$ is integrable iff:
+
+    \[
+        \inf \{ U(P,f, \alpha) - L(P,f,\alpha) \} = 0 \quad P \text{\: is arbitrary partition}
+    \]
+\end{thm}
+
+\begin{proof}
+    if $f$ is integrable
+
+    we define:
+
+    \begin{align*}
+        U_n &= U(P_n, f, \alpha) \quad \lim_{n \to \infty}U_n = \overline{\int}_a^b f \mathrm{d} \alpha = L^+ \\
+        L_n &= L(Q_n, f, \alpha) \quad \lim_{n \to \infty}L_n = \underline{\int}_a^b f \mathrm{d} \alpha = L^- \\
+        J_n &= U(Q_n \cup P_n, f, \alpha)  \\
+        K_n &= L(Q_n \cup P_n, f, \alpha)  \\
+    \end{align*}
+
+    by $L_n \le K_n \le J_n \le U_n$, we got
+
+    \[
+        \lim_{n \to \infty}K_n = \lim_{n \to \infty}J_n = L^+ = L^-
+    \]
+
+    by $\inf \{ U(P,f, \alpha) - L(P,f,\alpha) \} \le K_n - J_n$, we got $\inf \{ U(P,f, \alpha) - L(P,f,\alpha) \} = 0$
+
+    on the other hand,
+
+    if $\inf \{ U(P,f, \alpha) - L(P,f,\alpha) \} = 0$, we can pick $P_n$ such that
+
+    \[
+        \lim_{n \to \infty} U(P_n,f,\alpha) - L(P_n,f,\alpha) = 0
+    \]
+
+    since 
+
+    \[
+        L(P_n,f,\alpha) \le L^- \le L^+ \le U(P_n, f, \alpha)
+    \]
+
+    which shows $L^+ = L^-$
+
+\end{proof}
+
+\begin{thm}
+    if $f: [a,b] \to \R$, and
+
+    \[
+        U(P,f, \alpha) - L(P,f,\alpha) < \epsilon
+    \]
+
+    Then:
+
+    \begin{enumerate}
+        \item The above inequality holds for every partition $P^*$ which is refinement of $P$
+
+        \item if $P = \{ x_0,x_1,x_2,...,x_n \}$ and if $s_i, t_i$ are arbitrary points in $[x_{i-1}, x_i]$, Then
+
+        \[
+            \sum_{i=1}^{n}\left| f(s_i) - f(t_i) \right| \Delta \alpha_i < \epsilon
+        \]
+
+        \item If $f$ is integrable, then
+
+        \[
+            \left| \sum_{i=1}^{n} f(t_i)  \Delta \alpha_i - \int_a^b f \mathrm{d}\alpha \right| < \epsilon
+        \]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    for:
+    
+    \begin{enumerate}
+        \item it is easily prove by $U(P^*,f,\alpha) \le U(P,f,\alpha)$ and $L(P,f,\alpha) \le L(P^*,f,\alpha)$
+
+        \item obviously:
+
+        \begin{align*}
+            \sum_{i=1}^{n}\left| f(s_i) - f(t_i) \right| \Delta \alpha_i &\le \sum_{i=1}^{n}\left(M_i - m_i \right)\Delta \alpha_i \\
+            & \le U(P,f, \alpha) - L(P,f, \alpha) < \epsilon
+        \end{align*}
+
+        \item obviously
+        
+        \[
+             \sum_{i=1}^{n} f(t_i)  \Delta \alpha_i - \int_a^b f \mathrm{d}\alpha  \le \sum_{i=1}^{n} M_i  \Delta \alpha_i - \int_a^b f \mathrm{d}\alpha \le U(P,f,\alpha) - \int_a^b f \mathrm{d}\alpha
+        \]
+
+        similarly for $L(P,f,\alpha)$ and
+
+        \begin{align*}
+ L(P,f,\alpha) - \int_a^b f \mathrm{d}\alpha & \le \sum_{i=1}^{n} f(t_i)  \Delta \alpha_i - \int_a^b f \mathrm{d}\alpha  \le U(P,f,\alpha) - \int_a^b f \mathrm{d}\alpha \\
+-\epsilon & < \sum_{i=1}^{n} f(t_i)  \Delta \alpha_i - \int_a^b f \mathrm{d}\alpha  < \epsilon
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}
+    if $f$ is continuous on $[a,b]$ then $f$ is integrable on $[a,b]$
+\end{thm}
+
+\begin{proof}
+    Since $[a,b]$ is compact, so $f$ is uniformly continuous. For any $\epsilon >0$, we can pick $n$ large enough so that
+
+    \[
+        \left| f(x) - f(y) \right| \le \epsilon
+    \]
+
+    for any $\left| x-y\right| \le (b-a)/n$
+    
+    let's define $s = (b-a)/n$ and $P = \{a,a+s, a+2s, ..., a+(n-1)s, a+ns\}$, Then
+
+    \[
+        U(P,f,\alpha) - L(P,f,\alpha) = \sum_{k=1}^{n}\left(M_i - m_i \right) \Delta \alpha_i
+    \]
+
+    by:
+
+    \[
+        -\epsilon \le f(x) -f(y) \le \epsilon
+    \]
+
+    take $\sup$ on $x \in [a+(i-1)s, a+is]$:
+
+
+    \[
+        -\epsilon \le \sup f -f(y) \le \epsilon
+    \]
+
+    then take $\inf$ on $y \in [a+(i-1)s, a + is]$:
+
+
+    \[
+        -\epsilon \le \sup f - \inf f \le \epsilon
+    \]
+
+    so $M_i - m_i \le \epsilon$ and
+
+
+    \begin{align*}
+        U(P,f,\alpha) - L(P,f,\alpha) &\le \epsilon \sum_{i=1}^{n} \Delta \alpha_i \\
+        & \le \epsilon (\alpha(b) - \alpha(a))
+    \end{align*}
+
+    since $\epsilon$ is arbitrary, $f$ is integrable
+\end{proof}
+
+\begin{thm}
+    if $f$ is monotonic on $[a,b]$ and if $\alpha$ is continuous on $[a,b]$, then
+    $f$ is integrable
+\end{thm}
+
+\begin{proof}
+    Since $[a,b]$ is compact, so $\alpha$ is uniformly continuous. For any $\epsilon >0$, we can pick $n$ large enough so that
+
+    \[
+        \left| \alpha(x) - \alpha(y) \right| \le \epsilon
+    \]
+
+    for any $\left| x-y\right| \le (b-a)/n$
+
+    let's define $s = (b-a)/n$ and $P = \{a,a+s, a+2s, ..., a+(n-1)s, a+ns\}$, Then
+
+
+    \begin{align*}
+        U(P,f,\alpha) - L(P,f,\alpha) &= \sum_{k=1}^{n}\left(M_i - m_i \right) \Delta \alpha_i \\
+        & \le \epsilon \left( f(b) - f(a) \right)
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    \label{thm:int-of-near-interval}
+    if  $f$ is integrable on $[u,v]$ and $[v,w]$.
+    Then $f$ is integrable on $[u,w]$ and
+
+    \[
+        \int_{u}^w f \mathrm{d} \alpha = \int_{u}^v f \mathrm{d} \alpha + \int_{v}^w f \mathrm{d}\alpha
+    \]
+\end{thm}
+
+\begin{proof}
+    let $P_1, P_2$ be partition of $[u,v]$ and $[v,w]$. And 
+
+    \begin{align*}
+        U(P_1,f,\alpha) - L(P_1,f,\alpha) &\le \epsilon \\
+        U(P_2,f,\alpha) - L(P_2,f,\alpha) &\le \epsilon \\
+    \end{align*}
+
+    Then $P_1 \cup P_2$ become a partition of $[u,w]$ and
+
+    \begin{align*}
+        U(P_1 \cup P_2,f,\alpha) &=U(P_1,f,\alpha) + U(P_2,f,\alpha) \\
+        L(P_1 \cup P_2,f,\alpha) &= L(P_1,f,\alpha) + L(P_2,f,\alpha)
+    \end{align*}
+
+    which indicates:
+
+    \[
+        \overline{\int}_u^w f \mathrm{d} \alpha -\underline{\int}_u^w f \mathrm{d} \alpha \le U(P_1 \cup P_2,f,\alpha) - L(P_1 \cup P_2,f,\alpha) \le 2\epsilon
+    \]
+
+    So $f$ is integrable on $[u,w]$
+
+    And by
+
+    \begin{align*}
+        \overline{\int}_u^w f \mathrm{d} \alpha - \overline{\int}_u^v f \mathrm{d}\alpha - \overline{\int}_v^w f \mathrm{d} \alpha &\le U(P_1 \cup P_2,f,\alpha)  - \overline{\int}_u^v f \mathrm{d}\alpha - \overline{\int}_v^w f \mathrm{d} \alpha \\
+         & \le U(P_1, f, \alpha) + U(P_2,f,\alpha) - L(P_1, f, \alpha) - L(P_2,f,\alpha) \\
+         & \le 2\epsilon
+    \end{align*}
+
+    which indicates:
+
+    \[
+        \overline{\int}_u^w f \mathrm{d} \alpha  = \overline{\int}_u^v f \mathrm{d} \alpha + \overline{\int}_v^w f \mathrm{d} \alpha
+    \]
+\end{proof}
+
+\begin{thm}
+    if $f$ is continuous on $[a,b] \setminus E$, and $f$ is bounded on $[a,b]$, and $E$ is finite, and $\alpha$ is continuous at every point of $E$.
+    Then $\int_{[a,b]} f \mathrm{d} \alpha $ is integrable
+\end{thm}
+
+
+\begin{proof}
+    We will prove when $E = \{ a \}$ 
+
+    Since $f$ is bounded, assume $\left| f \right| \le M$
+
+    Pick any $\epsilon > 0$, since $[a+\epsilon,b]$ is compact, so $f$ is uniformly continuous on $[a+\epsilon, b]$. We can pick $n$ large enough so that
+
+    \[
+        \left| f(x) - f(y) \right| \le \epsilon
+    \]
+
+    for any $\left| x-y\right| \le (b-a - \epsilon)/n,\: x,y \in [a + \epsilon, b]$
+    
+    let's define $s = (b-a-\epsilon)/n$ and $P = \{a, a + \epsilon,a+\epsilon+s, a+ \epsilon+2s, ..., a+\epsilon+(n-1)s, a+\epsilon+ns\}$, Then
+
+    \begin{align*}
+        U(P,f,\alpha) - L(P,f,\alpha) &= \sum_{k=1}^{n}\left(M_i - m_i \right) \Delta \alpha_i \\
+        & \le \left(M_1 -m_1 \right) \Delta \alpha_1  + \epsilon (\alpha(b) - \alpha(a + \epsilon)) \\
+        & \le 2M \epsilon  + \epsilon (\alpha(b) - \alpha(a + \epsilon)) \\
+    \end{align*}
+
+    since $\alpha$ is continuous and $\epsilon$ can be arbitrary small, so $f$ is integrable.
+
+    Similarly for $E = \{ b \}$ and $E = \{a,b\}$
+
+
+    Next, if $E = \{ u_1,u_2,u_3,...,u_n \}$
+
+    We can prove that $f$ is integrable on $[a,u_1], [u_1,u_2], ..., [u_{n}, b]$. And concat those intervals by \autoref{thm:int-of-near-interval}
+
+    We can even update $f(x)$ on $E$ as arbitrary value in $\mathbb{R}$, and won't affect the integration.
+\end{proof}
+
+\begin{thm}
+    suppose $f$ is integrable on $[a,b]$, $m \le f \le M$, $\phi$ is continuous on $[m,M]$.
+    and $h(x) = \phi(f(x))$ on $[a,b]$. Then $h$ is also integrable
+\end{thm}
+
+\begin{proof}
+    Let's pick a $\epsilon > 0$ at first.
+
+   since $\phi$ is continuous on a compact set and hence uniformly continuous. We can pick $\delta > 0$ so that $|x-y| \le \delta$ indicates $|\phi(x) - \phi(y)| \le \epsilon $
+
+   let $\left| \phi \right| \le C$, because $\phi$ is bounded
+
+   because $f$ in integrable, we can pick a partition of $[a,b]$ so that
+
+   \[
+    U(P,f,\alpha) - L(P,f,\alpha) \le \delta^2
+   \]
+
+    let's consider partition $P$ on $[a,b]$ and $h$:
+
+    define:
+
+    \begin{align*}
+        P &= \{ x_0, x_1,x_2,...,x_n \} \\
+        M_i &= \sup_{[x_{i-1}, x_i]} f \\
+        m_i &= \inf_{[x_{i-1}, x_i]} f \\
+        M^*_i &= \sup_{[x_{i-1}, x_i]} h \\
+        m^*_i &= \inf_{[x_{i-1}, x_i]} h \\
+        A &= \{ i: M_i - m_i \le \delta \} \\
+        B &= \{ i: M_i - m_i > \delta \} \\
+    \end{align*}
+
+    And when $i \in A$, for $u,v \in [x_{i-1}, x_i]$, we got $|f(u) - f(v)| \le M_i - m_i \le \delta$, thus we have
+
+    \[
+        |h(u) - h(v)| \le \epsilon
+    \]
+
+    since $u,v$ is arbitrary, we got $M^*_i - m^*_i \le \epsilon $
+
+    When $i \in B$:
+
+    By $M_i - m_i > \delta$:
+
+    \[
+ \delta \sum_{i \in B} \Delta \alpha_i       \le \sum_{i \in B}\left( M_i - m_i \right) \Delta \alpha_i \le \delta^2
+    \]
+
+    which indicates:
+
+    \[
+        \sum_{i \in B} \Delta \alpha_i \le \delta
+    \]
+
+
+    Then:
+
+    \begin{align*}
+        U(P,h, \alpha) - L(P,h,\alpha) &= \sum_{i=1}^{n}\left( M^*_i - m^*_i \right) \Delta \alpha_i \\
+        &= \sum_{i \in A}\left( M^*_i - m^*_i \right) \Delta \alpha_i + \sum_{i \in B}\left( M^*_i - m^*_i \right) \Delta \alpha_i \\
+        & \le \epsilon \sum_{i \in A} \Delta \alpha_i + 2C \sum_{i \in B} \Delta \alpha_i \\
+        & \le \epsilon \sum_{i=1}^{n} \Delta \alpha_i + 2C \delta \\
+        & \le \epsilon \left( \alpha(b) - \alpha(a)\right) + 2C \delta
+    \end{align*}
+
+    take $\epsilon \to 0, \delta \to 0$ we got $h$ is integrable.
+\end{proof}
+
+
+\begin{thm}
+    suppose $f,g$ is integrable on $[a,b]$, $m \le f,g \le M$ by $\alpha$ length, $\phi: \mathbb{R}^2 \to \mathbb{R}$ is continuous on $[m,M] \times [m,M]$.
+    and $h(x) = \phi(f(x), g(x))$ on $[a,b]$. Then $h$ is also integrable by $\alpha$ length.
+\end{thm}
+
+\begin{proof}
+    Let's pick a $\epsilon > 0$ at first.
+
+   since $\phi$ is continuous on a compact set and hence uniformly continuous. 
+
+   We can pick $\delta > 0$ so that $|(x_1,y_1)-(x_2,y_2)| \le \delta$ indicates $|\phi(x_1,y_1) - \phi(x_2,y_2)| \le \epsilon $
+
+   let $\left| \phi \right| \le K$, because $\phi$ is bounded
+
+   because $f,g$ is integrable, we can pick a partition of $[a,b]$ so that
+
+   \begin{align*}
+    U(P,f,\alpha) - L(P,f,\alpha) &\le \delta^2 \\
+    U(P,g,\alpha) - L(P,g,\alpha) &\le \delta^2 \\
+   \end{align*}
+
+    let's consider partition $P$ on $[a,b]$ and $h$:
+
+    define:
+
+    \begin{align*}
+        P &= \{ x_0, x_1,x_2,...,x_n \} \\
+        M_i &= \sup_{[x_{i-1}, x_i]} f,\quad m_i = \inf_{[x_{i-1}, x_i]} f \\
+        L_i &= \sup_{[x_{i-1}, x_i]} g \quad l_i = \inf_{[x_{i-1}, x_i]} g \\
+        M^*_i &= \sup_{[x_{i-1}, x_i]} h \quad m^*_i = \inf_{[x_{i-1}, x_i]} h \\
+        A &= \{ i: M_i - m_i > \frac{1}{\sqrt{2}}\delta \} \quad B = \{ i: L_i - l_i > \frac{1}{\sqrt{2}}\delta \} \\
+        C &= \{ i: \max(M_i - m_i,L_i -l_i) \le \frac{1}{\sqrt{2}}\delta \} \\
+    \end{align*}
+
+    When $i \in A$:
+
+    By $M_i - m_i > \delta/\sqrt{2}$:
+
+    \[
+\frac{\delta}{\sqrt{2}} \sum_{i \in A} \Delta \alpha_i       \le \sum_{i \in A}\left( M_i - m_i \right) \Delta \alpha_i \le \delta^2
+    \]
+
+    which indicates:
+
+    \[
+        \sum_{i \in A} \Delta \alpha_i \le \sqrt{2}\delta
+    \]
+
+    Similarly for $i \in B$, we got
+
+    \[
+        \sum_{i \in B} \Delta \alpha_i \le \sqrt{2}\delta
+    \]
+
+
+    And when $i \in C$, for $u,v \in [x_{i-1}, x_i]$, we got $|(f(u),g(u)) - (f(v),g(v))| \le \delta$, thus we have
+
+    \[
+        |h(u) - h(v)| \le \epsilon
+    \]
+
+    since $u,v$ is arbitrary, we got $M^*_i - m^*_i \le \epsilon $
+
+    we can ignore overlap of $A$ and $B$ here, because all member of them are non-negative. 
+    Note we have $\{1,2,3,...,n \} = A \cup B \cup C$
+
+    \begin{align*}
+        U(P,h, \alpha) - L(P,h,\alpha) &= \sum_{i=1}^{n}\left( M^*_i - m^*_i \right) \Delta \alpha_i \\
+        & \le \sum_{i \in C}\left( M^*_i - m^*_i \right) \Delta \alpha_i + \sum_{i \in A}\left( M^*_i - m^*_i \right) \Delta \alpha_i + + \sum_{i \in B}\left( M^*_i - m^*_i \right) \Delta \alpha_i \\
+        & \le \epsilon \sum_{i \in C} \Delta \alpha_i + 2K \sum_{i \in A} \Delta \alpha_i + 2K \sum_{i \in B} \Delta \alpha_i \\
+        & \le \epsilon \sum_{i=1}^{n} \Delta \alpha_i + 4K \sqrt{2} \delta \\
+        & \le \epsilon \left( \alpha(b) - \alpha(a)\right) +  4K \sqrt{2} \delta
+    \end{align*}
+
+    The $\epsilon$ here can be arbitrary small.
+    When $\epsilon$ is fixed, the $\delta$ can be arbitrary small. So we can take $\delta \to 0$, then take $\epsilon \to 0$.
+\end{proof}
+
+\begin{corollary}
+    if $f,g$ is integrable by $\alpha$ length. Then $fg, \max(f,g), \min(f,g), |f|$ are also integrable.
+\end{corollary}
+
+\begin{proof}
+    consider $h(x,y) = xy, h(x,y) = \max(x,y), h(x,y) = \min(x,y), |f| = \max(f, -f)$. 
+    Where $xy, \max, \min$ here are continuous.
+\end{proof}
+
+
+\begin{thm}
+    suppose $f,g$ is integrable on $[a,b]$. Then $h = \max(f,g)$ is also integrable
+\end{thm}
+
+\begin{proof}
+    consider when $f,g$ in a certain interval, since $\sup f,\: \sup g$ are both accumulation point, 
+    by law of limits:
+    
+    \begin{align*}
+        f &\le \max(\sup f, \sup g), g \le \max(\sup f, \sup g) \\
+        \max(f,g) &\le \max(\sup f, \sup g) \\
+        \sup h  & = \sup\left( \max(f,g) \right) \le \max(\sup f, \sup g) \\
+    \end{align*}
+
+    and
+
+    \begin{align*}
+        \inf f & \le f \\
+        \inf g & \le g \\
+        \max(\inf f, \inf g) & \le \max (f,g) \\
+        \max(\inf f, \inf g) & \le \inf h \\
+    \end{align*}
+
+    which indicates:
+
+    \begin{align*}
+        \sup h - \inf h & \le \max(\sup f, \sup g) - \max(\inf f, \inf g) \\
+        & \le \max \{ \sup f - \max(\inf f, \inf g), \sup g - \max(\inf f, \inf g) \} \\
+        & \le \max \{ \sup f - \inf f, \sup g - \inf g \} \\
+        & \le \sup f - \inf f +  \sup g - \inf g
+    \end{align*}
+
+    if 
+
+    \begin{align*}
+        U(P,f,\alpha) - L(P,f,\alpha) \le \epsilon \\
+        U(Q,g,\alpha) - L(Q,g,\alpha) \le \epsilon \\
+    \end{align*}
+
+    Then:
+
+    \begin{align*}
+        U(P \cup Q, h, \alpha) - L(P \cup Q, h, \alpha) &= \sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left( \sup_I h - \inf_I h \right) \Delta \alpha_i \\
+        &\le \sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left( \sup_I f - \inf_I f +  \sup_I g - \inf_I g \right) \Delta \alpha_i \\
+        &\le \sum_{I=[x_{i-1}, x_i]  \in P \cup Q} \left( \sup_I f - \inf_I f \right)\Delta \alpha_i  +  \sum_{I=[x_{i-1}, x_i] \in P \cup Q}\left( \sup_I g - \inf_I g \right) \Delta \alpha_i \\
+        & \le  U(P \cup Q,f,\alpha) - L(P \cup Q,f,\alpha) + U(P \cup Q,g,\alpha) - L(P \cup Q,g,\alpha) \\
+        & \le  U(P ,f,\alpha) - L(P,f,\alpha) + U( Q,g,\alpha) - L(Q,g,\alpha) \\
+        & \le 2\epsilon
+    \end{align*}
+\end{proof}
+
+
+\begin{thm}
+    suppose $f,g$ is integrable on $[a,b]$. Then $h = fg$ is also integrable
+\end{thm}
+
+\begin{proof}
+    let's assume $f \ge 0, g \ge 0$ at first. and they have a common upper bound $M$, and a common lower bound $0$, 
+    consider $f,g$ at a certain interval, by property of $\sup$ and $\inf$:
+
+    \begin{align*}
+        fg &\le f \sup g \\
+        \sup fg &  \le \sup \left(f \cdot \sup g \right) = \sup f \cdot \sup g \\
+        fg & \ge f \cdot \inf g \\
+        \inf fg & \ge \inf \left( f \cdot \inf g \right) = \inf f \cdot \inf g \\
+        \sup fg - \inf fg & \le \sup f  \sup g - \inf f \inf g \\
+        & \le \sup f\left( \sup g - \inf g\right) + \left(\sup f  - \inf f \right) \inf g \\
+        & \le M \left( \sup g - \inf g\right) + M(\sup f - \inf f)
+    \end{align*}
+
+
+    if 
+
+    \begin{align*}
+        U(P,f,\alpha) - L(P,f,\alpha) \le \epsilon \\
+        U(Q,g,\alpha) - L(Q,g,\alpha) \le \epsilon \\
+    \end{align*}
+
+    Then:
+
+
+    \begin{align*}
+        U(P \cup Q, h, \alpha) - L(P \cup Q, h, \alpha) &= \sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left( \sup_I h - \inf_I h \right) \Delta \alpha_i \\
+        &\le \sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left(\sup_I f \cdot \sup_I g  -  \inf_I f \cdot \inf_I g\right) \Delta \alpha_i \\
+        & \le \sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left(\sup_I f \cdot \sup_I g  -  \inf_I f \cdot \inf_I g\right) \Delta \alpha_i \\
+        & \le \sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left(M \left( \sup_I f - \inf_I f\right) + M\left( \sup_I g - \inf_I g\right) \right) \Delta \alpha_i \\ 
+        & \le M\sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left( \sup_I f - \inf_I f\right)  + M\sum_{I = [x_{i-1}, x_i] \in P \cup Q} \left( \sup_I g - \inf_I g\right) \\
+        & \le M \left( U(P \cup Q, f, \alpha) - L(P \cup Q, f, \alpha) \right) + M \left( U(P \cup Q, g, \alpha) - L(P \cup Q, g, \alpha) \right) \\
+        & \le M \left( U(P, f, \alpha) - L(P, f, \alpha) \right) + M \left( U(Q, g, \alpha) - L(Q, g, \alpha) \right) \\
+        & \le 2M \epsilon
+    \end{align*}
+
+    which indicates $fg$ is integrable, if $f,g$ are both non-negative and integrable.
+
+    Similarly we can prove for $f \le 0, g \ge 0$ , $f \le 0, g \le 0$, $f \ge 0, g \le 0$
+
+    Now assume $f,g$ are just integrable, by split $fg$ as $(f^+ - f^-)(g^+ - g^-) = f^+g^+ + f^-g^- - f^+g^- -f^-g^+$,
+    we can prove that $fg$ is integrable.
+\end{proof}
+
+\subsection{Properties of Riemann-Stieltjes Integral}
+
+\begin{thm}
+    List some properties of Riemann-Stieltjes Integral:
+
+    \begin{enumerate}
+        \item additive:
+        
+        if $f,g$ are both integrable:
+        
+        \[
+            \int_a^b f \mathrm{d} \alpha + \int_a^b g \mathrm{d} \alpha = \int_a^b \left( f+g\right) \mathrm{d} \alpha
+        \]
+
+        \item scalar mul
+        
+        if $f$ is integrable, and $c \in \R$, then $cf$ is also integrable, and:
+
+        \[
+            \int_a^b cf \mathrm{d} \alpha = c \int_a^b f \mathrm{d} \alpha
+        \]
+
+        \item If $f_1 \le f_2$, then:
+        
+        \[
+           \int_a^b f_1 \mathrm{d} \alpha \le \int_a^b f_2 \mathrm{d} \alpha
+        \]
+
+        \item if $f$ is integrable on $[a,b]$ and $a < c <b$, then $f$ is integrable on $[a,c]$ and $[c,b]$:
+       
+        \[
+            \int_a^b f \mathrm{d} \alpha = \int_a^c f \mathrm{d} \alpha + \int_c^b f \mathrm{d} \alpha
+        \]
+
+        \item if $f$ is integrable and $|f| \le M$ on $[a,b]$, then
+
+        \[
+            \left| \int_{a}^b f \mathrm{d} \alpha \right| \le M(\alpha(b) - \alpha(a))
+        \]
+
+        \item If $f$ is integrable by $\alpha_1$ and $\alpha_2$, then $f$ is integrable by $\alpha_1 + \alpha_2$ and
+
+        \[
+            \int_a^b f \mathrm{d} (\alpha_1 + \alpha_2) = \int_a^b f \mathrm{d} \alpha_1 + \int_a^b f \mathrm{d}  \alpha_2
+        \]
+
+
+        \item If $f$ is integrable by $\alpha$ and $c \in \R$, then $f$ is integrable by $c \alpha$ and
+
+        \[
+            \int_a^b f \mathrm{d} (c \alpha) = c\int_a^b f \mathrm{d}  \alpha
+        \]
+
+        \item Similarly with (2)
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    see in list:
+
+    \begin{enumerate}
+        \item it is easily to prove by define:
+        
+        \begin{align*}
+        U(P_n, f, \alpha) & \to \int_a^b f \mathrm{d} \alpha \\
+        U(Q_n, g, \alpha) & \to \int_a^b g \mathrm{d} \alpha \\
+        \end{align*}
+        
+        and discuss on their common refinement
+
+        \item easily to prove by discuss on $c \ge 0, c < 0$
+
+        \item obviously
+        
+        \item take partition $P$ 
+        
+        then add $c$ to $P$
+
+        \item by
+
+        \begin{align*}
+            \int_a^b f \mathrm{d} \alpha \le \int_a^b |f| \mathrm{d} \alpha \le M(\alpha(b) - \alpha(a))
+        \end{align*}
+
+        similarly for $-f$, and apply $|r| = \max(- r, r)$
+
+        \item pick two partition $P, Q$ for $\alpha_1$ and $\alpha_2$
+        
+        then apply their common refinement:
+
+        \begin{align*}
+            U(P \cup Q,f, \alpha_1 + \alpha_2) - L(P \cup Q,f, \alpha_1 + \alpha_2) \le 2 \epsilon
+        \end{align*}
+
+        and consider
+
+        \begin{align*}
+            U(P_n \cup Q_n,f, \alpha_1 + \alpha_2) &=U(P_n \cup Q_n,f, \alpha_1) + U(P_n \cup Q_n,f, \alpha_1) \\
+            & \to \overline{\int}_{a}^b f \mathrm{d} \alpha_1 + \overline{\int}_{a}^b f \mathrm{d} \alpha_2
+        \end{align*}
+
+        And
+
+        \begin{align*}
+            L(P_n \cup Q_n,f, \alpha_1 + \alpha_2) &= L(P_n \cup Q_n,f, \alpha_1) + L(P_n \cup Q_n,f, \alpha_1) \\
+            & \to \underline{\int}_{a}^b f \mathrm{d} \alpha_1 + \underline{\int}_{a}^b f \mathrm{d} \alpha_2
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}[Unit Step Function]
+    The unit step function $I$ is defined by 
+
+    \[
+        I(x) = \begin{cases}
+            0 & (x \le 0) \\
+            1 & (x > 0)
+        \end{cases}
+    \]
+\end{thm}
+
+\begin{thm}
+    If $a < s <b$, $f$ is bounded on $[a,b]$, $f$ is continuous at $s$,
+    and $\alpha(x) = I(x-s)$, then:
+
+    \[
+        \int_a^b f \mathrm{d} x = f(s)
+    \]
+\end{thm}
+
+\begin{proof}
+   We define a partition by $\epsilon$:
+   
+   \[
+    P_{\epsilon} = \{ a, s-\epsilon, s+ \epsilon , b \}
+   \]
+
+   and thus:
+
+   \[
+    U(P_\epsilon, f, \alpha) = \alpha|_{a}^{s-\epsilon}\left( \sup_{[a,s-\epsilon]}  f \right)  + \alpha|_{s-\epsilon}^{s+\epsilon}\left( \sup_{[s-\epsilon, s+\epsilon]}  f \right) + \alpha|_{s+\epsilon}^{b}\left( \sup_{[s+\epsilon, b]}  f \right) 
+   \]
+
+   by $\alpha|_{a}^{s-\epsilon} = 0 - 0 = 0$, $\alpha|_{s+\epsilon}^{b} = 1 - 1 = 0$ and $\alpha|_{s-\epsilon}^{s+\epsilon} = 1 - 0 = 1$
+
+   we have:
+
+   \[
+    U(P_\epsilon, f, \alpha) =  \sup_{[s-\epsilon, s+\epsilon]}  f 
+   \]
+
+   and similarly:
+
+
+   \[
+    L(P_\epsilon, f, \alpha) =  \inf_{[s-\epsilon, s+\epsilon]}  f 
+   \]
+
+   then
+
+   \[
+   U(P_\epsilon, f, \alpha)  - L(P_\epsilon, f, \alpha) = \mathrm{diam} f([s-\epsilon, s+\epsilon]) 
+   \]
+
+   by $f$ is continuous at $s$,  $U(P_\epsilon, f, \alpha)  - L(P_\epsilon, f, \alpha) \to 0$ as $\epsilon \to 0$, so $f$ is integrable.
+
+
+   And $U(P_{\epsilon}, f, \alpha) \to f(s)$ as $\epsilon \to 0$
+\end{proof}
+
+\begin{thm}
+    Suppose $c_n \ge 0$ for $1,2,3,...,$ $\sum c_n$ converges, $\{ s_n \}$
+    is a sequence of distinct points in $(a,b)$, and
+
+    \[
+        \alpha(x) = \sum_{n=1}^{\infty}c_nI(x-s_n)
+    \]
+
+    let $f$ be continuous on $[a,b]$. Then
+
+    \[
+        \int_a^b f \mathrm{d} \alpha = \sum_{n=1}^{\infty} c_n f(s_n)
+    \]
+\end{thm}
+
+\begin{proof}
+    $\sum_{n=1}^{\infty}c_nI(x-s_n)$ is absolutely convergent since:
+
+    \[
+        \sum_{n=1}^{N}c_nI(x-s_n) \le \sum_{n=1}^{N}c_n \le \sum_{n=1}^{\infty}c_n
+    \]
+
+    And $\alpha(x)$ is monotonically increasing by inspect its every item $I(x-s_n)$
+
+    Obviously:
+
+    \begin{align*}
+        \alpha(a) &= \sum 0 = 0 \\
+        \alpha(b) &= \sum c_n 1 = \sum_{n=1}^{\infty}c_n \\
+    \end{align*}
+
+    We pick $\epsilon > 0$ and define $\alpha_1$ and $\alpha_2$, pick $N$ large enough.
+
+    \begin{align*}
+        \alpha_1 (x) &= \sum_{n=1}^{N}c_nI(x-s_n) \\
+        \alpha_2 (x) &= \sum_{n=N+1}^{\infty}c_nI(x-s_n) \\
+        L &= \sum_{n=1}^{\infty}c_n \\
+    \sum_{n=N+1}^{\infty}\left| c_n \right| & \le \epsilon
+    \end{align*}
+
+    Then:
+
+    \begin{align*}
+        \int_a^b f \mathrm{d} \alpha &= \int_a^b f \mathrm{d} \left( \alpha_1 + \alpha_2 \right) \\
+        &= \int_a^b f \mathrm{d} \alpha_1 + \int_a^b f \mathrm{d} \alpha_2 \\
+        &= \sum_{n=1}^{N}c_nf(s_n) + \int_a^b f \mathrm{d} \alpha_2
+    \end{align*}
+
+    And
+
+    \begin{align*}
+        \left| \int_a^b f \mathrm{d} \alpha_2 \right| &\le \int_a^b |f| \mathrm{d} \alpha_2  \\
+        & \le \int_a^b M \mathrm{d} \alpha_2 \\
+        & \le M(\alpha_2(b) - \alpha_2(a)) \\
+        & \le M \sum_{n=N+1}^{\infty}c_nI(b-s_n) \\
+        & \le M \sum_{n=N+1}^{\infty}c_n \le M \epsilon
+    \end{align*}
+
+    after all, we got:
+
+    \[
+        \left| \int_a^b f \mathrm{d} \alpha - \sum_{n=1}^{N}c_nf(s_n) \right| \le M \epsilon
+    \]
+
+    take $N \to \infty$, then $\epsilon \to 0$.
+\end{proof}
+
+
+\begin{thm}
+    Assume $\alpha$ increases monotonically and $\alpha'$ is integrable on $[a,b]$. 
+    Let $f$ be a bounded real function on $[a,b]$.
+
+    Then $f$ is integrable by measure $\alpha$ iff $f\alpha'$ is integrable. In that case
+
+    \[
+        \int_a^b f \mathrm{d} \alpha  = \int_a^b f \alpha' \mathrm{d}x
+    \]
+\end{thm}
+
+\begin{proof}
+    Let
+
+    \[
+        U(P,\alpha') -L(P, \alpha') \le \epsilon
+    \]
+
+    let $s_i \in [x_{i-1},x_i]$ consider, by $\alpha' \ge 0$ and $f$ has upper bound $M, M > 0$
+
+    \begin{align*}
+        \left| \sum_{i=1}^{n} f(s_i) \alpha'(s_i) \Delta x_i - \sum_{i=1}^{n} f(s_i) \Delta \alpha_i \right| &= \left| \sum_{i=1}^{n} f(s_i) \alpha'(s_i) \Delta x_i - \sum_{i=1}^{n} f(s_i) \alpha'(t_i)\Delta x_i \right| \\
+        & = \left| \sum_{i=1}^{n} f(s_i)\left( \alpha'(s_i) - \alpha'(t_i) \right) \Delta x_i \right| \\
+        & \le \sum_{i=1}^{n} \left| f(s_i) \right| \left| \alpha'(s_i) - \alpha'(t_i) \right| \Delta x_i  \\
+        & \le M \epsilon
+    \end{align*}
+
+    take:
+
+    \[
+        f(s_i) \to \sup_{[x_{i-1},x_i]} f
+    \]
+
+    in particular:
+
+    \begin{align*}
+    \sum_{i=1}^{n} f(s_i) \alpha'(s_i) \Delta x_i &\le  \sum_{i=1}^{n} f(s_i) \Delta \alpha_i + M\epsilon \\
+    & \le U(P,f,\alpha) + M\epsilon
+    \end{align*}
+
+    take $f(s_i)\alpha'(s_i) \to \sup f\alpha'([x_{i-1},x_i])$, then we got
+
+    \[
+        U(P,f\alpha') \le U(P,f,\alpha) + M\epsilon
+    \]
+
+    Similarly we got
+
+    \[
+        U(P,f,\alpha) \le U(P,f\alpha') + M\epsilon
+    \]
+
+    which indicates
+
+    \[
+        \left| U(P,f,\alpha) -U(P,f\alpha') \right| \le M \epsilon
+    \]
+
+    since $\epsilon$ is arbitrary, we got
+
+    \[
+        \overline{\int}_a^b f \alpha' \mathrm{d} x =\overline{\int}_a^b f  \mathrm{d} \alpha
+    \]
+
+    Similarly for:
+
+    \[
+        \underline{\int}_a^b f \alpha' \mathrm{d} x =\underline{\int}_a^b f  \mathrm{d} \alpha
+    \]
+\end{proof}
+
+\begin{thm}[change of variable]
+    \label{thm:int-change-of-variable-1}
+    Suppose $\phi$ is a increasing continuous function that maps an interval $[a,b]$ onto $[\phi(a),\phi(b)]$.
+    Suppose $\alpha$ is monotonically increasing on $[a,b]$. $f([a,b])$ is bounded
+
+    Then $f $ is integrable by measure $\alpha$ iff $f \circ \phi$ is integrable by measure $\alpha \circ \phi$
+
+    \[
+ \int_{\phi(a)}^{\phi(b)} f \mathrm{d}\alpha =       \int_a^b \left(f \circ \phi \right) \mathrm{d} \left(\alpha \circ \phi\right) 
+    \]
+\end{thm}
+
+\begin{proof}
+    Steps:
+
+    \begin{enumerate}
+        \item We will define $\phi(P)$ for partition $P$ of $[a,b]$ and $\phi^{-1}(Q)$ for partition $Q$ of $[\phi(a), \phi(b)]$:
+
+
+    consider any partition $P = \{x_0,x_1,x_2,...,x_n \}$ of $[a,b]$. Then 
+    
+    \begin{align*}
+        \phi(P) &= \{\phi(x_0),\phi(x_1), \phi(x_2), ..., \phi(x_n) \} \\
+        &= \{y_0,y_1,y_2,...,y_n \}
+    \end{align*}
+
+    It is easily to verify that $P$ becomes a partition of $[\phi(a), \phi(b)]$ then
+
+    Also, it is easily to verify that $\phi(P_1 \cup P_2) = \phi(P_1) \cup \phi(P_2)$
+
+    consider any partition $Q = \{y_0,y_1,y_2,...,y_n \}$ of $[\phi(a),\phi(b)]$. Then we define $\phi^{-1}(Q)$ as 
+
+    \begin{align*}
+        \phi^{-1}(P) &= \{ x_0, x_1,x_2,...,x_n \}  \\
+        x_0 &= a \\
+        y_0 &= b \\
+        x_k & = \inf_{\{ y_k \}} \phi^{-1} 
+    \end{align*}
+
+    It is easily to verify that $\phi(\phi^{-1}(Q)) = Q$
+
+    \item We will prove that:
+    
+    \begin{align*}
+        U(P, f \circ \phi, \alpha \circ \phi) &= U(\phi(P), f, \alpha) \\
+    \end{align*}
+
+    consider partition $P$ of $[a, b]$:
+
+
+    \begin{align*}
+        \sum_{[x_{i-1},x_i] \in P} f \circ \phi(s_i)  \left(\Delta \alpha \circ \phi \right)_i =\sum_{[y_{i-1},y_i] \in \phi(P)} f (t_i)  \Delta \alpha_i \quad \mathrm{where}\quad t_i = \phi(s_i)
+    \end{align*}
+
+    which indicates:
+
+    \begin{align*}
+        \sum_{i=1}^{n} f(t_i) \Delta \alpha_i \le U(P,f \circ \phi, \alpha \circ \phi)
+    \end{align*}
+
+    and take 
+    
+    \[
+        f \circ \phi  \to \sup_{[x_{i-1},x_i]} \left(f \circ \phi \right) = \sup_{[y_{i-1},y_i]} f
+    \]
+
+    we can do so because $\phi$ is continuous
+
+    so we got:
+
+    \[
+        U(\phi(P),f,\alpha) \le U(P,f \circ \phi,\alpha \circ \phi)
+    \]
+
+
+    Similarly, we prove that
+
+
+    \[
+        U(\phi(P),f,\alpha) \ge U(P,f \circ \phi,\alpha \circ \phi)
+    \]
+
+    \item And:
+    
+    \[
+        U(Q, f, \alpha ) = U(\phi^{-1}(Q), f \circ \phi, \alpha \circ \phi) \\
+    \]
+
+    We just need to use above conclusion, and replace $P$ with $\phi^{-1}(Q)$, and prove by $\phi(\phi^{-1}(Q)) = Q$
+    \end{enumerate}
+
+    Now, we can prove the conclusion easily by pick special partition sequence $P_n \subseteq [a,b]$, $Q_n \subseteq [\phi(a), \phi(b)]$ and combine 
+    their common refinement $P_n \cup \phi^{-1}(Q_n), \: \phi(P_n) \cup Q_n$. Hint:
+
+    \[
+        \phi(P_n \cup \phi^{-1}(Q_n)) = \phi(P_n) \cup \phi (\phi^{-1}(Q_n)) = \phi(P_n) \cup Q_n
+    \]
+
+\end{proof}
+
+
+\begin{corollary}[change of variable]
+    This a special case when $\alpha$ of \autoref{thm:int-change-of-variable-1} is identity,
+    and $\phi': [a,b] \to \R$ is integrable:
+
+    \[
+        \int_a^b \phi' \cdot f \circ \phi \mathrm{d} x = \int_a^b  f \circ \phi \mathrm{d} \phi =  \int_{\phi(a)}^{\phi(b)}  f \mathrm{d} x
+    \]
+
+\end{corollary}
+
+\begin{thm}
+    Assume $a \le b$, for decreasing $\alpha$ length function, we define integral as:
+
+    \[
+        \int_a^b f \mathrm{d} \alpha = -\int_a^b f \mathrm{d} \left(-\alpha \right)
+    \]
+
+    and we define the integration for inverse interval
+
+    \[
+        \int_b^a f \mathrm{d} \alpha = -\int_a^b f \mathrm{d} \alpha
+    \]
+
+    Then change of variable also hold for decreasing $\phi$
+\end{thm}
+
+\begin{proof}
+    By definition, and standard change of variable theorem:
+
+    \begin{align*}
+        \int_a^b f \circ \phi \mathrm{d} \phi &= -\int_a^b f \circ \phi \mathrm{d} \left(-\phi \right) \\
+        &= -\int_{-\phi(a)}^{-\phi(b)} f(-x) \mathrm{d} x
+    \end{align*}
+
+
+    let's define $P' = \{ y_0,y_1,y_2,...,y_n\} = \{ -x_n,-x_{n-1},...,-x_0\}$ which
+    is partition of $[\phi(b), \phi(a)]$
+
+    It is easily to verify that any partition $P=\{ x_0,x_1,x_2,...,x_n\}$ of $[-\phi(a), -\phi(b)]$ has:
+
+    \begin{align*}
+        \sum_{i=1}^{n} f(-s_i) (x_i - x_{i-1}) &= \sum_{i=1}^{n}f(-s_i)((-x_i) -(-x_{i-1})) \\
+        &=  \sum_{i=1}^{n}f(-s_i)(y_{n-i+1} -y_{n-i}) = \sum_{j=1}^{n}f(-s_{n+1-j})(y_{j} -y_{j-1}) \\
+        &=  \sum_{j=1}^{n}f(t_j)(y_{j} -y_{j-1}) \\
+    \end{align*}
+
+    by $x_{i-1} \le s_i \le x_i$, we got $-x_i \le -s_i \le -x_{i-1}$, where $-x_i = y_{n-i+1} = y_j$, similarly, we got
+
+    $t_j = -s_i,\: t_j \in[y_{j-1}, y_j]$. So any riemann sum of 
+
+    \[
+\int_{-\phi(a)}^{-\phi(b)} f(-x) \mathrm{d} x
+    \]
+
+    and
+
+    \[
+\int_{\phi(b)}^{\phi(a)} f(x) \mathrm{d} x
+    \]
+
+    could be converted from one to another one.
+
+    which indicates:
+
+    \[
+        \int_{-\phi(a)}^{-\phi(b)} f(-x) \mathrm{d} x = \int_{\phi(b)}^{\phi(a)} f(x) \mathrm{d} x
+    \]
+
+    so 
+
+    \begin{align*}
+        -\int_{-\phi(a)}^{-\phi(b)} f(-x) \mathrm{d} x &= -\int_{\phi(b)}^{\phi(a)} f(x) \mathrm{d} x \\
+        &= \int_{\phi(a)}^{\phi(b)} f(x) \mathrm{d} x
+    \end{align*}
+\end{proof}
+
+\subsection{Integration and Differentiation}
+
+\begin{thm}
+    let $f$ is integrable on $[a,b]$ For $a \le x \le b$, define $F: [a,b] \to \R$
+
+    \[
+        F(x) = \int_a^x f(t) \mathrm{d} t
+    \]
+
+    Then $f$ is continuous on $[a,b]$. furthermore, if $f$ is continuous at a point $x_0$,
+    then $F$ is differentiable at $x_0$ and
+    
+
+    \[
+        F'(x_0) = f(x_0)
+    \]
+\end{thm}
+
+\begin{proof}
+    \begin{align*}
+        \left| F(y) - F(x) \right| &= \left| \int_x^y f(t) \mathrm{d}t \right| \\
+        & \le  \int_x^y \left| f(t) \right| \mathrm{d}t  \le M \left| y-x \right|
+    \end{align*}
+
+    So $F$ is uniformly continuous, and hence continuous.
+
+    If $f$ is continuous at $x_0$, pick $\epsilon > 0$, and $\delta > 0$ so that
+    $\left| f(y) -f(x_0) \right| \le \epsilon,\: \forall \left| y - x_0 \right| \le \delta$.
+
+    Then:
+
+    \begin{align*}
+        F(y) - F(x_0) &= \int_{x_0}^{y} f(t) \mathrm{d}t \le \int_{x_0}^{y} f(x_0) + \epsilon \mathrm{d}t \\
+        & \le \left(f(x_0) + \epsilon \right)(y-x_0)
+    \end{align*}
+
+    thus:
+
+    \begin{align*}
+        \frac{F(y) - F(x_0)}{y-x_0} - f(x_0) \le  \epsilon 
+    \end{align*}
+
+    Similarly, we can prove:
+
+    \begin{align*}
+        \epsilon \le \frac{F(y) - F(x_0)}{y-x_0} - f(x_0)
+    \end{align*}
+
+    and thus
+
+    \[
+        \left| \frac{F(y) - F(x_0)}{y-x_0} - f(x_0) \right|\le  \epsilon ,\: \forall y \in (x_0, x_0 + \delta]
+    \]
+
+    it easily prove for $y \in [x_0-\delta,x_0)$
+    
+\end{proof}
+
+\begin{thm}[The fundamental theorem of calculus]
+    \label{thm:fundamental-calculus}
+    let $f$ is integrable on $[a,b]$ and if there is a differentiable function $F$ on $[a,b]$
+    and such that $F' = f$, then
+
+    \[
+        \int_a^b f \mathrm{d}x = F(b) - F(a)
+    \]
+\end{thm}
+
+\begin{proof}
+    consider any partition $P$ on $[a,b]$ 
+
+    \begin{align*}
+        F(b) - F(a) &= \sum_{i=1}^{n} F(x_i) - F(x_{i-1}) \\
+        & = \sum_{i=1}^{n} f(s_i) \Delta x_i
+    \end{align*}
+
+    and so
+
+    \[
+        L(P,f) \le F(b) - F(a) \le U(P,f)
+    \]
+
+    since $P$ is arbitrary, we got:
+
+    \[
+        \int_a^b f \mathrm{d}t = F(b) - F(a)
+    \]
+\end{proof}
+
+\begin{thm}[integration by parts]
+    suppose $F,G$ are differentiable on $[a,b]$, $F' = f$ and $G' = g$. Then 
+
+    \[
+        \int_a^b Fg = F(b)G(b) - F(a)G(a) - \int_a^b f G 
+    \]
+
+    since $F$ and $G$ are both integrable, so $F\cdot G$ is integrable, by \autoref{thm:fundamental-calculus}:
+
+    \begin{align*}
+        \int_a^b (FG)' &= F(b)G(b) - F(a)G(a) \\
+        &= \int_a^b \left( FG' + F'G\right) \\
+        &= \int_a^b Fg + \int_a^b fG
+    \end{align*}
+\end{thm}
+
+\subsection{Integration of Vector Valued Functions}
+
+\begin{definition}[Integration of Vector Valued Functions]
+    let $f_1, f_2,f_3, ..., f_k : [a,b] \to \R$, and let $\mathbf{f}: [a,b] \to \R^k, \mathbf{f} = (f_1,f_2,f_3,...,f_k)$ 
+
+    If $\alpha$ is monotonically increasing, we say $\mathbf{f}$ is integrable on $[a,b]$ iff each $f_k$ is integrable on $[a,b]$, and define
+
+    \[
+        \int_a^b \mathbf{f} \mathrm{d} \alpha = (\int_a^b f_1 \mathrm{d} \alpha, ..., \int_a^b f_k \mathrm{d} \alpha)
+    \]
+\end{definition}
+
+\begin{thm}
+    if $\mathbf{f}, \mathbf{F}: [a,b] \to \R^k$   and $\mathbf{f}$ is integrable, and if $\mathbf{F}' = f$,
+    then:
+
+    \[
+        \int_a^b \mathbf{f} \mathrm{d}x = \mathbf{F}(b) - \mathbf{F}(a)
+    \]
+\end{thm}
+
+\begin{proof}
+    It is easily to prove by inspect each component of $\mathbf{f}$
+\end{proof}
+
+\begin{thm}
+    If $\mathbf{f}: [a,b] \to \R^k$ and $\mathbf{f}$ is integrable, then $\left| f \right|: [a,b] \to \R$ is integrable,
+    and 
+    
+    \[
+        \left| \int_a^b \mathbf{f} \mathrm{d} \alpha \right| \le \int_a^b  \left|\mathbf{f} \right|\mathrm{d} \alpha
+    \]
+\end{thm}
+
+\begin{proof}
+    define $y_i$
+    \begin{align*}
+        y_i &= \int_a^b f_i \mathrm{d} \alpha \\
+        \mathbf{y} &= \left(y_1,y_2,y_3,...,y_k \right) = \int_a^b \mathbf{f} \mathrm{d} \alpha
+    \end{align*}
+
+    consider $\left| \mathbf{y}\right|^2$:
+
+    \begin{align*}
+\left| \mathbf{y}\right|^2 &= \sum_{i=1}^{k} y_i \cdot y_i \\
+&= \sum_{i=1}^{k} y_i \cdot \int_a^b f_i \mathrm{d} \alpha \\
+&=  \int_a^b\sum_{i=1}^{k} y_i \cdot  f_i \mathrm{d} \alpha \\
+&= \int_a^b \langle \mathbf{y}, \mathbf{f} \rangle \mathrm{d} \alpha
+    \end{align*}
+
+    by cauchy inequality:
+
+    \begin{align*}
+\left| \langle \mathbf{y}, \mathbf{f} \rangle \right|  &\le |\mathbf{y}| |\mathbf{f}| \\
+    \end{align*}
+
+    which indicates:
+
+    \begin{align*}
+    \int_a^b\langle \mathbf{y}, \mathbf{f} \rangle \mathrm{d} \alpha & \le     \int_a^b \left|\mathbf{y} \right| \left|\mathbf{f} \right|  \mathrm{d} \alpha \\
+    & \le  \left|\mathbf{y} \right| \int_a^b \left|\mathbf{f} \right|  \mathrm{d} \alpha
+    \end{align*}
+
+    thus we got:
+
+    \[
+\left| \mathbf{y}\right|^2 \le \left|\mathbf{y} \right| \int_a^b \left|\mathbf{f} \right|  \mathrm{d} \alpha
+    \]
+
+    by discussion on $\left| \mathbf{y} \right| = 0$ or $\left| \mathbf{y} \right| > 0$, we got
+
+    \[
+\left| \mathbf{y}\right| \le \int_a^b \left|\mathbf{f} \right|  \mathrm{d} \alpha
+    \]
+\end{proof}
+
+\begin{thm}
+    let $\gamma: [a,b] \to \R^k$, $P = \{ x_0, x_1,x_2,...,x_n \} $ be a partition of $[a,b]$. 
+    
+    Define $\Lambda (P, \gamma)$  as:
+
+    \[
+        \Lambda(P, \gamma) = \sum_{i=1}^{n} \left| \gamma(x_i) - \gamma(x_{i-1})\right|
+    \]
+
+    and
+
+    \[
+        \Lambda(\gamma) = \sup_{P} \Lambda(P, \gamma)
+    \]
+
+    if $\gamma'$ is continuous on $[a,b]$ Then:
+
+    \[
+        \Lambda(\gamma) = \int_a^b \left| \gamma'(t) \right| \mathrm{d} t
+    \]
+\end{thm}
+
+\begin{proof}
+    Steps:
+
+
+    \begin{enumerate}
+        \item we prove $\Lambda(\gamma) \le \int_a^b \left| \gamma'(t) \right| \mathrm{d} t$ at first
+
+        consider $P$ is arbitrary partition of $[a,b]$, then
+
+        \begin{align*}
+            \int_a^b \left| \gamma'(t) \right| \mathrm{d}t  &= \sum_{i=1}^{n}\int_{x_{i-1}}^{x_i} \left| \gamma'(t) \right| \mathrm{d}t \\
+            & \ge \sum_{i=1}^{n} \left| \int_{x_{i-1}}^{x_i}  \gamma'(t) \mathrm{d}t  \right| \\
+            & \ge\sum_{i=1}^{n} \left| \gamma(x_i) - \gamma(x_{i-1})  \right| \\
+            & \ge \Lambda(P, \gamma)
+        \end{align*}
+
+        since $P$ is arbitrary, we got
+
+        \[
+            \int_a^b \left| \gamma'(t) \right| \mathrm{d}t \ge \Lambda(\gamma)
+        \]
+
+        \item then we prove another side
+        
+        \begin{align*}
+            \Lambda(P, \gamma) &= \sum_{i=1}^{n} \left| \gamma(x_i) - \gamma(x_{i-1})\right| \\
+            &= \sum_{i=1}^{n} \left| \gamma'(s_i) \right| \Delta x_i \\
+            & \ge L(P, \left| \gamma'\right|)
+        \end{align*}
+
+        thus:
+
+        \[
+        L(P, \left| \gamma'\right|) \le \Lambda(\gamma)
+        \]
+
+        since $P$ is arbitrary, take $L(P_n, \left| \gamma'\right|) \to \int_a^b \left| \gamma'(t) \right| \mathrm{d} t$, 
+
+        then we got
+
+        \[
+            \int_a^b \left| \gamma'(t) \right| \mathrm{d} t \le \Lambda(\gamma)
+        \]
+
+    \end{enumerate} 
+\end{proof}
+
+\subsection{Exercise}
+
+\begin{exercise}
+    let $f: [a,b] \to \mathbb{R}$ be integrable by $\alpha$ length.
+    Then, given any positive real number $\epsilon$, there exists a continuous function $g$ such that:
+
+    \[
+        \int_a^{b} \left| f(x) - g(x) \right|^2 \mathrm{d} \alpha \le \epsilon 
+    \]
+\end{exercise}
+
+\begin{proof}
+   by definition of riemann integrable, there exists a partition $P$ such that 
+
+   \[
+    \sum_{i=1}^{n} \left( \sup_{[x_{i-1},x_i]}f -\inf_{[x_{i-1},x_i]}f \right) \Delta \alpha_i \le \epsilon
+   \]
+
+   for concise, we define:
+
+   \begin{align*}
+    s_i &= \sup_{[x_{i-1},x_i]}f \\
+    t_i &= \inf_{[x_{i-1},x_i]}f \\
+   \end{align*}
+
+   define $g$ as $g(x_0) = f(x_0), g(x_1) = f(x_1), ..., g(x_n) = f(x_n)$, then we connect those points, which means:
+
+   \[
+        g(t) = \frac{x_i - t}{\Delta x_i}f(x_{i-1}) + \frac{t-x_{i-1}}{\Delta x_i}f(x_{i}) \quad t \in [x_{i-1}, x_i]
+   \]
+
+   consider that 
+   
+   \begin{align*}
+   |f(t) - g(t)| &\le s_i - t_i
+   \end{align*}
+
+   and $f$ is bounded by $M$
+
+   and
+
+   \begin{align*}
+    \int_{a}^{b} \left|f - g\right|^2 \mathrm{d} \alpha &= \sum_{i=1}^{n}\int_{x_{i-1}}^{x_i} \left|f - g\right|^2 \mathrm{d} \alpha \\
+    & \le \sum_{i=1}^{n}\int_{x_{i-1}}^{x_i} \left(s_i - t_i \right)^2 \mathrm{d} \alpha \\
+    & \le \sum_{i=1}^{n}\int_{x_{i-1}}^{x_i} \left|s_i - t_i \right| \left| s_i - t_i\right| \mathrm{d} \alpha \\
+    & \le 2M \sum_{i=1}^{n}\int_{x_{i-1}}^{x_i}  \left| s_i - t_i\right| \mathrm{d} \alpha \\
+    & \le 2M \epsilon
+   \end{align*}
+
+   since $\epsilon$ can be arbitrary small, so $g$ is what we want.
+\end{proof}

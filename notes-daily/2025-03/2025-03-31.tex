@@ -1,0 +1,644 @@
+
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{2025-03-31}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{高等代数}
+
+\subsection{行列式-拆分法}
+
+\subsubsection{证明}
+
+请证明
+
+\begin{align*}
+    \left| A(t)\right| &= \begin{vmatrix}
+        a_{11} + t & a_{12} + t & .. & a_{1n} + t \\
+        a_{21} + t & a_{22} + t & .. & a_{2n} + t \\
+        .. & .. & .. & .. \\
+        a_{n1} + t & a_{n2} + t & .. & a_{nn} + t \\
+    \end{vmatrix} \\
+    &= \lvert A(0) \rvert + t\sum_{i=1}^{n}\sum_{j=1}^{n}A_{ij}
+\end{align*}
+
+证明如下
+
+\begin{align*}
+    \left| A(t)\right| &= \begin{vmatrix}
+        a_{11} + t & a_{12} + t & .. & a_{1n} + t \\
+        a_{21} + t & a_{22} + t & .. & a_{2n} + t \\
+        .. & .. & .. & .. \\
+        a_{n1} + t & a_{n2} + t & .. & a_{nn} + t \\
+    \end{vmatrix} \\
+    &=  \begin{vmatrix}
+        a_{11}  & a_{12} + t & .. & a_{1n} + t \\
+        a_{21}  & a_{22} + t & .. & a_{2n} + t \\
+        .. & .. & .. & .. \\
+        a_{n1} & a_{n2} + t & .. & a_{nn} + t \\
+    \end{vmatrix}  + t \begin{vmatrix}
+        1  & a_{12} + t & .. & a_{1n} + t \\
+        1  & a_{22} + t & .. & a_{2n} + t \\
+        .. & .. & .. & .. \\
+        1 & a_{n2} + t & .. & a_{nn} + t \\
+    \end{vmatrix}
+\end{align*}
+
+以此类推把每一列都拆分后得到
+
+\begin{align*}
+&\begin{vmatrix}
+        a_{11}  & a_{12} & .. & a_{1n}  \\
+        a_{21}  & a_{22}  & .. & a_{2n} \\
+        .. & .. & .. & .. \\
+        a_{n1} & a_{n2} & .. & a_{nn}  \\
+\end{vmatrix} + t\begin{vmatrix}
+        1  & a_{12} + t & .. & a_{1n} + t \\
+        1  & a_{22} + t & .. & a_{2n} + t \\
+        .. & .. & .. & .. \\
+        1 & a_{n2} + t & .. & a_{nn} + t \\
+    \end{vmatrix} \\ + t & \begin{vmatrix}
+        a_{11}  & 1  & .. & a_{1n} + t \\
+        a_{21}  & 1  & .. & a_{2n} + t \\
+        .. & .. & .. & .. \\
+        a_{n1} & 1 & .. & a_{nn} + t \\
+    \end{vmatrix} + .. + t\begin{vmatrix}
+        a_{11}  & a_{12}  & .. & 1 \\
+        a_{21}  & a_{21}  & .. & 1 \\
+        .. & .. & .. & .. \\
+        a_{n1} & a_{n2} & .. & 1 \\
+    \end{vmatrix}
+\end{align*}
+
+注意到那些带有 $+t$ 的列的 $+t$ 都可以用全为 $1$ 的列消去，最终得到
+
+\begin{align*}
+&\begin{vmatrix}
+        a_{11}  & a_{12} & .. & a_{1n}  \\
+        a_{21}  & a_{22}  & .. & a_{2n} \\
+        .. & .. & .. & .. \\
+        a_{n1} & a_{n2} & .. & a_{nn}  \\
+\end{vmatrix} + t\begin{vmatrix}
+        1  & a_{12}  & .. & a_{1n}  \\
+        1  & a_{22}  & .. & a_{2n}  \\
+        .. & .. & .. & .. \\
+        1 & a_{n2}  & .. & a_{nn}  \\
+    \end{vmatrix} \\ + t & \begin{vmatrix}
+        a_{11}  & 1  & .. & a_{1n}  \\
+        a_{21}  & 1  & .. & a_{2n}  \\
+        .. & .. & .. & .. \\
+        a_{n1} & 1 & .. & a_{nn}  \\
+    \end{vmatrix} + .. + t\begin{vmatrix}
+        a_{11}  & a_{12}  & .. & 1 \\
+        a_{21}  & a_{21}  & .. & 1 \\
+        .. & .. & .. & .. \\
+        a_{n1} & a_{n2} & .. & 1 \\
+    \end{vmatrix}
+\end{align*}
+
+然后各自按照全为 $1$ 的列展开得到
+
+\[
+\lvert A(0) \rvert + t\sum_{j=1}^{n}\sum_{i=1}^{n}A_{ij}
+\]
+
+\subsubsection{推论}
+
+\begin{align*}
+ \begin{vmatrix}
+        a_{11} + t_1 & a_{12} + t_2 & .. & a_{1n} + t_n \\
+        a_{21} + t_1 & a_{22} + t_2 & .. & a_{2n} + t_n \\
+        .. & .. & .. & .. \\
+        a_{n1} + t_1 & a_{n2} + t_2 & .. & a_{nn} + t_n \\
+\end{vmatrix}  = \lvert A(0) \rvert  + \sum_{j=1}^{n}t_j \sum_{i=1}^{n}A_{ij}
+\end{align*}
+
+\subsubsection{推论}
+
+上面的结论可以用来计算
+
+\begin{align*}
+    \begin{vmatrix}
+        a & b & b & .. & b\\
+        c & a & b & .. & b\\
+        c & c & a & .. & b\\
+        .. & .. & .. & .. & ..\\
+        c & c & c & .. & a\\
+    \end{vmatrix}
+\end{align*}
+
+令 
+
+\begin{align*}
+A(t) &= \begin{vmatrix}
+        a + t& b + t& b + t& .. & b + t\\
+        c + t& a + t& b + t& .. & b +t \\
+        c + t& c + t & a + t & .. & b + t \\
+        .. & .. & .. & .. & ..\\
+        c + t& c + t& c + t& .. & a + t\\
+    \end{vmatrix} \\
+u &= \sum_{i=1}^{n}\sum_{j=1}^{n}A_{ij}
+\end{align*}
+
+得到
+
+\begin{align*}
+A(-b) &= \lvert  A \rvert - bu = (a-b)^n\\
+A(-c) &= \lvert A \rvert - cu  = (a-c)^n
+\end{align*}
+
+若 $b \ne c$，用克莱姆法则可以求解得到
+
+\[
+\lvert A \rvert = \frac{b(a-c)^n - c(a-b)^n}{b-c}
+\]
+
+若 $b = c$，用求和法得到
+
+\[
+(a+(n-1)b) (a-b)^{n-1}
+\]
+
+\subsection{抽屉原理}
+
+若 $f_1(x),f_2(x),..,f_n(x)$ 都是多项式，而且 $\deg (f(x)) \le n-2$，证明
+
+\[
+\begin{vmatrix}
+    f_1(a_1) & f_2(a_1) & .. & f_n(a_1) \\
+    f_1(a_2) & f_2(a_2) & .. & f_n(a_2) \\
+    .. & .. & .. & .. \\
+    f_1(a_n) & f_2(a_n) & .. & f_n(a_n) \\
+\end{vmatrix} = 0
+\]
+
+也就是 $b_{ij} = f_j(a_i)$
+
+我们把上面的行列式按照单项式的和进行拆分，至多可以拆分成 $(n-1)^n$ 项，其中每一项都是只包含单项式的行列式。
+我们分析其中任意一项
+
+\[
+\begin{vmatrix}
+    f_{1,d_1}(a_1) & f_{2,d_2}(a_1) & .. & f_{n,d_n}(a_1) \\
+    f_{1,d_1}(a_2) & f_{2,d_2}(a_2) & .. & f_{n,d_n}(a_2) \\
+    .. & .. & .. & .. \\
+    f_{1,d_1}(a_n) & f_{2,d_2}(a_n) & .. & f_{n,d_n}(a_n) \\
+\end{vmatrix} 
+\]
+
+这里 $d_1, d_2,..$ 表示这个单项式的次数是 $d_1,d_2, ..$，因为 $d_1,d_2,..d_n$ 都是整数，而且满足 $0 \le d_i \le n-2$，
+所以一定存在如下两个次数相同的列，不妨设就是第一列和第二列
+
+\[
+\begin{vmatrix}
+    c_{1d}a_1^d & c_{2d}a_1^d & .. & f_{n,d_n}(a_1) \\
+    c_{1d}a_2^d & c_{2d}a_2^d & .. & f_{n,d_n}(a_2) \\
+    .. & .. & .. & .. \\
+    c_{1d}a_n^d & c_{2d}a_n^d & .. & f_{n,d_n}(a_n) \\
+\end{vmatrix} 
+\]
+
+可以看到这两列是成比例的，所以行列式为0，所以每一项都是0
+
+\subsubsection{拆分+递推}
+
+\begin{align*}
+    D_n &= \begin{vmatrix}
+        1+a_1^2 & a_1a_2 & .. & a_1a_n \\
+        a_2a_1 & 1+a_2^2 & .. & a_2a_n \\
+        .. & .. & .. & .. \\
+        a_na_1 & a_na_2 & .. & 1 + a_n^2  
+    \end{vmatrix} \\
+    &= \begin{vmatrix}
+        1+a_1^2 & a_1a_2 & .. & 0 \\
+        a_2a_1 & 1+a_2^2 & .. & 0 \\
+        .. & .. & .. & .. \\
+        a_na_1 & a_na_2 & .. & 1  
+    \end{vmatrix} + \begin{vmatrix}
+        1+a_1^2 & a_1a_2 & .. & a_1a_n \\
+        a_2a_1 & 1+a_2^2 & .. & a_2a_n \\
+        .. & .. & .. & .. \\
+        a_na_1 & a_na_2 & .. & a_n^2  
+    \end{vmatrix} \\
+    &= D_{n-1} + a_n \begin{vmatrix}
+        1 & 0 & .. & 0 \\
+        0 & 1 & .. & 0 \\
+        .. & .. & .. & .. \\
+        a_1 & a_2 & .. & a_n
+    \end{vmatrix} = D_{n-1} + a_n^2
+\end{align*}
+
+所以 
+
+\[
+D_n = 1 + \sum_{i=1}^{n}a_i^2
+\]
+
+\subsection{Vandermonde 行列式}
+
+\subsubsection{齐次行列式}
+
+\begin{align*}
+    \begin{vmatrix}
+        a_1^{n-1} & a_1^{n-2}b_1 & .. & a_1b_1^{n-2} & b_1^{n-1} \\
+        a_2^{n-1} & a_2^{n-2}b_2 & .. & a_2b_2^{n-2} & b_2^{n-1} \\
+        .. & .. &.. &.. &..  \\ 
+        a_n^{n-1} & a_n^{n-2}b_n & .. & a_nb_n^{n-2} & b_n^{n-1} \\
+    \end{vmatrix}
+\end{align*}
+
+若 $a_1a_2..a_n \ne 0$，那么每一行 $i$ 都提取因子 $a_i^{n-1}$ 得到
+
+\begin{align*}
+    & = (a_1a_2..a_n)^{n-1}\begin{vmatrix}
+        1 & b_1/a_1 & .. & (b_1/a_1)^{n-2} & (b_1/a_1)^{n-1} \\
+        1 & b_2/a_2 & .. & (b_2/a_2)^{n-2} & (b_2/a_2)^{n-1} \\
+        .. & .. &.. &.. &..  \\ 
+        1 & b_n/a_n & .. & (b_n/a_n)^{n-2} & (b_n/a_n)^{n-1} \\
+    \end{vmatrix} \\
+    &= (a_1a_2..a_n)^{n-1} \prod_{j=2}^{n}\prod_{i=1}^{j-1}(\frac{b_j}{a_j} - \frac{b_i}{a_i})
+\end{align*}
+
+注意到
+
+\[
+\prod_{j=2}^{n}\prod_{i=1}^{j-1}a_ja_i = (a_1a_2.a_n)^{n-1}
+\]
+
+因为 $a_i$ 的次数为它出现在 $a_j$ 的次数 加上它出现在 $a_i$ 的次数
+
+\[
+i-1 + n-(i+1) + 1 = n-1
+\]
+
+所以
+
+\begin{align*}
+& (a_1a_2..a_n)^{n-1} \prod_{j=2}^{n}\prod_{i=1}^{j-1}(\frac{b_j}{a_j} - \frac{b_i}{a_i})  \\
+= & \prod_{j=2}^{n}\prod_{i=1}^{j-1}(a_ib_j - a_jb_i) 
+\end{align*}
+
+此外若存在不同的 $i,j$  满足 $a_i = a_j = 0$，那么这个行列式为 0
+
+如果仅有一个 $i$ 满足 $a_i = 0$，那么对第 $i$ 行展开得到相同类型的行列式
+
+\subsection{多项式}
+
+令 $f_k(k) = x^k + a_{k1}x^{k-1} + a_{k2}x^{k-2} + .. + a_{kk} $
+
+那么
+
+\begin{align*}
+    \begin{vmatrix}
+        1 & f_1(x_1) & f_2(x_1) & .. & f_{n-1}(x_1) \\
+        1 & f_1(x_2) & f_2(x_2) & .. & f_{n-1}(x_2) \\
+        .. & .. &.. &.. &..  \\
+        1 & f_1(x_n) & f_2(x_n) & .. & f_{n-1}(x_n) \\
+    \end{vmatrix} =     \begin{vmatrix}
+        1 & x_1 + a_{11} & x_1^2 + a_{21}x_1 + a_{22} & .. & f_{n-1}(x_1) \\
+        1 & x_2 + a_{11} & x_2^2 + a_{21}x_2 + a_{22} & .. & f_{n-1}(x_2) \\
+        .. & .. &.. &.. &..  \\
+        1 & x_n + a_{11} & x_n^2 + a_{21}x_n + a_{22} & .. & f_{n-1}(x_n) \\
+    \end{vmatrix}
+\end{align*}
+
+我们可以先用第一列消去后面所有列的 0 次项，然后用第二列消去后面所有列的一次项，最终所有都只包含最高次项。
+所以得到
+
+\[
+\prod_{1 \le i < j \le n}(x_j -x_i)
+\]
+
+\subsubsection{三角多项式}
+
+首先推导一个等式
+
+\begin{align*}
+    \cos{kx} + \text{i} \sin kx &= \text{e} ^{\text{i} kx} = \left( \cos x + \text{i} \sin x \right)^k \\
+    &= \binom{k}{0}\cos^k x + \binom{k}{1}\text{i} \sin x \cos^{k-1} x - \binom{k}{2}\cos^{k-2} x (1- \cos^2 x)  \\
+    & - \binom{k}{3}\text{i} \sin^3 x \cos^{k-3} x + \binom{k}{4}\cos^{k-4} x (1- \cos^2 x)^2  \\
+    & + \binom{k}{5}\text{i} \sin^5 x \cos^{k-5} x  - \binom{k}{6}\cos^{k-6} x (1- \cos^2 x)^3 + .. \\
+    & + \binom{k}{k-1}\text{i}^{k-1} \sin^{k-1} x \cos x + \binom{k}{k}\text{i}^k \sin^k x
+\end{align*}
+
+
+比较实部后发现， $\cos kx$ 可以表示成 $\cos x$ 的多项式，而且它的最高次为 $k$，最高次的系数为 $2^{k-1}$
+
+注意当 $k$ 为奇数时有，考虑奇数项和偶数项的对称性
+\[
+    \binom{k}{0} + \binom{k}{2} .. + \binom{k}{k-1} = 2^{k-1}
+\]
+
+当 $k$ 为偶数时，
+
+\begin{align*}
+\binom{k}{2} + \binom{k}{4} + .. + \binom{k}{k-2} &= \binom{k-1}{2} + \binom{k-1}{4} .. + \binom{k-1}{k-2} \\
+& + \binom{k-1}{1} + \binom{k-1}{3} .. + \binom{k-1}{k-3} \\
+&= 2^{k-1} - 2
+\end{align*}
+
+两边同时加上 $\binom{k}{0}$ 和 $\binom{k}{k}$ 得到
+
+\[
+\binom{k}{0} + \binom{k}{2} + .. + \binom{k}{k} = 2^{k-1}
+\]
+
+所以下面的行列式
+
+\begin{align*}
+    \begin{vmatrix}
+        1 & \cos \theta_1 & \cos 2\theta_1 & .. & \cos(n-1)\theta_1 \\
+        1 & \cos \theta_2 & \cos 2\theta_2 & .. & \cos(n-1)\theta_2 \\
+        .. & .. &.. &.. &.. \\
+        1 & \cos \theta_n & \cos 2\theta_n & .. & \cos(n-1)\theta_n \\
+    \end{vmatrix}
+\end{align*}
+
+可以逐列消去只保留最高次项，然后利用 Vandermonde 行列是计算得到
+
+\[
+2^{\binom{n-1}{2}}\prod_{1 \le i < j \le n}\left( \cos \theta_j - \cos \theta_i \right)
+\]
+
+\subsubsection{Another example}
+
+\begin{align*}
+    \begin{vmatrix}
+        \sin \theta_1 & \sin 2 \theta_1 & .. & \sin n \theta_1 \\
+        \sin \theta_2 & \sin 2 \theta_2 & .. & \sin n \theta_2 \\
+        .. & .. & .. & .. \\
+        \sin \theta_n & \sin 2 \theta_n & .. & \sin n \theta_n \\
+    \end{vmatrix}
+\end{align*}
+
+利用和差化积公式有
+
+\[
+\sin kx - \sin(k-2)x = 2 \sin x \cos (k-1)x
+\]
+
+然后把第 $n-2$ 列乘以 $-1$ 加到第 $n$ 列，以此类推得到
+
+\begin{align*}
+    \begin{vmatrix}
+        \sin \theta_1 & \sin 2 \theta_1 & 2\sin\theta_1 \cos 2 \theta_1 & .. & 2\sin\theta_1 \cos (n-1) \theta_1\\
+        \sin \theta_2 & \sin 2 \theta_2 & 2\sin\theta_2 \cos 2 \theta_2 & .. & 2\sin\theta_2 \cos (n-1) \theta_2\\
+        .. & .. & .. & .. & ..\\
+        \sin \theta_n & \sin 2 \theta_n & 2\sin\theta_n \cos 2 \theta_n & .. & 2\sin\theta_n \cos (n-1) \theta_n\\
+    \end{vmatrix} = 2^{\binom{n}{2}}\prod_{i=1}^{n} \sin \theta_i \prod_{1 \le i < j \le n}\left( \cos \theta_j - \cos \theta_i \right)
+\end{align*}
+
+\subsubsection{多项式命题证明}
+
+设 $n$ 次多项式
+
+\[
+f(x) = a^nx^n + a_{n-1}x^{n-1} + .. + a_1x + a_0
+\]
+
+有 $n+1$ 个不同的根 $b_1, b_2, .. b_{n+1}$，证明 $f(x)$ 是零多项式。
+
+根据题意可以得到 $a_0, a_1, .. a_n$ 满足是如下关于 $y$ 方程的解
+
+
+\begin{align*}
+y + b_1y + .. + b_1^{n-1}y^{n-1} + b_1^ny^{n} &= 0 \\
+y + b_2y + .. + b_2^{n-1}y^{n-1} + b_2^ny^{n} &= 0 \\
+&.. \\
+y + b_ny + .. + b_n^{n-1}y^{n-1} + b_n^ny^{n} &= 0 \\
+\end{align*}
+
+这个方程对应的行列式为
+
+\[
+\begin{vmatrix}
+    1 & b_1 & b_1^2 & .. &b_1^n \\
+    1 & b_2 & b_2^2 & .. &b_2^n \\
+    .. & .. &.. &.. &..  \\
+    1 & b_n & b_n^2 & .. &b_n^n \\
+\end{vmatrix} = \prod_{1 \le i < j \le n}\left( b_j - b_i\right)
+\]
+
+因为 $b_j \ne b_i$，所以行列式不为零，所以方程唯一的解是 $a_0 = a_1 = a_2 = .. = a_n = 0$
+
+\section{三角函数公式}
+
+\subsection{和差化积}
+
+\begin{align*}
+    \sin x + \sin y &= 2 \sin(\frac{x+y}{2}) \cos (\frac{x-y}{2}) \\
+    \cos x + \cos y &= 2 \cos(\frac{x+y}{2}) \cos (\frac{x-y}{2}) \\
+\end{align*}
+
+\subsection{积化和差}
+
+\begin{align*}
+   \sin x \cos y &= \frac{\sin(x+y) + \sin(x-y)}{2}  \\
+   \cos x \sin y &= \frac{\sin(x+y) - \sin(x-y)}{2}  \\
+   \sin x \sin x &= \frac{\cos(x-y) - \cos(x+y)}{2} \\
+   \cos x \cos x &= \frac{\cos(x-y) + \cos(x+y)}{2} \\
+\end{align*}
+
+\section{实变函数}
+
+\subsection{点集拓扑}
+
+证明 $f: \mathbb{R} \to \mathbb{R}$，那么 $f(x)$ 不连续但是右侧极限存在的点是可数集。
+
+令 
+
+\[
+E_n = \{ x \,\vert\, \exists \delta > 0,\, \forall x_1,x_2 \in (x-\delta, x+\delta),\, \lvert f(x_1) - f(x_2) \rvert \le \frac{1}{n}\}
+\]
+
+显然 $f(x)$ 连续的点可以表示为
+
+\[
+\bigcap_{n=1}^{\infty}E_n
+\]
+
+记 $f(x)$ 右极限存在的点是 $S$，那么题目中描述的点集就是
+
+\[
+S \setminus \bigcap_{n=1}^{\infty}E_n = \bigcup_{n=1}^{\infty}S \setminus E_n
+\]
+
+所以我们只需要证明 $S \setminus E_n$ 是可数集。
+
+我们固定 $n$ 取 $E_n$，然后取 $x \in E_n$，因为 $x \in S$，所以我们可以取到 $\delta$ 满足
+
+\[
+\forall x_1,\, x<x_1 < x+ \delta,\, \lvert f(x_1) - f(x+0) \rvert \le \frac{1}{2n}
+\]
+
+由此可以得到
+
+
+\[
+\forall x_1,x_2 \in (x, x+\delta),\, \lvert f(x_1) - f(x_2) \rvert \le \frac{1}{n}
+\]
+
+所以我们对任意 $x \in S \setminus E_n$ 都能构造出一个区间 $I_x$，满足 $I_x \subseteq E_n$从而有 $I_x \cap (S \setminus E_n) = \emptyset$
+
+因此，若 $x_1,\, x_2 \in S \setminus E_n$ 时，$I_{x_1}$ 和 $I_{x_2}$ 一定是不相交的，如果它们相交，相交的部分一定包含 $x_1,\, x_2$ 其中一个，
+这个和 $I_{x_1} \cap S \setminus E_n = \emptyset$ 矛盾。
+
+所以 $S \setminus E_n$ 可以映射到不相交的开区间，所以 $S \setminus E_n$ 是至多可数的。
+
+\section{初等数论}
+
+\subsection{整除理论}
+
+\subsubsection{LCM}
+
+若 $a_j \vert c,\, 1 \le j \le k$ 那么必然有 $[a_1,..a_k] \vert c$
+
+证明:
+
+令 $L = [a_1,a_2, .. ,a_k]$，用 $c$ 对 $L$ 作带余除法得到
+
+\[
+c = qL + r
+\]
+
+由 $a_j \vert c,\, a_j \vert L$ 能得到 $a_j \vert r$，所以 $r$ 也是公倍数，但因为 $r < L$，所以 $r$ 只能是 $0$
+
+\subsubsection{LCM 数乘}
+
+$m[a_1,a_2,..,a_k] = [ma_1,ma_2,..,ma_k]$
+
+证明：
+
+令 $L= [a_1,a_2,..,a_k],\, L' =[ma_1, ma_2,..,ma_k]$，显然 $a_i \vert L$ 得到 $ma_i \vert mL$，所以 $mL$ 是 $ma_i$ 公倍数。
+
+此外，$ma_i \vert L'$ 可以得到 $a_i \vert L'/m$，所以 $L'/m$ 是 $a_1,a_2,..,a_k$ 公倍数。
+
+所以
+
+\begin{align*}
+    mL &\ge L' \\
+    L'/m &\ge L
+\end{align*}
+
+所以 $mL = L'$
+
+\subsubsection{GCD}
+
+$D=(a_1,..,a_k)$ 的充分必要条件是
+
+\begin{enumerate}
+    \item $\forall 1 \le j \le k,\, D \vert a_j$
+    \item $\forall d \vert a_j(1 \le j \le k),\, d \vert D$
+\end{enumerate}
+
+我们记 $a_1,a_2,..,a_k$ 所有的公约数 $d_1,d_2,..$ 的最小公倍数为 $L$，然后我们证明 $L = D$
+根据之前我们证明的最小公倍数的性质，我们可以得到 $L \vert a_j,\, 1 \le j \le k$，所以 $L$ 是公约数，
+
+因为 $D$ 是公约数，所以 $D \vert L$，又因为 $D$ 是最大公约数，所以有 $L \le D$，所以 $L = D$
+
+\subsubsection{GCD 数乘}
+
+$m(b_1,..,b_k) = (mb_1,..,mb_k)$
+
+证明：
+
+$D_1 \vert b_i$ 可以得到 $mD_1 \vert mb_i$，所以左边小于等于右边 $mD_1 \le D_2$。
+
+同理 $D_2 \vert mb_i$ 可以得到 $D_2/m \vert b_i$，所以 $D_2/m \le D_1$，即 $D_2 \le mD_1$
+
+结合上面得到 $mD_1 = D_2$
+
+\subsubsection{GCD 结合律}
+
+$(a_1,a_2,a_3,..,a_k) = ((a_1,a_2),a_3,..,a_k)$
+
+这个用最大公约数 $D$ 是公约数的最小公倍数证明即可。
+
+\subsection{互素 I}
+
+$(m,a) = 1$ 那么 $(m,ab) = (m,b)$
+
+\[
+(m,b) = (m,b(m,a)) = (m,(mb,ab)) = ((m,mb),ab) = (m,ab)
+\]
+
+\subsubsection{互素 II}
+
+$(m,a)=1$ 若 $m \vert ab$ 则 $m \vert b$
+
+用上面的结论即可，$(m,b) = (m,ab) = m$
+
+
+\subsubsection{互素 III}
+
+$(a,b) = 1$ 若 $a \vert c$ 且 $b \vert c$，那么 $ab \vert c$
+
+证明: 令 $c = ka$，因为 $b \vert ka$ 得到 $b \vert k$，两边乘上 $a$ 得到 $ab \vert ka$，
+也就是 $ab \vert c$
+
+
+\subsection{最大公约数和最小公倍数}
+
+$[a_1,a_2](a_1,a_2) = a_1a_2$
+
+证明：
+
+令 $L=[a_1,a_2]$ 我们先假定 $(a_1,a_2) = 1$，接下来只要证明 $[a_1,a_2] = a_1a_2$。
+
+根据之前的结论有 $L \vert a_1a_2$，此外根据 $(a_1, a_2) = 1$，以及 $a_1 \vert L$ 且 $a_2 \vert L$
+得到 $a_1a_2 \vert L$
+
+所以 $a_1a_2 = L$
+
+当 $(a_1,a_2) \ne 1$ 时，有 $(a_1/D, a_2/D) = 1$，此时有
+
+\begin{align*}
+[a_1/D, a_2/D] &= a_1a_2/D^2 \\
+[a_1, a_2] (a_1, a_2) &= a_1a_2
+\end{align*}
+
+\subsubsection{线性组合}
+
+\begin{enumerate}
+    \item $(a_1,a_2,..,a_k) = \min \{ s \,\vert\, s = x_1a_1 + x_2a_2 + .. + a_kx_k,\, s > 0 \}$
+
+    最大公约数是最小的线性组合
+
+    证明：显然左边一定能整除右边，令右边为 $D'$ 然后对 $a_i$ 作带余除法得到
+
+    \[
+        D' = q_ia_i + r_i
+    \]
+
+    显然 $r_i$ 也是线性组合，因为 $D'$ 是最小的，所以 $r_i = 0$，所以 $a_i \vert D'$，所以 $D' \vert D$
+
+    \item 存在整数 $x_1,x_2, .., x_k$ 满足
+
+    $(a_1,a_2,..,a_k) = x_1a_1 + x_2a_2 + .. + x_ka_k$
+
+    证明：
+
+    我们只要证明 $\{ s \,\vert\, s = x_1a_1 + x_2a_2 + .. + a_kx_k,\, s > 0 \}$ 不是空集即可，因为
+
+    \[
+        x_1 = a_1, x_2 = a_2, .., x_k =a_k
+    \]
+
+    时有
+
+    \[
+        s= a_1^2+ a_2^2 + .. + a_k^2 > 0
+    \]
+
+\end{enumerate}
+
+\end{document}
+

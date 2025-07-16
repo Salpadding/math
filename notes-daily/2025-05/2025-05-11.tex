@@ -1,0 +1,128 @@
+\subsubsection{Topology}
+
+\begin{exercise}
+    let $V, W \subseteq \mathbb{R}^n$ and $V \cap \overline{W} = \emptyset,\: \overline{V} \cap W = \emptyset$, prove:
+
+    for any $x \in V,\: y \in W$ and $\gamma: [0,1] \to \mathbb{R}^n$ is a continuous function, and  $\gamma(0) = x,\: \gamma(1) = y$
+
+    then $\exists 0 < t < 1, \gamma(t) \notin V \cup W$
+
+\end{exercise}
+
+\begin{proof}
+    we define: 
+    
+    \begin{align*}
+        t_0 &= \sup_{0 \le t \le 1} \{ t: \gamma(t) \in V \} \\
+           z &= \gamma(t_0)
+    \end{align*}
+
+    let's define $t_n \to t_0, \gamma(t_n) \in V$, since $\overline{V}$ is closed and $\gamma$ is continuous, we have
+
+    \[
+        \lim_{n \to \infty}\gamma(t_n) = \gamma(t_0) \in \overline{V}
+    \]
+
+    since $z \in \overline{V}$ then we must have $z \notin W$ and $t_0 < 1$ let's discuss on if $z \in V$
+
+    \begin{enumerate}
+        \item $z \notin V$
+
+        then $t_0$ is what we want
+
+        \item $z \in V$
+
+        then we have $z \notin (\overline{W})^C$, let's define $F = (\overline{W})^C$, since $F$ is open, we have an open set $V_z \subseteq F$,
+        since $\gamma$ is continuous, so $\gamma^{-1}(V_z)$ is also an open set, and we have $t_0 \in \gamma^{-1}(V_z)$
+
+        let's pick $0 < \epsilon < 1 - t_0$ be small enough, so that $t_0 + \epsilon \in \gamma^{-1}(V_z)$
+
+        because if $z' \in V$, then $t_0 + \epsilon$ is contradict with that $t_0$ is sup.
+
+        so $t_0 + \epsilon$ is what we want
+    \end{enumerate}
+\end{proof}
+
+
+\begin{exercise}
+    if $A$ is a set under metric space, then below statements are identical
+
+    \begin{enumerate}
+        \item $x$ is a limit point of $A$
+
+        \item exists a sequence $a_n \in A \setminus \{ x \}$ and $a_n \to x$
+
+        \item exists a distinct sequence $a_n$ in $A$ and $a_n \to x$
+
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item $1 \to 2$
+
+        we construct a sequence like below:
+
+        \begin{align*}
+            a_1 & \in A \setminus \{x\} \quad \text {and} \quad d(a_1, x) < 1 \\
+            a_2 & \in A \setminus \{x\} \quad \text {and} \quad d(a_2, x) < \min(d(a_1, x), \frac{1}{2}) \\
+            .. \\
+            a_n & \in A \setminus \{x\} \quad \text {and} \quad d(a_n, x) < \min(d(a_{n-1}, x), \frac{1}{n}) \\
+        \end{align*}
+
+        by definition of limit point, $a_n$ is well defined and $a_n \to x$
+
+        \item $2 \to 3$
+
+        assume $a_n \to x$ and $\forall n, a_n \ne x$, we then pick a subsequence of $a_n$:
+
+        \begin{align*}
+            b_1 &= a_{n_1} \quad \text{and} \quad d(b_1, x) < 1 \\
+            b_2 &= a_{n_2} \quad \text{and} \quad n_2 > n_1,\: d(b_2, x) < \min(d(b_1, x), \frac{1}{2}) \\
+            .. \\
+            b_k &= a_{n_k} \quad \text{and} \quad n_k > n_{k-1},\: d(b_k, x) < \min(d(b_{k-1}, x), \frac{1}{k}) \\
+        \end{align*}
+
+        \item $3 \to 1$
+
+        assume $a_n$ is distinct, so $x$ occurs at most once in $a_n$, so we can remove this item and get a subsequence $b_n \in A \setminus \{ x \}$
+        and $b_n \to x$
+
+        by definition of metric space, for any open ball $B(x, r), r > 0$ we have $N$ and $\forall n \ge N,\: b_n \in B(x,r)$
+
+        since $b_N \in A \setminus \{ x \}$, so $x$ is a limit point of $A$
+    \end{enumerate}
+\end{proof}
+
+
+\begin{exercise}
+    let $\{ a_n \} $ contains points under metric space, and we define
+
+    \[
+        E(x, r) = \{ n : d(a_n, x) < r \}
+    \]
+
+    and
+
+    \[
+        F = \{ x: \forall r > 0, E(x,r) \text{\: is infinite }\}
+    \]
+
+    prove: $F$ is closed
+
+\end{exercise}
+
+\begin{proof}
+    We will prove $F' \subseteq F$. assume $x \in F'$ and there exists a sequence $x_n,\: x_n \in F \setminus \{x\}$ and $x_n \to x$
+
+    we will prove $x \in F$. consider any $r > 0$, since $x_n \to x$, we can pick $N$ be large enough so that
+    $d(x_N, x) < r/2$, and since $x_N \in F$, we have $E(x_N, r/2)$ be infinite. let's prove $E(x_N, r/2) \subseteq E(x,r)$:
+
+    \[
+        d(a_n, x) \le d(a_n, x_N) + d(x_N, x) < r
+    \]
+
+    so $E(x,r)$ is infinite and $x \in F$
+\end{proof}

@@ -1,0 +1,305 @@
+%!LW recipe=latexmk (xelatex)
+% a4 页面 字体大小12像素
+\documentclass[12pt,a4paper]{ctexart}
+\input\input{../macros.tex}
+\title{学习记录}
+\author{朱英杰}
+\date{\today}
+
+\begin{document}
+\zihao{-4}
+\maketitle
+\tableofcontents
+
+\section{组合数学}
+
+\subsection{线性递推方程}
+
+\[
+h_n = a_1h_{n-1} + a_2h_{n-2} + .. +a_kh_{n-k}
+\]
+
+不难得到，若 $x_n$ 满足方程，那么 $c x_n$ 也满足，同理，若 $x_n,\, y_n$ 满足，那么 $x_n + y_n$ 也满足，
+所以该方程的解可以用几个特解的线性组合表示。
+
+\subsection{特征方程}
+
+特解可以用如下方程求解
+
+\[
+x^k = a_1x^{k-1} + a_2x^{k-2} + .. + a_k
+\]
+
+若以上方程有实根 $q$，那么 $x = q^n$ 就是递推方程的特解。若以上方程有根 $q_1,q_2,..,q_m$，
+那么通解可以表示为
+
+\[
+c_1q_1^n + c_2q_2^n + .. + c_mq_m^n
+\]
+
+若有 $k$ 个不同实根，那么给定初值条件 $h_0, h_1, .., h_{k-1}$，如下的方程一定有解
+
+\begin{align*}
+    h_0 &= x_1 + x_2 + .. + x_k \\
+    h_1 &= x_1q_1 + x_2q_2 + .. + x_kq_k \\
+    .. & .. \\
+    h_{k-1} &= x_1q_1^{k-1} + x_2q_2^{k-1} + .. + x_kq_k^{k-1} \\
+\end{align*}
+
+因为上面系数对应的行列式是 Vandermonde 行列式
+
+\section{实变函数}
+
+\subsection{点集拓扑}
+
+\subsubsection{极限点}
+
+若 $E \subseteq \mathbb{R}^n$，且 $x \in \mathbb{R}^n$。 若存在 $E$ 中互异的点列 $\{ x_n \}$ 满足
+
+\[
+\lim_{n \to \infty} \lvert x_n - x \rvert = 0
+\]
+
+那么称 $x$ 是 $E$ 的极限点
+
+注意给定集合 $E$，它的极限点不一定包含于 $E$ 中。
+
+\subsubsection{定理}
+
+若 $E \subseteq \mathbb{R}^n$ 那么 $x$ 是 $E$ 的极限点等价于如下命题
+
+\[
+\bigcap_{n = 1}^{\infty} \left( B(x, \frac{1}{n}) \setminus \{ x \} \right) \cap E \ne \emptyset \quad B(x,\frac{1}{n}) = \{ y \, \vert \, \lvert y-x\rvert < \frac{1}{n} \}
+\]
+
+
+证明：
+
+\begin{enumerate}
+    \item 充分性
+
+    我们将递归地构造一个互异的点列，首先取 $y_0 \in E,\, y_0 \ne x$ 满足 $\lvert y_0 -x \rvert < 1$。根据命题，这个 $y_0$ 一定是可以取到的，
+    只需要将 $n=1$ 代入即可。因为 $y_0 \ne x$，那么一定存在一个足够大的自然数 $N_1$ 满足  
+
+    \[
+        \frac{1}{N_1} \le \lvert y_0 - x\rvert < \frac{1}{1}
+    \]
+
+    我们把这个 $N_1$ 代入命题，可以去到一个离 $x$ 更近的点 $y_1$。然后以此类推下去可以得到 $y_2,\, y_3, ..$，
+    注意到有
+
+    \[
+    \lvert y_{m} -x \rvert <\lvert y_{m-1} -x \rvert < .. < \lvert y_{1} -x \rvert < \lvert y_{0} -x \rvert
+    \]
+
+    所以 $y_0,y_1, ..$ 都是互异的点，而且根据数学归纳法可以证明 $\lvert y_{m} - x\rvert < \frac{1}{m+1}$:
+
+    \[
+        \lvert y_{m+1} - x\rvert < \frac{1}{N_{m+1}} \le \lvert y_m -x \rvert < \frac{1}{m+1}
+    \]
+
+    因为 $N_{m+1}$ 是整数，所以有
+
+    \[
+        \frac{1}{N_{m+1}} \le \frac{1}{(m+1) + 1}
+    \]
+
+    所以
+
+    \[
+        \lvert y_{m+1} - x\rvert < \frac{1}{(m+1) + 1}
+    \]
+
+    所以我们构造了一个收敛到 $x$ 的互异的点列 $y_n$
+
+    \item 必要性
+
+    用极限的性质即可证明，互异的点列至多只包含一项等于 $x$，我们可以去掉这一项得到一个每项都不为 $x$
+    且收敛到 $x$ 的点列。
+
+\end{enumerate}
+
+\subsubsection{度量}
+
+$\mathbb{R}^n$ 上的度量有如下关系
+
+\begin{align*}
+    l_1 & \le l_2 \le \sqrt{n} l_1 \\
+    l_{\infty} & \le l_1 \le n l_{\infty}
+\end{align*}
+
+\subsubsection{Bolzano-Weierstrass Theorem}
+
+$\mathbb{R}^n$ 中任意一个无限且有界的点集至少有一个极限点。
+
+$\mathbb{R}$ 上有界序列一定有收敛的子列，$\mathbb{R}^n$ 同样有这样的定理。
+根据 $l_{\infty}$ 和 $l_2$ 的等价性，集合 $E \subseteq \mathbb{R}^n$ 如果有界，那么它的每个点 $x = (x_1,x_2,..,x_n)$，每个点各自的 $x_1,x_2,..,x_n$ 也都是有界的。
+
+我们取 $E$ 中的任意一个互异的点列 $x_n$，因为 $E$ 是无限集，所以我们可以这么做。
+
+我们先考虑 $x_1$，因为 $x_1$ 有界，我们可以利用实数集上的 Bolzano-Weierstrass Theorem 得到子列 $x_{f(n)}$，
+对这个子列有 $\langle x_{f(n)}, \mathbf{e}_1 \rangle$ 收敛。以此类推我们可以找到子列 $g(f(n))$ 满足
+$\langle x_{g(f(n))}, \mathbf{e}_1 \rangle$ 和 $\langle x_{g(f(n))}, \mathbf{e}_2 \rangle$ 都收敛。
+
+重复 $n$ 次后我们就得到了收敛的子列 $x_{h(n)}$，它对 $1 \le i \le n$ 都有 $\langle x_{h(n)}, \mathbf{e}_i\rangle$ 收敛。
+
+\subsubsection{闭集的定义}
+
+闭集通常有两种定义，第一种将闭集定义为开集的补集，第二种定义为包含所有极限点的集合。如果用邻域
+定义开集和极限点，那么这两种定义是等价的，下面给出证明。
+
+\begin{enumerate}
+    \item 开集的补集包含了所有极限点
+
+    假设某个开集 $X$ 的补集 $X^C$，它有不在集合内的极限点 $x,\, x \notin X^C$，根据补集的性质，那么有 $x \in X$。
+    因为开集的所有点都是内点，所以存在邻域 $B(x, r)$ 满足 $B(x,r) \cap X^C = \emptyset$，这个和 $x$ 是 $X^C$ 极限点矛盾了。
+
+    \item 包含了所有极限点的集合，它的补集是开集
+
+    令 $X$ 包含了所有极限点，令 $x \in X^C$。显然 $x$ 不是 $X$ 的极限点，所以存在 $x$ 去心邻域 $B(x, r) \setminus \{ x \}$，满足
+    $ \left( B(x, r) \setminus \{ x \} \right) \cap X = \emptyset$，所以有 $\left( B(x, r) \setminus \{ x \} \right) \in X^C$。
+\end{enumerate}
+
+\section{高等代数}
+
+\subsection{矩阵乘法}
+
+矩阵乘法的行向量视角 $A: \mathbb{R}^{m \times n},\, B: \mathbb{R}^{n \times k}$, $AB$ 可以理解为
+
+\begin{align*}
+    A &= \begin{bmatrix}
+        \mathbf{x}_1^T \\
+        \mathbf{x}_2^T \\
+        .. \\
+        \mathbf{x}_m^T \\
+    \end{bmatrix}\quad
+    B = \begin{bmatrix}
+        \mathbf{y}_1^T \\
+        \mathbf{y}_2^T \\
+        .. \\
+        \mathbf{y}_n^T \\
+    \end{bmatrix} \\
+    AB &= \begin{bmatrix}
+        c_{11}\mathbf{y}_1 + c_{12}\mathbf{y}_2 + .. +  c_{1n}\mathbf{y}_n \\
+        c_{21}\mathbf{y}_1 + c_{22}\mathbf{y}_2 + .. +  c_{2n}\mathbf{y}_n \\
+         .. \\
+        c_{m1}\mathbf{y}_1 + c_{m2}\mathbf{y}_2 + .. +  c_{mn}\mathbf{y}_n \\
+    \end{bmatrix}
+\end{align*}
+
+\subsection{矩阵乘法与行列式}
+
+若 $A,B \in \mathbb{R}^{n \times n}$，那么有
+
+\[
+\det(AB) = \det(A) \det(B)
+\]
+
+证明:
+
+\begin{align*}
+    |A||B| = \begin{vmatrix}
+        A & O \\
+        I_n & B \\
+    \end{vmatrix} =     \begin{vmatrix}
+        O & -AB \\
+        I_n & B \\
+    \end{vmatrix}  =  (-1)^{n^2} (-1)^n|AB| = |AB|
+\end{align*}
+
+因为 $n^2+n = n(n+1)$ 必然是一个偶数
+
+以上行变化可以理解为，将第 $n+1$ 到 $2n$ 行进行线性组合后加到第 $1$ 到 $n$ 行。线性组合后得到的矩阵为
+
+\begin{align*}
+    B &= \begin{bmatrix}
+        \beta_1^T \\
+        \beta_2^T \\
+        .. \\
+        \beta_n^T \\
+    \end{bmatrix} \\
+    -AB &= -\begin{bmatrix}
+        a_{11}\beta_1^T + a_{12}\beta_2^T + .. + a_{1n}\beta_n^T \\
+        a_{21}\beta_1^T + a_{22}\beta_2^T + .. + a_{2n}\beta_n^T \\
+        .. \\
+        a_{n1}\beta_1^T + a_{n2}\beta_2^T + .. + a_{nn}\beta_n^T \\
+    \end{bmatrix}
+\end{align*}
+
+\section{Cauchy-Binet Formula}
+
+Proof: let $m < n,\, A \in \mathbb{R}^{m \times n},\, B \in \mathbb{R}^{n \times m}$, by Laplace theorm, we have:
+
+let 
+
+\begin{align*}
+    \alpha &= (n+1) + (n+2) +  .. + (n+m) + 1 + 2 + .. + m  \\
+    &= 2\binom{m+1}{2} + nm \\
+    &= nm 
+\end{align*}
+
+只考虑奇偶性可以去掉偶数项
+
+\begin{align*}
+    C = \begin{vmatrix}
+        A_{m \times n} & O_{m}  \\
+       I_n & B_{n \times m} \\
+    \end{vmatrix}  &= \begin{vmatrix}
+        O_{m \times n} & -AB  \\
+       I_n & B_{n \times m}  \\
+    \end{vmatrix}= (-1)^{\alpha + m} |AB| =(-1)^{nm + m} |AB|
+\end{align*}
+
+we also expand $C$ by first m rows.
+
+let 
+
+\[
+\beta=1+2+.. +m + j_1+j_2 + .. +j_m = \binom{m+1}{2} + j_1 + j_2 + .. + j_m
+\],
+
+also let
+
+\[
+\gamma = 1+2+.. + (n-m) + i_1 + i_2 + .. + i_{n-m}
+\]
+
+\begin{align*}
+    |C| &= \sum_{1 \le j_1 < j_2 .. < j_m \le n}A \begin{bmatrix}
+        1 & 2 & .. & m \\
+        j_1 & j_2 & .. & j_m \\
+    \end{bmatrix}(-1)^{\beta} \begin{vmatrix}
+       \mathbf{e}_{i_1} & \mathbf{e}_{i_2} & .. & \mathbf{e}_{i_{n-m}} & B
+    \end{vmatrix} \\
+    &= \sum_{1 \le j_1 < j_2 .. < j_m \le n}A \begin{bmatrix}
+        1 & 2 & .. & m \\
+        j_1 & j_2 & .. & j_m \\
+    \end{bmatrix}(-1)^{\beta}(-1)^{\gamma}B \begin{bmatrix}
+       j_1 & j_2 & .. j_m \\ 
+       1 & 2 & .. & m
+    \end{bmatrix}
+\end{align*}
+
+\begin{align*}
+\alpha + m + \beta + \gamma &= nm + m + \binom{n+1}{2} + \binom{m+1}{2} + \binom{n-m+1}{2} \\
+&= nm + m + \frac{n^2 + n + m^2 + m + n^2 -2mn + m^2 + n-m }{2} \\
+&= nm + m + n^2  + m^2 -mn + n \\
+&= 0
+\end{align*}
+
+所以得到
+
+\begin{align*}
+    |AB| = \sum_{1 \le j_1 < j_2 .. < j_m \le n}A \begin{bmatrix}
+        1 & 2 & .. & m \\
+        j_1 & j_2 & .. & j_m \\
+    \end{bmatrix}B \begin{bmatrix}
+       j_1 & j_2 & .. j_m \\ 
+       1 & 2 & .. & m
+    \end{bmatrix}
+\end{align*}
+
+\end{document}
+
+
+

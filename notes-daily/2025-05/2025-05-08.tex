@@ -1,0 +1,187 @@
+\subsubsection{Topology}
+
+\begin{exercise}
+    let $K$ is a compact set under metric space $(X,d)$ and $K \ne X$ prove that: $K$ is closed.
+
+
+\end{exercise}
+
+\begin{proof}
+    let $p \in K^C$, for every $q \in K$, create a open ball $B(q, \epsilon_q)$ and cover $K$:
+
+    \[
+        K \subseteq \bigcup_{q \in K} B(q, \epsilon_{q}), \: \epsilon_{q} < \frac{1}{2}d(p, q)
+    \]
+
+    since $K$ is compact, there exists a finite sub cover
+
+    \[
+    K \subseteq \bigcup_{n=1}^{N} B(q_n, \epsilon_{n}), \: \epsilon_{n} < \frac{1}{2}d(p, q_n)
+    \]
+
+    then for every $y \in K$, we have 
+
+    \[
+y \in \bigcup_{n=1}^{N} B(q_n, \epsilon_{n})
+    \]
+
+    for every $y$, exists $1 \le n \le N$ such that
+
+    \[
+        d(y, q_n) < \epsilon_n < \frac{1}{2}d(p, q_n)
+    \]
+
+    for this $n$ we have
+
+    \begin{align*}
+        d(y, p) &\ge d(p,q_n) - d(y, q_n) > d(p,q_n) - \frac{1}{2}d(p, q_n) \\
+        & > \frac{1}{2}d(p, q_n) \ge \frac{1}{2}\min_{n \le N} \left( d(p, q_n) \right)
+    \end{align*}
+
+    now we set 
+
+    \[
+        r = \frac{1}{2}\min_{n \le N}d(p, q_n)
+    \]
+
+
+    so we got
+
+    \[
+        K \subseteq X \setminus B(p, r)
+    \]
+
+    thus we got
+
+    \[
+        B(p,r) \subseteq K^C
+    \]
+
+    so $p$ is a interior point of $K^C$, so $K^C$ is open and $K$ is closed.
+\end{proof}
+
+\begin{exercise}
+    let $K$ be a compact set and $J$ be a closed set and $J \subseteq K$, prove that $J$ is also compact
+\end{exercise}
+
+\begin{proof}
+    let $J$ covered by a group of open sets $V_{\alpha},\, \alpha \in I$
+
+    \[
+        J \subseteq \bigcup_{\alpha \in I} V_{\alpha}
+    \]
+
+    then we have
+
+    \[
+        K \subseteq J \cup J^C \subseteq \bigcup_{\alpha \in I} V_{\alpha} \cup J^C
+    \]
+
+    since $K$ is compact, there exists a finite sub cover of $K$ such that
+
+    \[
+        J \subseteq K \subseteq \bigcup_{n=1}^{N} V_{n} \cup J^C
+    \]
+
+    then we have
+
+    \begin{align*}
+        J & \subseteq \bigcup_{n=1}^{N} V_{n} \cup J^C \\
+        J & \subseteq \bigcup_{n=1}^{N} V_{n} \cup J \\
+        J \cap J & \subseteq \bigcup_{n=1}^{N} V_{n} \cup (J \cap J^C) \\
+        J & \subseteq \bigcup_{n=1}^{N} V_{n}
+    \end{align*}
+
+\end{proof}
+
+\begin{exercise}
+    let $K_{\alpha},\: \alpha \in I$ be a group of compact sets. And for any nonempty finite subset $J \subseteq I$ we have
+
+    \[
+        \bigcap_{\alpha \in J} K_{\alpha} \ne \emptyset
+    \]
+
+    prove that:
+
+    \[
+        \bigcap_{\alpha \in I} K_{\alpha} \ne \emptyset
+    \]
+
+    pick any $K_1$ of  $\{ K_{\alpha}\}$, assume that
+
+    \[
+        K_1 \cap \left( \bigcap_{\alpha \in I} K_{\alpha} \right) = \emptyset
+    \]
+
+    then we have
+
+    \[
+        K_1 \subseteq \bigcup_{\alpha \in I}K_{\alpha}^C
+    \]
+
+    since $K_1$ is compact, and we have a open cover of $K_1$, there should exists a finite sub cover:
+
+    \[
+        K_1 \subseteq \bigcup_{m=1}^{M}K_{\alpha_m}^C
+    \]
+
+    so we have
+
+    \[
+        K_1 \cap K_{\alpha_1} .. \cap K_{\alpha_M} = \emptyset
+    \]
+
+    which is contradict with condition
+\end{exercise}
+
+\begin{exercise}
+    let $E$ be a infinite set and $E \subseteq K$ where $K$ is a compact set on metric space. prove that 
+
+    $E$ has at least one limit point in $K$
+\end{exercise}
+
+\begin{proof}
+    assume  $E'$ is all limit points of $E$ and $E' \cap K = \emptyset$, then we have $K \subseteq (E')^C$
+
+    since $(E')^C$ could be written as
+
+    \[
+        (E')^C = \{ x: \exists r_x > 0,\, B(x, r_x) \cap E \subseteq \{ x \} \}
+    \]
+
+    so we have
+
+    \[
+        E \subseteq K \subseteq \bigcup_{x \in (E')^C} B(x, r_x) \quad B(x, r_x) \cap E \subseteq \{ x \}
+    \]
+
+    since $K$ is compact, there exists finite sub cover:
+
+
+    \[
+        E \subseteq K \subseteq \bigcup_{n=1}^{N} B(x_n, r_n) \quad B(x_n, r_n) \cap E \subseteq \{ x_n \}
+    \]
+
+    then we have
+
+    \[
+        E \cap \bigcup_{n=1}^{N} B(x_n, r_n) = E \subseteq \{ x_1, x_2, .. , x_n \}
+    \]
+
+    which is contradict with that $E$ is infinite.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,237 @@
+\subsubsection{Topology}
+
+\begin{exercise}
+    let $x_k = (x_{1}^{(k)}, x_{2}^{(k)}, .., x_{n}^{(k)})$ and $x=(x_1,x_2, .., x_n)$, prove $x_k \to x$ iff $\forall 1 \le i \le n, x_{i}^{k} \to x_i$
+\end{exercise}
+
+by cauchy inequality, we have:
+
+\begin{proof}
+    \begin{align*}
+        l_{\infty} & \le l_{1} \le nl_{\infty} \\
+        l_2 & \le l_1 \le  \sqrt{n}l_2  \\
+        \frac{1}{\sqrt{n}}l_{\infty} & \le l_2 \le n l_{\infty}
+    \end{align*}
+
+    and if
+
+    \[
+        d_{l_\infty}(x_k, x) = \max_{i \le n}\lvert x_i^{(k)} - x_i \rvert \to 0
+    \]
+
+    then we have $d_{l_{2}}(x_k, x) \le nd_{l_\infty}(x_k,x)$, so $d_{l_2}(x_k, x) \to 0$
+
+    also, if $d_{l_{2}}(x_k, x) \to 0$, then $d_{l_\infty}(x_k, x) \le  \sqrt{n}l_2$, so $d_{l_\infty(x_k, x)} \to 0$
+
+\end{proof}
+
+\begin{exercise}
+    let $x_n \in A$ and $A$ is compact set under metric space, prove: $x_n$ has convergent subsequence.
+\end{exercise}
+
+\begin{proof}
+    let's define:
+
+    \[
+        E = \{ y \in A: y = x_n \: \text{for some } n\}
+    \]
+    
+    divide into two cases:
+
+    \begin{enumerate}
+        \item $E$ is finite
+
+        then all elements of $E$ is limitation of subsequence
+
+        \item $E$ is infinite
+
+        then $E$ is a infinite subset of $A$, so $E$ has at least one limit point $x \in A$
+
+        so for any open neighbour $B(x,1/n)$ we have $B(x, 1/n) \cap E$ contains infinite points. 
+    \end{enumerate}
+\end{proof}
+
+
+\begin{definition}[diam]
+    let $A$ is a set under metric space, then we define
+
+    \[
+        \text{diam}\: A  = \sup \{ d(x,y) : x,y \in A \}
+    \]
+\end{definition}
+
+\begin{definition}[Cauchy Sequence]
+    let $x_n$ be a point sequence of metric space, we define $E_N$ as
+
+    \[
+        E_N = \{ x_n : n \ge N \}
+    \]
+
+    then $x_n$ is cauchy sequence iff
+
+    \[
+        \lim_{N \to \infty}E_N = 0
+    \]
+\end{definition}
+
+
+\begin{exercise}
+    let $K_n$ be compact set under metric space and $K_n \supseteq K_{n+1} .. $, and we have
+
+    \[
+        \lim_{n \to \infty} \text{diam}\: K_n = 0
+    \]
+
+    prove 
+
+    \[
+        K = \bigcap_{n=1}^{\infty}K_n
+    \]
+
+    contains exactly one point
+\end{exercise}
+
+\begin{proof}
+    assume $K$ contains more than two point $x,y$, then we have $\text{diam} K > 0$, which is contradict with
+
+    \[
+        \text{diam}\: K \le \text{diam}\:K_n,\: \forall n
+    \]
+\end{proof}
+
+\begin{exercise}
+    let $x_n$ be a cauchy sequence of compact set $A$, prove: $x_n \to x,\: x \in A$
+\end{exercise}
+
+\begin{proof}
+    we define $E_N$ as: 
+
+    \[
+        E_N = \{ x_n : x_n \ge N \}
+    \]
+
+    and we have
+
+    \[
+        \lim_{N \to \infty} \overline{E_N} = 0
+    \]
+
+    so
+
+    \[
+        E = \bigcap_{N=1}^{\infty} \overline{E_N}
+    \]
+
+    contains exactly one point, assume $E = \{ x \}$, for any $\epsilon > 0$, we have $N_0$ such that $\text{diam}\: E_n \le \epsilon, \forall n \ge N_0$,
+    because $x \in \overline{E_{N_0}}$ we have $B(x, \epsilon) \cap E_{N_0} \ne \emptyset$, assume we have $d(x_m, x) < \epsilon, m \ge N_0$, then $\forall q \ge N_0$, we have:
+
+    \[
+        d(x_q, x) \le d(x_q, x_m) + d(x_m, x) \le 2 \epsilon
+    \]
+\end{proof}
+
+
+\begin{exercise}
+    prove $n^{1/n} \to 1$
+\end{exercise}
+
+\begin{proof}
+    we prove a lemma at first, for $\epsilon \ge 0$:
+
+    \[
+        (1+\epsilon)^n \ge 1 + n\epsilon,\: \forall n \ge 1
+    \]
+
+    for $n =1$, obviously, assume holds for $n = k$, consider $n=k+1$
+
+    \begin{align*}
+        (1+\epsilon)^{k+1} & =(1+\epsilon)^k (1 + \epsilon)  \\
+        & \ge (1+ k\epsilon)(1 + \epsilon) \\
+        & \ge  1+ (k+1) \epsilon
+    \end{align*}
+
+    let's define $t_n = n^{1/n}$, then $t_n \ge 1$ obviously, otherwise we have $t_n^n < 1$, which is contradict with $t_n^n = n \ge 1$.
+
+    then we define $t_n = 1 + \epsilon_n,\: \epsilon_n \ge 0$, then we have
+
+    \begin{align*}
+        (1+\epsilon_n)^n &= n \ge 1 + n \epsilon_n \\
+        \epsilon_n &\le (n-1)/n
+    \end{align*}
+
+    so we have $\epsilon_n \to 0$ and $t_n \to 1$
+    
+    another method, consider that:
+
+    \begin{align*}
+        (1+\epsilon_n)^n = n \ge \frac{n(n-1)}{2}\epsilon_n^2 \\
+        \epsilon_n \le \sqrt{\frac{n-1}{2}}
+    \end{align*}
+\end{proof}
+
+\begin{exercise}
+    prove:
+
+    \[
+        \frac{n^{\alpha}}{(1+p)^n} \to 0
+    \]
+
+    fix $k > \alpha$ and $n > 2k$, then we have
+
+    \begin{align*}
+        (1+p)^n &> 1 + \binom{n}{k}p^k \ge 1 + \frac{n(n-1)..(n-(k-1))}{k!}p^k \\
+        & \ge 1 + \frac{(n/2 )^k}{k!}p^k \\
+        & \ge 1 + \frac{n^k}{2^k k!}p^k
+    \end{align*}
+
+    and 
+
+    \[
+        \frac{n^\alpha}{(1+p)^n} \le \frac{n^{\alpha} 2^k k!}{n^kp^k} \le \frac{2^k k!}{p^k} n^{\alpha - k} \le  \frac{2^k k!}{p^k} \frac{1}{n}
+    \]
+
+    take $n \to \infty$, we have
+
+    \[
+        \frac{n^\alpha}{(1+p)^n} \to 0
+    \]
+\end{exercise}
+
+\begin{exercise}
+    let $a_n \ge 0 $ and $a_1 \ge a_2 ..$, and we define
+
+    \[
+        S_n = \sum_{k=1}^{n}a_k
+    \]
+
+    and
+
+    \[
+        T_n = \sum_{k=0}^{n-1}2^ka_{2^k}
+    \]
+
+    then $S_n$ is bounded iff $T_n$ is bounded
+
+\end{exercise}
+
+\begin{proof}
+    steps:
+
+    \begin{enumerate}
+        \item $T_n$ bounded $\to$ $S_n$ bounded
+
+        \begin{align*}
+            S_{1 + 2 + 4 + .. 2^{n-1}} & = S_{2^{n} - 1} = a_1 + (a_2 + a_3) + .. (a_{2^{n-1}} + .. + a_{2^{n} - 1}) \\
+                & \le a_1 + 2a_2 + .. + 2^{n-1}a_{2^{n-1}} \\
+                & \le T_{n-1}
+        \end{align*}
+
+        \item $S_n$ bounded $\to$ $T_n$ bounded
+
+        \begin{align*}
+            S_{1 + 2 + 4 + .. 2^{n-1}} & = S_{2^{n} - 1} = a_1 + (a_2 + a_3) + .. (a_{2^{n-1}} + .. + a_{2^{n} - 1}) \\ 
+            & \ge a_2 + 2a_4 + .. + 2^{n-1}a_{2^n} \\
+            & \ge \frac{1}{2}T_{n+1} - \frac{1}{2}a_1
+        \end{align*}
+    \end{enumerate}
+\end{proof}

@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.fls": true,
+        "**/*.log": true,
+        "**/*.out": true,
+        "**/*.xdv": true,
+        "**/*.toc": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.synctex.gz": true,
+        "notes-daily/**/*.pdf": true,
+        "**/*.dvi": true
+    }
+}
