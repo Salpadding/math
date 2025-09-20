@@ -1,0 +1,88 @@
+%!LW recipe=latexmk
+\documentclass[11pt,a4paper]{article}
+\input{macros.tex}
+\title{All in One}
+\author{Yingjie Zhu}
+
+
+\begin{document}
+
+
+\section{Metric Space}
+
+\subsection{Compact Set}
+
+\begin{thm}
+      If $E \subseteq \mathbb{R}^n$ is bounded and closed, then $E$ is compact.
+\end{thm}
+
+\begin{proof}
+Let $\{V_\alpha\}_{\alpha \in I}$ be an open cover of $E$. Define, for each $x \in E$,
+
+\[
+  r(x) := \sup\{\, r > 0 : \exists\, \alpha \in I \text{ with } B(x,r) \subseteq V_\alpha \,\}.
+\]
+
+
+We first show that $r$ is lower semicontinuous. Fix $a \in \mathbb{R}$. 
+If $r(x) > a$,
+then by definition there exist $\alpha$ and $r>a$ with $B(x,r) \subseteq V_\alpha$.
+Let $\varepsilon = (r-a)/4 > 0$. For any $p \in B(x,\varepsilon)$ we have
+$B(p,r-\varepsilon) \subseteq B(x,r) \subseteq V_\alpha$; since $r-\varepsilon > a+\varepsilon$,
+it follows that $r(p) > a$. Hence the set $\{x \in E : r(x) > a\}$ is open, i.e. $r$ is
+lower semicontinuous. In particular, for any sequence $x_n \to x$ in $E$,
+
+\[
+  \varliminf_{n \to \infty} r(x_n) \ge r(x).
+\]
+
+Set $r_0 := \inf\{ r(x) : x \in E \}$.
+
+\textbf{Claim 1}: $r_0 > 0$. Suppose to the contrary that $r_0 = 0$. Then there exists a
+sequence $x_n \in E$ with $r(x_n) \to 0$. Since $E$ is bounded, by Bolzano–Weierstrass
+there is a subsequence $y_n = x_{f(n)}$ converging to some $y \in \mathbb{R}^n$; because
+$E$ is closed, $y \in E$. As $\{V_\alpha\}$ covers $E$ and $y \in E$, there exists some
+$\alpha_0$ with $y \in V_{\alpha_0}$; since $V_{\alpha_0}$ is open, there exists
+$\delta>0$ with $B(y,\delta) \subseteq V_{\alpha_0}$. Hence $r(y) \ge \delta > 0$.
+But lower semicontinuity gives
+$
+  \liminf_{n \to \infty} r(y_n) \ge r(y) > 0,
+$
+contradicting $r(y_n)=r(x_{f(n)}) \to 0$. Thus $r_0>0$.
+
+\textbf{Claim 2}: $\{V_\alpha\}$ has a finite subcover. Choose any $x_0 \in E$.
+By definition of $r_0$ and the cover, there exists $\alpha_0$ with
+$B(x_0,r_0) \subseteq V_{\alpha_0}$. If $E \subseteq V_{\alpha_0}$, we are done.
+Otherwise pick $x_1 \in E \setminus V_{\alpha_0}$; then there exists $\alpha_1$
+with $B(x_1,r_0) \subseteq V_{\alpha_1}$. Note that $B(x_0,r_0)$ and $B(x_1,r_0)$
+are disjoint, since otherwise $x_1 \in B(x_0,r_0) \subseteq V_{\alpha_0}$.
+
+Proceed inductively: having chosen pairwise disjoint balls $B(x_k,r_0) \subseteq V_{\alpha_k}$
+for $k=0,\dots,m-1$ whose corresponding $V_{\alpha_k}$ do not yet cover $E$, pick
+$x_m \in E \setminus \bigcup_{k=0}^{m-1} V_{\alpha_k}$ and then choose $\alpha_m$
+with $B(x_m,r_0) \subseteq V_{\alpha_m}$. Again, $B(x_m,r_0)$ is disjoint from the
+previous balls, so the centers satisfy $|x_i - x_j| \ge r_0$ for $i \ne j$.
+
+If this process never stops, we produce infinitely many pairwise disjoint balls of
+radius $r_0/2$ inside a fixed bounded set containing $E$. This is impossible in
+$\mathbb{R}^n$ (e.g., by a simple volume-packing bound). Therefore the process must
+terminate after finitely many steps, yielding a finite subcover of $E$.
+
+Since every open cover of $E$ admits a finite subcover, $E$ is compact.
+\end{proof}
+
+\begin{thm}
+    In Hausdorff space, compact set is closed.
+\end{thm}
+
+\begin{proof}
+   Assume $K$ is compact and $p \notin K$, we can construct an open cover of $K$.
+
+   \[
+        K \subseteq \bigcup_{q \in K} V_q \quad \text{where } U_q \cap V_p = \emptyset
+   \]
+
+   $U_q$ and $V_p$ is open neighborhood of $q,p$ respectively, thus we could pick a finite subcover.
+\end{proof}
+
+\end{document}
