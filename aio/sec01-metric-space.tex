@@ -1,0 +1,499 @@
+\section{Metric Space}
+
+\subsection{Topological Space}
+
+\begin{definition}[Topological Space]
+\leavevmode
+\begin{enumerate}
+    \item A collection $\tau$ of subsets of a set $X$ is said to be a \emph{topology} on $X$ if $\tau$ has the following three properties:
+    \begin{enumerate}
+        \item $\varnothing \in \tau$ and $X \in \tau$.
+        \item If $V_i \in \tau$ for $i = 1, \dots, n$, then $V_1 \cap V_2 \cap \cdots \cap V_n \in \tau$.
+        \item If $\{ V_\alpha \}$ is an arbitrary collection of members of $\tau$ (finite, countable, or uncountable), then $\bigcup_\alpha V_\alpha \in \tau$.
+    \end{enumerate}
+
+    \item If $\tau$ is a topology on $X$, then $X$ is called a \emph{topological space}, and the members of $\tau$ are called the \emph{open sets} in $X$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Interior Point]\label{fc673441}
+    Let $(X, \tau)$ be a topological space and $E \subseteq X$. A point $p$ is an interior point of $E$ if and only if there exists a neighborhood $V$ of $p$ such that $V \subseteq E$.
+\end{definition}
+
+
+\begin{definition}[Interior]
+    Let $(X, \tau)$ be a topological space and $E \subseteq X$. The interior of $E$ is the set of all interior points of $E$, often
+    denoted as $\mathring{E}$ or $\mathrm{int}(E)$.
+
+    \[
+\mathring{E} = \{ p : p \text{ is an interior point of } E \}
+    \]
+
+\end{definition}
+
+\begin{corollary}\label{bfb0d46a}
+    The interior operator is monotone: if $A \subseteq B$, then $\mathring{A} \subseteq \mathring{B}$.
+\end{corollary}
+
+
+\begin{proof}
+    Easily to prove by transitivity of $\subseteq$
+\end{proof}
+
+\begin{corollary}\label{f486ca55}
+    For any set $E$, $\mathring{E} \subseteq E$
+\end{corollary}
+
+\begin{proof}
+    By definition, every interior point of $A$ is contained in $A$, so $\mathring{A} \subseteq A$.
+\end{proof}
+
+\begin{thm}\label{cc4ec32c}
+    The interior of any set is open.
+\end{thm}
+
+\begin{proof}
+    Let $\mathring{A}$ denote the interior of $A$.
+    Pick any point $p \in \mathring{A}$. 
+    Since $p$ is an interior point, 
+    there exists a neighborhood $V$ of $p$ such that $V \subseteq A$. 
+    Now, for any $q \in V$, $q$ is also an interior point of $A$ because $V$ is a neighborhood of $q$ contained in $A$.
+
+    \[
+    \mathring{A} = \bigcup_{p \in A} \{ V_p : V \text{ open},\, V \subseteq \mathring{A} \}
+    \]
+    
+    is a union of open sets, and hence is open.
+\end{proof}
+
+\begin{thm}
+    For any set $A$, $A$ is open if and only if $\mathring{A} = A$.
+\end{thm}
+
+\begin{proof}
+    If $A$ is open, any $p \in A$ is an interior point, 
+    because $A$ is a neighborhood of $p$,
+    which shows $A \subseteq \mathring{A}$, so $A = \mathring{A}$ by \cref{f486ca55}.
+
+    Conversely, if $\mathring{A} = A$, then $A$ is open by \cref{cc4ec32c}.
+\end{proof}
+
+\begin{thm}
+    For any $E\subseteq X$, the interior $\mathring{E}$ is the largest open subset of $E$; equivalently,
+    \[
+        \mathring{E} = \bigcup\{V \subseteq E : V \text{ is open} \} .
+    \]
+\end{thm}
+
+\begin{proof}
+    Let
+    \[
+        \mathcal{I} := \{V \subseteq E : V \text{ is open} \}, \qquad
+        V' := \bigcup_{V \in \mathcal{I}} V .
+    \]
+    Then $V'$ is open (a union of open sets) and $V'\subseteq E$ by construction.
+
+    \begin{enumerate}
+        \item[($\subseteq$)] Since $\mathring{E}$ is open and $\mathring{E}\subseteq E$, 
+        we have $\mathring{E}\in\mathcal{I}$, hence $\mathring{E}\subseteq V'$.
+
+        \item[($\supseteq$)] If $p\in V'$, then $p\in V$ for some open $V\subseteq E$. 
+        By the definition of interior point (\cref{fc673441}), this implies $p\in\mathring{E}$.
+    \end{enumerate}
+
+    Therefore $V'=\mathring{E}$, and $\mathring{E}$ is the largest open subset of $E$.
+\end{proof}
+
+% <code>
+\begin{thm}
+    $\mathrm{int}(A \cap B) = \mathrm{int}(A) \cap \mathrm{int}(B)$
+\end{thm}
+
+\begin{proof}
+    \:
+
+   \begin{enumerate}
+    \item [($\subseteq$)] By $\mathring{A}$ is monotone increasing function over $A$.
+    
+    \begin{align}
+        A \cap B & \subseteq A \\
+        \mathrm{int}(A \cap B) & \subseteq \mathrm{int}(A) \label{6919e47e} \\
+        \mathrm{int}(A \cap B) & \subseteq \mathrm{int}(B) \label{baa9c1c7}
+    \end{align}
+
+    And apply $\cap$ at both side of \eqref{6919e47e} and \eqref{baa9c1c7}
+
+    \item [($\supseteq$)]
+
+    Define
+
+    \begin{align*}
+        I_A &= \{V \subseteq A: V \text{ is open} \} \\
+        I_B &= \{U \subseteq B: U \text{ is open} \} \\
+    \end{align*}
+
+    Thus
+
+    \begin{align*}
+        \mathrm{int}(A) \cap \mathrm{int}(B) &= \bigcup_{V \in I_A} V \cap  \bigcup_{U \in I_B} U \\
+        &=  \bigcup_{V \in I_A} \bigcup_{U \in I_B} V \cap U
+    \end{align*}
+
+    Since $V, U$ is open and $V \cap U \subseteq A \cap B$ for any $V \in I_A, U \in I_B$. $\mathrm{int}(A) \cap \mathrm{int}(B)$
+    is union of open sets contained by $A \cap B$, and hence $\mathrm{int}(A) \cap \mathrm{int}(B) \subseteq \mathrm{int}(A \cap B)$
+   \end{enumerate} 
+\end{proof}
+% </code>
+
+\subsection{T1 Space}
+
+\begin{thm}\label{03f30576}
+    In T1 space, any single point set is closed.
+\end{thm}
+
+\begin{proof}
+    Fix single point set $ E = \{ p \}$, consider $q \in E^C$, by $q \ne p$ and T1 axiom, there exists neighborhood $V_q$
+    contains $q$ such that $p \notin V_q$. Thus $E^C$ is union of open sets, and hence open.
+
+    \[
+        E^C = \bigcup_{q \in E^C} V_q \quad  p \notin V_q
+    \]
+\end{proof}
+
+\begin{thm}
+    In a T1 space, the derived set (the set of all limit points) of any subset is closed.
+\end{thm}
+
+\begin{proof}
+    Assume $E'$ is derive set of $E$, if $p \notin E'$, there exists a neighborhood $V$ of $p$ such that 
+
+    \[
+        V \cap E \subseteq \{ p \}
+    \]
+
+    Consider $U = V \setminus \{ p \}$; $U$ is open because $\{ p \}$ is closed in a T1 space(by \cref{03f30576}). And for any $q \in U$, $q$ is not a limit point of $E$.
+\end{proof}
+
+\begin{thm}\label{2dc4936a}
+    In a T1 space, let $p$ be a limit point of $E$. For every neighborhood $V$ of $p$, $V \cap E$ is infinite.
+\end{thm}
+
+\begin{proof}
+    Without loss of generality, we may assume $p \notin E$(by \cref{57d9c0d2}), since removing $p$ from $E$ does not affect whether $V \cap E$ is infinite. 
+    A superset of an infinite set must also be infinite. 
+
+    Suppose $p$ is a limit point of $E$. 
+    Suppose, for the sake of contradiction, that $V \cap E = \{x_1, x_2, \dots, x_n\}$ is finite, where $V$ is a neighborhood of $p$.
+    For each $x_k \in V \cap E$, the T1 axiom provides a neighborhood $U_k$ of $p$ such that $x_k \notin U_k$. 
+    Define
+    \[
+        U = \bigcap_{k=1}^n U_k.
+    \]
+    Then $U$ is a neighborhood of $p$ (as a finite intersection of neighborhoods), and by construction, $U$ excludes all points $x_k \in V \cap E$, so $U \cap (V \cap E) = \emptyset$. 
+    Thus, $U \cap V$ is a neighborhood of $p$ with $U \cap V \cap E = \emptyset$, contradicting the assumption that $p$ is a limit point of $E$.
+\end{proof}
+
+
+\begin{corollary}
+    In a T1 space, a finite set has no limit points. 
+\end{corollary}
+
+\begin{proof}
+    By \cref{2dc4936a}
+\end{proof}
+
+\begin{corollary}
+    In a T1 space, if $E$ has a limit point $p$
+\end{corollary}
+
+\begin{proof}
+    By \cref{2dc4936a}
+\end{proof}
+
+\subsection{First Countable}
+
+\begin{definition}[Limit Point]
+   A limit point $p$ of $E$ is a point such that for all open neighborhoods 
+   $V$ containing $p$, we have $V \setminus \{ p \} \cap E \ne \emptyset$.
+\end{definition}
+
+
+\begin{corollary}\label{57d9c0d2}
+    $p$ is limit point of $E$ iff $p$ is  limit point of $E \setminus \{ p \}$
+\end{corollary}
+
+\begin{proof}
+    It is obviously by 
+
+    \[
+        \left(V \setminus \{ p \} \right) \cap E = \left(V \setminus \{ p \} \right) \cap \left( E \setminus \{ p \} \right)
+    \]
+\end{proof}
+
+\begin{thm}
+    In a first countable space $X$, a point $p$ is a limit point of $E\subset X$ iff 
+    there exists a sequence $\{ x_n \}$ with $x_n\in E\setminus\{p\}$ and $x_n\to p$. Moreover, if $X$ is $T_1$, the sequence can be chosen with pairwise distinct terms. In particular, in a $T_1$ space one may remove finitely many points from $E$ without affecting whether $p$ is a limit point.
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $(\Rightarrow)$  
+        
+        Suppose 
+        $x_n\in E\setminus\{p\}$ and $x_n\to p$. Then for every neighborhood $V$ of $p$,
+        $x_n \in V$ for all but finitely $n$.
+        Since $x_n\neq p$, we have $(V\setminus\{p\})\cap E\neq\varnothing$, so $p$ is a limit point of $E$.
+
+        \item $(\Leftarrow)$ 
+        
+        Assume $X$ is first countable and $p$ is a limit point of $E$. 
+        Let $(V_n)_{n\ge1}$ be a countable local base at $p$. 
+        Define a nested base by $U_1:=V_1$ and $U_n:=\bigcap_{k=1}^n V_k$ for $n\ge2$. 
+        By the definition of limit point, for each $n$ there exists $x_n\in (U_n\cap E)\setminus\{p\}$. 
+        If $V$ is any neighborhood of $p$, $U_k \subseteq V, x_k \in V$ for all but finitely $k$, and therefore $x_n\to p$.
+
+        \item Distinctness in $T_1$ 
+
+        Now assume in addition that $X$ is $T_1$. 
+        $U_n\cap E$ is infinite for every $n$ by \cref{2dc4936a}
+        Hence each $U_n\cap E$ is infinite. 
+        We can then choose inductively a sequence of distinct points $y_n\in (U_n\cap E)\setminus\{p,y_1,\dots,y_{n-1}\}$. 
+        By the nesting argument above, $y_n\to p$.
+    \end{enumerate}
+\end{proof}
+
+\subsection{Compact Set}
+
+\begin{thm}
+      If $E \subseteq \mathbb{R}^n$ is bounded and closed, then $E$ is compact.
+\end{thm}
+
+\begin{proof}
+Let $\{V_\alpha\}_{\alpha \in I}$ be an open cover of $E$. Define, for each $x \in E$,
+
+\[
+  r(x) := \sup\{\, r > 0 : \exists\, \alpha \in I \text{ with } B(x,r) \subseteq V_\alpha \,\}.
+\]
+
+
+We first show that $r$ is lower semicontinuous. Fix $a \in \mathbb{R}$. 
+If $r(x) > a$,
+then by definition there exist $\alpha$ and $r>a$ with $B(x,r) \subseteq V_\alpha$.
+Let $\varepsilon = (r-a)/4 > 0$. For any $p \in B(x,\varepsilon)$ we have
+$B(p,r-\varepsilon) \subseteq B(x,r) \subseteq V_\alpha$; since $r-\varepsilon > a+\varepsilon$,
+it follows that $r(p) > a$. Hence the set $\{x \in E : r(x) > a\}$ is open, i.e. $r$ is
+lower semicontinuous. In particular, for any sequence $x_n \to x$ in $E$,
+
+\[
+  \varliminf_{n \to \infty} r(x_n) \ge r(x).
+\]
+
+Set $r_0 := \inf\{ r(x) : x \in E \}$.
+
+\textbf{Claim 1}: $r_0 > 0$. Suppose to the contrary that $r_0 = 0$. Then there exists a
+sequence $x_n \in E$ with $r(x_n) \to 0$. Since $E$ is bounded, by \cref{metric-space-bolzano-weierstrass}
+there is a subsequence $y_n = x_{f(n)}$ converging to some $y \in \mathbb{R}^n$; because
+$E$ is closed, $y \in E$. As $\{V_\alpha\}$ covers $E$ and $y \in E$, there exists some
+$\alpha_0$ with $y \in V_{\alpha_0}$; since $V_{\alpha_0}$ is open, there exists
+$\delta>0$ with $B(y,\delta) \subseteq V_{\alpha_0}$. Hence $r(y) \ge \delta > 0$.
+But lower semicontinuity gives
+$
+  \liminf_{n \to \infty} r(y_n) \ge r(y) > 0,
+$
+contradicting $r(y_n)=r(x_{f(n)}) \to 0$. Thus $r_0>0$.
+
+\textbf{Claim 2}: $\{V_\alpha\}$ has a finite subcover. Choose any $x_0 \in E$.
+By definition of $r_0$ and the cover, there exists $\alpha_0$ with
+$B(x_0,r_0) \subseteq V_{\alpha_0}$. If $E \subseteq V_{\alpha_0}$, we are done.
+Otherwise pick $x_1 \in E \setminus V_{\alpha_0}$; then there exists $\alpha_1$
+with $B(x_1,r_0) \subseteq V_{\alpha_1}$. Note that $B(x_0,r_0)$ and $B(x_1,r_0)$
+are disjoint, since otherwise $x_1 \in B(x_0,r_0) \subseteq V_{\alpha_0}$.
+
+Proceed inductively: having chosen pairwise disjoint balls $B(x_k,r_0) \subseteq V_{\alpha_k}$
+for $k=0,\dots,m-1$ whose corresponding $V_{\alpha_k}$ do not yet cover $E$, pick
+$x_m \in E \setminus \bigcup_{k=0}^{m-1} V_{\alpha_k}$ and then choose $\alpha_m$
+with $B(x_m,r_0) \subseteq V_{\alpha_m}$. Again, $B(x_m,r_0)$ is disjoint from the
+previous balls, so the centers satisfy $|x_i - x_j| \ge r_0$ for $i \ne j$.
+
+If this process never stops, we produce infinitely many pairwise disjoint balls of
+radius $r_0/2$ inside a fixed bounded set containing $E$. This is impossible in
+$\mathbb{R}^n$ (e.g., by a simple volume-packing bound). Therefore the process must
+terminate after finitely many steps, yielding a finite subcover of $E$.
+
+Since every open cover of $E$ admits a finite subcover, $E$ is compact.
+\end{proof}
+
+\begin{thm}
+    In Hausdorff space, compact set is closed.
+\end{thm}
+
+\begin{proof}
+   Assume $K$ is compact and $p \notin K$, we can construct an open cover of $K$.
+
+   \[
+        K \subseteq \bigcup_{q \in K} U_q \quad \text{where } U_q \cap V_q = \emptyset
+   \]
+
+   $U_q$ and $V_p$ is open neighborhood of $q,p$ respectively, thus we could pick a finite sub cover.
+
+   \[
+        K \subseteq \bigcup_{q \in I} U_q \quad I \subseteq K \quad I \text{ is finite}
+   \]
+
+   And define
+
+   \[
+    U = \bigcup_{q \in I} U_q \quad V = \bigcap_{q \in I} V_q
+   \]
+
+   Then we got $V \cap K \subseteq V \cap U \subseteq \emptyset$, which shows $K^C$ is open and $K$ is closed.
+\end{proof}
+
+\begin{thm}
+    Compact set under metric space is bounded.
+\end{thm}
+
+\begin{proof}
+    Consider a compact set $K$, and its open cover by infinite open balls.
+
+    \[
+       K \subseteq \bigcup_{q \in K} B(q, 1) 
+    \]
+
+    Thus there exists a finite open cover:
+
+    \[
+       K \subseteq \bigcup_{q \in I} B(q, 1) \quad I \subseteq K \quad I \text{ is finite}
+    \]
+
+    Pick $q_0 \in I$ and 
+
+    \[
+        r = \max_{q \in I} d(q_0, q)
+    \]
+
+    For any $p \in K$, we got $d(p, q_0) \le d(p, q) + d(q, q_0)$, where $p \in B(q, 1)$, and $d(p, q_0) \le 1 + r$
+\end{proof}
+
+\begin{thm}\label{e603cd67}
+    Under a metric space, if $E \subseteq K$, where $E$ is infinite and $K$ is compact, then $E$ has at least
+    one limit point in $K$
+\end{thm}
+
+\begin{proof}
+    Assume $\forall p \in K, \exists V_p$ such that $V_p \cap E \subseteq \{ p \}$. Thus we got
+    an open cover of $K$:
+
+    \[
+        K \subseteq \bigcup_{p \in K} V_p \quad V_p \cap E \subseteq \{p\}
+    \]
+
+    And hence we got a finite sub cover $I \subseteq K$ and 
+
+
+    \[
+        K \subseteq \bigcup_{p \in I} V_p \quad V_p \cap E \subseteq \{p\}
+    \]
+
+    Thus
+
+    \[
+        K \cap E \subseteq \bigcup_{p \in I} E \cap V_p \subseteq I
+    \]
+
+    which is contradict with $E$ is infinite.
+\end{proof}
+
+
+\begin{thm}\label{e0cea514}
+    Suppose $I_k = [a_k, b_k]$ where $a_k \le b_k$, and $I_{k+1} \subseteq I_k$, then
+
+    \[
+        \bigcap_{k=1}^{\infty} I_k \ne \emptyset
+    \]
+\end{thm}
+
+\begin{proof}
+    put 
+    
+    \begin{align*}
+        a &= \sup_{k \ge 1} a_k \\
+        b &= \inf_{k \ge 1} b_k \\
+    \end{align*}
+
+    Then $\forall x \in [a,b]$, we got 
+
+    \[
+        [a,b] \subseteq \bigcap_{k=1}^{\infty}I_k
+    \]
+\end{proof}
+
+\begin{corollary}
+    Suppose $I_k \subseteq \mathbb{R}^n$, and
+
+    \[
+        I_k = [a^{(1)}_k, b^{(1)}_k] \times [a^{(2)}_k, b^{(2)}_k] \times \dots [a^{(n)}_k, b^{(n)}_k]
+    \]
+
+    If $I_{k+1} \subseteq I_{k}, \forall k, I_k \ne \emptyset$, then 
+
+    \[
+        \bigcap_{k=1}^{\infty} I_k \ne \emptyset
+    \]
+\end{corollary}
+
+\begin{proof}
+    Consider coordinates of $I_k$ and apply \cref{e0cea514}
+\end{proof}
+
+\begin{thm}[Heine-Borel]\label{heine-borel}
+    In $\mathbb{R}^n$, bounded and closed set is compact. 
+
+    We consider cube at first, assume 
+
+    \[
+        I_0 =  \{ (x_1,x_2,\dots, x_n):  0 \le x_i \le a\}
+    \]
+
+    And $I_0$ has an open cover.
+
+    Then we divide $I_0$ into $2^n$ pieces, if $I_0$ is not compact, 
+    there exists $I_1 \subseteq I_1$ which is one of piece of $I_0$, and 
+    $I_1$ has no finite sub cover. And we can construct $I_1,I_2,I_3,\dots$ 
+    inductively, where $I_k$ has no finite sub cover.
+
+    Pick $p$ such that
+
+    \[
+        p \in \bigcap_{k=0}^{\infty}I_k
+    \]
+
+    Since $p \in V$ for some open set, there exists $B(p, r) \subseteq V$. 
+
+    When $k$ is large enough, we got $I_k \subseteq B(p,r)$, because
+
+    \[
+        \mathrm{diam}(I_k) \le \sqrt{n} \frac{a}{2^{nk}}
+    \]
+
+    Which shows closed and bounded cube is compact.
+
+    For any closed and bounded set, we can put it inside a closed and bounded cube.
+    Since closed sub set of compact is closed, so closed and bounded set is closed.
+\end{thm}
+
+
+\begin{thm}[Bolzano-Weierstrass]\label{metric-space-bolzano-weierstrass}
+    Each infinite bounded sequence in $\mathbb{R}^n$
+ has a convergent subsequence. 
+\end{thm}
+
+\begin{proof}
+    Assume $a_n$ is bounded sequence in $\mathbb{R}^n$, thus we can put set $\{ a_n \}$
+    inside a compact box $K$. If set $ \{ a_n \} $ is finite, at least one of $\{ a_n \}$
+    occurs infinitely, otherwise by \cref{e603cd67} set $\{ a_n \}$ has a limit point in $K$.
+
+    Consider this limit point as $p$, we can select $a_{n_1}$ such that $d(a_{n_1}, p) \le 1$,
+    consider set $\{ a_n \}_{n > n_1}$, $p$ is also limit point of $\{ a_n \}_{n > n_1}$, because 
+    we only exclude finite points from $\{ a_n \}$, after all, we construct a convergent subsequence.
+\end{proof}
