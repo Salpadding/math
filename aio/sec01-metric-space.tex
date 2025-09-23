@@ -16,6 +16,8 @@
 \end{enumerate}
 \end{definition}
 
+\subsubsection{Interior}
+
 \begin{definition}[Interior Point]\label{fc673441}
     Let $(X, \tau)$ be a topological space and $E \subseteq X$. A point $p$ is an interior point of $E$ if and only if there exists a neighborhood $V$ of $p$ such that $V \subseteq E$.
 \end{definition}
@@ -104,7 +106,6 @@
     Therefore $V'=\mathring{E}$, and $\mathring{E}$ is the largest open subset of $E$.
 \end{proof}
 
-% <code>
 \begin{thm}
     $\mathrm{int}(A \cap B) = \mathrm{int}(A) \cap \mathrm{int}(B)$
 \end{thm}
@@ -143,7 +144,106 @@
     is union of open sets contained by $A \cap B$, and hence $\mathrm{int}(A) \cap \mathrm{int}(B) \subseteq \mathrm{int}(A \cap B)$
    \end{enumerate} 
 \end{proof}
-% </code>
+
+\begin{corollary}
+    $\mathrm{int}(A) \cup \mathrm{int}(B) \subseteq \mathrm{int}(A \cup B)$
+\end{corollary}
+
+\subsubsection{Closure}
+
+\begin{definition}[Closure]
+    For a subset $A$ of a topological space $X$, the \emph{closure} of $A$ is defined by
+    \[
+        \overline{A} := \bigl(\mathrm{int}(A^C)\bigr)^C,
+    \]
+    where $A^C$ denotes the complement of $A$. This definition is convenient because
+    many properties of closure follow directly from the corresponding properties of the interior.
+\end{definition}
+
+\begin{thm}
+    For any $A\subseteq X$, the closure $\overline{A}$ satisfies:
+    \begin{enumerate}
+        \item $\overline{A}$ is closed, since $\mathrm{int}(A^C)$ is open.
+        \item $A \subseteq \overline{A}$, because $\mathrm{int}(A^C)\subseteq A^C$ implies
+        \[
+            A \subseteq \bigl(\mathrm{int}(A^C)\bigr)^C = \overline{A}.
+        \]
+        \item If $A\subseteq B$, then $\overline{A}\subseteq \overline{B}$, since the interior operator is monotone.
+    \end{enumerate}
+\end{thm}
+
+
+\begin{thm}
+    $A$ is closed iff $\overline{A} = A$
+\end{thm}
+
+\begin{proof}
+    Since $A^C$ is open iff $\mathrm{int}(A^C) = A^C$
+\end{proof}
+
+\begin{thm}
+    $\overline{A}$ is minimum closed set which covers $A$
+\end{thm}
+
+\begin{proof}
+    Consider that
+
+    \[
+        \{ K:  A \subseteq K,\: K \text{ is closed }\} = \{ V^C: V \subseteq A^C,\: V \text{ is open }\}
+    \]
+
+    Thus
+
+    \begin{align*}
+        \bigcap \{ K:  A \subseteq K,\: K \text{ is closed }\} &= \bigcap \{ V^C: V \subseteq A^C,\: V \text{ is open }\} \\
+        &=  \left( \bigcup \{ V: V \subseteq A^C,\: V \text{ is open }\} \right)^C \\
+        &= \bigl( \mathrm{int}(A^C) \bigr)^C = \overline{A}
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    $\overline{A \cup B} = \overline{A} \cup \overline{B}$ and  $\overline{A \cap B} \subseteq \overline{A} \cap \overline{B}$
+\end{thm}
+
+\begin{proof}
+   By:
+   
+   \begin{align*}
+    \overline{A \cup B} &= \bigl( \mathrm{int}(A^C \cap B^C) \bigr)^C = \bigl( \mathrm{int}(A^C) \cap \mathrm{int}(B^C) \bigr)^C \\
+    & = \bigl( \mathrm{int}(A^C) \bigr)^C \cup \bigl( \mathrm{int}(B^C) \bigr)^C = \overline{A} \cup \overline{B}
+   \end{align*}
+
+   and
+
+
+   \begin{align*}
+    \overline{A \cap B} &= \bigl( \mathrm{int}(A^C \cup B^C) \bigr)^C \subseteq \bigl( \mathrm{int}(A^C) \cup \mathrm{int}(B^C) \bigr)^C \\
+    & = \bigl( \mathrm{int}(A^C) \bigr)^C \cap \bigl( \mathrm{int}(B^C) \bigr)^C = \overline{A} \cap \overline{B}
+   \end{align*}
+\end{proof}
+
+\begin{thm}
+    $\overline{A} = A' \cup A$. $\overline{A}$ is the union of $A$ and its set of limit points.
+\end{thm}
+
+\begin{proof}
+    First, we show that $A \cup A'$ is closed. Suppose $p \notin A \cup A'$. 
+    Then $p \notin A$ and $p \notin A'$. 
+    The latter means there exists a neighborhood $V$ of $p$ such that 
+    $(V \setminus \{p\}) \cap A = \varnothing$. Since also $p \notin A$, we get $V \cap A = \varnothing$. 
+    Hence $V \subseteq (A \cup A')^C$, showing $(A \cup A')^C$ is open and therefore $A \cup A'$ is closed.
+
+    Clearly $A \subseteq A \cup A'$, so by minimality of closure,
+    \[
+        \overline{A} \subseteq A \cup A'.
+    \]
+
+    Let's prove $\mathrm{int}(A^C) \subseteq (A')^C$. It is obviously that 
+    $\mathrm{int}(A^C)$ is a neighborhood of all its elements who has empty
+    intersection with $A$, which shows $p \notin A'$. Apply complement at both side,
+    we got $A' \subseteq \overline{A}$, combine $A \subseteq \overline{A}$, we got 
+    $A' \cup A \subseteq \overline{A}$
+\end{proof}
 
 \subsection{T1 Space}
 
@@ -496,4 +596,28 @@ Since every open cover of $E$ admits a finite subcover, $E$ is compact.
     Consider this limit point as $p$, we can select $a_{n_1}$ such that $d(a_{n_1}, p) \le 1$,
     consider set $\{ a_n \}_{n > n_1}$, $p$ is also limit point of $\{ a_n \}_{n > n_1}$, because 
     we only exclude finite points from $\{ a_n \}$, after all, we construct a convergent subsequence.
+\end{proof}
+
+\section{Exercise}
+
+\begin{exercise}
+    Let $X \ne \emptyset, f: \mathscr{P}(X) \to \mathscr{P}(X)$. If $\forall A \subseteq B, f(A) \subseteq f(B)$. Then
+    exists $T \subseteq X$ and $f(T) = T$
+\end{exercise}
+
+\begin{proof}
+   Define 
+
+   \[
+        T = \bigcup \{ A \subseteq X: A \subseteq f(A) \}
+   \]
+
+   Then we got $T \subseteq f(T)$ by
+
+   \[
+    f(T) = \bigcup \{ f(A): A \subseteq f(A) \} \supseteq  \bigcup \{ A: A \subseteq f(A) \}
+   \]
+
+   Since $f(T) \subseteq f(f(T))$, which shows $f(T) \subseteq T$
+
 \end{proof}

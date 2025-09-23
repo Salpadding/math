@@ -1,0 +1,282 @@
+\section{Cardinality}
+
+\subsection{cardinality}
+
+\begin{definition}
+    If $X$ and $Y$ are nonempty sets, we define the expressions
+\[
+\mathrm{card}(X) \leq \mathrm{card}(Y), \quad
+\mathrm{card}(X) = \mathrm{card}(Y), \quad
+\mathrm{card}(X) \geq \mathrm{card}(Y)
+\]
+to mean that there exists $f : X \to Y$ which is injective, bijective, or surjective,
+respectively. We also define
+\[
+\mathrm{card}(X) < \mathrm{card}(Y), \quad
+\mathrm{card}(X) > \mathrm{card}(Y)
+\]
+to mean that there is an injection but no bijection, or a surjection but no bijection,
+from $X$ to $Y$. Observe that we attach no meaning to the expression
+``$\mathrm{card}(X)$'' when it stands alone; there are various ways of doing so, but
+they are irrelevant for our purposes (except when $X$ is finite---see below). These
+relationships can be extended to the empty set by declaring that
+\[
+\mathrm{card}(\varnothing) < \mathrm{card}(X)
+\quad\text{and}\quad
+\mathrm{card}(X) > \mathrm{card}(\varnothing)
+\quad\text{for all } X \neq \varnothing.
+\]
+
+For the remainder of this section we assume implicitly that all sets in question are
+nonempty in order to avoid special arguments for $\varnothing$. Our first task is to prove
+that the relationships defined above enjoy the properties that the notation suggests.
+\end{definition}
+
+\begin{prop}
+$\mathrm{card}(X) \le \mathrm{card}(Y)$ iff $\mathrm{card}(Y) \ge \mathrm{card}(X)$
+\end{prop}
+
+\begin{proof}
+($\Rightarrow$) Suppose there exists an injection $f:X \to Y$. 
+Define $h:Y \to X$ by
+\[
+   h(y) = 
+   \begin{cases}
+      x, & \text{if } y = f(x) \text{ for some } x \in X, \\
+      x^*, & \text{if } y \notin f(X),
+   \end{cases}
+\]
+where $x^*\in X$ is fixed. Then for every $x\in X$, we have $h(f(x))=x$, so $h$ is surjective.
+
+
+($\Leftarrow$) Suppose there exists a surjection $f:Y \to X$. 
+For each $x\in X$, the fiber 
+\[
+   f^{-1}(\{x\}) = \{ y \in Y : f(y)=x\}
+\]
+is nonempty. By the Axiom of Choice, we can choose one element $h(x)\in f^{-1}(\{x\})$. 
+This defines a map $h:X \to Y$, and by construction, $f(h(x))=x$ for each $x\in X$. 
+Thus $h$ is injective.
+\end{proof}
+
+\begin{prop}
+For any sets $X$ and $Y$, either $\mathrm{card}(X) \leq \mathrm{card}(Y)$ or 
+$\mathrm{card}(Y) \leq \mathrm{card}(X)$.
+\end{prop}
+
+\begin{proof}
+Consider the set $\mathcal{J}$ of all injections from subsets of $X$ to $Y$. 
+The members of $\mathcal{J}$ can be regarded as subsets of $X \times Y$, so 
+$\mathcal{J}$ is partially ordered by inclusion. It is easily verified that 
+Zorn's lemma applies, so $\mathcal{J}$ has a maximal element $f$, with (say) 
+domain $A$ and range $B$. If $x_0 \in X \setminus A$ and $y_0 \in Y \setminus B$, 
+then $f$ can be extended to an injection from $A \cup \{x_0\}$ to 
+$Y \cup \{y_0\}$ by setting $f(x_0) = y_0$, contradicting maximality. 
+Hence either $A = X$, in which case $\mathrm{card}(X) \leq \mathrm{card}(Y)$, 
+or $B = Y$, in which case $f^{-1}$ is an injection from $Y$ to $X$ and 
+$\mathrm{card}(Y) \leq \mathrm{card}(X)$.
+\end{proof}
+
+\begin{thm}\label{5dd1cdb2}
+    If exists $f: X \to Y$ and $g: Y \to X$, then $X$ could be divide as disjoint union $A \cup \tilde{A}$, and 
+    $Y$ could be divide as disjoint union $B \cup \tilde{B}$, such that $f(A) = B,\: g(\tilde{B}) = \tilde{A}$
+\end{thm}
+
+\begin{proof}
+    consider set function $h: \mathscr{P}(X) \to \mathscr{P}(X)$
+
+    \[
+        h(E) =  X \setminus g(Y \setminus f(E)) 
+    \]
+
+    Since $h$ is monotone increasing, there exists fixed point $A \subseteq X$ and
+
+    \begin{align*}
+        A &= h(A) = \bigcup \{ E: E \subseteq h(E) \} \\
+    \end{align*}
+
+    where $E \subseteq h(E)$ is equivalent to $E \cap g(Y \setminus f(E)) = \emptyset$,
+    by $A = h(A)$, shows $A \cap g(Y \setminus f(A)) = \emptyset$.
+
+    Now, define $B = f(A),\: \tilde{B} = Y \setminus B$.
+
+    It is obviously that $A \cap g(\tilde{B}) = \emptyset$ by
+
+    \[
+        A \cap g(Y \setminus B) =  A \cap g(Y \setminus f(A)) = \emptyset
+    \]
+
+    And thus $g(\tilde{B}) \subseteq X \setminus A$, assume $x_0 \in X \setminus A$, while $x_0 \notin g(\tilde{B})$,
+    Put $A_0 = A \cup \{ x_0 \}$, Then
+
+    \begin{align*}
+        A_0 \cap g(Y \setminus f(A_0)) & \subseteq A_0  \cap g(Y \setminus f(A)) \\
+        & \subseteq \emptyset 
+    \end{align*}
+
+    It is contradict with $A$ is maximal set which satisfy $A \subseteq h(A)$
+
+\end{proof}
+
+\begin{prop}
+    If $\mathrm{card}(X) \le \mathrm{card}(Y)$ and $\mathrm{card}(Y) \le \mathrm{card}(X)$, then
+    $\mathrm{card}(X) = \mathrm{card}(Y)$. 
+\end{prop}
+
+\begin{thm}
+    Let $f: X \to Y$ and $g: Y \to X$ both be injection.
+    By \cref{5dd1cdb2}, we can divide $X$ as disjoint union $A \cup \tilde{A}$, and $Y$
+    as disjoin union $B \cup \tilde{B}$, such that $f(A) = B,\: g(\tilde{B}) = \tilde{A}$.
+
+    Now, let's define $h: X \to Y$ as
+
+    \begin{align*}
+        h(x) = \begin{cases}
+            f(x) & x \in A\\
+            g^{-1}(x) & x \in \tilde{A}
+        \end{cases}
+    \end{align*}
+
+    This is a well define because $g$ is bijection on $\tilde{B} \to \tilde{A}$, hence has inverse.
+
+    Then $h$ is injection, since $f(A) \cap g^{-1}(\tilde{A}) = B \cap \tilde{B} = \emptyset$. $h$
+    is surjection by $h(X) = h(A \cup \tilde{A}) = h(A) \cup h(\tilde{A}) = B \cup \tilde{B} Y$
+\end{thm}
+
+\begin{prop}
+For any set $X$, $\mathrm{card}(X) < \mathrm{card}(\mathscr{P}(X))$
+\end{prop}
+
+\begin{proof}
+    ($\le$) Define $h: X \to \mathscr{P}(X)$ where $h(x) = \{x\}$, then $h$ is injection obviously.
+
+
+(strictness) Suppose, for contradiction, there is a bijection $f:X\to\mathscr{P}(X)$
+(hence a surjection). Define the diagonal set
+\[
+T=\{x\in X: x\notin f(x)\}.
+\]
+Since $f$ is surjective, there exists $x^*\in X$ with $f(x^*)=T$.
+
+Now:
+
+\begin{enumerate}
+    \item If $x^*\in T$, then by definition of $T$ we must have $x^*\notin f(x^*)=T$,
+  a contradiction.
+
+    \item If $x^*\notin T$, then by definition of $T$ we must have $x^*\in f(x^*)=T$,
+  a contradiction.
+
+\end{enumerate}
+Both cases are impossible. Therefore no bijection $X\to\mathscr{P}(X)$ exists, so
+$\mathrm{card}(X)<\mathrm{card}(\mathscr{P}(X))$.
+\end{proof}
+
+\begin{prop}
+    Any vector space has a basis.
+\end{prop}
+
+\begin{proof}
+   Consider vector space $V$, which is not zero space. Let $E$ contains  
+   all linearly independent subset of $V$. Consider $\subseteq$ as partial order.
+   For any total order chain $C$, define 
+
+   \[
+        W = \bigcup_{U \in C} U
+   \]
+
+   We will show $W$ is linearly independent. Assume $x_1, x_2, \dots, x_n \in W$, and exists $c_1,c_2,\dots c_n$ such that
+
+   \[
+    c_1x_1 + c_2 x_2 + \dots + c_n x_n = 0
+   \]
+
+    Since $x_i \in U_i,\: 1 \le i \le n$, for some linearly independent subset $U_i$. 
+    By $W$ is totally ordered, there exists $U'$ which is the 
+    maximum element in $U_1,U_2,\dots ,U_n$. Since $x_i \in U', \: \forall 1 \le i \le n$, 
+    and $U'$ is linearly independent, we got $c_1 = c_2 = \dots = c_n = 0$
+
+\end{proof}
+
+\subsection{Exercise}
+
+\begin{exercise}
+    Let $f: \mathbb{R} \to \mathbb{R}$ be continuous and injective, then $f$ is strictly monotone.
+\end{exercise}
+
+\begin{proof}
+    We will prove at first, if $x_0 < y_0$, $f(x_0) < f(y_0)$, then $\forall x \in (x_0, y_0),\: f(x_0) < f(x) < f(y)$.
+
+    For contradiction, assume exists $x \in (x_0, y_0),\: f(x) < f(x_0)$.
+
+    Put
+
+    \begin{align*}
+        c &= \frac{f(x) + f(x_0)}{2} \\
+        c & \in [f(x), f(x_0)] \cap [f(x), f(y_0)] 
+    \end{align*}
+
+    by intermediate theorem, there exists $y \in [x_0, x],\: f(y) = c$.
+    And $y_1 \in [x,y_0], f(y_1) = c$.
+
+    By $y < y_1$ (Otherwise $f(x) = c$, impossible), we got $f$ no longer be injective, shows 
+    contradict with $f(x) < f(x_0)$.
+
+    Similarly for $f(x) > f(y_0)$.
+
+    Now we can prove $f$ is strictly increasing on any $[x_0, y_0]$ if $f(x_0) < f(y_0)$. Pick $x <y,\: x,y \in (x_0, y_0)$. By $y \in (x_0, y_0)$,
+    we got $f(x_0) < f(y) < f(y_0)$, by $x \in (x_0, y)$, we got $f(x_0) < f(x) < f(y)$.
+
+    Further more, we can extend $[x_0, y_0]$ to $[x_0, y_0 + \delta]$ by any $\delta > 0$,
+    and keep $f(x_0) < f(y_0 + \delta)$. Because if $f(y_0 + \delta) < f(x_0)$, 
+    shows $-f(x_0) < - f(y_0 + \delta)$, but $-f(y_0) < -f(x_0)$, be contradict with our previous conclusion. 
+
+    Similarly, we can extend $[x_0, y_0]$ to $[x_0 - \delta, y_0]$. Combine above, we can extend $[x_0, y_0]$
+    to cover every point in $\mathbb{R}$.
+
+
+\end{proof}
+
+\begin{exercise}
+Let $f:\mathbb{R}\to\mathbb{R}$ be continuous. If $f$ is injective on the set
+of irrationals $\mathbb{R}\setminus\mathbb{Q}$, then $f$ is injective on $\mathbb{Q}$ as well.
+Equivalently, there is no continuous $f$ that is one-to-one on $\mathbb{R}\setminus\mathbb{Q}$
+but not one-to-one on $\mathbb{Q}$.
+\end{exercise}
+
+\begin{proof}
+Assume for contradiction that there exist distinct rationals $q_1<q_2$ with
+$f(q_1)=f(q_2)=:v$. Because $f$ is continuous on the compact interval $[q_1,q_2]$,
+it attains a maximum $M$ and a minimum $m$ there.
+
+If $f$ were constant on $[q_1,q_2]$, then $f(x)=v$ for all $x\in[q_1,q_2]$.
+In particular, choosing two distinct irrationals $x\neq y$ in $(q_1,q_2)$ would give
+$f(x)=f(y)$ with $x,y\in\mathbb{R}\setminus\mathbb{Q}$, contradicting injectivity on
+the irrationals. Hence $f$ is not constant on $[q_1,q_2]$, so either $M>v$ or $m<v$.
+Without loss of generality, suppose $M>v$, and let $c\in[q_1,q_2]$ satisfy $f(c)=M$.
+
+Consider the open interval $(v,M)$. Since $f(\mathbb{Q})$ is at most countable while $(v,M)$
+is uncountable, we may choose a real number $y\in(v,M)\setminus f(\mathbb{Q})$.
+By the Intermediate Value Theorem applied to $[q_1,c]$ and to $[c,q_2]$, there exist points
+$x_1\in(q_1,c)$ and $x_2\in(c,q_2)$ with
+\[
+f(x_1)=y=f(x_2).
+\]
+Because $y\notin f(\mathbb{Q})$, neither $x_1$ nor $x_2$ can be rational.
+Thus $x_1,x_2\in\mathbb{R}\setminus\mathbb{Q}$, and $x_1\neq x_2$.
+This contradicts the injectivity of $f$ on $\mathbb{R}\setminus\mathbb{Q}$.
+
+Therefore our assumption was false, and $f$ must be injective on $\mathbb{Q}$.
+\end{proof}
+
+\begin{exercise}
+    Let $f: X \to Y,\: g: Y \to X$, if $\forall x \in X, g(f(x)) = x$, then $g$ is surjective 
+    while $f$ is injective.
+\end{exercise}
+
+\begin{proof}
+   $f$ is injective obviously, otherwise if $f(x_1) = f(x_2) = y$, then $h(x_1) = h(x_2) = g(y)$, which is contradict with
+   $h$ is injective.
+
+   $g$ is also surjective, if exists $x \in X$ and $x \notin g(Y)$. Then we got $h(x) \ne x$ since $x \notin g(Y)$
+\end{proof}
